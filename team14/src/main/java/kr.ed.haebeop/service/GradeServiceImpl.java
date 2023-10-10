@@ -1,7 +1,7 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Grade;
-import kr.ed.haebeop.repository.GradeDAOImpl;
+import kr.ed.haebeop.repository.GradeRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,40 +10,40 @@ import java.util.List;
 @Service
 public class GradeServiceImpl implements GradeService{
     @Autowired
-    private GradeDAOImpl gradeDAO;
+    private GradeRepositoryImpl gradeRepository;
 
     @Override
     public List<Grade> gradeList() throws Exception {
-        return gradeDAO.gradeList();
+        return gradeRepository.gradeList();
     }
 
     @Override
     public Grade gradeDetail(int no) throws Exception {
-        return gradeDAO.gradeDetail(no);
+        return gradeRepository.gradeDetail(no);
     }
 
     @Override
     public void gradeInsert(Grade grade) throws Exception {
-        gradeDAO.gradeInsert(grade);
+        gradeRepository.gradeInsert(grade);
     }
 
     @Override
     public void gradeDelete(int no) throws Exception {
-        gradeDAO.gradeDelete(no);
+        gradeRepository.gradeDelete(no);
     }
 
     @Override
     public void gradeEdit(Grade grade) throws Exception {
-        gradeDAO.gradeEdit(grade);
+        gradeRepository.gradeEdit(grade);
     }
 
     @Override
     public void totGrade(String sname) throws Exception {
-        gradeDAO.totGrade(sname);
+        gradeRepository.totGrade(sname);
     }
 
     @Override
     public void avgGrade(String sname) throws Exception {
-        gradeDAO.avgGrade(sname);
+        gradeRepository.avgGrade(sname);
     }
 }

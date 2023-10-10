@@ -2,7 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.util.MailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -12,7 +12,7 @@ import java.util.Random;
 @Service("mss")
 public class MailSendService {
     @Autowired
-    private JavaMailSenderImpl mailSender;
+    private JavaMailSender mailSender;
 	private int size;
 
     //인증키 생성
