@@ -11,6 +11,54 @@ CREATE DATABASE haebeop;
 
 USE haebeop
 
+-- 회원(아이디, 비밀번호, 이름, 이메일, 전화번호, 주소1, 주소2, 우편번호, 가입일, 생년월일, 점수, 방문횟수, 직업)
+DROP TABLE member;
+
+CREATE TABLE member(
+	id VARCHAR(20) PRIMARY KEY, -- 아이디
+	pw VARCHAR(350) NOT NULL, -- 비밀번호
+	NAME VARCHAR(50) NOT NULL, -- 이름
+	email VARCHAR(150), -- 이메일
+	tel VARCHAR(20), -- 전화번호
+	addr1 VARCHAR(200), -- 주소1
+	addr2 VARCHAR(200), -- 주소2
+	postcode VARCHAR(20), -- 우편번호
+	regdate DATETIME DEFAULT CURRENT_TIME, -- 가입일
+	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
+	pt INT DEFAULT 0, -- 점수
+	cnt INT DEFAULT 0, -- 방문횟수,
+	job INT -- 직업
+);
+
+-- 관리자
+INSERT INTO member VALUES(
+'admin', '1234', '관리자', 'admin@edu.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT, 0);
+
+-- 학부모
+INSERT INTO member VALUES(
+'hong', '1234', '홍길동', 'hong@edu.com', '010-2222-3333', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1980-04-22',
+	DEFAULT, DEFAULT, 1);
+	INSERT INTO member VALUES(
+'kang', '1234', '강감찬', 'kang@edu.com', '010-1212-1212', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1975-04-22',
+	DEFAULT, DEFAULT, 1);
+
+-- 선생
+INSERT INTO member VALUES(
+'son', '1234', '손흥민', 'son@edu.com', '010-5555-6666', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1983-04-22',
+	DEFAULT, DEFAULT, 2);
+	INSERT INTO member VALUES(
+'lee', '1234', '이순신', 'lee@edu.com', '010-3434-3434', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1990-04-22',
+	DEFAULT, DEFAULT, 2);
+
+-- 비밀번호 1234 spring 암호화 버전
+UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi'
+
 CREATE TABLE board(
 	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
 	title VARCHAR(200) NOT NULL, -- 제목
@@ -20,7 +68,7 @@ CREATE TABLE board(
 	cnt INT DEFAULT 0, -- 조회수
 	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
 	par INT, -- 부모 게시글 번호
-	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
+	FOREIGN KEY(author) REFERENCES MEMBER(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
 
@@ -264,23 +312,6 @@ INSERT test VALUES(2, '제목2');
 INSERT test VALUES(3, '제목3');
 INSERT test VALUES(4, '제목4');
 INSERT test VALUES(5, '제목5');
-
--- 회원(아이디, 비밀번호, 이름, 이메일, 전화번호, 주소1, 주소2, 우편번호, 가입일, 생년월일, 점수, 방문횟수, 직업)
-CREATE TABLE member(
-	id VARCHAR(20) PRIMARY KEY, -- 아이디
-	pw VARCHAR(350) NOT NULL, -- 비밀번호
-	NAME VARCHAR(50) NOT NULL, -- 이름
-	email VARCHAR(150), -- 이메일
-	tel VARCHAR(20), -- 전화번호
-	addr1 VARCHAR(200), -- 주소1
-	addr2 VARCHAR(200), -- 주소2
-	postcode VARCHAR(20), -- 우편번호
-	resdate DATETIME DEFAULT CURRENT_TIME, -- 가입일
-	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
-	pt INT DEFAULT 0, -- 점수
-	cnt INT DEFAULT 0, -- 방문횟수,
-	job INT -- 직업
-);
 
 -- 공지사항(순번, 제목, 내용, 작성자, 작성일, 읽은 횟수)
 create table notice(

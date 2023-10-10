@@ -61,11 +61,15 @@ public class RootConfig {
         commonsMultipartResolver.setMaxUploadSize(100000000);
         commonsMultipartResolver.setMaxInMemorySize(100000000);
         return commonsMultipartResolver;
-        
+    }
+
+    @Bean(name = "uploadPath")
+    public String uploadPath() { // 멀티파트 업로드 디렉토리 지정
+        return "D:\\kim\\spring1\\pro31\\src\\main\\webapp\\resources\\upload";
     }
 
     @Bean
-    public JavaMailSender mailSender() {
+    public JavaMailSender mailSender() { // 메일 api 설정
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.naver.com");
         mailSender.setPort(465);

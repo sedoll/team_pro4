@@ -370,7 +370,7 @@ public class MemberController {
         Member mem = memberService.selectMember(email);
         System.out.println(mem);
 
-        try{
+        if (mem != null) {
             Random r = new Random();
             int num = r.nextInt(999999); // 랜덤난수설정
 
@@ -406,12 +406,13 @@ public class MemberController {
                 mv.setViewName("/member/pw_find");
                 return mv;
             }
-        } catch (Exception e) {
+        } else {
             ModelAndView mv = new ModelAndView();
             mv.setViewName("/member/pw_find");
             return mv;
         }
     }
+
 
     //이메일 인증번호 확인
     @RequestMapping(value = "/pw_set.do", method = RequestMethod.POST)

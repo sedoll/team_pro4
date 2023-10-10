@@ -45,7 +45,7 @@ public class MailSendService {
             sendMail.setSubject("회원가입 이메일 인증");
             sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
             .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-            .append("<a href='http://localhost:8081/team13_war/signUpConfirm.me?email=")
+            .append("<a href='http://localhost:8081/team14_war/signUpConfirm.me?email=")
             .append(email)
             .append("&authkey=")
             .append(authkey)
