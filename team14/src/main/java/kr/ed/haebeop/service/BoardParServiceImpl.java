@@ -1,5 +1,6 @@
 package kr.ed.haebeop.service;
 
+
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.repository.BoardParRepositoryImpl;
