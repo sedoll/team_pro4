@@ -1,7 +1,7 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Faq;
-import kr.ed.haebeop.repository.FaqDAO;
+import kr.ed.haebeop.repository.FaqRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.List;
 public class FaqServiceImpl implements FaqService{
 
     @Autowired
-    private FaqDAO faqDAO;
+    private FaqRepository faqRepository;
 
     @Override
     public List<Faq> faqList() throws Exception {
-        return faqDAO.faqList();
+        return faqRepository.faqList();
     }
 }
