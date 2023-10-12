@@ -30,11 +30,30 @@ CREATE TABLE member(
 	job INT -- 직업
 );
 
+-- 로그인 타입 1: 일반 2: 카카오 3: 네이버
+ALTER TABLE member ADD login_tp_cd INT DEFAULT 1;
+-- 상태코드 1: 정상 2: 신고정지 3: 탈퇴 4: 휴면
+ALTER TABLE member ADD state_cd INT DEFAULT 1;
+
 -- 관리자
 INSERT INTO member VALUES(
 'admin', '1234', '관리자', 'admin@edu.com', '010-1234-5678', 
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
-	DEFAULT, DEFAULT, 0);
+	DEFAULT, DEFAULT);
+
+INSERT INTO member VALUES(haebeophaebeop
+'oh1234', '1234', '오세훈', 'do11anm@naver.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT);
+	
+UPDATE member SET email='admin@edu.com' WHERE email='do11anm@naver.com';
+UPDATE member SET email='jk3473@naver.com' WHERE id='admin';
+UPDATE member SET email='spospotv@naver.com' WHERE email='kooyj92@naver.com';
+
+INSERT INTO member VALUES(
+'ku1234', '1234', '구예진', 'kooyj92@naver.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT, DEFAULT);
 
 -- 학부모
 INSERT INTO member VALUES(

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ed.haebeop.persistence.*;
 import kr.ed.haebeop.repository.*;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.Utils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -102,6 +103,13 @@ public class ApplicationConfig {
     @Bean
     public QnaService qnaService() {return new QnaServiceImpl();}
 
+    //auth
+    @Bean
+    public AuthRepositoryImpl authRepository() {return new AuthRepositoryImpl();}
+
+    //utils
+    @Bean
+    public Utils utils() {return new Utils();}
 
     @Bean
     public ObjectMapper mapper() { return new ObjectMapper(); }

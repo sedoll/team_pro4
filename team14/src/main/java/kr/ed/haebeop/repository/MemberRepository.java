@@ -1,9 +1,6 @@
 package kr.ed.haebeop.repository;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.BoardlistVO;
-import kr.ed.haebeop.domain.CommentlistVO;
-import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -50,5 +47,12 @@ public interface MemberRepository {
     public  void boardReportCancel(int bno) throws Exception;
     public  void teaReportCancel(int bno) throws Exception;
     public  void parReportCancel(int bno) throws Exception;
+
+    //이메일로 유저찾기
+    public Member getMemberEmail(String email) throws Exception;
+    //시큐리티 유저 조회
+    public UserDetail getUserDetailsDto (String email) throws Exception;
+    //소셜회원 가입. insert후 id 리턴
+    public String insertSocialUser(Member member) throws Exception;
 }
 
