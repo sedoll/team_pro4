@@ -1,25 +1,33 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.BoardlistVO;
-import kr.ed.haebeop.domain.CommentlistVO;
-import kr.ed.haebeop.domain.Member;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import kr.ed.haebeop.domain.*;
+import kr.ed.haebeop.repository.AuthDao;
+import kr.ed.haebeop.repository.MemberDAO;
 import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.util.Utils;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -36,12 +44,32 @@ public class MemberCtrl {
     @Autowired
     JavaMailSender mailSender;
 
+    @Autowired
+    NaverLoginBo naverLoginBo;
+
+    @Autowired
+    Utils utils;
+
+    @Autowired
+    MemberDAO memberDao;
+
+    @Autowired
+    AuthDao authDao;
+
+    OAuth2AccessToken oauthToken;
+
+    org.json.simple.JSONObject jsonObj;
+    private String apiResult = null;
+
     // spring security 이용
     private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     //로그인 폼 로딩
     @RequestMapping("login.do")
     public String memberLoginForm(Model model) throws Exception {
+        /*네이버 로그인 URL*/
+        String naverAuthUrl = naverLoginBo.getAuthorizationUrl(session);
+        model.addAttribute("urlNaver", naverAuthUrl);
         return "/member/loginForm";
     }
 
@@ -69,6 +97,92 @@ public class MemberCtrl {
             out.flush();
             return "/member/loginForm";
         }
+    }
+
+    //랜덤 문자열 생성, 소셜 닉네임 생성
+    public String crtNickName() { //랜덤 문자열 생성, 소셜 닉네임 생성
+        return "new_" + utils.createRandomStr();
+    }
+
+    //네이버 로그인
+    @GetMapping("social/naver")
+    public String naverLogin(HttpSession session, String code, String state, RedirectAttributes rattr) {
+        try {
+            oauthToken = naverLoginBo.getAccessToken(session, code, state);
+            apiResult = naverLoginBo.getUserProfile(oauthToken);
+
+            jsonObj = getParsedApiResult(apiResult);
+            org.json.simple.JSONObject response_obj = (org.json.simple.JSONObject) jsonObj.get("response");
+
+            String email = (String) response_obj.get("email");
+            String id = (String) response_obj.get("id");
+
+            Member member = memberService.getMemberEmail(email);
+
+            if (member == null) { //신규
+                final int NAVER = 3;
+
+                member = member.builder()
+                        .email(email)
+/*                        .nick_nm(crtNickName())*/
+                        .login_tp_cd(NAVER)
+                        .build();
+
+                String socialId = memberService.regSocialUser(member);
+                member = memberService.getMember(socialId);
+            } else {
+                if (member.getState_cd() == 3) {
+                    rattr.addFlashAttribute("msg", "UNABLE");
+                    return "redirect:/member/login.do";
+                }
+                /*memberService.updateLoginTm(member.getIdx(), member.getEmail()); *///ok
+            }
+
+
+            if (makeAuth(member)) {
+                session.setAttribute("loginService", "naver"); // 최종 로그인 서비스타입 명시. 같은 이메일, 다른 서비스 로그인 구
+                crtSession(session, member);
+                return "redirect:/";
+            } else throw new Exception("auth failed");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("로그인 에러");
+            rattr.addFlashAttribute("msg", "LOGIN_ERR"); //로그인 에러
+            return "redirect:/member/login.do";
+        }
+    }
+
+    //TODO:: 네이버 로그아웃
+
+
+    // 인증 생성
+    public boolean makeAuth(Member member) throws Exception {
+        UserDetailsDto dto = memberDao.getUserDetailsDto(member.getEmail());
+
+        if (dto == null) return false;
+        dto.setAuthority((ArrayList<String>) authDao.getAuthList(member.getState_cd()));
+        if (dto.getAuthorities() == null) return false; //인증 실패시 null
+
+        Authentication authentication =
+                new UsernamePasswordAuthenticationToken(member, null, dto.getAuthorities()); //userDetailsDto.getAuthorities()식으로 권한을 추가해야 함
+
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(authentication);
+        return true;
+    }
+
+
+    //세션 저장
+    public void crtSession(HttpSession session, Member member) {
+        session.setAttribute("sid", member.getId());
+        session.setAttribute("email", member.getEmail());
+        //session.setAttribute("nickName", member.getNick_nm());
+
+    }
+
+    public org.json.simple.JSONObject getParsedApiResult(String apiResult) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        return (org.json.simple.JSONObject) jsonParser.parse(apiResult);
     }
 
     // 로그아웃

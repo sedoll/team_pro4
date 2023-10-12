@@ -269,4 +269,16 @@ public class MemberServiceImpl implements MemberService{
     public void parReportCancel(int bno) throws Exception {
         memberDAO.parReportCancel(bno);
     }
+
+    // 회원 이메일 가져오기
+    @Override
+    public Member getMemberEmail(String email)  throws Exception {
+        return memberDAO.getMemberEmail(email);
+    }
+
+    @Override
+    public String regSocialUser(Member member) throws Exception {
+        return memberDAO.insertSocialUser( member );
+    }
+
 }

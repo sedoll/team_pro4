@@ -1,14 +1,11 @@
-package kr.ed.haebeop.service;
+package kr.ed.haebeop.repository;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.BoardlistVO;
-import kr.ed.haebeop.domain.CommentlistVO;
-import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.domain.*;
 
 import java.util.List;
 import java.util.Map;
 
-public interface MemberService {
+public interface MemberDAO {
     public List<Member> memberList() throws Exception;
     public Member getMember(String id) throws Exception;
     public int memberCount() throws Exception;
@@ -16,7 +13,7 @@ public interface MemberService {
     public void memberUpdate(Member member) throws Exception;
     public void memberDelete(String id) throws Exception;
     public Member signIn(String id) throws Exception;
-    public boolean loginCheck(String id, String pw) throws Exception;
+    public Member loginCheck(String id) throws Exception;
     public Member login(String id) throws Exception;
 
 
@@ -29,9 +26,10 @@ public interface MemberService {
     public List<BoardlistVO> getWriteList5(String id);
     public List<BoardlistVO> getWriteList6(String id);
     public List<BoardlistVO> getWriteList7(String id);
+
     /*내가 쓴 댓글*/
     public List<CommentlistVO> getWriteComment(String id);
-    public List<CommentlistVO> getWriteComment1(String id);
+    public List<CommentlistVO> getWriteComment1(String id); //자유
     public List<CommentlistVO> getWriteComment2(String id);
     public List<CommentlistVO> getWriteComment3(String id);
     public List<CommentlistVO> getWriteComment4(String id);
@@ -39,10 +37,10 @@ public interface MemberService {
     public List<CommentlistVO> getWriteComment6(String id);
     public List<CommentlistVO> getWriteComment7(String id);
 
-    /* 비밀번호 찾기*/
+    /*비밀번호 찾기*/
     public Member selectMember(String email) throws Exception;
-    public int pwUpdate(Member mem) throws Exception;
-    public void updateAuthStatus (Map<String, Integer> map) throws Exception;
+    public int pwUpdate(Member member) throws Exception;
+    public void updateAuthStatus(Map<String, Integer> map) throws Exception;
   
     //내가 신고한 게시글
     public List<Board> myReportList(String id) throws Exception;
@@ -50,4 +48,13 @@ public interface MemberService {
     public  void teaReportCancel(int bno) throws Exception;
     public  void parReportCancel(int bno) throws Exception;
 
+    //이메일로 유저찾기
+    public Member getMemberEmail(String email) throws Exception;
+
+    //시큐리티 유저 조회
+    public UserDetailsDto getUserDetailsDto (String email) throws Exception;
+
+    //소셜회원 가입. insert후 id 리턴
+    public String insertSocialUser(Member member) throws Exception;
 }
+

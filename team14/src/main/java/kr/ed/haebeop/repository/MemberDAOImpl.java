@@ -1,9 +1,6 @@
 package kr.ed.haebeop.repository;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.BoardlistVO;
-import kr.ed.haebeop.domain.CommentlistVO;
-import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.domain.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -173,6 +170,22 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public void parReportCancel(int bno) throws Exception {
         sqlSession.delete("member.parReportCancel", bno);
+    }
+
+    @Override
+    public Member getMemberEmail(String email) throws Exception {
+        return sqlSession.selectOne("member.getMemberEmail", email);
+    }
+
+    @Override
+    public UserDetailsDto getUserDetailsDto (String email) throws Exception {
+        return sqlSession.selectOne("member.getUserDetailsDto", email);
+    }
+
+    @Override
+    public String insertSocialUser(Member member) throws Exception {
+        sqlSession.insert("insertSocialUser", member);
+        return member.getId();
     }
 
 }
