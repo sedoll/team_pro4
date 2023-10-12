@@ -2,7 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.util.MailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -12,7 +12,7 @@ import java.util.Random;
 @Service("mss")
 public class MailSendService {
     @Autowired
-    private JavaMailSenderImpl mailSender;
+    private JavaMailSender mailSender;
 	private int size;
 
     //인증키 생성
@@ -45,7 +45,7 @@ public class MailSendService {
             sendMail.setSubject("회원가입 이메일 인증");
             sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
             .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-            .append("<a href='http://localhost:8081/team13_war/signUpConfirm.me?email=")
+            .append("<a href='http://localhost:8081/team14_war/signUpConfirm.me?email=")
             .append(email)
             .append("&authkey=")
             .append(authkey)

@@ -2,7 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Report;
-import kr.ed.haebeop.repository.BoardDAO;
+import kr.ed.haebeop.repository.BoardRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,31 +12,31 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService{
 
     @Autowired
-    private BoardDAO boardDAO;
+    private BoardRepositoryImpl boardRepository;
 
     @Override
     public List<Board> boardList() throws Exception {
-        return boardDAO.boardList();
+        return boardRepository.boardList();
     }
 
     @Override
     public Board boardDetail(int bno) throws Exception {
-        return boardDAO.boardDetail(bno);
+        return boardRepository.boardDetail(bno);
     }
 
     @Override
     public void boardInsert(Board dto) throws Exception {
-        boardDAO.boardInsert(dto);
+        boardRepository.boardInsert(dto);
     }
 
     @Override
     public void boardDelete(int bno) throws Exception {
-        boardDAO.boardDelete(bno);
+        boardRepository.boardDelete(bno);
     }
 
     @Override
     public void boardEdit(Board dto) throws Exception {
-        boardDAO.boardEdit(dto);
+        boardRepository.boardEdit(dto);
     }
 
     @Override
@@ -46,39 +46,39 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<Board> commentList(int bno) throws Exception {
-        return boardDAO.commentList(bno);
+        return boardRepository.commentList(bno);
     }
 
     @Override
     public void commentInsert(Board dto) throws Exception {
-        boardDAO.commentInsert(dto);
+        boardRepository.commentInsert(dto);
     }
 
     @Override
     public void commentDeleteAll(int bno) throws Exception {
-        boardDAO.commentDeleteAll(bno);
+        boardRepository.commentDeleteAll(bno);
     }
     @Override
     public List<Board> allCommentList() throws Exception {
-        return boardDAO.allCommentList();
+        return boardRepository.allCommentList();
     }
 
     @Override
     public void reportBoard(Report report) throws Exception {
-        boardDAO.reportBoard(report);
+        boardRepository.reportBoard(report);
     }
     @Override
     public int checkReported(Report report) throws Exception {
-        return boardDAO.checkReported(report);
+        return boardRepository.checkReported(report);
     }
 
     @Override
     public List<Board> boardReportList() throws Exception {
-        return boardDAO.boardReportList();
+        return boardRepository.boardReportList();
     }
 
     @Override
     public List<Board> recentReportList() throws Exception {
-        return boardDAO.recentReportList();
+        return boardRepository.recentReportList();
     }
 }

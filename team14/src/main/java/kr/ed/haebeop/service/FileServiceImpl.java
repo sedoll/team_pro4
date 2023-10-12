@@ -2,7 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.FileDTO;
 import kr.ed.haebeop.domain.FileVO;
-import kr.ed.haebeop.repository.FileDAO;
+import kr.ed.haebeop.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,26 +12,26 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
 
     @Autowired
-    FileDAO fileDAO;
+    FileRepository fileRepository;
 
     @Override
     public void insertFileboard(FileVO fileboard) throws Exception {
-        fileDAO.insertFileboard(fileboard);
+        fileRepository.insertFileboard(fileboard);
     }
 
     @Override
     public List<FileVO> getFileList() throws Exception {
-        return fileDAO.getFileList();
+        return fileRepository.getFileList();
     }
 
     @Override
     public List<FileDTO> getFileGroupList(int postNo) throws Exception {
-        return fileDAO.getFileGroupList(postNo);
+        return fileRepository.getFileGroupList(postNo);
     }
 
     @Override
     public FileVO getFilebord(int postNo) throws Exception {
-        return fileDAO.getFilebord(postNo);
+        return fileRepository.getFilebord(postNo);
     }
 
     @Override
@@ -41,25 +41,25 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void removeFileboard(int postNo) throws Exception {
-        fileDAO.removeFileboard(postNo);
+        fileRepository.removeFileboard(postNo);
     }
 
     @Override
     public void fileRemove(int no) throws Exception {
-        fileDAO.fileRemove(no);
+        fileRepository.fileRemove(no);
     }
 
     @Override
     public FileDTO getFile(int no) throws Exception {
-        return fileDAO.getFile(no);
+        return fileRepository.getFile(no);
     }
 
     @Override
     public void updateFileboard(FileVO fileboard) throws Exception {
-        fileDAO.updateFileboard(fileboard);
+        fileRepository.updateFileboard(fileboard);
     }
     @Override
     public void removeFileAll(int postNo) throws Exception {
-        fileDAO.removeFileAll(postNo);
+        fileRepository.removeFileAll(postNo);
     }
 }
