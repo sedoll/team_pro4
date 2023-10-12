@@ -17,7 +17,7 @@
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- theme meta -->
-    <meta name="theme-name" content="kross-bulma"/>
+    <meta name="theme-name" content="kross-bulma" />
     <!-- ** Plugins Needed for the Project ** -->
     <!-- bulma -->
     <link rel="stylesheet" href="${path}/resources/theme/plugins/bulma/bulma.min.css">
