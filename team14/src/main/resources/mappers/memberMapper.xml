@@ -178,4 +178,21 @@
     <delete id="parReportCancel">
         delete from report_par where board_bno = #{bno}
     </delete>
+
+    <select id="getMemberEmail" resultType="kr.ed.haebeop.domain.Member">
+        select * from member where email = #{email}
+    </select>
+
+    <!--security-->
+    <select id="getUserDetailsDto" resultType="kr.ed.haebeop.domain.UserDetail">
+        SELECT * FROM member WHERE EMAIL = #{email}
+    </select>
+
+    <insert id="insertSocialUser" parameterType="kr.ed.haebeop.domain.Member">
+        INSERT INTO member (EMAIL, LOGIN_TP_CD)
+        VALUES (#{email},#{login_tp_cd} );
+        <selectKey resultType="String" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
 </mapper>
