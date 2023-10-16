@@ -38,7 +38,7 @@
         <div class="column is-9">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="../">Teaspoon</a></li>
+                    <li><a href="../">Haebeop</a></li>
                     <li class="is-active"><a href="#" aria-current="page">Admin</a></li>
                 </ul>
             </nav>
@@ -59,7 +59,8 @@
                 <th>No</th>
                 <th>ID</th>
                 <th>Name</th>
-                <th>job</th>
+                <th>Tel</th>
+                <th>Email</th>
                 <th>RegDate</th>
             </tr>
             </thead>
@@ -69,7 +70,8 @@
                     <td>${status.count}</td>
                     <td><a href="${path}/admin/memberDetail.do?id=${member.id}">${member.id}</a></td>
                     <td>${member.name}</td>
-                    <td>${member.job == 1 ? '학부모' : (member.job == 2 ? '교사' : '-')}</td>
+                    <td>${member.tel}</td>
+                    <td>${member.email}</td>
                     <td>
                         <fmt:parseDate value="${member.regdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                         <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" />
