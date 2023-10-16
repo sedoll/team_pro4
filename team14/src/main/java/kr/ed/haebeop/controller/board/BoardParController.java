@@ -1,8 +1,8 @@
-package kr.ed.haebeop.controller;
+package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Report;
-import kr.ed.haebeop.service.BoardTeaServiceImpl;
+import kr.ed.haebeop.service.board.BoardParServiceImpl;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,25 +19,25 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/boardTea/*")
-public class BoardTeaController {
+@RequestMapping("/boardPar/*")
+public class BoardParController {
 
     @Autowired
-    private BoardTeaServiceImpl boardTeaService;
+    private BoardParServiceImpl boardParService;
 
     @Autowired
     HttpSession session; // 세션 생성
 
     @GetMapping("list.do")		// board/list.do
     public String getBoardList(HttpServletResponse response, Model model) throws Exception {
-        if(session.getAttribute("sid") != null &&("admin".equals(session.getAttribute("sid")) || 2 == (Integer) session.getAttribute("job"))) {
-            List<Board> boardList = boardTeaService.boardList();
+        if(session.getAttribute("sid") != null &&("admin".equals(session.getAttribute("sid")) || 1 == (Integer) session.getAttribute("job"))) {
+            List<Board> boardList = boardParService.boardList();
             model.addAttribute("boardList", boardList);
-            return "/boardTea/boardList";
+            return "/boardPar/boardList";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('해당 페이지는 선생님만 접근 가능합니다.');</script>");
+            out.println("<script>alert('해당 페이지는 학부모만 접근 가능합니다.');</script>");
             out.flush();
             return "/index";
         }
@@ -46,17 +46,17 @@ public class BoardTeaController {
     @GetMapping("detail.do")	// board/detail.do?bno=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Board dto = boardTeaService.boardDetail(bno);
-        List<Board> comment = boardTeaService.commentList(bno);
+        Board dto = boardParService.boardDetail(bno);
+        List<Board> comment = boardParService.commentList(bno);
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
         System.out.println(comment.toString());
-        return "/boardTea/boardDetail";
+        return "/boardPar/boardDetail";
     }
 
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
-        return "/boardTea/boardInsert";
+        return "/boardPar/boardInsert";
     }
 
     @PostMapping("insert.do")
@@ -65,7 +65,7 @@ public class BoardTeaController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         dto.setAuthor((String) session.getAttribute("sid"));
-        boardTeaService.boardInsert(dto);
+        boardParService.boardInsert(dto);
         return "redirect:list.do";
     }
 
@@ -75,24 +75,24 @@ public class BoardTeaController {
         dto.setAuthor(request.getParameter("id"));
         dto.setBno(Integer.parseInt(request.getParameter("bno")));
         dto.setContent(request.getParameter("content"));
-        boardTeaService.commentInsert(dto);
+        boardParService.commentInsert(dto);
         return "redirect:list.do";
     }
 
     @GetMapping("delete.do")
     public String boardDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        boardTeaService.boardDelete(bno);
-        boardTeaService.commentDeleteAll(bno);
+        boardParService.boardDelete(bno);
+        boardParService.commentDeleteAll(bno);
         return "redirect:list.do";
     }
 
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Board dto = boardTeaService.boardDetail(bno);
+        Board dto = boardParService.boardDetail(bno);
         model.addAttribute("dto", dto);
-        return "/boardTea/boardEdit";
+        return "/boardPar/boardEdit";
     }
 
     @PostMapping("edit.do")
@@ -102,13 +102,13 @@ public class BoardTeaController {
         dto.setBno(bno);
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
-        boardTeaService.boardEdit(dto);
+        boardParService.boardEdit(dto);
         return "redirect:list.do";
     }
     //게시글 신고 팝업 창
     @RequestMapping("reportPopup.do")
     public String reportPopup(HttpServletRequest request, Model model) throws Exception {
-        return "/boardTea/reportPopup";
+        return "/boardPar/reportPopup";
     }
 
     //팝업창에서 게시글 신고 버튼 눌렀을때 처리
@@ -126,9 +126,9 @@ public class BoardTeaController {
         report.setReason(reason);
         report.setBoard_bno(bno);
         boolean result = false;
-        int chk1 = boardTeaService.checkReported(report);
+        int chk1 = boardParService.checkReported(report);
         if (chk1 == 0) {
-            boardTeaService.reportBoard(report);
+            boardParService.reportBoard(report);
             result = true;
         } else {
             result = false;

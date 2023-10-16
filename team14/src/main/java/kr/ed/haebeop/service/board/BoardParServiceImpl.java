@@ -1,42 +1,42 @@
-package kr.ed.haebeop.service;
+package kr.ed.haebeop.service.board;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Report;
-import kr.ed.haebeop.repository.BoardTeaRepositoryImpl;
+import kr.ed.haebeop.repository.BoardParRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BoardTeaServiceImpl implements BoardService{
+public class BoardParServiceImpl implements BoardService{
 
     @Autowired
-    private BoardTeaRepositoryImpl boardTeaRepository;
+    private BoardParRepositoryImpl boardParRepository;
 
     @Override
     public List<Board> boardList() throws Exception {
-        return boardTeaRepository.boardList();
+        return boardParRepository.boardList();
     }
 
     @Override
     public Board boardDetail(int bno) throws Exception {
-        return boardTeaRepository.boardDetail(bno);
+        return boardParRepository.boardDetail(bno);
     }
 
     @Override
     public void boardInsert(Board dto) throws Exception {
-        boardTeaRepository.boardInsert(dto);
+        boardParRepository.boardInsert(dto);
     }
 
     @Override
     public void boardDelete(int bno) throws Exception {
-        boardTeaRepository.boardDelete(bno);
+        boardParRepository.boardDelete(bno);
     }
 
     @Override
     public void boardEdit(Board dto) throws Exception {
-        boardTeaRepository.boardEdit(dto);
+        boardParRepository.boardEdit(dto);
     }
 
     @Override
@@ -46,36 +46,37 @@ public class BoardTeaServiceImpl implements BoardService{
 
     @Override
     public List<Board> commentList(int bno) throws Exception {
-        return boardTeaRepository.commentList(bno);
+        return boardParRepository.commentList(bno);
     }
 
     @Override
     public void commentInsert(Board dto) throws Exception {
-        boardTeaRepository.commentInsert(dto);
+        boardParRepository.commentInsert(dto);
     }
 
     @Override
     public void commentDeleteAll(int bno) throws Exception {
-        boardTeaRepository.commentDeleteAll(bno);
+        boardParRepository.commentDeleteAll(bno);
     }
     @Override
     public List<Board> allCommentList() throws Exception {
-        return boardTeaRepository.allCommentList();
+        return boardParRepository.allCommentList();
     }
     @Override
     public void reportBoard(Report report) throws Exception {
-        boardTeaRepository.reportBoard(report);
+        boardParRepository.reportBoard(report);
     }
+
     @Override
     public int checkReported(Report report) throws Exception {
-        return boardTeaRepository.checkReported(report);
+        return boardParRepository.checkReported(report);
     }
     @Override
     public List<Board> boardReportList() throws Exception {
-        return boardTeaRepository.boardReportList();
+        return boardParRepository.boardReportList();
     }
     @Override
     public List<Board> recentReportList() throws Exception {
-        return boardTeaRepository.recentReportList();
+        return boardParRepository.recentReportList();
     }
 }

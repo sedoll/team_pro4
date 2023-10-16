@@ -44,6 +44,7 @@
         .login{
             margin: 0 auto;
             width: 440px;
+            background-color: #BED4E9;
         }
 
         #logo-6{
@@ -68,8 +69,16 @@
 
         .level-item .find{
             margin-left: 20px;
+            margin-right: 20px;
         }
 
+        .level-item .inst{
+            margin-left: 20px;
+        }
+
+        img {
+            margin-bottom: 20px;
+        }
 
 
     </style>
@@ -98,7 +107,18 @@
                 </button>
             </form>
             <br>
-
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <a href="../member/term.do" class="term">회원가입</a>
+                        <a>|</a>
+                        <a href="${path}/member/pw_find.do" class="find">비밀번호 찾기</a>
+                        <a>|</a>
+                        <a href="${path}/member/instLogin.do" class="inst">강사 로그인</a>
+                    </div>
+                </div>
+            </nav>
+            <br>
             <div class="social">
 
                 <div class="join-buttons">
@@ -110,17 +130,6 @@
                     </a>
                 </div>
             </div>
-
-            <br>
-            <nav class="level">
-                <div class="level-item has-text-centered">
-                    <div>
-                        <a href="../member/term.do" class="term">회원가입</a>
-                        <a>|</a>
-                        <a href="${path}/member/pw_find.do" class="find">비밀번호 찾기</a>
-                    </div>
-                </div>
-            </nav>
         </div>
     </div>
 </section>
