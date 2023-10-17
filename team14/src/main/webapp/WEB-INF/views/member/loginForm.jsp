@@ -43,6 +43,7 @@
     <style>
         .login{
             margin: 0 auto;
+            padding-top: 50px;
             width: 440px;
             background-color: #cbdff3;
         }
@@ -118,9 +119,8 @@
                     </div>
                 </div>
             </nav>
-            <br>
-            <div class="social">
 
+            <div class="social">
                 <div class="join-buttons">
                     <a href="${urlKakao}" class="login-social kakao">
                         <img src="${path}/resources/img/kakao.png" alt="kakao" style="width: 50px; margin-bottom: 20px">
