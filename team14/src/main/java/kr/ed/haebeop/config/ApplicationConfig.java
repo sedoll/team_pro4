@@ -1,9 +1,18 @@
 package kr.ed.haebeop.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ed.haebeop.persistence.*;
+import kr.ed.haebeop.persistence.TestMapper;
+import kr.ed.haebeop.persistence.TestMapperImpl;
+import kr.ed.haebeop.persistence.UserMapper;
+import kr.ed.haebeop.persistence.UserMapperImpl;
 import kr.ed.haebeop.repository.*;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.service.board.BoardParServiceImpl;
+import kr.ed.haebeop.service.board.BoardServiceImpl;
+import kr.ed.haebeop.service.board.BoardTeaServiceImpl;
+import kr.ed.haebeop.service.info.InfoActServiceImpl;
+import kr.ed.haebeop.service.info.InfoStuServiceImpl;
+import kr.ed.haebeop.service.info.InfoUniServiceImpl;
 import kr.ed.haebeop.util.Utils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -103,6 +112,25 @@ public class ApplicationConfig {
     @Bean
     public QnaService qnaService() {return new QnaServiceImpl();}
 
+    // lecture
+    @Bean
+    public LectureService lectureService() {return new LectureService();}
+
+    // inst
+    @Bean
+    public InstService instService() {return new InstService();}
+
+    // cart
+    @Bean
+    public CartServiceImpl cartService() {return new CartServiceImpl();}
+
+    // payment
+    @Bean
+    public PaymentService paymentService() {return new PaymentService();}
+
+    @Bean
+    public ObjectMapper mapper() { return new ObjectMapper(); }
+
     //auth
     @Bean
     public AuthRepositoryImpl authRepository() {return new AuthRepositoryImpl();}
@@ -110,7 +138,4 @@ public class ApplicationConfig {
     //utils
     @Bean
     public Utils utils() {return new Utils();}
-
-    @Bean
-    public ObjectMapper mapper() { return new ObjectMapper(); }
 }

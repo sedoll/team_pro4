@@ -9,14 +9,13 @@ import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 
 public class MailUtils {
-
 	private JavaMailSender mailSender;
 	private MimeMessage message;
 	private MimeMessageHelper messageHelper;
-
+	
 	public MailUtils(JavaMailSender mailSender)throws MessagingException{
 		this.mailSender = mailSender;
-
+		
 		message= this.mailSender.createMimeMessage();
 		messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 	}

@@ -1,8 +1,8 @@
-package kr.ed.haebeop.controller;
+package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Report;
-import kr.ed.haebeop.service.BoardParServiceImpl;
+import kr.ed.haebeop.service.board.BoardServiceImpl;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,44 +19,36 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/boardPar/*")
-public class BoardParController {
+@RequestMapping("/board/*")
+public class BoardController {
 
     @Autowired
-    private BoardParServiceImpl boardParService;
+    private BoardServiceImpl boardService;
 
     @Autowired
     HttpSession session; // 세션 생성
 
     @GetMapping("list.do")		// board/list.do
-    public String getBoardList(HttpServletResponse response, Model model) throws Exception {
-        if(session.getAttribute("sid") != null &&("admin".equals(session.getAttribute("sid")) || 1 == (Integer) session.getAttribute("job"))) {
-            List<Board> boardList = boardParService.boardList();
-            model.addAttribute("boardList", boardList);
-            return "/boardPar/boardList";
-        } else {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('해당 페이지는 학부모만 접근 가능합니다.');</script>");
-            out.flush();
-            return "/index";
-        }
+    public String getBoardList(Model model) throws Exception {
+        List<Board> boardList = boardService.boardList();
+        model.addAttribute("boardList", boardList);
+        return "/board/boardList";
     }
 
     @GetMapping("detail.do")	// board/detail.do?bno=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Board dto = boardParService.boardDetail(bno);
-        List<Board> comment = boardParService.commentList(bno);
+        Board dto = boardService.boardDetail(bno);
+        List<Board> comment = boardService.commentList(bno);
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
         System.out.println(comment.toString());
-        return "/boardPar/boardDetail";
+        return "/board/boardDetail";
     }
 
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
-        return "/boardPar/boardInsert";
+        return "/board/boardInsert";
     }
 
     @PostMapping("insert.do")
@@ -65,7 +57,7 @@ public class BoardParController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         dto.setAuthor((String) session.getAttribute("sid"));
-        boardParService.boardInsert(dto);
+        boardService.boardInsert(dto);
         return "redirect:list.do";
     }
 
@@ -75,24 +67,24 @@ public class BoardParController {
         dto.setAuthor(request.getParameter("id"));
         dto.setBno(Integer.parseInt(request.getParameter("bno")));
         dto.setContent(request.getParameter("content"));
-        boardParService.commentInsert(dto);
+        boardService.commentInsert(dto);
         return "redirect:list.do";
     }
 
     @GetMapping("delete.do")
     public String boardDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        boardParService.boardDelete(bno);
-        boardParService.commentDeleteAll(bno);
+        boardService.boardDelete(bno);
+        boardService.commentDeleteAll(bno);
         return "redirect:list.do";
     }
 
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Board dto = boardParService.boardDetail(bno);
+        Board dto = boardService.boardDetail(bno);
         model.addAttribute("dto", dto);
-        return "/boardPar/boardEdit";
+        return "/board/boardEdit";
     }
 
     @PostMapping("edit.do")
@@ -102,13 +94,14 @@ public class BoardParController {
         dto.setBno(bno);
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
-        boardParService.boardEdit(dto);
+        boardService.boardEdit(dto);
         return "redirect:list.do";
     }
+
     //게시글 신고 팝업 창
     @RequestMapping("reportPopup.do")
     public String reportPopup(HttpServletRequest request, Model model) throws Exception {
-        return "/boardPar/reportPopup";
+        return "/board/reportPopup";
     }
 
     //팝업창에서 게시글 신고 버튼 눌렀을때 처리
@@ -126,9 +119,9 @@ public class BoardParController {
         report.setReason(reason);
         report.setBoard_bno(bno);
         boolean result = false;
-        int chk1 = boardParService.checkReported(report);
+        int chk1 = boardService.checkReported(report);
         if (chk1 == 0) {
-            boardParService.reportBoard(report);
+            boardService.reportBoard(report);
             result = true;
         } else {
             result = false;
@@ -142,4 +135,26 @@ public class BoardParController {
         System.out.println(json.toString());
 
     }
+    @PostMapping(value = "chkReported.do")
+    public void chkReported(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        String id = request.getParameter("id");
+        int bno = Integer.parseInt(request.getParameter("bno"));
+        Report report = new Report();
+        report.setReporter(id);
+        report.setBoard_bno(bno);
+        System.out.println(report.toString());
+        int chk = boardService.checkReported(report);
+
+        boolean result = false;
+        if (chk != 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+        JSONObject json = new JSONObject();
+        json.put("result", result);
+        PrintWriter out = response.getWriter();
+        out.println(json.toString());
+    }
+
 }

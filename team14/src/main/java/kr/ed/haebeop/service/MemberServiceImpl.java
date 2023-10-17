@@ -16,7 +16,7 @@ import java.util.Map;
 public class MemberServiceImpl implements MemberService{
     @Autowired
     private MemberRepository memberRepository;
-
+    
     // spring security 이용
     private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService{
     public Member signIn(String id) throws Exception {
         return memberRepository.signIn(id);
     }
-
+    
     // 서비스에서 로그인 처리
     @Override
     public boolean loginCheck(String id, String pw) throws Exception {
@@ -66,11 +66,11 @@ public class MemberServiceImpl implements MemberService{
                 comp = true;
             }
         } catch (Exception e) {
-
+            
         }
         return comp;
     }
-
+    
     // Ajax로 로그인 처리 (컨트롤러)
     @Override
     public Member login(String id) throws Exception {
@@ -279,5 +279,11 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public String regSocialUser(Member member) throws Exception {
         return memberRepository.insertSocialUser( member );
+    }
+    
+    // 포인트 추가
+    @Override
+    public void memberPoint(Member member) throws Exception {
+        memberRepository.memberPoint(member);
     }
 }

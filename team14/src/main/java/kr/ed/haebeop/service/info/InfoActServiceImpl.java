@@ -1,40 +1,40 @@
-package kr.ed.haebeop.service;
+package kr.ed.haebeop.service.info;
 
 import kr.ed.haebeop.domain.Infomation;
-import kr.ed.haebeop.repository.InfoUniRepositoryImpl;
+import kr.ed.haebeop.repository.InfoActRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class InfoUniServiceImpl implements InfoService{
+public class InfoActServiceImpl implements InfoService{
 
     @Autowired
-    private InfoUniRepositoryImpl infoUniRepository;
+    private InfoActRepositoryImpl infoActRepository;
 
     @Override
     public List<Infomation> infoList() throws Exception {
-        return infoUniRepository.infoList();
+        return infoActRepository.infoList();
     }
 
     @Override
     public Infomation infoDetail(int bno) throws Exception {
-        return infoUniRepository.infoDetail(bno);
+        return infoActRepository.infoDetail(bno);
     }
 
     @Override
     public void infoInsert(Infomation dto) throws Exception {
-        infoUniRepository.infoInsert(dto);
+        infoActRepository.infoInsert(dto);
     }
 
     @Override
     public void infoDelete(int bno) throws Exception {
-        infoUniRepository.infoDelete(bno);
+        infoActRepository.infoDelete(bno);
     }
 
     @Override
     public void infoEdit(Infomation dto) throws Exception {
-        infoUniRepository.infoEdit(dto);
+        infoActRepository.infoEdit(dto);
     }
 }

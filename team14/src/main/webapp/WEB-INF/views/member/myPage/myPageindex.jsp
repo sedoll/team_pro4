@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -39,7 +39,7 @@
                                     alt="프로필 사진"
                                     class="my-page-profile__image"
                             />
-                            <span class="my-page-profile__nickname">user</span>
+                            <span class="my-page-profile__nickname">${member.name}</span>
                         </div>
 
                         <div class="my-transaction-info">
@@ -56,7 +56,7 @@
 
                                 <li class="my-transaction-info-item">
                                     <span class="my-transaction-info__title">POINT</span>
-                                    <span class="my-transaction-info__content">1000 점</span>
+                                    <span class="my-transaction-info__content">${member.pt} 점</span>
                                 </li>
                             </ul>
                         </div>
@@ -75,11 +75,12 @@
 
                     <div class="transaction-history">
                         <div class="transaction-history__sale">
-                            <a href="${path14}/PaymentList.do">결제정보</a>
+                            <a href="${path14}/payment/paymentList.do">수강 내역</a>
                         </div>
                         <div class="transaction-history__purchase">
-                            <a href="${path14}/CartList.do">장바구니</a>
+                            <a href="${path14}/cart/cartList.do">장바구니</a>
                         </div>
+                    </div>
                 </article>
             </main>
         </div>

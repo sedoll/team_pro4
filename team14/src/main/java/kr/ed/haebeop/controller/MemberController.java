@@ -4,6 +4,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.repository.AuthRepositoryImpl;
 import kr.ed.haebeop.repository.MemberRepository;
+import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.util.Utils;
 import org.json.JSONObject;
@@ -37,15 +38,12 @@ import java.util.Random;
 public class MemberController {
     @Autowired
     private MemberService memberService; // 서비스 생성
-
+    @Autowired
+    private InstService instService; // 강사 로그인을 위해 사용
     @Autowired
     HttpSession session; // 세션 생성
-
     @Autowired
     JavaMailSender mailSender;
-
-    // spring security 이용
-    private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private NaverLoginBo naverLoginBo;
@@ -63,6 +61,9 @@ public class MemberController {
 
     org.json.simple.JSONObject jsonObj;
     private String apiResult = null;
+
+    // spring security 이용
+    private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     //로그인 폼 로딩
     @RequestMapping("login.do")
@@ -86,8 +87,6 @@ public class MemberController {
             out.println("<script>alert('로그인 성공');</script>");
             out.flush();
             session.setAttribute("sid", id);
-            session.setAttribute("job", mem.getJob());
-            System.out.println(mem.getJob());
             return "/index";
         } else { // 로그인 실패
             response.setContentType("text/html; charset=UTF-8");
@@ -101,6 +100,34 @@ public class MemberController {
     //랜덤 문자열 생성, 소셜 닉네임 생성
     public String crtNickName() { //랜덤 문자열 생성, 소셜 닉네임 생성
         return "new_" + utils.createRandomStr();
+    }
+    
+    // 강사 로그인
+    @RequestMapping("instLogin.do")
+    public String instLoginForm(Model model) throws Exception {
+        return "/member/loginForm2";
+    }
+    @PostMapping("instSignin.do")
+    public String instSignIn(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        boolean check = instService.loginCheck(id, pw);
+        if (check) { // 로그인 성공
+            Instructor mem = new Instructor();
+            mem = instService.getInstructor(id);
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('로그인 성공');</script>");
+            out.flush();
+            session.setAttribute("sid", id);
+            return "/index";
+        } else { // 로그인 실패
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('로그인 실패');</script>");
+            out.flush();
+            return "/member/loginForm2";
+        }
     }
 
     //네이버 로그인
@@ -483,7 +510,7 @@ public class MemberController {
         Member mem = memberService.selectMember(email);
         System.out.println(mem);
 
-        if (mem != null) {
+        try{
             Random r = new Random();
             int num = r.nextInt(999999); // 랜덤난수설정
 
@@ -519,13 +546,12 @@ public class MemberController {
                 mv.setViewName("/member/pw_find");
                 return mv;
             }
-        } else {
+        } catch (Exception e) {
             ModelAndView mv = new ModelAndView();
             mv.setViewName("/member/pw_find");
             return mv;
         }
     }
-
 
     //이메일 인증번호 확인
     @RequestMapping(value = "/pw_set.do", method = RequestMethod.POST)
@@ -596,12 +622,6 @@ public class MemberController {
         return mav;
     }
 
-
-
-
-
-
-
     //신고한 게시글 목록
     @GetMapping("myReportList.do")
     public String myReportList(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
@@ -611,6 +631,7 @@ public class MemberController {
         System.out.println(boardList.toString());
         return "/member/myPage/myReportList";
     }
+
     @GetMapping("myReportCancel.do")
     public String myReportCancel(HttpServletRequest request, Model model) throws Exception {
         String id = request.getParameter("id");

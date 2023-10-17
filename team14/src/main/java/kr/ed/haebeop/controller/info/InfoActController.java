@@ -1,7 +1,7 @@
-package kr.ed.haebeop.controller;
+package kr.ed.haebeop.controller.info;
 
 import kr.ed.haebeop.domain.Infomation;
-import kr.ed.haebeop.service.InfoStuServiceImpl;
+import kr.ed.haebeop.service.info.InfoActServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/infoStu/*")
-public class InfoStuController {
+@RequestMapping("/infoAct/*")
+public class InfoActController {
 
     @Autowired
-    private InfoStuServiceImpl infoStuService;
+    private InfoActServiceImpl infoActService;
 
     @Autowired
     HttpSession session; // 세션 생성
@@ -31,9 +31,9 @@ public class InfoStuController {
     @GetMapping("list.do")		//info/list.do
     public String getinfoList(HttpServletResponse response, Model model) throws Exception {
         if(session.getAttribute("sid") != null && !"".equals(session.getAttribute("sid"))) {
-            List<Infomation> infomationList = infoStuService.infoList();
+            List<Infomation> infomationList = infoActService.infoList();
             model.addAttribute("infoList", infomationList);
-            return "/infoStu/infoList";
+            return "/infoAct/infoList";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -46,14 +46,14 @@ public class InfoStuController {
     @GetMapping("detail.do")	//info/detail.do?bno=1
     public String getinfoDetail(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Infomation dto = infoStuService.infoDetail(bno);
+        Infomation dto = infoActService.infoDetail(bno);
         model.addAttribute("dto", dto);
-        return "/infoStu/infoDetail";
+        return "/infoAct/infoDetail";
     }
 
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
-        return "/infoStu/infoInsert";
+        return "/infoAct/infoInsert";
     }
 
     @PostMapping("insert.do")
@@ -61,23 +61,23 @@ public class InfoStuController {
         Infomation dto = new Infomation();
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
-        infoStuService.infoInsert(dto);
+        infoActService.infoInsert(dto);
         return "redirect:list.do";
     }
 
     @GetMapping("delete.do")
     public String infoDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        infoStuService.infoDelete(bno);
+        infoActService.infoDelete(bno);
         return "redirect:list.do";
     }
 
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Infomation dto = infoStuService.infoDetail(bno);
+        Infomation dto = infoActService.infoDetail(bno);
         model.addAttribute("dto", dto);
-        return "/infoStu/infoEdit";
+        return "/infoAct/infoEdit";
     }
 
     @PostMapping("edit.do")
@@ -87,7 +87,7 @@ public class InfoStuController {
         dto.setBno(bno);
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
-        infoStuService.infoEdit(dto);
+        infoActService.infoEdit(dto);
         return "redirect:list.do";
     }
 
