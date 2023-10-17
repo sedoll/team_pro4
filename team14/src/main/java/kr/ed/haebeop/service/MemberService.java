@@ -59,4 +59,6 @@ public interface MemberService {
     // 포인트 추가
     public void memberPoint(Member member) throws Exception;
 
+
+
 }
