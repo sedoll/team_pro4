@@ -50,4 +50,13 @@ public interface MemberService {
     public  void teaReportCancel(int bno) throws Exception;
     public  void parReportCancel(int bno) throws Exception;
 
+    //이메일 가져오기
+    public Member getMemberEmail (String email) throws Exception;
+
+    //소셜가입
+    public String regSocialUser(Member member) throws Exception;
+
+    // 포인트 추가
+    public void memberPoint(Member member) throws Exception;
+
 }

@@ -11,54 +11,6 @@ CREATE DATABASE haebeop;
 
 USE haebeop
 
--- 회원(아이디, 비밀번호, 이름, 이메일, 전화번호, 주소1, 주소2, 우편번호, 가입일, 생년월일, 점수, 방문횟수, 직업)
-DROP TABLE member;
-
-CREATE TABLE member(
-	id VARCHAR(20) PRIMARY KEY, -- 아이디
-	pw VARCHAR(350) NOT NULL, -- 비밀번호
-	NAME VARCHAR(50) NOT NULL, -- 이름
-	email VARCHAR(150), -- 이메일
-	tel VARCHAR(20), -- 전화번호
-	addr1 VARCHAR(200), -- 주소1
-	addr2 VARCHAR(200), -- 주소2
-	postcode VARCHAR(20), -- 우편번호
-	regdate DATETIME DEFAULT CURRENT_TIME, -- 가입일
-	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
-	pt INT DEFAULT 0, -- 점수
-	cnt INT DEFAULT 0, -- 방문횟수,
-	job INT -- 직업
-);
-
--- 관리자
-INSERT INTO member VALUES(
-'admin', '1234', '관리자', 'admin@edu.com', '010-1234-5678', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
-	DEFAULT, DEFAULT, 0);
-
--- 학부모
-INSERT INTO member VALUES(
-'hong', '1234', '홍길동', 'hong@edu.com', '010-2222-3333', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1980-04-22',
-	DEFAULT, DEFAULT, 1);
-	INSERT INTO member VALUES(
-'kang', '1234', '강감찬', 'kang@edu.com', '010-1212-1212', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1975-04-22',
-	DEFAULT, DEFAULT, 1);
-
--- 선생
-INSERT INTO member VALUES(
-'son', '1234', '손흥민', 'son@edu.com', '010-5555-6666', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1983-04-22',
-	DEFAULT, DEFAULT, 2);
-	INSERT INTO member VALUES(
-'lee', '1234', '이순신', 'lee@edu.com', '010-3434-3434', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1990-04-22',
-	DEFAULT, DEFAULT, 2);
-
--- 비밀번호 1234 spring 암호화 버전
-UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi'
-
 CREATE TABLE board(
 	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
 	title VARCHAR(200) NOT NULL, -- 제목
@@ -68,7 +20,7 @@ CREATE TABLE board(
 	cnt INT DEFAULT 0, -- 조회수
 	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
 	par INT, -- 부모 게시글 번호
-	FOREIGN KEY(author) REFERENCES MEMBER(id) ON DELETE 		
+	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
 
@@ -313,6 +265,26 @@ INSERT test VALUES(3, '제목3');
 INSERT test VALUES(4, '제목4');
 INSERT test VALUES(5, '제목5');
 
+-- 회원(아이디, 비밀번호, 이름, 이메일, 전화번호, 주소1, 주소2, 우편번호, 가입일, 생년월일, 점수, 방문횟수, 직업)
+CREATE TABLE member(
+	id VARCHAR(20) PRIMARY KEY, -- 아이디
+	pw VARCHAR(350) NOT NULL, -- 비밀번호
+	NAME VARCHAR(50) NOT NULL, -- 이름
+	email VARCHAR(150), -- 이메일
+	tel VARCHAR(20), -- 전화번호
+	addr1 VARCHAR(200), -- 주소1
+	addr2 VARCHAR(200), -- 주소2
+	postcode VARCHAR(20), -- 우편번호
+	resdate DATETIME DEFAULT CURRENT_TIME, -- 가입일
+	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
+	pt INT DEFAULT 0, -- 점수
+	cnt INT DEFAULT 0 -- 방문횟수,
+);
+
+ALTER TABLE member DROP COLUMN job;
+
+UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi' WHERE pw='1234';
+
 -- 공지사항(순번, 제목, 내용, 작성자, 작성일, 읽은 횟수)
 create table notice(
 	no int primary KEY AUTO_INCREMENT, -- notice 글 번호
@@ -323,50 +295,58 @@ create table notice(
 	cnt int DEFAULT 0 -- 조회수
 );
 
-
--- 자료실(순번, 제목, 내용, 파일1, 파일2, 파일3, 작성일, 작성자, 읽은 횟수)
-CREATE TABLE FILE(
-	NO INT PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(200) NOT null,
-	content VARCHAR(1000),
-	FILE1 VARCHAR(1000),
-	FILE2 VARCHAR(1000),
-	FILE3 VARCHAR(1000),
-	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
-	id VARCHAR(20),
-	cnt INT DEFAULT 0
-);
-
--- 과목(과목코드(PK), 과목명, 과목단가)
-CREATE TABLE SUBJECT(
-	NO INT PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(200) NOT NULL,
-	cost INT NOT NULL
-	);
-
 -- 강사(강사코드(PK), 강사명, 연락처, 이메일)
+-- DROP TABLE instructor;
 CREATE TABLE instructor(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
+	id VARCHAR(20) not null,
+	pw VARCHAR(100) NOT null,
 	NAME VARCHAR(10),
 	tel VARCHAR(20),
 	email VARCHAR(100)
-	);
+);
+	
+INSERT INTO instructor VALUES(DEFAULT, '강감찬', '01011111111', 'kang@edu.com');
+INSERT INTO instructor VALUES(DEFAULT, '홍길동', '01022222222', 'hong@edu.com');
+INSERT INTO instructor VALUES(DEFAULT, '이순신', '01033333333', 'lee@edu.com');
 
 -- 강의(강의코드(PK), 강의명,  강의동영상파일, 과목코드(FK), 강사코드(FK), 수강인원, 최대수강인원)
-DROP TABLE lecture;
+-- 외래 키 체크를 비활성화
+-- SET FOREIGN_KEY_CHECKS = 0;
+
+-- 테이블 삭제
+-- DROP TABLE lecture;
+
+-- 외래 키 체크를 다시 활성화
+-- SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE lecture(
-	NO INT PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(200) NOT NULL,
-	sfile VARCHAR(1000),
-	sno INT,
-	ino INT,
-	cnt INT DEFAULT 0,
-	max_cnt INT,
-	FOREIGN KEY(sno) REFERENCES subject(no), 
-	FOREIGN KEY(ino) REFERENCES instructor(no)
-	);
-	
+	NO INT PRIMARY KEY AUTO_INCREMENT, -- 강의 번호
+	cate VARCHAR(100), -- 과목 (국어, 수학, 영어, ...)
+	slevel VARCHAR(100), -- 수강 레벨, 분류 ex(중학교 1학년, 고등학교 3학년 등등..)
+	title VARCHAR(200) NOT NULL, -- 강의 제목
+	content VARCHAR(2000), -- 강의 소개 글
+	simg VARCHAR(1000), -- 목록 프로필 이미지
+	sfile1 VARCHAR(1000), -- ot 영상
+	sfile2 VARCHAR(1000), -- 강의 영상1
+	sfile3 VARCHAR(1000), -- 강의 영상2
+	sfile4 VARCHAR(1000), -- 강의 영상3
+	sfile5 VARCHAR(1000), -- 강의 영상4
+	price INT NOT NULL, -- 강의 가격
+	ino INT, -- 강사코드(FK)
+	cnt INT DEFAULT 0, -- 조회수
+	lec INT DEFAULT 0, -- 현재 수강인원
+	lec_max INT, -- 최대 수강인원
+	aplctClss1 DATE, -- 수강신청 시작일
+	aplctClss2 DATE, -- 수강신청 종료일
+	studystart DATE, -- 강의 시작일
+	studyend DATE, -- 강의 종료일
+	endday INT, -- 강의 수강 기간일 지정
+	FOREIGN KEY(ino) REFERENCES instructor(NO)
+);
+-- ALTER TABLE lecture ADD COLUMN endday INT;
+-- UPDATE lecture SET endday = 100; 
+
 
 -- 수강(수강코드(PK), 강의코드(FK), 학생아이디(FK), 수강총시간, 수강완료 여부)
 DROP table course;
@@ -375,11 +355,12 @@ CREATE TABLE course(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
 	lec_no INT,
 	sid VARCHAR(20),
-	ctime INT DEFAULT 0,
 	CHECK1 VARCHAR(10),
-	FOREIGN KEY(lec_no) REFERENCES lecture(no), 
-	FOREIGN KEY(sid) REFERENCES member(id)
+	-- FOREIGN KEY(lec_no) REFERENCES lecture(no), 
+	-- FOREIGN KEY(sid) REFERENCES member(id)
 	);
+
+-- payment 
 
 -- 교재(교재코드(PK), 교재명, 교재목차, 출판사, 출판일, 저자, 가격, 기타메모)
 CREATE TABLE textbook(
@@ -392,6 +373,44 @@ CREATE TABLE textbook(
 	cost INT DEFAULT 0,
 	memo VARCHAR(1000)
 	);
+
+-- 장바구니
+-- SET FOREIGN_KEY_CHECKS = 0;
+
+-- 테이블 삭제
+-- DROP TABLE cart;
+
+-- 외래 키 체크를 다시 활성화
+-- SET FOREIGN_KEY_CHECKS = 1;
+-- 여기에서 lecture의 과목, 강의명 컬럼 추가
+CREATE TABLE cart(
+	cartno INT PRIMARY KEY AUTO_INCREMENT,
+	id VARCHAR(20),
+	lec_no INT,
+	FOREIGN KEY(lec_no) REFERENCES lecture(NO) ON DELETE CASCADE, 
+	FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
+	)
+
+-- 결제 내역(강의 구매 내역)
+CREATE TABLE payment(
+	sno INT PRIMARY KEY AUTO_INCREMENT, -- (수강신청, 걸제 내역 번호)
+	id VARCHAR(20), -- 구매자 id(FK)
+	lec_no INT, -- 강의 번호(FK)
+	lec_name VARCHAR(200), -- 강의 이름
+	pmethod VARCHAR(500), -- 결제 방법
+	pcom VARCHAR(500), -- 결제 대행
+	cnum VARCHAR(500), -- 결제번호
+	price INT, -- 가격
+	state INT DEFAULT 0, -- 상태
+	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 결제 일
+	buydate TIMESTAMP, -- 구매 확정 일
+	FOREIGN KEY(lec_no) REFERENCES lecture(NO),
+	FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
+	);
+-- ALTER TABLE payment ADD COLUMN resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP();
+-- ALTER TABLE payment ADD COLUMN buydate TIMESTAMP;
+-- alter table payment change resdate TIMESTAMP;
+ALTER TABLE payment DROP COLUMN resdate;
 
 -- 강의 배정
 -- 과목, 강사, 교재 정보를 강의 테이블에 등록하는 행위

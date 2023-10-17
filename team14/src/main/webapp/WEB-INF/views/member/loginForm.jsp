@@ -32,6 +32,11 @@
     <!-- Main Stylesheet -->
     <link href="${path}/resources/theme/css/style.css" rel="stylesheet">
 
+    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- 카카오톡 자바스크립트 라이브러리 -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+            charset="utf-8"></script> <!-- 네이버 js 라이브러리 -->
+
     <!--Favicon-->
     <link rel="shortcut icon" href="${path}/resources/theme/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="${path}/resources/theme/images/favicon.ico" type="image/x-icon">
@@ -39,6 +44,7 @@
         .login{
             margin: 0 auto;
             width: 440px;
+            background-color: #BED4E9;
         }
 
         #logo-6{
@@ -63,8 +69,16 @@
 
         .level-item .find{
             margin-left: 20px;
+            margin-right: 20px;
         }
 
+        .level-item .inst{
+            margin-left: 20px;
+        }
+
+        img {
+            margin-bottom: 20px;
+        }
 
 
     </style>
@@ -99,9 +113,23 @@
                         <a href="../member/term.do" class="term">회원가입</a>
                         <a>|</a>
                         <a href="${path}/member/pw_find.do" class="find">비밀번호 찾기</a>
+                        <a>|</a>
+                        <a href="${path}/member/instLogin.do" class="inst">강사 로그인</a>
                     </div>
                 </div>
             </nav>
+            <br>
+            <div class="social">
+
+                <div class="join-buttons">
+                    <a href="${urlKakao}" class="login-social kakao">
+                        <img src="${path}/resources/img/kakao.png" alt="kakao" style="width: 50px">
+                    </a>
+                    <a href="${urlNaver}" class="login-social naver">
+                        <img src="${path}/resources/img/naver.png" alt="naver" style="width: 50px">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>

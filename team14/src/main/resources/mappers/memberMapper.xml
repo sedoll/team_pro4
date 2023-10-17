@@ -5,7 +5,7 @@
 <mapper namespace="member">
     <!-- 회원 목록 보기 -->
     <select id="memberList" resultType="kr.ed.haebeop.domain.Member">
-        select * from member order by regdate desc
+        select * from member where id not in ('admin') order by regdate desc
     </select>
 
     <!-- 회원 상세 정보 보기 -->
@@ -25,9 +25,8 @@
 
     <!-- 회원 가입 -->
     <insert id="memberInsert">
-        insert into member values(#{id}, #{pw}, #{name}, #{email}, #{tel},
-        #{addr1}, #{addr2}, #{postcode}, DEFAULT, #{birth},
-        DEFAULT, DEFAULT, #{job})
+        insert into member values(#{id}, #{pw}, #{name}, #{email}, #{tel}, #{addr1}, #{addr2}, #{postcode}, DEFAULT, #{birth},
+        DEFAULT, DEFAULT)
     </insert>
 
     <!-- 로그인을 컨트롤에서 처리 -->
@@ -178,4 +177,26 @@
     <delete id="parReportCancel">
         delete from report_par where board_bno = #{bno}
     </delete>
+
+    <select id="getMemberEmail" resultType="kr.ed.haebeop.domain.Member">
+        select * from member where email = #{email}
+    </select>
+
+    <!--security-->
+    <select id="getUserDetailsDto" resultType="kr.ed.haebeop.domain.UserDetail">
+        SELECT * FROM member WHERE EMAIL = #{email}
+    </select>
+
+    <insert id="insertSocialUser" parameterType="kr.ed.haebeop.domain.Member">
+        INSERT INTO member (EMAIL, LOGIN_TP_CD)
+        VALUES (#{email},#{login_tp_cd} );
+        <selectKey resultType="String" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+
+    <!-- 포인트 추가 -->
+    <update id="memberPoint">
+        update member set pt=pt+#{pt} where id=#{id}
+    </update>
 </mapper>

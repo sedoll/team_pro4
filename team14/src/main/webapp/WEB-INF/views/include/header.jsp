@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
@@ -52,18 +52,18 @@
                     <a href="${path2}/board/list.do" class="navbar-item">
                         자유 게시판
                     </a>
-                    <a href="${path2}/boardTea/list.do" class="navbar-item">
-                        선생님 게시판
-                    </a>
-                    <a href="${path2}/boardPar/list.do" class="navbar-item">
-                        학부모 게시판
-                    </a>
+<%--                    <a href="${path2}/boardTea/list.do" class="navbar-item">--%>
+<%--                        선생님 게시판--%>
+<%--                    </a>--%>
+<%--                    <a href="${path2}/boardPar/list.do" class="navbar-item">--%>
+<%--                        학부모 게시판--%>
+<%--                    </a>--%>
                 </div>
             </div>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
-                    <strong>내 자녀</strong>
+                    <strong>학교 생활</strong>
                 </a>
                 <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
                     <a href="${path2}/menu/list.do" class="navbar-item">
@@ -71,6 +71,17 @@
                     </a>
                     <a href="${path2}/grade/list.do" class="navbar-item">
                         성적표
+                    </a>
+                </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <strong>강의</strong>
+                </a>
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                    <a href="${path2}/lecture/lecList" class="button is-link2 is-rounded b2" >
+                        강의 목록
                     </a>
                 </div>
             </div>
@@ -101,34 +112,28 @@
                     </c:if>
                 </div>
                 <div class="buttons">
-                    <c:if test="${not empty sid && sid != 'admin'}"> <%-- 회원으로 로그인한 경우 --%>
-                        <%--<a href="${path1}/member/mypage.do" class="button is-link is-rounded" >--%>
-                        <a href="${path2}/member/mypage.do" class="button is-link is-rounded b1 button-bg" >
+                    <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
+                        <a href="${path2}/member/mypage.do" class="button is-link is-rounded b2" >
                             마이페이지
                         </a>
-                        <%--<a href="${path1}/member/logout.do" class="button is-link2 is-rounded" >--%>
-                        <a href="${path2}/member/logout.do" class="button is-link2 is-rounded b2 button-bg2" >
+                        <a href="${path2}/cart/cartList.do" class="button is-link2 is-rounded b2" >
+                            장바구니
+                        </a>
+                        <a href="${path2}/member/logout.do" class="button is-link2 is-rounded b2" >
                             로그아웃
                         </a>
                     </c:if>
                     <c:if test="${empty sid}"> <%-- 로그인을 안 한 경우 --%>
-                        <%--<a href="${path1}/member/term.do" class="button is-link is-rounded" >--%>
-                        <a href="${path2}/member/term.do" class="button is-link is-rounded b1 button-bg" >
+                        <a href="${path2}/member/term.do" class="button is-link is-rounded b2" >
                             회원가입
                         </a>
-                        <%--<a href="${path1}/member/login.do" class="button is-link2 is-rounded" >--%>
-                        <a href="${path2}/member/login.do" class="button is-link2 is-rounded b2 button-bg2" >
+                        <a href="${path2}/member/login.do" class="button is-link2 is-rounded b2" >
                             로그인
                         </a>
                     </c:if>
-                    <c:if test="${sid.equals('admin')}"> <%-- 관리자로 로그인 한 경우 --%>
-                        <%--<a href="${path1}/admin/adminMain.do" class="button is-link is-rounded " >--%>
-                        <a href="${path2}/admin/adminMain.do" class="button is-link is-rounded b1 button-bg" >
+                    <c:if test="${sid eq 'admin'}"> <%-- 관리자로 로그인 한 경우 --%>
+                        <a href="${path2}/admin/adminMain.do" class="button is-link is-rounded b2" >
                             관리자페이지
-                        </a>
-                        <%--<a href="${path1}/member/logout.do" class="button is-link2 is-rounded" >--%>
-                        <a href="${path2}/member/logout.do" class="button is-link2 is-rounded b2 button-bg2" >
-                            로그아웃
                         </a>
                     </c:if>
                 </div>
