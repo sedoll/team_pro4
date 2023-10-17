@@ -6,16 +6,16 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-compatible" content="IE=edge"> <!-- 익스프로어 일 경우 엣지를 사용하라고 안내-->
-<meta http-equiv="author" content="TeenTalk"> <!-- 문서의 제작사 -->
-<meta http-equiv="publisher" content="TeenTalk"> <!-- 문서의 저자 정의 -->
-<meta http-equiv="copyright" content="copyright@teentalk.co.kr"> <!-- 저작권 명시 -->
-<title>TEENTALK</title>
+<meta http-equiv="author" content="Haebeop"> <!-- 문서의 제작사 -->
+<meta http-equiv="publisher" content="Haebeop"> <!-- 문서의 저자 정의 -->
+<meta http-equiv="copyright" content="copyright@haebeop.co.kr"> <!-- 저작권 명시 -->
+<title>Haebeop</title>
 
 <!-- 검색엔진 최적화(SEO) -->
-<meta name="subject" content="TeenTalk"> <!-- 페이지 주제 지정 http-equiv 로 지정해도 상관 무 -->
-<meta name="keywords" content="TeenTalk"> <!-- 검색 단어 지정 -->
+<meta name="subject" content="Haebeop"> <!-- 페이지 주제 지정 http-equiv 로 지정해도 상관 무 -->
+<meta name="keywords" content="Haebeop"> <!-- 검색 단어 지정 -->
 <!-- 검색 결과에 표시되는 문자 지정-->
-<meta name="description" content="tspoon 입니다.">
+<meta name="description" content="Haebeop 입니다.">
 <meta name="robots" content="index, follow">
 
 <!-- 오픈 그래프 -->
@@ -27,7 +27,7 @@
 <meta property="og:url" content="${path1}/img/img1.jpg">
 
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="${path1}/resources/img/favicon128.ico">
+<link rel="shortcut icon" href="${path1}/resources/img/favicon.ico">
 <!-- 애플 계열 모바일 -->
 <link rel="apple-touch-icon-precomposed" href="${path1}/resources/img/icon-48x48.png">
 <!-- IE 계열 브라우저 -->
@@ -61,8 +61,8 @@
 <link rel="stylesheet" href="${path1}/resources/css/header/header.css">
 
 <!--Favicon-->
-<link rel="shortcut icon" href="${path1}/resources/theme/images/favicon.ico" type="image/x-icon">
-<link rel="icon" href="${path1}/resources/theme/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${path1}/resources/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="${path1}/resources/img/favicon.ico" type="image/x-icon">
 
 <!-- font -->
 <style>
@@ -80,3 +80,4 @@
     // document.onselectstart = function () {return false;}
     // document.onkeydown = function () {return false;} // 키보드 입력 방지
 </script>
+
