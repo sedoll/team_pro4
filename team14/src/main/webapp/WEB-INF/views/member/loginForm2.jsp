@@ -55,7 +55,7 @@
             box-shadow: #dddddd;}
 
         .level-item div{
-            margin-left: 27px;
+            /*margin-left: 27px;*/
         }
 
         .level-item .term {
