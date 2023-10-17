@@ -1,8 +1,8 @@
-package kr.ed.haebeop.controller;
+package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Report;
-import kr.ed.haebeop.service.BoardServiceImpl;
+import kr.ed.haebeop.service.board.BoardTeaServiceImpl;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,36 +19,44 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/board/*")
-public class BoardController {
+@RequestMapping("/boardTea/*")
+public class BoardTeaController {
 
     @Autowired
-    private BoardServiceImpl boardService;
+    private BoardTeaServiceImpl boardTeaService;
 
     @Autowired
     HttpSession session; // 세션 생성
 
     @GetMapping("list.do")		// board/list.do
-    public String getBoardList(Model model) throws Exception {
-        List<Board> boardList = boardService.boardList();
-        model.addAttribute("boardList", boardList);
-        return "/board/boardList";
+    public String getBoardList(HttpServletResponse response, Model model) throws Exception {
+        if(session.getAttribute("sid") != null &&("admin".equals(session.getAttribute("sid")) || 2 == (Integer) session.getAttribute("job"))) {
+            List<Board> boardList = boardTeaService.boardList();
+            model.addAttribute("boardList", boardList);
+            return "/boardTea/boardList";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('해당 페이지는 선생님만 접근 가능합니다.');</script>");
+            out.flush();
+            return "/index";
+        }
     }
 
     @GetMapping("detail.do")	// board/detail.do?bno=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Board dto = boardService.boardDetail(bno);
-        List<Board> comment = boardService.commentList(bno);
+        Board dto = boardTeaService.boardDetail(bno);
+        List<Board> comment = boardTeaService.commentList(bno);
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
         System.out.println(comment.toString());
-        return "/board/boardDetail";
+        return "/boardTea/boardDetail";
     }
 
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
-        return "/board/boardInsert";
+        return "/boardTea/boardInsert";
     }
 
     @PostMapping("insert.do")
@@ -57,7 +65,7 @@ public class BoardController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         dto.setAuthor((String) session.getAttribute("sid"));
-        boardService.boardInsert(dto);
+        boardTeaService.boardInsert(dto);
         return "redirect:list.do";
     }
 
@@ -67,24 +75,24 @@ public class BoardController {
         dto.setAuthor(request.getParameter("id"));
         dto.setBno(Integer.parseInt(request.getParameter("bno")));
         dto.setContent(request.getParameter("content"));
-        boardService.commentInsert(dto);
+        boardTeaService.commentInsert(dto);
         return "redirect:list.do";
     }
 
     @GetMapping("delete.do")
     public String boardDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        boardService.boardDelete(bno);
-        boardService.commentDeleteAll(bno);
+        boardTeaService.boardDelete(bno);
+        boardTeaService.commentDeleteAll(bno);
         return "redirect:list.do";
     }
 
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
-        Board dto = boardService.boardDetail(bno);
+        Board dto = boardTeaService.boardDetail(bno);
         model.addAttribute("dto", dto);
-        return "/board/boardEdit";
+        return "/boardTea/boardEdit";
     }
 
     @PostMapping("edit.do")
@@ -94,14 +102,13 @@ public class BoardController {
         dto.setBno(bno);
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
-        boardService.boardEdit(dto);
+        boardTeaService.boardEdit(dto);
         return "redirect:list.do";
     }
-
     //게시글 신고 팝업 창
     @RequestMapping("reportPopup.do")
     public String reportPopup(HttpServletRequest request, Model model) throws Exception {
-        return "/board/reportPopup";
+        return "/boardTea/reportPopup";
     }
 
     //팝업창에서 게시글 신고 버튼 눌렀을때 처리
@@ -119,9 +126,9 @@ public class BoardController {
         report.setReason(reason);
         report.setBoard_bno(bno);
         boolean result = false;
-        int chk1 = boardService.checkReported(report);
+        int chk1 = boardTeaService.checkReported(report);
         if (chk1 == 0) {
-            boardService.reportBoard(report);
+            boardTeaService.reportBoard(report);
             result = true;
         } else {
             result = false;
@@ -135,26 +142,4 @@ public class BoardController {
         System.out.println(json.toString());
 
     }
-    @PostMapping(value = "chkReported.do")
-    public void chkReported(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
-        String id = request.getParameter("id");
-        int bno = Integer.parseInt(request.getParameter("bno"));
-        Report report = new Report();
-        report.setReporter(id);
-        report.setBoard_bno(bno);
-        System.out.println(report.toString());
-        int chk = boardService.checkReported(report);
-
-        boolean result = false;
-        if (chk != 0) {
-            result = true;
-        } else {
-            result = false;
-        }
-        JSONObject json = new JSONObject();
-        json.put("result", result);
-        PrintWriter out = response.getWriter();
-        out.println(json.toString());
-    }
-
 }

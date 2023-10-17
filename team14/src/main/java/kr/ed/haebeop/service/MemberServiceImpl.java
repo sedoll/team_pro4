@@ -280,4 +280,10 @@ public class MemberServiceImpl implements MemberService{
     public String regSocialUser(Member member) throws Exception {
         return memberRepository.insertSocialUser( member );
     }
+    
+    // 포인트 추가
+    @Override
+    public void memberPoint(Member member) throws Exception {
+        memberRepository.memberPoint(member);
+    }
 }
