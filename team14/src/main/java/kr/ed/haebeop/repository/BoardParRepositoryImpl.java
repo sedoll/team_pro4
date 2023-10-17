@@ -1,6 +1,7 @@
 package kr.ed.haebeop.repository;
 
 import kr.ed.haebeop.domain.Board;
+import kr.ed.haebeop.domain.Like;
 import kr.ed.haebeop.domain.Report;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,24 @@ public class BoardParRepositoryImpl implements BoardRepository {
     @Override
     public List<Board> recentReportList() throws Exception {
         return sqlSession.selectList("board.recentReportList");
+    }
+
+    @Override
+    public int cntReport(int bno) throws Exception {
+        return sqlSession.selectOne("boardPar.cntReport");
+    }
+    @Override
+    public int checkLiked(Like like) throws Exception {
+        return sqlSession.selectOne("boardPar.checkLiked", like);
+    }
+
+    @Override
+    public void removeLike(Like like) throws Exception {
+        sqlSession.delete("boardPar.removeLike", like);
+    }
+
+    @Override
+    public void addLike(Like like) throws Exception {
+        sqlSession.insert("boardPar.addLike", like);
     }
 }

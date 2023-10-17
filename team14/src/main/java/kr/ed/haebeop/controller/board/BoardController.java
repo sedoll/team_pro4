@@ -1,6 +1,7 @@
 package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
+import kr.ed.haebeop.domain.Like;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
 import org.json.JSONObject;
@@ -42,6 +43,29 @@ public class BoardController {
         List<Board> comment = boardService.commentList(bno);
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
+
+        //신고 누적 수 가져오기
+        System.out.println("bno : "+bno);
+        int cntReport = boardService.cntReport(bno);
+        model.addAttribute("cntReport",cntReport);
+        System.out.println("cntReport : "+cntReport);
+
+        //추천(좋아요) 기능 처리
+        String sid = (String) session.getAttribute("sid");
+        System.out.println("detail sid : "+sid);
+        Like like = new Like();
+        like.setUserId(sid);
+        like.setBoardNo(bno);
+        System.out.println(like.toString());
+        boolean isLiked = false;
+        int chk= boardService.checkLiked(like);
+        if(chk==1){
+            isLiked = true;
+        }
+        model.addAttribute("isLiked",isLiked);
+
+
+
         System.out.println(comment.toString());
         return "/board/boardDetail";
     }
@@ -157,4 +181,32 @@ public class BoardController {
         out.println(json.toString());
     }
 
+    //좋아요 ajax 처리
+    @PostMapping(value = "boardLike.do")
+    public void boardLike(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        String id = request.getParameter("sid");
+        int bno = Integer.parseInt(request.getParameter("boardNo"));
+        String result = "unliked";
+
+        Like like=new Like();
+        like.setUserId(id);
+        like.setBoardNo(bno);
+        int chk = boardService.checkLiked(like);
+        if(chk==0) {
+            //추가
+            boardService.addLike(like);
+            result = "liked";
+        } else if (chk==1){
+            //삭제
+            boardService.removeLike(like);
+            result = "unliked";
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("result", result);
+        PrintWriter out = response.getWriter();
+        out.println(json.toString());
+        System.out.println(json.toString());
+
+    }
 }
