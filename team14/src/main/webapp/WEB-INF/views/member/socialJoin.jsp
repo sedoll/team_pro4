@@ -167,10 +167,10 @@
 
             <br><br>
 
-            <button type="button" class="btn btn-outline-secondary " type="reset"   style="    width: 200px;
+            <button type="reset" class="btn btn-outline-secondary " style="    width: 200px;
                 height: 50px;
                 font-size: 20px;">취소</button>
-            <button type="button" class="btn btn-primary " type="submit"   style="    width: 200px;
+            <button type="submit" class="btn btn-primary " style="    width: 200px;
                 height: 50px;
                 font-size: 20px;">회원가입</button>
 
