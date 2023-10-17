@@ -266,9 +266,11 @@ a {
     text-decoration: none
 }
 
+
 a strong {
     color: currentColor
 }
+
 
 a:hover {
     color: #363636

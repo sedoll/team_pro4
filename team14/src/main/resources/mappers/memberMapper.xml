@@ -184,12 +184,13 @@
 
     <!--security-->
     <select id="getUserDetailsDto" resultType="kr.ed.haebeop.domain.UserDetail">
-        SELECT * FROM member WHERE EMAIL = #{email}
+        SELECT * FROM member WHERE email = #{email}
     </select>
 
-    <insert id="insertSocialUser" parameterType="kr.ed.haebeop.domain.Member">
-        INSERT INTO member (EMAIL, LOGIN_TP_CD)
-        VALUES (#{email},#{login_tp_cd} );
+    <!--네이버 회원가입-->
+    <insert id="regSocialUser" parameterType="kr.ed.haebeop.domain.Member">
+        INSERT INTO member (id, pw, name, email, tel, login_tp_cd)
+        VALUES (#{id}, #{pw}, #{name}, #{email},#{tel},#{login_tp_cd} );
         <selectKey resultType="String" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>

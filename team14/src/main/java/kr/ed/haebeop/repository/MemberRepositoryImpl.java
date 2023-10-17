@@ -183,8 +183,8 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public String insertSocialUser(Member member) throws Exception {
-        sqlSession.insert("insertSocialUser", member);
+    public String regSocialUser(Member member) throws Exception {
+        sqlSession.insert("regSocialUser", member);
         return member.getId();
     }
 
