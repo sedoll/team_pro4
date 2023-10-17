@@ -44,7 +44,7 @@
         .login{
             margin: 0 auto;
             width: 440px;
-            background-color: #BED4E9;
+            background-color: #cbdff3;
         }
 
         #logo-6{
@@ -60,7 +60,7 @@
             box-shadow: #dddddd;}
 
         .level-item div{
-            margin-left: 27px;
+            /*margin-left: 27px;*/
         }
 
         .level-item .term {
@@ -76,9 +76,9 @@
             margin-left: 20px;
         }
 
-        img {
-            margin-bottom: 20px;
-        }
+        /*img {*/
+        /*    margin-bottom: 20px;*/
+        /*}*/
 
 
     </style>
@@ -89,7 +89,7 @@
 <section class="hero is-fullheight">
     <div class="hero-body has-text-centered">
         <div class="login box is-rounded">
-            <img src="${path}/resources/img/logo_noBackground_blue.png" alt="logo" width="220">
+            <img src="${path}/resources/img/smart_haebeop_logo.png" alt="logo" width="220" style="margin-bottom: 20px">
             <form action="${path }/member/signin.do" method="post" name="loginForm">
                 <div class="field">
                     <div class="control">
@@ -123,10 +123,10 @@
 
                 <div class="join-buttons">
                     <a href="${urlKakao}" class="login-social kakao">
-                        <img src="${path}/resources/img/kakao.png" alt="kakao" style="width: 50px">
+                        <img src="${path}/resources/img/kakao.png" alt="kakao" style="width: 50px; margin-bottom: 20px">
                     </a>
                     <a href="${urlNaver}" class="login-social naver">
-                        <img src="${path}/resources/img/naver.png" alt="naver" style="width: 50px">
+                        <img src="${path}/resources/img/naver.png" alt="naver" style="width: 50px; margin-bottom: 20px">
                     </a>
                 </div>
             </div>

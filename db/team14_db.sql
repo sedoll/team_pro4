@@ -11,6 +11,83 @@ CREATE DATABASE haebeop;
 
 USE haebeop
 
+DROP TABLE MEMBER;
+-- 회원(아이디, 비밀번호, 이름, 이메일, 전화번호, 주소1, 주소2, 우편번호, 가입일, 생년월일, 점수, 방문횟수, 직업)
+CREATE TABLE member(
+	id VARCHAR(20) PRIMARY KEY, -- 아이디
+	pw VARCHAR(350) NOT NULL, -- 비밀번호
+	NAME VARCHAR(50) NOT NULL, -- 이름
+	email VARCHAR(150), -- 이메일
+	tel VARCHAR(20), -- 전화번호
+	addr1 VARCHAR(200), -- 주소1
+	addr2 VARCHAR(200), -- 주소2
+	postcode VARCHAR(20), -- 우편번호
+	regdate DATETIME DEFAULT CURRENT_TIME, -- 가입일
+	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
+	pt INT DEFAULT 0, -- 점수
+	cnt INT DEFAULT 0, -- 방문횟수,
+	job INT DEFAULT 1
+);
+
+-- ALTER TABLE member DROP COLUMN job;
+
+
+-- 로그인 타입 1: 일반 2: 카카오 3: 네이버
+ALTER TABLE member ADD login_tp_cd INT DEFAULT 1;
+-- 상태코드 1: 정상 2: 신고정지 3: 탈퇴 4: 휴면
+ALTER TABLE member ADD state_cd INT DEFAULT 1;
+
+-- 관리자
+INSERT INTO member VALUES(
+'admin', '1234', '관리자', 'admin@edu.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT,DEFAULT);
+
+INSERT INTO member VALUES(
+'oh1234', '1234', '오세훈', 'do11anm@naver.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT,DEFAULT);
+	
+UPDATE member SET email='admin@edu.com' WHERE email='do11anm@naver.com';
+UPDATE member SET email='jk3473@naver.com' WHERE id='admin';
+UPDATE member SET email='spospotv@naver.com' WHERE email='kooyj92@naver.com';
+
+INSERT INTO member VALUES(
+'ku1234', '1234', '구예진', 'kooyj92@naver.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT, DEFAULT);
+
+-- 학부모
+INSERT INTO member VALUES(
+'hong', '1234', '홍길동', 'hong@edu.com', '010-2222-3333', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1980-04-22',
+	DEFAULT, DEFAULT, 1);
+	INSERT INTO member VALUES(
+'kang', '1234', '강감찬', 'kang@edu.com', '010-1212-1212', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1975-04-22',
+	DEFAULT, DEFAULT, 1);
+
+-- 선생
+INSERT INTO member VALUES(
+'son', '1234', '손흥민', 'son@edu.com', '010-5555-6666', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1983-04-22',
+	DEFAULT, DEFAULT, 2);
+	INSERT INTO member VALUES(
+'lee', '1234', '이순신', 'lee@edu.com', '010-3434-3434', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1990-04-22',
+	DEFAULT, DEFAULT, 2);
+
+INSERT INTO member VALUES(
+'user', '1234', '김유저', 'user1@edu.com', '010-1234-5678', 
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	DEFAULT, DEFAULT,DEFAULT);
+
+-- 비밀번호 1234 spring 암호화 버전
+UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi'
+
+
+UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi' WHERE pw='1234';
+
 CREATE TABLE board(
 	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
 	title VARCHAR(200) NOT NULL, -- 제목
@@ -265,26 +342,6 @@ INSERT test VALUES(3, '제목3');
 INSERT test VALUES(4, '제목4');
 INSERT test VALUES(5, '제목5');
 
--- 회원(아이디, 비밀번호, 이름, 이메일, 전화번호, 주소1, 주소2, 우편번호, 가입일, 생년월일, 점수, 방문횟수, 직업)
-CREATE TABLE member(
-	id VARCHAR(20) PRIMARY KEY, -- 아이디
-	pw VARCHAR(350) NOT NULL, -- 비밀번호
-	NAME VARCHAR(50) NOT NULL, -- 이름
-	email VARCHAR(150), -- 이메일
-	tel VARCHAR(20), -- 전화번호
-	addr1 VARCHAR(200), -- 주소1
-	addr2 VARCHAR(200), -- 주소2
-	postcode VARCHAR(20), -- 우편번호
-	resdate DATETIME DEFAULT CURRENT_TIME, -- 가입일
-	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
-	pt INT DEFAULT 0, -- 점수
-	cnt INT DEFAULT 0 -- 방문횟수,
-);
-
-ALTER TABLE member DROP COLUMN job;
-
-UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi' WHERE pw='1234';
-
 -- 공지사항(순번, 제목, 내용, 작성자, 작성일, 읽은 횟수)
 create table notice(
 	no int primary KEY AUTO_INCREMENT, -- notice 글 번호
@@ -355,7 +412,7 @@ CREATE TABLE course(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
 	lec_no INT,
 	sid VARCHAR(20),
-	CHECK1 VARCHAR(10),
+	CHECK1 VARCHAR(10)
 	-- FOREIGN KEY(lec_no) REFERENCES lecture(no), 
 	-- FOREIGN KEY(sid) REFERENCES member(id)
 	);
@@ -412,6 +469,15 @@ CREATE TABLE payment(
 -- alter table payment change resdate TIMESTAMP;
 ALTER TABLE payment DROP COLUMN resdate;
 
+-- 추천(좋아요) 기능 테이
+create table boardlikes (
+    userid VARCHAR(20) NOT NULL,      -- 사용자 ID
+    boardno INT NOT NULL,           -- 게시글 no 
+    liketime TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 좋아요를 누른 시간
+    PRIMARY KEY (userid, boardno)   -- 사용자 ID와 게시글 no 조합으로 각 레코드를 유일하게 식별
+);
+
+
 -- 강의 배정
 -- 과목, 강사, 교재 정보를 강의 테이블에 등록하는 행위
 -- 하나의 과목당 여러 강의를 모두 등록해야한다.
@@ -421,3 +487,4 @@ ALTER TABLE payment DROP COLUMN resdate;
 -- 강의 정보를 보고, 학생이 수강 신청을 하는 행위,
 -- 학생별로 모든 강의 정보가 등록되어야 하며, 
 -- 만약 수강신청시 수강인원이 초과될 경우 수강신청을 할 수 없다.
+
