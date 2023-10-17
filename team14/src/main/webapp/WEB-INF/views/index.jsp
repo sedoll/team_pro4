@@ -28,8 +28,8 @@
     <!-- Main Stylesheet -->
     <link href="${path}/resources/theme/css/style.css" rel="stylesheet">
     <!--Favicon-->
-    <link rel="shortcut icon" href="${path}/resources/theme/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="${path}/resources/theme/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="${path}/resources/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="${path}/resources/img/favicon.ico" type="image/x-icon">
 
 
     <!-- 슬라이드 -->
@@ -43,6 +43,13 @@
         * {
             font-family: 'NanumSquare' !important;
         }
+
+         .buttons {
+             margin-bottom: 0;
+         }
+        .buttons .button {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +57,7 @@
     <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="${path}/">
-                <img src="${path}/resources/img/logo_noBackground_blue.png" width="112" height="28">
+                <img src="${path}/resources/img/smart_haebeop_logo.png" width="112" height="28">
             </a>
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
@@ -61,10 +68,58 @@
         <!-- header menu -->
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a href="${path}" class="navbar-link is-arrowless">
-                    <strong>정보</strong>
+                <a class="navbar-link is-arrowless">
+                    <strong>강의</strong>
                 </a>
                 <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                    <a href="${path}/lecture/lecList" class="button is-link2 is-rounded b2" >
+                        강의 목록
+                    </a>
+                </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <strong>선생님</strong>
+                </a>
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                    <a href="${path}/instructor/instructorList" class="button is-link2 is-rounded b2" >
+                        선생님 목록
+                    </a>
+                </div>
+            </div>
+            <%--            --%>
+            <%--            <div class="navbar-item has-dropdown is-hoverable">--%>
+            <%--                <a href="${path}" class="navbar-link is-arrowless">--%>
+            <%--                    <strong>정보</strong>--%>
+            <%--                </a>--%>
+            <%--                <div class="navbar-dropdown is-size-6 is-dark is-outlined .shadow">--%>
+            <%--                    <a href="${path}/infoStu/list.do" class="navbar-item">--%>
+            <%--                        교육 정보--%>
+            <%--                    </a>--%>
+            <%--                    <a href="${path}/infoUni/list.do" class="navbar-item">--%>
+            <%--                        대입 정보--%>
+            <%--                    </a>--%>
+            <%--                    <a href="${path}/infoAct/list.do" class="navbar-item">--%>
+            <%--                        대외 활동--%>
+            <%--                    </a>--%>
+            <%--                    <a href="${path}/file/filelist1.do" class="navbar-item">--%>
+            <%--                        자료실--%>
+            <%--                    </a>--%>
+            <%--                    <a href="${path}/news/list.do" class="navbar-item">--%>
+            <%--                        뉴스--%>
+            <%--                    </a>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <strong>입시 커뮤니티</strong>
+                </a>
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                    <a href="${path}/board/list.do" class="navbar-item">
+                        자유 게시판
+                    </a>
                     <a href="${path}/infoStu/list.do" class="navbar-item">
                         교육 정보
                     </a>
@@ -80,97 +135,94 @@
                     <a href="${path}/news/list.do" class="navbar-item">
                         뉴스
                     </a>
+                    <%--                    <a href="${path}/boardTea/list.do" class="navbar-item">--%>
+                    <%--                        선생님 게시판--%>
+                    <%--                    </a>--%>
+                    <%--                    <a href="${path}/boardPar/list.do" class="navbar-item">--%>
+                    <%--                        학부모 게시판--%>
+                    <%--                    </a>--%>
                 </div>
             </div>
+
+
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
-                    <strong>커뮤니티</strong>
+                    <strong>나의 학습방</strong>
                 </a>
                 <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
-                    <a href="${path}/board/list.do" class="navbar-item">
-                        자유 게시판
+                    <a href="${path2}/" class="button is-link2 is-rounded b2" >
+                        나의 학습진도
                     </a>
-<%--                    <a href="${path}/boardTea/list.do" class="navbar-item">--%>
-<%--                        선생님 게시판--%>
-<%--                    </a>--%>
-<%--                    <a href="${path}/boardPar/list.do" class="navbar-item">--%>
-<%--                        학생 게시판--%>
-<%--                    </a>--%>
-                </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
-                    <strong>학교 생활</strong>
-                </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
-                    <a href="${path}/menu/list.do" class="navbar-item">
-                        급식표
-                    </a>
-                    <a href="${path}/grade/list.do" class="navbar-item">
-                        성적표
+                    <a href="${path2}/" class="button is-link2 is-rounded b2" >
+                        나의 스케줄러
                     </a>
                 </div>
             </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
-                    <strong>강의</strong>
-                </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
-                    <a href="${path}/lecture/lecList" class="button is-link2 is-rounded b2" >
-                        강의 목록
-                    </a>
-                </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
-                    <strong>고객센터</strong>
-                </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
-                    <a href="${path}/notice/list.do" class="navbar-item">
-                        공지 사항
-                    </a>
-                    <a href="${path}/faq/list.do" class="navbar-item">
-                        자주 묻는 질문
-                    </a>
-                    <a href="${path}/qna/list.do" class="navbar-item">
-                        QnA
-                    </a>
-                </div>
-            </div>
+            <%--            <div class="navbar-item has-dropdown is-hoverable">--%>
+            <%--                <a class="navbar-link is-arrowless">--%>
+            <%--                    <strong>학교 생활</strong>--%>
+            <%--                </a>--%>
+            <%--                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">--%>
+            <%--                    <a href="${path}/menu/list.do" class="navbar-item">--%>
+            <%--                        급식표--%>
+            <%--                    </a>--%>
+            <%--                    <a href="${path}/grade/list.do" class="navbar-item">--%>
+            <%--                        성적표--%>
+            <%--                    </a>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+
+
         </div>
         <!-- header menu end -->
         <div class="navbar-end">
             <div class="navbar-item">
-                <div>
+                <div style="padding-right: 10px">
                     <c:if test="${not empty sid}">
                         ${sid} 회원님 환영합니다.
                     </c:if>
                 </div>
-                <div class="buttons">
+                <div class="buttons" style="margin-bottom: 0">
                     <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
-                        <a href="${path}/member/mypage.do" class="button is-link is-rounded b1" >
+                        <a href="${path}/member/mypage.do" class="button is-link is-rounded b2" >
                             마이페이지
                         </a>
-                        <a href="${path}/cart/cartList.do" class="button is-link is-rounded b1" >
+                        <a href="${path}/cart/cartList.do" class="button is-link2 is-rounded b2" >
                             장바구니
                         </a>
-                        <a href="${path}/member/logout.do" class="button is-link is-rounded b1" >
+                        <a href="${path}/member/logout.do" class="button is-link2 is-rounded b2" >
                             로그아웃
                         </a>
                     </c:if>
                     <c:if test="${empty sid}"> <%-- 로그인을 안 한 경우 --%>
-                        <a href="${path}/member/term.do" class="button is-link is-rounded b1" >
+                        <a href="${path}/member/term.do" class="button is-link is-rounded b2" >
                             회원가입
                         </a>
-                        <a href="${path}/member/login.do" class="button is-link is-rounded b1" >
+                        <a href="${path}/member/login.do" class="button is-link2 is-rounded b2" >
                             로그인
                         </a>
                     </c:if>
                     <c:if test="${sid eq 'admin'}"> <%-- 관리자로 로그인 한 경우 --%>
-                        <a href="${path}/admin/adminMain.do" class="button is-link is-rounded b1" >
+                        <a href="${path}/admin/adminMain.do" class="button is-link is-rounded b2" >
                             관리자페이지
                         </a>
                     </c:if>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link is-arrowless">
+                        <strong>고객센터</strong>
+                    </a>
+                    <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                        <a href="${path}/notice/list.do" class="navbar-item">
+                            공지 사항
+                        </a>
+                        <a href="${path}/faq/list.do" class="navbar-item">
+                            자주 묻는 질문
+                        </a>
+                        <a href="${path}/qna/list.do" class="navbar-item">
+                            QnA
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

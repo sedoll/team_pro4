@@ -1,6 +1,7 @@
 package kr.ed.haebeop.repository;
 
 import kr.ed.haebeop.domain.Board;
+import kr.ed.haebeop.domain.Like;
 import kr.ed.haebeop.domain.Report;
 
 import java.util.List;
@@ -19,5 +20,10 @@ public interface BoardRepository {
     int checkReported(Report report) throws Exception;
     public List<Board> boardReportList() throws Exception;
     public List<Board> recentReportList() throws Exception;
+
+    public int cntReport(int bno) throws Exception;
+    public int checkLiked(Like like) throws Exception;
+    public void removeLike(Like like) throws Exception;
+    public void addLike(Like like) throws Exception;
 
 }

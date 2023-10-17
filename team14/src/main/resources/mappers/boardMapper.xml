@@ -87,4 +87,21 @@
         ORDER BY report_date DESC
             LIMIT 10;
     </select>
+
+<!--    신고 수 카운트-->
+    <select id="cntReport" resultType="integer">
+        select count(*) from report WHERE board_bno = #{bno}
+    </select>
+
+    <!-- 게시글 추천(좋아요) 기능 -->
+    <select id="checkLiked" resultType="integer">
+        SELECT count(*) FROM boardlikes WHERE userid = #{userId} AND boardno = #{boardNo}
+    </select>
+    <delete id="removeLike">
+        delete from boardlikes where userid = #{userId} and boardno = #{boardNo}
+    </delete>
+    <insert id="addLike">
+        insert into boardlikes values (#{userId},#{boardNo},default)
+    </insert>
+
 </mapper>

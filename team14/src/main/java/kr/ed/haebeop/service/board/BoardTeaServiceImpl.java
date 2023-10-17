@@ -1,6 +1,7 @@
 package kr.ed.haebeop.service.board;
 
 import kr.ed.haebeop.domain.Board;
+import kr.ed.haebeop.domain.Like;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.repository.BoardTeaRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,24 @@ public class BoardTeaServiceImpl implements BoardService{
     @Override
     public List<Board> recentReportList() throws Exception {
         return boardTeaRepository.recentReportList();
+    }
+
+    @Override
+    public int cntReport(int bno) throws Exception {
+        return boardTeaRepository.cntReport(bno);
+    }
+    @Override
+    public int checkLiked(Like like) throws Exception {
+        return boardTeaRepository.checkLiked(like);
+    }
+
+    @Override
+    public void removeLike(Like like) throws Exception {
+        boardTeaRepository.removeLike(like);
+    }
+
+    @Override
+    public void addLike(Like like) throws Exception {
+        boardTeaRepository.addLike(like);
     }
 }
