@@ -267,9 +267,9 @@ a {
 }
 
 
-a strong {
-    color: currentColor
-}
+/*a strong {*/
+/*    color: currentColor*/
+/*}*/
 
 
 a:hover {
@@ -2820,7 +2820,7 @@ a.box:active {
 }
 
 .buttons .button:not(:last-child):not(.is-fullwidth) {
-    margin-right: .5rem
+    /*margin-right: .5rem*/
 }
 
 .buttons:last-child {
