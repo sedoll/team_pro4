@@ -115,7 +115,7 @@ public class QnaController {
         Qna dto = new Qna();
         qnaService.qnaDelete(bno);
         qnaService.commentDeleteAll(bno);
-        return "redirect:detail.do?bno="+dto.getBno();
+        return "redirect:list.do";
     }
     
     // qna 댓글 삭제
