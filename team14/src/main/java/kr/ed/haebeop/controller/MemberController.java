@@ -40,10 +40,13 @@ import java.util.Random;
 public class MemberController {
     @Autowired
     private MemberService memberService; // 서비스 생성
+
     @Autowired
     private InstService instService; // 강사 로그인을 위해 사용
+
     @Autowired
     HttpSession session; // 세션 생성
+
     @Autowired
     JavaMailSender mailSender;
 
