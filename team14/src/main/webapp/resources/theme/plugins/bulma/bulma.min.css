@@ -267,9 +267,9 @@ a {
 }
 
 
-a strong {
-    color: currentColor
-}
+/*a strong {*/
+/*    color: currentColor*/
+/*}*/
 
 
 a:hover {
