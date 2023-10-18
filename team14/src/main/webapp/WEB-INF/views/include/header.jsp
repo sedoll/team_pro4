@@ -100,7 +100,9 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
-                    <strong>나의 학습방</strong>
+                    <a href="${path2}/mystudy/myStudyIndex.do" class="button is-link2 is-rounded b2" >
+                        <strong>나의 학습방</strong>
+                    </a>
                 </a>
                 <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
                     <a href="${path2}/" class="button is-link2 is-rounded b2" >

@@ -147,17 +147,16 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
-                    <strong>나의 학습방</strong>
+                    <a href="${path}/mystudyroom/myStudyIndex"  >
+                        <strong>나의 학습방</strong>
+                    </a>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                <%--<div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
                     <a href="${path2}/" class="button is-link2 is-rounded b2" >
                         나의 학습진도
                     </a>
                     <a href="${path2}/" class="button is-link2 is-rounded b2" >
                         나의 스케줄러
-                    </a>
-                    <a href="${path}/grade/list.do" class="button is-link2 is-rounded b2" >
-                        나의 성적표
                     </a>
                 </div>
             </div>
