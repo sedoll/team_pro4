@@ -254,6 +254,10 @@
             margin-top: 40px;
         }
 
+        .select select:active{
+            border: #0c0c0c solid 2px;
+        }
+
 
     </style>
 </head>
@@ -279,16 +283,28 @@
                     <form class="box" action="${path }/grade/gradeinsert.do" method="post">
                         <div class="register_info_id">
                             <label>학생 이름</label>
-                            <input type="text" name="sname" id="sname" class="indata" placeholder="학생 이름을 입력하세요" autofocus required/>
+                            <input type="text" name="stuname" id="stuname" class="indata" placeholder="학생 이름을 입력하세요" autofocus required/>
                         </div>
                         <div class="register_info">
-                            <label>학부모님 아이디</label>
-                            <input type="text" name="pid" id="pid" class="indata" placeholder="학생의 학부모님 성함을 입력하세요" required/>
+                            <label>학생 아이디</label>
+                            <input type="text" name="stuid" id="stuid" class="indata" placeholder="학생 아이디를 입력하세요" required/>
                         </div>
 
-                        <div class="register_info">
+                        <!--<div class="register_info">
                             <label>시험 종류</label>
                             <input type="text" name="exam" id="exam" class="indata" placeholder="ex)1학기 중간고사" required/>
+                        </div> -->
+                        <div class="register_info">
+                            <label>시험 종류</label>
+                            <div class="select">
+                            <select name="exam" style="width: 553px; height: 50px;">
+                                <option value="1학기 중간고사">1학기 중간고사</option>
+                                <option value="1학기 기말고사">1학기 기말고사</option>
+                                <option value="2학기 중간고사">2학기 중간고사</option>
+                                <option value="2학기 기말고사">2학기 기말고사</option>
+                            </select>
+                                <input type="hidden" name="exam" id="exam" required>
+                            </div>
                         </div>
 
                         <div class="register_info">
@@ -318,7 +334,8 @@
 
                         <div class="register_info">
                             <label>담당 선생님 성함</label>
-                            <input type="text" name="tname" id="tname" value="${member.name}" class="indata" placeholder="선생님 성함 입력"  required/>
+                            <input type="text" name="tname" id="tname" placeholder="선생님 성함 입력" class="indata" required/>
+                            <input type="hidden" name="tid" id="tid" value="${sid}"/>
                         </div>
 
 

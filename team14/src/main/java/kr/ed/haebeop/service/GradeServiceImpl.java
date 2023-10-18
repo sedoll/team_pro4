@@ -37,13 +37,4 @@ public class GradeServiceImpl implements GradeService{
         gradeRepository.gradeEdit(grade);
     }
 
-    @Override
-    public void totGrade(String sname) throws Exception {
-        gradeRepository.totGrade(sname);
-    }
-
-    @Override
-    public void avgGrade(String sname) throws Exception {
-        gradeRepository.avgGrade(sname);
-    }
 }

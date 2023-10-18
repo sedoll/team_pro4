@@ -66,11 +66,11 @@
                             <tbody style="">
                             <tr>
                                 <th >학생 이름</th>
-                                <td class="data">${grade.sname}</td>
+                                <td class="data">${grade.stuname}</td>
                             </tr>
                             <tr>
-                                <th >학부모님 아이디</th>
-                                <td class="data">${grade.pid}</td>
+                                <th >학생 아이디</th>
+                                <td class="data">${grade.stuid}</td>
                             </tr>
                             <tr>
                                 <th>시험 종류</th>
@@ -78,37 +78,48 @@
                             </tr>
                             <tr>
                                 <th>국어</th>
-                                <td class="data">${grade.kor}</td>
+                                <td class="data">${grade.kor}점</td>
                             </tr>
                             <tr>
                                 <th>영어</th>
-                                <td class="data">${grade.eng}</td>
+                                <td class="data">${grade.eng}점</td>
                             </tr>
                             <tr>
                                 <th>수학</th>
-                                <td class="data">${grade.math}</td>
+                                <td class="data">${grade.math}점</td>
                             </tr>
                             <tr>
                                 <th>사회</th>
-                                <td class="data">${grade.social}</td>
+                                <td class="data">${grade.social}점</td>
                             </tr>
                             <tr>
                                 <th>과학</th>
-                                <td class="data">${grade.science}</td>
+                                <td class="data">${grade.science}점</td>
+                            </tr>
+                            <tr>
+                                <th>합계</th>
+                                <td class="data">${grade.su}점</td>
+                            </tr>
+                            <tr>
+                                <th>평균</th>
+                                <td class="data">${grade.av}점</td>
                             </tr>
                             <tr>
                                 <th>담당 선생님 성함</th>
-                                <td class="data">${grade.tname}</td>
+                                <td class="data">
+                                    ${grade.tname}
+                                        <input type="hidden" name="tid" id="tid" value="tid"/>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                         <table class="tb2" style="margin-left: 540px">
                             <tr>
                                 <td colspan="2">
-                                    <c:if test="${job == 2 || job == 0}">
+                                    <c:if test="${sid == grade.tid }">
                                     <a href="${path}/grade/gradeedit.do?no=${grade.no}" class="button is-outlined is-link">성적 수정</a>
                                     </c:if>
-                                    <a href="/team13_war/" class="button is-black is-outlined">메인화면</a>
+                                    <a href="/team14_war/" class="button is-black is-outlined">메인화면</a>
                                 </td>
                             </tr>
                         </table>

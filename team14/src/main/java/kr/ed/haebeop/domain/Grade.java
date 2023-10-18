@@ -11,8 +11,8 @@ import lombok.ToString;
 @ToString
 public class Grade {
     private int no;
-    private String sname;
-    private String pid;
+    private String stuname;
+    private String stuid;
     private int kor;
     private int math;
     private int eng;
@@ -20,5 +20,8 @@ public class Grade {
     private int science;
     private String exam;
     private String tname;
+    private String tid;
     private String regdate;
+    private int su; // 합계
+    private int av; // 평균
 }
