@@ -156,6 +156,9 @@
                     <a href="${path2}/" class="button is-link2 is-rounded b2" >
                         나의 스케줄러
                     </a>
+                    <a href="${path}/grade/list.do" class="button is-link2 is-rounded b2" >
+                        나의 성적표
+                    </a>
                 </div>
             </div>
             <%--            <div class="navbar-item has-dropdown is-hoverable">--%>

@@ -54,7 +54,18 @@
                             <tbody>
                             <tr>
                                 <th>시험 종류</th>
-                                <td><input type="text" name="exam" id="exam" class="input" value="${grade.exam}"></td>
+                                <td>
+
+                                    <div class="select">
+                                        <select name="exam"  value="${grade.exam}">
+                                            <option value="1학기 중간고사">1학기 중간고사</option>
+                                            <option value="1학기 기말고사">1학기 기말고사</option>
+                                            <option value="2학기 중간고사">2학기 중간고사</option>
+                                            <option value="2학기 기말고사">2학기 기말고사</option>
+                                        </select>
+                                        <input type="hidden" name="exam" id="exam" value="${grade.exam}">
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <th>국어</th>
@@ -82,7 +93,7 @@
                                 <td colspan="1">
                                     <input type="submit" class="button is-link is-outlined" value="등록하기">
                                     <a href="${path }/grade/gradedelete.do?no=${grade.no}" class="button is-danger is-outlined">성적 삭제</a>
-                                    <a href="${path }/grade/gradelist.do" class="button is-black is-outlined">회원 목록</a>
+                                    <a href="${path }/grade/list.do" class="button is-black is-outlined">회원 목록</a>
                                 </td>
                             </tr>
                             </tfoot>
@@ -90,7 +101,9 @@
                     </div>
                 </form>
             </div>
+            </div>
         </div>
+</div>
         <!-- 푸터 부분 인클루드 -->
         <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

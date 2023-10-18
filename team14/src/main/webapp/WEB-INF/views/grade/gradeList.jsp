@@ -47,8 +47,9 @@
                 <tr>
                     <th width="80">No</th>
                     <th>학생 이름</th>
-                    <th>학부모님 아이디</th>
+                    <th>학생 아이디</th>
                     <th>담당선생님 성함</th>
+                    <th>시험 종류</th>
                     <th width="120">등록일</th>
                     <th>비고</th>
                 </tr>
@@ -57,18 +58,21 @@
                 <c:forEach items="${gradeList}" var="grade" varStatus="status">
                     <tr>
                         <td>${grade.no}</td>
-                        <td>${grade.sname}</td>
-                        <td>${grade.pid}</td>
-                        <td>${grade.tname}</td>
+                        <td>${grade.stuname}</td>
+                        <td>${grade.stuid}</td>
+                        <td>${grade.tname}
+                            <input type="hidden" id="tid" name="tid" value="tid"/>
+                        </td>
+                        <td>${grade.exam}</td>
                         <td>
                             <fmt:parseDate value="${grade.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                             <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
                         </td>
                         <td colspan="2">
-                            <c:if test="${sid == grade.pid || job == 2 || job == 0}">
+                            <c:if test="${sid == grade.stuid || sid == grade.tid}">
                                 <a href="${path}/grade/gradedetail.do?no=${grade.no}" class="button is-black is-outlined">상세보기</a>
                             </c:if>
-                            <c:if test="${job == 2  || job == 0}">
+                            <c:if test="${sid == grade.tid}">
                                 <a href="${path}/grade/gradedelete.do?no=${grade.no}" class="button is-danger is-outlined">성적삭제</a>
                             </c:if>
                         </td>
@@ -76,7 +80,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <c:if test='${job == 2 || job == 0}'>
+            <c:if test="${job == 2                                                                                                                                                                                              }">
             <div class="button-group">
                 <a class="button is-link is-outlined" href="${path}/grade/gradeinsert.do">성적입력</a>
             </div>

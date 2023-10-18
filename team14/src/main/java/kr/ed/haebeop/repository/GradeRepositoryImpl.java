@@ -22,6 +22,7 @@ public class GradeRepositoryImpl implements GradeRepository {
         return sqlSession.selectOne("grade.gradeDetail", no);
     }
 
+
     @Override
     public void gradeInsert(Grade grade) throws Exception {
         sqlSession.insert("grade.gradeInsert", grade);
@@ -37,13 +38,4 @@ public class GradeRepositoryImpl implements GradeRepository {
         sqlSession.update("grade.gradeEdit", grade);
     }
 
-    @Override
-    public void totGrade(String sname) throws Exception {
-        sqlSession.selectOne("grade.totGrade", sname);
-    }
-
-    @Override
-    public void avgGrade(String sname) throws Exception {
-        sqlSession.selectOne("grade.avgGrade", sname);
-    }
 }
