@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.internet.MimeMessage;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -375,7 +376,7 @@ public class MemberController {
     }
 
 
-    /*회원 정보 수정*/
+    /*회원 정보 수정 폼 이동*/
     @GetMapping("update.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         String id = request.getParameter("id");
@@ -384,7 +385,8 @@ public class MemberController {
         System.out.println(member.toString());
         return "/member/myPage/memberUpdate";
     }
-
+    
+    // 회원 정보 수정
     @PostMapping("update.do")
     public String memberEdit(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         String id = request.getParameter("id");
@@ -396,10 +398,23 @@ public class MemberController {
         String addr2 = request.getParameter("addr2");
         String postcode = request.getParameter("postcode");
         String birth = request.getParameter("birth");
+        int job = Integer.parseInt(request.getParameter("job"));
 
+        //해당 id의 기존 job값 가져오기
+        //기존 job값이 2이면 teacher테이블 update처리, 아니면 insert
+        Member chkmember = memberService.getMember(id);
+        int chkJob = chkmember.getJob();
+        System.out.println("chkJob : "+chkJob);
+
+        if (chkJob==2 && job==2) {
+            //update
+        } else if (chkJob==2 && job==1){
+            //delete
+        } else {
+            //insert
+        }
 
         Member member = new Member();
-
         member.setId(id);
         member.setPw(pw);
         member.setName(name);
@@ -409,6 +424,7 @@ public class MemberController {
         member.setAddr2(addr2);
         member.setPostcode(postcode);
         member.setBirth(birth);
+        member.setJob(job);
 
         memberService.memberUpdate(member);
         model.addAttribute("member", member);
@@ -418,7 +434,15 @@ public class MemberController {
         out.println("<script>alert('회원님의 정보가 수정되었습니다.');</script>");
         out.flush();
 
-        return "/member/myPage/memberUpdate";
+        List<Member> memberList = memberService.memberList();
+        model.addAttribute("memberList", memberList);
+        model.addAttribute("title", "회원 목록");
+        String sid = (String) session.getAttribute("sid");
+        if (sid.equals("admin")) {
+            return "/admin/memberList";
+        } else {
+            return "/member/myPage/memberUpdate";
+        }
     }
 
 /*    @RequestMapping(value = "update.do", method = RequestMethod.POST)
@@ -517,10 +541,10 @@ public class MemberController {
         }
 
         /* 자료실 */
-        List<BoardlistVO> boardfreelist = memberService.getWriteList4(id);
-        if (boardfreelist != null) {
-            model.addAttribute("boardfreelist", boardfreelist);
-        }
+//        List<BoardlistVO> boardfreelist = memberService.getWriteList4(id);
+//        if (boardfreelist != null) {
+//            model.addAttribute("boardfreelist", boardfreelist);
+//        }
 
 
         /* 자유게시판 댓글 */
@@ -571,7 +595,8 @@ public class MemberController {
         return "/member/myPage/memberWritten2";
 
     }
-
+    
+    // 비밀번호 찾기 폼 이동
     @RequestMapping(value = "/pw_find.do", method = RequestMethod.GET)
     public String pw_find() {
         return "/member/pw_find";

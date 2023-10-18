@@ -188,10 +188,14 @@ public class MemberRepositoryImpl implements MemberRepository {
         return member.getId();
     }
 
-
     @Override
     public void memberPoint(Member member) throws Exception {
         sqlSession.update("member.memberPoint", member);
+    }
+
+    @Override
+    public void memberPointSub(Member member) throws Exception {
+        sqlSession.update("member.memberPointSub", member);
     }
 
 }

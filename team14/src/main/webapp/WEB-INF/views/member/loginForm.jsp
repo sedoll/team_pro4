@@ -113,8 +113,6 @@
                         <a href="../member/term.do" class="term">회원가입</a>
                         <a>|</a>
                         <a href="${path}/member/pw_find.do" class="find">비밀번호 찾기</a>
-                        <a>|</a>
-                        <a href="${path}/member/instLogin.do" class="inst">강사 로그인</a>
                     </div>
                 </div>
             </nav>

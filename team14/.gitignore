@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+
+### 파일 업로드 방지 ###
+src/main/webapp/resources/upload

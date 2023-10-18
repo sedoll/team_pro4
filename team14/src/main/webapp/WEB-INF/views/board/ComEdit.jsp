@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QNA 수정하기</title>
+    <title>자유게시판 수정하기</title>
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
     <style>
@@ -29,7 +29,7 @@
             <li class="hero is-medium is-white">
                 <div class="hero-body has-text-centered">
                     <p class="title is-size-3">
-                        QNA
+                        자유게시판
                     </p>
                     <p class="subtitle is-size-5">
                         수정
@@ -41,14 +41,15 @@
     <div class="content" id="contents">
         <div class="row column text-center">
             <div class="container">
-                <form action="${path }/qna/edit.do" method="post">
+                <form action="${path }/board/commentEdit.do" method="post">
                     <table id="table1">
                         <tbody>
                         <tr>
                             <th style="background-color:#dcdcdc">글 제목</th>
                             <td>
                                 <input type="hidden" name="bno" id="bno" value="${dto.bno }" >
-                                <input type="text" name="title" id="title" class="input" placeholder="제목 입력" value="${dto.title }"  maxlength="98" required>
+                                <input type="hidden" name="par" id="par" value="${dto.par }" >
+                                <input type="text" name="title" id="title" class="input" placeholder="제목 입력" value="댓글" maxlength="98" readonly>
                             </td>
                         </tr>
                         <tr>

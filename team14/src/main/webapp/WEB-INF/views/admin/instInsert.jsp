@@ -53,7 +53,7 @@
             </section>
 
             <div class="is-fullwidth">
-                <form action="${path}/admin/instInsert.do" method="post">
+                <form action="${path}/admin/instInsert.do" method="post" enctype="multipart/form-data">
                     <table id="table" style="width: 100%">
                         <tbody>
                         <tr>
@@ -91,6 +91,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <th style="background-color:#dcdcdc">생년월일</th>
+                            <td>
+                                <input type="date" name="birth" id="birth" class="input" placeholder="생일" maxlength="10" autofocus required>
+                            </td>
+                        </tr>
+                        <tr>
                             <th style="background-color:#dcdcdc">전화번호</th>
                             <td>
                                 <input type="tel" name="tel" id="tel" class="input" placeholder="전화번호" maxlength="18" autofocus required>
@@ -103,10 +109,38 @@
                             </td>
                         </tr>
                         <tr>
+                            <th style="background-color:#dcdcdc">주소</th>
+                            <td>
+                                <input type="text" name="postcode" id="postcode" style="width:160px;float:left;margin-right:20px;" placeholder="우편번호" class="form-control" readonly>
+                                <button type="button" id="post_btn" onclick="findAddr()" class="button is-link is-size-6">우편번호 검색</button>
+                                <input type="text" name="addr1" id="addr1" placeholder="기본 주소 입력" class="form-control" required readonly/><br>
+                                <input type="text" name="addr2" id="addr2" placeholder="상세 주소 입력" class="form-control" required /><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>담당 과목</th>
                             <td colspan="2">
-                                <input type="submit" class="submit button is-link is-outlined" value="글 등록" >
+                                <select name="cate" id="cate" class="indata" autofocus required>
+                                    <option value="국어" selected>국어</option>
+                                    <option value="수학">수학</option>
+                                    <option value="영어">영어</option>
+                                    <option value="과학">과학</option>
+                                    <option value="과학">사회</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>선생님 설명</th>
+                            <td colspan="2"> <textarea name="intro" id="intro" cols="50" rows="15" placeholder="설명 입력" required></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>선생님 이미지</th>
+                            <td colspan="2"><input type="file" name="img" id="img" class="input" placeholder="이미지" accept=".jpg, .png" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" class="submit button is-link is-outlined" value="선생님 가입" >
                                 <input type="reset" value="취소" class="button is-danger is-outlined" onclick="window.history.back();">
-                                <a class="button is-outlined is-black" href="${path }/admin/adminMain.do">관리자 페이지</a>
                             </td>
                         </tr>
                         </tbody>
@@ -166,11 +200,27 @@
                         return false;
                     }
                 }
+                function findAddr() {
+                    new daum.Postcode({
+                        oncomplete: function (data) {
+                            console.log(data);
+                            var roadAddr = data.roadAddress;
+                            var jibunAddr = data.jibunAddress;
+                            document.getElementById("postcode").value = data.zonecode;
+                            if (roadAddr !== '') {
+                                document.getElementById("addr1").value = roadAddr;
+                            } else if (jibunAddr !== '') {
+                                document.getElementById("addr1").value = jibunAddr;
+                            }
+                            document.getElementById("addr2").focus();
+                        }
+                    }).open();
+                }
             </script>
+            <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         </div>
     </div>
 </div>
-
 
 <footer id="footer" class="footer-nav row expanded collapse">
     <!-- 푸터 부분 인클루드 -->
