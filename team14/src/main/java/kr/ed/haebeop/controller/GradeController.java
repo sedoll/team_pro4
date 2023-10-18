@@ -41,6 +41,7 @@ public class GradeController {
         }
     }
 
+
     @GetMapping("gradedetail.do")	//info/detail.do?bno=1
     public String gradeDetail(HttpServletRequest request, Model model) throws Exception {
         int no = Integer.parseInt(request.getParameter("no"));
@@ -58,8 +59,8 @@ public class GradeController {
     public String gradeInsert(HttpServletRequest request, Model model) throws Exception {
         Grade grade = new Grade();
         //grade.setNo(Integer.parseInt(request.getParameter("no")));
-        grade.setSname(request.getParameter("sname"));
-        grade.setPid(request.getParameter("pid"));
+        grade.setStuname(request.getParameter("stuname"));
+        grade.setStuid(request.getParameter("stuid"));
         grade.setKor(Integer.parseInt(request.getParameter("kor")));
         grade.setMath(Integer.parseInt(request.getParameter("math")));
         grade.setEng(Integer.parseInt(request.getParameter("eng")));
@@ -67,6 +68,7 @@ public class GradeController {
         grade.setScience(Integer.parseInt(request.getParameter("science")));
         grade.setExam(request.getParameter("exam"));
         grade.setTname(request.getParameter("tname"));
+        grade.setTid(request.getParameter("tid"));
         gradeService.gradeInsert(grade);
         return "redirect:list.do";
     }
