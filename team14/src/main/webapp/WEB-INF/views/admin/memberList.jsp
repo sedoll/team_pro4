@@ -61,6 +61,7 @@
                 <th>Name</th>
                 <th>Tel</th>
                 <th>Email</th>
+                <th>Member Type</th>
                 <th>RegDate</th>
             </tr>
             </thead>
@@ -72,6 +73,7 @@
                     <td>${member.name}</td>
                     <td>${member.tel}</td>
                     <td>${member.email}</td>
+                    <td>${member.job == 1 ? '일반회원' : (member.job == 2 ? '선생님' : '-')}</td>
                     <td>
                         <fmt:parseDate value="${member.regdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                         <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" />
