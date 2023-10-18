@@ -20,13 +20,13 @@
 
     <!-- 회원 수정 -->
     <update id="memberUpdate">
-        update member set pw=#{pw }, name=#{name }, email=#{email }, tel=#{tel }, addr1=#{addr1 }, addr2=#{addr2 }, postcode=#{postcode } where id = #{id }
+        update member set pw=#{pw }, name=#{name }, email=#{email }, tel=#{tel }, addr1=#{addr1 }, addr2=#{addr2 }, postcode=#{postcode }, job=#{job} where id = #{id }
     </update>
 
     <!-- 회원 가입 -->
     <insert id="memberInsert">
         insert into member values(#{id}, #{pw}, #{name}, #{email}, #{tel}, #{addr1}, #{addr2}, #{postcode}, DEFAULT, #{birth},
-        DEFAULT, DEFAULT)
+        DEFAULT, DEFAULT, default, default, #{job})
     </insert>
 
     <!-- 로그인을 컨트롤에서 처리 -->
@@ -111,9 +111,9 @@
          select bno as num, title as subject, resdate as write_date from board_par where author = #{id} and lev = 0 order by resdate desc
     </select>
         <!--자료실-->
-    <select id="getWriteList4"  resultType="BoardlistVO">
-        select bno as num, title as subject, resdate as write_date from free where author = #{id} order by resdate desc
-    </select>
+<!--    <select id="getWriteList4"  resultType="BoardlistVO">-->
+<!--        select bno as num, title as subject, resdate as write_date from free where author = #{id} order by resdate desc-->
+<!--    </select>-->
     <!--<select id="getWriteList5" parameterType="String" resultType="BoardlistVO">
         select doc_no as num, doc_subject as subject, doc_date as write_date from community where doc_email = #{email} order by doc_date desc
     </select>
@@ -199,5 +199,10 @@
     <!-- 포인트 추가 -->
     <update id="memberPoint">
         update member set pt=pt+#{pt} where id=#{id}
+    </update>
+
+    <!-- 포인트 감산 -->
+    <update id="memberPointSub">
+        update member set pt=pt-#{pt} where id=#{id}
     </update>
 </mapper>

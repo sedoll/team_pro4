@@ -26,11 +26,12 @@ CREATE TABLE member(
 	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
 	pt INT DEFAULT 0, -- 점수
 	cnt INT DEFAULT 0, -- 방문횟수,
+	login_tp_cd INT DEFAULT 1,
+	state_cd INT DEFAULT 1,
 	job INT DEFAULT 1
 );
-
--- ALTER TABLE member DROP COLUMN job;
-
+ALTER TABLE member add COLUMN job INT;
+ALTER TABLE member DROP COLUMN job;
 
 -- 로그인 타입 1: 일반 2: 카카오 3: 네이버
 ALTER TABLE member ADD login_tp_cd INT DEFAULT 1;
@@ -356,11 +357,12 @@ create table notice(
 -- DROP TABLE instructor;
 CREATE TABLE instructor(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
-	id VARCHAR(20) not null,
-	pw VARCHAR(100) NOT null,
 	NAME VARCHAR(10),
 	tel VARCHAR(20),
-	email VARCHAR(100)
+	email VARCHAR(100),
+	intro VARCHAR(1000),
+	cate VARCHAR(20),
+	img VARCHAR(1000)
 );
 	
 INSERT INTO instructor VALUES(DEFAULT, '강감찬', '01011111111', 'kang@edu.com');
@@ -403,6 +405,13 @@ CREATE TABLE lecture(
 );
 -- ALTER TABLE lecture ADD COLUMN endday INT;
 -- UPDATE lecture SET endday = 100; 
+
+-- 실제 파일 이름 저장 경로
+CREATE TABLE lecfile (
+	NO INT PRIMARY KEY AUTO_INCREMENT,
+	sfile VARCHAR(1000),
+	realname VARCHAR(250)
+)
 
 
 -- 수강(수강코드(PK), 강의코드(FK), 학생아이디(FK), 수강총시간, 수강완료 여부)

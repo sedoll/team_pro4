@@ -1,9 +1,8 @@
 
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.Instructor;
-import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.controller.file.FileController;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.service.NoticeService;
@@ -11,6 +10,8 @@ import kr.ed.haebeop.service.board.BoardParServiceImpl;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
 import kr.ed.haebeop.service.board.BoardTeaServiceImpl;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,16 +20,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
+
+    private static final Logger log = LoggerFactory.getLogger(FileController.class);
+    @Resource(name="uploadPath")
+    String uploadPath;
 
     @Autowired
     private MemberService memberService; // 서비스 생성
@@ -270,14 +280,119 @@ public class AdminController {
         out.println(json.toString());
     }
     
-    // 강사 등록
+    // 강사 등록, member 포함
     @PostMapping("instInsert.do")
-    public String instInsert(HttpServletRequest req, Instructor instructor, Model model) throws Exception {
-        String ppw = instructor.getPw();
+    public String instInsert(HttpServletRequest req, MultipartHttpServletRequest files, Model model) throws Exception {
+
+        MultipartFile img = files.getFile("img");
+
+        String devFolder = uploadPath;    //개발자용 컴퓨터에 업로드 디렉토리 지정
+        String uploadFolder = req.getRealPath("/resources/upload");
+        File folder = new File(uploadFolder);
+        File devfol = new File(devFolder);
+
+        if(!folder.exists()) folder.mkdirs();
+        if(!devfol.exists()) devfol.mkdirs();
+
+        //파라미터 분리
+        Enumeration<String> enum1 = files.getParameterNames();
+        Map map = new HashMap();
+        while (enum1.hasMoreElements()) {
+            String name = enum1.nextElement();
+            String value = files.getParameter(name);
+            map.put(name, value);
+        }
+        
+        // member 테이블에 강사 정보 등록
+        Member member = new Member();
+        Instructor inst = new Instructor();
+        member.setId(files.getParameter("id"));
+        String ppw = files.getParameter("pw");
         String pw = pwEncoder.encode(ppw);
-        instructor.setPw(pw);
-        instService.addInstructor(instructor);
-        return "/admin/instInsert";
+        member.setPw(pw);
+        member.setName(files.getParameter("name"));
+        member.setEmail(files.getParameter("email"));
+        member.setTel(files.getParameter("tel"));
+        member.setAddr1(files.getParameter("addr1"));
+        member.setAddr2(files.getParameter("addr2"));
+        member.setPostcode(files.getParameter("postcode"));
+        member.setRegdate(files.getParameter("regdate"));
+        member.setPt(0);
+        member.setBirth(files.getParameter("birth"));
+        member.setJob(2);
+        memberService.memberInsert(member);
+        
+        // 강사 테이블에 정보 등록
+        Instructor inst2 = new Instructor();
+        inst2.setCate(files.getParameter("cate"));
+        inst2.setIntro(files.getParameter("intro"));
+        inst2.setName(files.getParameter("name"));
+        inst2.setEmail(files.getParameter("email"));
+        inst2.setTel(files.getParameter("tel"));
+
+        // 개발 서버 파일 저장 경로
+        String uploadDir = "D:/team_pro4/team14/src/main/webapp/resources/upload/"; // 회사
+        // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
+        // 실제 서버 파일 저장 경로
+        String uploadSev = req.getRealPath("/resources/upload/");
+
+        if (!img.isEmpty()) {
+            String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
+            String OriginalFilename = img.getOriginalFilename();
+            String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
+            String RandomFileName = randomUUID + Extension;
+            inst2.setImg(RandomFileName);
+
+            try {
+                img.transferTo(new File(uploadDir + RandomFileName));
+                img.transferTo(new File(uploadSev + RandomFileName));
+            } catch (IOException e) {
+                e.printStackTrace(); // 오류 처리
+            }
+        }
+        instService.addInstructor(inst2);
+
+        return "redirect:/admin/memberList.do";
+    }
+
+    // 회원 수정
+    @PostMapping("update.do")
+    public String memberEdit(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+        String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String tel = request.getParameter("tel");
+        String addr1 = request.getParameter("addr1");
+        String addr2 = request.getParameter("addr2");
+        String postcode = request.getParameter("postcode");
+        String birth = request.getParameter("birth");
+
+        Member member = new Member();
+
+        member.setId(id);
+        member.setPw(pw);
+        member.setName(name);
+        member.setEmail(email);
+        member.setTel(tel);
+        member.setAddr1(addr1);
+        member.setAddr2(addr2);
+        member.setPostcode(postcode);
+        member.setBirth(birth);
+
+        memberService.memberUpdate(member);
+        model.addAttribute("member", member);
+
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('회원님의 정보가 수정되었습니다.');</script>");
+        out.flush();
+
+        List<Member> memberList = memberService.memberList();
+        model.addAttribute("memberList", memberList);
+        model.addAttribute("title", "회원 목록");
+
+        return "/admin/memberList";
     }
 
 }
