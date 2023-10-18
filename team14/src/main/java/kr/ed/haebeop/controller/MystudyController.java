@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mystudyroom/*")
 public class MystudyController {
 
-    @RequestMapping("myStudyIndex")
+    @RequestMapping("myStudyIndex.do")
     public String myStudyIndex(Model model) throws Exception {
 
         return "/mystudyroom/myStudyIndex";

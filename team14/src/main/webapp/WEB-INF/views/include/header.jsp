@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -98,23 +99,10 @@
                 </div>
             </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
-                    <a href="${path2}/mystudy/myStudyIndex.do" class="button is-link2 is-rounded b2" >
-                        <strong>나의 학습방</strong>
-                    </a>
+            <div class="navbar-item is-hoverable">
+                <a href="${path}/mystudyroom/myStudyIndex.do" class="button is-link2 is-rounded b2" >
+                    <strong>나의 학습방</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
-                    <a href="${path2}/" class="button is-link2 is-rounded b2" >
-                        나의 학습진도
-                    </a>
-                    <a href="${path2}/" class="button is-link2 is-rounded b2" >
-                        나의 스케줄러
-                    </a>
-                    <a href="${path2}/grade/list.do" class="button is-link2 is-rounded b2" >
-                        나의 성적표
-                    </a>
-                </div>
             </div>
 <%--            <div class="navbar-item has-dropdown is-hoverable">--%>
 <%--                <a class="navbar-link is-arrowless">--%>
