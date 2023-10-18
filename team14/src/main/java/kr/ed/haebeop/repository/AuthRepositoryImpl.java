@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AuthRepositoryImpl {
+public class AuthRepositoryImpl implements AuthRepository{
     @Autowired
     SqlSession sqlsession;
 

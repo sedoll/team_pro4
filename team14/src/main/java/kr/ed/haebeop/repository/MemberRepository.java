@@ -52,7 +52,7 @@ public interface MemberRepository {
     //시큐리티 유저 조회
     public UserDetail getUserDetailsDto (String email) throws Exception;
     //소셜회원 가입. insert후 id 리턴
-    public String insertSocialUser(Member member) throws Exception;
+    public String regSocialUser(Member member) throws Exception;
 
     // 포인트 추가
     public void memberPoint(Member member) throws Exception;

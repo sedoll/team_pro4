@@ -7,6 +7,7 @@ import kr.ed.haebeop.repository.MemberRepository;
 import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.util.Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
+@Slf4j
 @RequestMapping("/member/*")
 public class MemberController {
     @Autowired
@@ -97,9 +99,9 @@ public class MemberController {
         }
     }
 
-    //랜덤 문자열 생성, 소셜 닉네임 생성
-    public String crtNickName() { //랜덤 문자열 생성, 소셜 닉네임 생성
-        return "new_" + utils.createRandomStr();
+    //랜덤 문자열 생성, 랜덤비밀번호 생성
+    public String crtPW() { //랜덤 문자열 생성, 소셜 닉네임 생성
+        return utils.createRandomStr();
     }
     
     // 강사 로그인
@@ -131,31 +133,56 @@ public class MemberController {
     }
 
     //네이버 로그인
-    @GetMapping("social/naver")
-    public String naverLogin(HttpSession session, String code, String state, RedirectAttributes rattr) {
+    @RequestMapping("social/naver")
+    public String naverLogin(HttpSession session, Model model, String code, String state, RedirectAttributes rattr) {
         try {
             oauthToken = naverLoginBo.getAccessToken(session, code, state);
-            apiResult = naverLoginBo.getUserProfile(oauthToken);
+
+
+            log.info("state 호출해봄 from callback " + state);
+            // 1. 로그인 사용자 정보를 읽어온다.
+            apiResult = naverLoginBo.getUserProfile(oauthToken); // String형식의 json데이터
+
+//            System.out.println("혹시 이거???" + apiResult);
+//            log.info("oauthToken이 이거임!!!!!!!!!" + oauthToken);
+            /**
+             * apiResult json 구조 {"resultcode":"00","message":"success",
+             * "response":{"id":"VWXu82fUob3nzhSp9Cqdfw7OSlpWJtKYOL66c7zbpio","nickname":"\uad6c\uc608\uc9c4",
+             *              "profile_image":"https:\/\/ssl.pstatic.net\/static\/pwe\/address\/img_profile.png",
+             *              "age":"30-39","gender":"F",
+             *              "email":"spospotv@naver.com",
+             *              "mobile":"010-9959-7512",
+             *              "mobile_e164":"+821099597512",
+             *              "name":"\uad6c\uc608\uc9c4",
+             *              "birthday":"08-10",
+             *              "birthyear":"1992"}}
+             **/
 
             jsonObj = getParsedApiResult(apiResult);
             org.json.simple.JSONObject response_obj = (org.json.simple.JSONObject) jsonObj.get("response");
 
-            String email = (String) response_obj.get("email");
-            String id = (String) response_obj.get("id");
+            String email = (String) response_obj.get("email"); //네이버 이메일 가져오기
+            String name = (String) response_obj.get("name"); // 네이버 이름 가져오기
+            String naverid = (String) response_obj.get("id"); // 네이버 아이디 가져오기 -> 너무 길다
+            String tel = (String) response_obj.get("mobile"); // 네이버 휴대폰 번호 가져오기
 
+
+            // 네이버 이메일이 DB에 있는 이메일안에 있는 지 확인
             Member member = memberService.getMemberEmail(email);
-
             if (member == null) { //신규
-                final int NAVER = 3;
 
-                member = member.builder()
-                        .email(email)
-/*                        .nick_nm(crtNickName())*/
-                        .login_tp_cd(NAVER)
-                        .build();
+                //출력확인
+                System.out.println(email+" " + name+" " +naverid+" " +tel);
+                
+                //네이버 정보 view로 보내기
+                model.addAttribute("socialEmail", email);
+                model.addAttribute("socialName", name);
+                model.addAttribute("socialId", naverid);
+                model.addAttribute("socialTel", tel);
+                
 
-                String socialId = memberService.regSocialUser(member);
-                member = memberService.getMember(socialId);
+                return "/member/socialJoin";
+
             } else {
                 if (member.getState_cd() == 3) {
                     rattr.addFlashAttribute("msg", "UNABLE");
@@ -178,11 +205,60 @@ public class MemberController {
         }
     }
 
+    // 소셜 회원가입 처리
+    @PostMapping(value = "naverJoin.do" )
+    public String socialInsert(HttpSession session, HttpServletRequest request, Model model, Member member,String code, String state, RedirectAttributes rattr) throws Exception {
+
+        String email = request.getParameter("socialEmail");
+        String name = request.getParameter("socialName");
+        String tel = request.getParameter("socialTel");
+
+
+        try {
+
+            //아이디 -> 이메일 @전까지 자르기
+            // @의 인덱스를 찾는다.
+            int idx = email.indexOf("@");
+            // @ 앞부분 추출
+            String id = email.substring(0,idx);
+
+
+            final int NAVER = 3;
+            member = member.builder()
+                    .id(id)
+                    .pw(crtPW()) //랜덤 비밀번호 생성
+                    .name(name)
+                    .email(email)
+                    .tel(tel)
+                    .login_tp_cd(NAVER) // 네이버 로그인 코드 : 3
+                    .build();
+
+            //회원정보 insert하고 해당 아이디 값 리턴 받기
+            String socialId = memberService.regSocialUser(member);
+            member = memberService.getMember(socialId);
+            System.out.println("회원정보 : " + member);
+
+            model.addAttribute("member", member);
+            model.addAttribute("msg", "회원가입이 완료되었습니다.");
+            model.addAttribute("url", "/");
+            
+
+            return "/include/redirect";
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("로그인 에러");
+            rattr.addFlashAttribute("msg", "LOGIN_ERR"); //로그인 에러
+            return "redirect:/member/login.do";
+        }
+    }
+
     //TODO:: 네이버 로그아웃
 
 
     // 인증 생성
     public boolean makeAuth(Member member) throws Exception {
+        //회원 이메일로 조회한 정보를 dto에 담는다
         UserDetail dto = memberRepository.getUserDetailsDto(member.getEmail());
 
         if (dto == null) return false;
