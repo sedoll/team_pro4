@@ -268,13 +268,48 @@
                         <td colspan="5" class="content">
                             <div>
 <%--                                특정 신고 수 이상이면 블라인드 처리  / 일단 신고수 3이상이면 블라인드 되게 테스트 --%>
+                                <c:if test="${sid eq 'admin'}">
+                                    <div class="select is-info">
+                                        <select id="contentSelect">
+                                            <option value="visible">열람 가능</option>
+                                            <option value="hidden">열람 불가능</option>
+                                        </select>
+                                    </div>
+                                </c:if>
+                                <c:choose>
+                                    <c:when test="${sid eq 'admin'}">
+                                        <c:if test="${cntReport > 2}">
+                                            <h4 style="text-align: center">[신고가 3건 이상 들어온 글입니다.]</h4>
+                                        </c:if>
+                                        <c:if test="${cntReport >= 0}">
+                                            <div id="content" style="display: block;">${dto.content}</div>
+                                        </c:if>
+                                    </c:when>
 
-                                <c:if test="${cntReport < 3}">
-                                    ${dto.content}
-                                </c:if>
-                                <c:if test="${cntReport > 2}">
-                                    <h4 style="text-align: center">[신고가 누적되어 블라인드 처리되었습니다. 관리자에게 문의해주세요]</h4>
-                                </c:if>
+                                    <c:otherwise>
+                                        <c:if test="${cntReport < 3}">
+                                            <div id="content" style="display: block;">${dto.content}</div>
+                                        </c:if>
+                                        <c:if test="${cntReport > 2}">
+                                            <h4 style="text-align: center">[신고가 누적되어 블라인드 처리되었습니다. 관리자에게 문의해주세요]</h4>
+                                        </c:if>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <script>
+                                    // JavaScript를 사용하여 select 요소의 변경을 감지하고 content를 표시 또는 숨깁니다.
+                                    const contentSelect = document.getElementById('contentSelect');
+                                    const content = document.getElementById('content');
+
+                                    contentSelect.addEventListener('change', function () {
+                                        if (contentSelect.value === 'visible') {
+                                            content.style.display = 'block';
+                                        } else if (contentSelect.value === 'hidden') {
+                                            content.style.display = 'none';
+                                        }
+                                    });
+                                </script>
+
                             </div>
                         </td>
                     </tr>
