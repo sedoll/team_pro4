@@ -158,11 +158,7 @@
                     <a href="${path2}/" class="button is-link2 is-rounded b2" >
                         나의 스케줄러
                     </a>
-                </div>--%>
-
-
-
-
+                </div>
             </div>
             <%--            <div class="navbar-item has-dropdown is-hoverable">--%>
             <%--                <a class="navbar-link is-arrowless">--%>

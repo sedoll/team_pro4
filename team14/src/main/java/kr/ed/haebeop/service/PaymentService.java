@@ -34,4 +34,10 @@ public class PaymentService {
 
     // 결제 확정
     public void buyPayemnt(int sno) {paymentMapper.buyPayemnt(sno);}
+
+    // 이미 수강하고 있는 강의인지 아닌지 확인
+    public int checkPayment(Payment payment) {return paymentMapper.checkPayment(payment);}
+
+    // 결제 번호를 통한 결제 정보
+    public Payment getPayment(int sno) {return paymentMapper.getPayment(sno);}
 }

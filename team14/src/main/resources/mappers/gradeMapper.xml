@@ -7,13 +7,13 @@
     <select id="gradeList" resultType="kr.ed.haebeop.domain.Grade">
         select * from grade order by no asc
     </select>
-    <!-- 성적 상세보기 -->
+    <!-- 성적 상세보기  평균, 합계-->
     <select id="gradeDetail" resultType="kr.ed.haebeop.domain.Grade">
-        select * from grade where no=#{no}
+        select *, kor+math+eng+social+science as su, (kor+math+eng+social+science)/5 as av from grade where no=#{no}
     </select>
     <!-- 성적 입력 -->
     <insert id="gradeInsert">
-        insert into grade(sname, pid, kor, math, eng, social, science, exam, tname) values (#{sname}, #{pid}, #{kor}, #{math}, #{eng}, #{social}, #{science}, #{exam}, #{tname})
+        insert into grade(stuname, stuid, kor, math, eng, social, science, exam, tname, tid) values (#{stuname}, #{stuid}, #{kor}, #{math}, #{eng}, #{social}, #{science}, #{exam}, #{tname}, #{tid})
     </insert>
     <!-- 성적 삭제 -->
     <delete id="gradeDelete">

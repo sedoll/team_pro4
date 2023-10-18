@@ -26,11 +26,12 @@ CREATE TABLE member(
 	birth DATE DEFAULT CURRENT_TIME, -- 생년월일
 	pt INT DEFAULT 0, -- 점수
 	cnt INT DEFAULT 0, -- 방문횟수,
+	login_tp_cd INT DEFAULT 1,
+	state_cd INT DEFAULT 1,
 	job INT DEFAULT 1
 );
-
--- ALTER TABLE member DROP COLUMN job;
-
+ALTER TABLE member add COLUMN job INT;
+ALTER TABLE member DROP COLUMN job;
 
 -- 로그인 타입 1: 일반 2: 카카오 3: 네이버
 ALTER TABLE member ADD login_tp_cd INT DEFAULT 1;
@@ -57,7 +58,7 @@ INSERT INTO member VALUES(
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
 	DEFAULT, DEFAULT, DEFAULT);
 
--- 학부모
+-- 학생
 INSERT INTO member VALUES(
 'hong', '1234', '홍길동', 'hong@edu.com', '010-2222-3333', 
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1980-04-22',
@@ -87,6 +88,8 @@ UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiq
 
 
 UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi' WHERE pw='1234';
+
+
 
 CREATE TABLE board(
 	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
@@ -283,8 +286,8 @@ CREATE TABLE fileboard (
 -- 성적 게시판
 CREATE TABLE grade( 
 	no INTEGER auto_increment PRIMARY KEY,
-	sname VARCHAR(150) NOT NULL ,
-	pid VARCHAR(150) NOT null ,
+	stuname VARCHAR(150) NOT NULL ,
+	stuid VARCHAR(150) NOT null ,
 	kor INTEGER ,
 	math INTEGER,
 	eng INTEGER ,
@@ -292,14 +295,21 @@ CREATE TABLE grade(
 	science INTEGER ,
 	exam VARCHAR(80),
 	tname VARCHAR(150),
+	tid VARCHAR(150),
 	regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 						
--- sname : 학생 이름, pid: 부모님 아이디, exam : 시험 유형(?), tname: 선생님 성함 
+-- stuname : 학생 이름, stuid: 학생 아이디, exam : 시험 유형(?), tname: 선생님 성함, stuid: 선생님 아이디 
 						  
 DROP TABLE grade;
 
-INSERT INTO grade VALUES(DEFAULT, '홍길동', 'oh12345', 90, 50, 50, 50, 50, '1학기 중간고사', '이순신', default);
+-- grade 더미 데이터
+INSERT INTO grade VALUES(DEFAULT, '홍길동', 'hong', 90, 50, 50, 50, 50, '1학기 중간고사', '손흥민','son', DEFAULT);
+INSERT INTO grade VALUES(DEFAULT, '강감찬', 'kang', 90, 50, 50, 50, 50, '1학기 중간고사', '손흥민','son', DEFAULT);
+INSERT INTO grade VALUES(DEFAULT, '강감찬', 'kang', 90, 50, 50, 50, 50, '2학기 중간고사', '손흥민','son', DEFAULT);
+INSERT INTO grade VALUES(DEFAULT, '강감찬', 'kang', 90, 50, 50, 50, 50, '1학기 기말고사', '손흥민','son', DEFAULT);
+
+SELECT * FROM grade WHERE stuid='kang';
 
 -- 관리자 게시판 관리 테이블
 CREATE TABLE report (
@@ -356,11 +366,12 @@ create table notice(
 -- DROP TABLE instructor;
 CREATE TABLE instructor(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
-	id VARCHAR(20) not null,
-	pw VARCHAR(100) NOT null,
 	NAME VARCHAR(10),
 	tel VARCHAR(20),
-	email VARCHAR(100)
+	email VARCHAR(100),
+	intro VARCHAR(1000),
+	cate VARCHAR(20),
+	img VARCHAR(1000)
 );
 	
 INSERT INTO instructor VALUES(DEFAULT, '강감찬', '01011111111', 'kang@edu.com');
@@ -403,6 +414,13 @@ CREATE TABLE lecture(
 );
 -- ALTER TABLE lecture ADD COLUMN endday INT;
 -- UPDATE lecture SET endday = 100; 
+
+-- 실제 파일 이름 저장 경로
+CREATE TABLE lecfile (
+	NO INT PRIMARY KEY AUTO_INCREMENT,
+	sfile VARCHAR(1000),
+	realname VARCHAR(250)
+)
 
 
 -- 수강(수강코드(PK), 강의코드(FK), 학생아이디(FK), 수강총시간, 수강완료 여부)

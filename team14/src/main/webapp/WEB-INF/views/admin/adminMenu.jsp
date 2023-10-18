@@ -18,9 +18,6 @@
                     <li><a href="${path}/admin/memberList.do">회원 목록</a></li>
                 </ul>
                 <ul class="menu-list">
-                    <li><a href="${path}/admin/instList.do">강사 목록</a></li>
-                </ul>
-                <ul class="menu-list">
                     <li><a href="${path}/admin/instInsert.do">강사 등록</a></li>
                 </ul>
                 <p class="menu-label">
