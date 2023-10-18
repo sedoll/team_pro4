@@ -249,14 +249,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
-                                <a href="${path}/board/delete.do?bno=${dto.bno}" class="button is-outlined is-danger" >삭제</a>
-                               </c:if>
-                            </td>
-                            <td>
                                 <c:if test="${dto.author eq sid && not empty sid}">
                                     <a href="${path}/board/edit.do?bno=${dto.bno}" class="button is-outlined is-link">수정</a>
                                 </c:if>
+                            </td>
+                            <td>
+                                <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
+                                <a href="${path}/board/delete.do?bno=${dto.bno}" class="button is-outlined is-danger" >삭제</a>
+                            </c:if>
                             </td>
                             <td>${dto.author}</td>
                             <td>${dto.resdate}</td>
@@ -352,8 +352,8 @@
                             <td class="item3">${lev.resdate}</td>
                             <td class="item4">
                                 <c:if test="${sid eq lev.author || sid eq 'admin'}">
-                                    <a href="${path}/board/edit.do?bno=${lev.bno}" class="button is-link is-small is-outlined is-rounded ">수정</a>
-                                    <a href="${path}/board/delete.do?bno=${lev.bno}" class="button is-danger is-small is-outlined is-rounded"> 삭제 </a>
+                                    <a href="${path}/board/commentEdit.do?bno=${lev.bno}" class="button is-link is-small is-outlined is-rounded ">수정</a>
+                                    <a href="${path}/board/comDelete.do?bno=${lev.bno}&par=${lev.par}" class="button is-danger is-small is-outlined is-rounded"> 삭제 </a>
                                 </c:if>
                             </td>
                         </tr>

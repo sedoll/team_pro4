@@ -376,7 +376,7 @@ public class MemberController {
     }
 
 
-    /*회원 정보 수정*/
+    /*회원 정보 수정 폼 이동*/
     @GetMapping("update.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         String id = request.getParameter("id");
@@ -385,7 +385,8 @@ public class MemberController {
         System.out.println(member.toString());
         return "/member/myPage/memberUpdate";
     }
-
+    
+    // 회원 정보 수정
     @PostMapping("update.do")
     public String memberEdit(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         String id = request.getParameter("id");
@@ -594,7 +595,8 @@ public class MemberController {
         return "/member/myPage/memberWritten2";
 
     }
-
+    
+    // 비밀번호 찾기 폼 이동
     @RequestMapping(value = "/pw_find.do", method = RequestMethod.GET)
     public String pw_find() {
         return "/member/pw_find";

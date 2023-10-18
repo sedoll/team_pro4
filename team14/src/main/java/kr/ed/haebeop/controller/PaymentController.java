@@ -19,17 +19,17 @@ import java.util.List;
 @RequestMapping("/payment/*")
 public class PaymentController {
     @Autowired
-    private LectureService lectureService;
+    private LectureService lectureService;      // 강의
     @Autowired
-    private MemberServiceImpl memberService;
+    private MemberServiceImpl memberService;    // 회원
     @Autowired
-    private InstService instService;
+    private InstService instService;            // 선생님, 강사
     @Autowired
-    private PaymentService paymentService;
+    private PaymentService paymentService;      // 결제
     @Autowired
-    private CartServiceImpl cartService;
+    private CartServiceImpl cartService;        // 장바구니
     @Autowired
-    HttpSession session; // 세션 생성
+    HttpSession session;                        // 세션 생성
 
     // 수강 신청, 결제 폼
     @GetMapping("addPayment.do")
@@ -67,14 +67,17 @@ public class PaymentController {
     @PostMapping("addPayment.do")
     public String addPaymentPro(@ModelAttribute Payment payment, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
+        int lec_no = payment.getLec_no();
+
         payment.setId(id);
         paymentService.paymentInsert(payment); // 결제 내역 추가
         Member member = memberService.getMember(id); // 결제한 회원정보 추출
         member.setPt(payment.getPt()); // 포인트
         memberService.memberPointSub(member); // 사용한 포인트 차감
+        lectureService.countUpLec(lec_no); // 수강 인원 현황 +1
 
         Cart cart = new Cart();
-        cart.setLec_no(payment.getLec_no());
+        cart.setLec_no(lec_no);
         cart.setId(payment.getId());
 
         // 카트에 있으면 제거
@@ -100,7 +103,6 @@ public class PaymentController {
     @GetMapping("buyPayment.do")
     public String buyPayment(HttpServletRequest req, Model model) throws Exception {
         int sno = Integer.parseInt(req.getParameter("sno"));
-        int lec_no = Integer.parseInt(req.getParameter("lno"));
 
         Member member = new Member();
         String id = (String) session.getAttribute("sid");
@@ -108,7 +110,6 @@ public class PaymentController {
         member.setId(id);
         member.setPt(pt);
         paymentService.buyPayemnt(sno);
-        lectureService.countUpLec(lec_no); // 수강 인원 현황 +1
         memberService.memberPoint(member);
         return "redirect:/payment/paymentList.do";
     }
@@ -122,6 +123,10 @@ public class PaymentController {
         member.setPt(payment.getPt());
         memberService.memberPoint(member);
 
+        // 수강 인원 현황 -1
+        lectureService.countDownLec(payment.getLec_no());
+        
+        // 결제 내역 삭제
         paymentService.paymentDelete(sno);
 
         return "redirect:/payment/paymentList.do";
