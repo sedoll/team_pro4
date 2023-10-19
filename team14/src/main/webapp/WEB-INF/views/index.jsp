@@ -147,7 +147,7 @@
 
 
             <div class="navbar-item is-hoverable">
-                <a href="${path}/myclass/myclassIndex.do" class="button is-link2 is-rounded b2" >
+                <a href="${path}/myclass/myclassIndex.do"  >
                     <strong>나의 학습방</strong>
                 </a>
             </div>

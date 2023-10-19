@@ -67,7 +67,7 @@
                                             onclick="location.href='${path14}/myclass/getLecVideo?no=${myclass.lec_no}' ">
                                         학습
                                     </button>--%>
-                                        <button type="button"
+                                        <button type="button" class="button is-info"
                                                 onclick="location.href='${path14}/myclass/myclassDetail?no=${myclass.lec_no}' ">
                                             학습
                                         </button>

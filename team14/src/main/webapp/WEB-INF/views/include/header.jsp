@@ -100,7 +100,7 @@
             </div>
 
             <div class="navbar-item is-hoverable">
-                <a href="${path2}/myclass/myclassIndex.do" class="button is-link2 is-rounded b2" >
+                <a href="${path2}/myclass/myclassIndex.do" style="color:black;" > <%--class="button is-link2 is-rounded b2" --%>
                     <strong>나의 학습방</strong>
                 </a>
             </div>
