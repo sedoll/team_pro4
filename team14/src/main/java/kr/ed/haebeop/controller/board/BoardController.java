@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Like;
+import kr.ed.haebeop.domain.Qna;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
 import org.json.JSONObject;
@@ -28,14 +29,16 @@ public class BoardController {
 
     @Autowired
     HttpSession session; // 세션 생성
-
+    
+    // 게시글 목록
     @GetMapping("list.do")		// board/list.do
     public String getBoardList(Model model) throws Exception {
         List<Board> boardList = boardService.boardList();
         model.addAttribute("boardList", boardList);
         return "/board/boardList";
     }
-
+    
+    // 게시글 상세
     @GetMapping("detail.do")	// board/detail.do?bno=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
@@ -69,12 +72,14 @@ public class BoardController {
         System.out.println(comment.toString());
         return "/board/boardDetail";
     }
-
+    
+    // 게시글 추가 폼
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
         return "/board/boardInsert";
     }
-
+    
+    // 게시글 추가
     @PostMapping("insert.do")
     public String boardInsert(HttpServletRequest request, Model model) throws Exception {
         Board dto = new Board();
@@ -82,9 +87,10 @@ public class BoardController {
         dto.setContent(request.getParameter("content"));
         dto.setAuthor((String) session.getAttribute("sid"));
         boardService.boardInsert(dto);
-        return "redirect:list.do";
+        return "redirect:/board/list.do";
     }
-
+    
+    // 댓글 추가
     @PostMapping("commentInsert.do")
     public String commentInsert(HttpServletRequest request, Model model) throws Exception {
         Board dto = new Board();
@@ -92,17 +98,30 @@ public class BoardController {
         dto.setBno(Integer.parseInt(request.getParameter("bno")));
         dto.setContent(request.getParameter("content"));
         boardService.commentInsert(dto);
-        return "redirect:list.do";
+        return "redirect:/board/detail.do?bno="+dto.getBno();
     }
-
+    
+    // 게시판 글 삭제
     @GetMapping("delete.do")
     public String boardDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         boardService.boardDelete(bno);
         boardService.commentDeleteAll(bno);
-        return "redirect:list.do";
+        return "redirect:/board/list.do";
     }
-
+    
+    // 댓글 삭제
+    @GetMapping("comDelete.do")
+    public String qnaComDelete(HttpServletRequest request, Model model) throws Exception {
+        int bno = Integer.parseInt(request.getParameter("bno"));
+        int par = Integer.parseInt(request.getParameter("par"));
+        Qna dto = new Qna();
+        dto.setPar(par);
+        boardService.boardDelete(bno);
+        return "redirect:/board/detail.do?bno="+dto.getPar();
+    }
+    
+    // 게시글 수정 폼
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
@@ -111,6 +130,7 @@ public class BoardController {
         return "/board/boardEdit";
     }
 
+    // 게시글 수정
     @PostMapping("edit.do")
     public String boardEdit(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
@@ -119,8 +139,33 @@ public class BoardController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         boardService.boardEdit(dto);
-        return "redirect:list.do";
+        return "redirect:/board/detail.do?bno="+dto.getBno();
     }
+
+    // 댓글 수정 폼
+    @GetMapping("commentEdit.do")
+    public String comEditForm(HttpServletRequest request, Model model) throws Exception {
+        int bno = Integer.parseInt(request.getParameter("bno"));
+        Board dto = boardService.boardDetail(bno);
+        model.addAttribute("dto", dto);
+        return "/board/ComEdit";
+    }
+
+    // 댓글 수정
+    @PostMapping("commentEdit.do")
+    public String qnaCommentEdit(HttpServletRequest request, Model model) throws Exception {
+        int bno = Integer.parseInt(request.getParameter("bno"));
+        int par = Integer.parseInt(request.getParameter("par"));
+        Board dto = new Board();
+        dto.setBno(bno);
+        dto.setPar(par);
+        dto.setTitle(request.getParameter("title"));
+        dto.setContent(request.getParameter("content"));
+        System.out.println(dto.toString());
+        boardService.boardEdit(dto);
+        return "redirect:/board/detail.do?bno="+dto.getPar();
+    }
+
 
     //게시글 신고 팝업 창
     @RequestMapping("reportPopup.do")
