@@ -43,18 +43,18 @@
             <form class="content">
 
                 <div id="ud_tab" style="">
-<%--                    <input type="radio" name="ud_tabs" id="tab1" checked>--%>
-<%--                    <label for="tab1">강좌소개</label>--%>
-<%--                    <input type="radio" name="ud_tabs" id="tab2">--%>
-<%--                    <label for="tab2">강좌목차</label>--%>
-<%--                    <input type="radio" name="ud_tabs" id="tab3">--%>
-<%--                    <label for="tab3">공지사항</label>--%>
-<%--                    <input type="radio" name="ud_tabs" id="tab4">--%>
-<%--                    <label for="tab4">QnA</label>--%>
-<%--                    <input type="radio" name="ud_tabs" id="tab5">--%>
-<%--                    <label for="tab5">수강후기</label>--%>
-<%--                    <input type="radio" name="ud_tabs" id="tab6">--%>
-<%--                    <label for="tab6">자료실</label>--%>
+                    <input type="radio" name="ud_tabs" id="tab1" checked>
+                    <label for="tab1">강좌소개</label>
+                    <input type="radio" name="ud_tabs" id="tab2">
+                    <label for="tab2">강좌목차</label>
+                    <input type="radio" name="ud_tabs" id="tab3">
+                    <label for="tab3">공지사항</label>
+                    <input type="radio" name="ud_tabs" id="tab4">
+                    <label for="tab4">QnA</label>
+                    <input type="radio" name="ud_tabs" id="tab5">
+                    <label for="tab5">수강후기</label>
+                    <input type="radio" name="ud_tabs" id="tab6">
+                    <label for="tab6">자료실</label>
 
 
                     <%--강좌 소개--%>
