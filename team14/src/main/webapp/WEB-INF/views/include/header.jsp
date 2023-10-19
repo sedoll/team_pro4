@@ -100,7 +100,7 @@
             </div>
 
             <div class="navbar-item is-hoverable">
-                <a href="${path}/mystudyroom/myStudyIndex.do" class="button is-link2 is-rounded b2" >
+                <a href="${path2}/mystudyroom/myStudyIndex.do" class="button is-link2 is-rounded b2" >
                     <strong>나의 학습방</strong>
                 </a>
             </div>
@@ -124,39 +124,48 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div style="padding-right: 10px">
-                    <c:if test="${not empty sid}">
-                        ${sid} 회원님 환영합니다.
-                    </c:if>
+<%--                    <c:if test="${not empty sid}">--%>
+<%--                        ${sid} 회원님 환영합니다.--%>
+<%--                    </c:if>--%>
                 </div>
                 <div class="buttons" style="margin-bottom: 0">
                     <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
                         <a href="${path2}/member/mypage.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
-                            마이페이지
+                            <img src="${path2}/resources/img/account_thin.svg" alt="${sid}" width="26px">
+                            &nbsp;${sid}님
                         </a>
                         <a href="${path2}/cart/cartList.do" class="button is-link2 is-rounded b2"  style="margin-bottom: 0">
-                            장바구니
+                            <img src="${path2}/resources/img/cart_thin.svg" alt="" width="26px">
+<%--                            장바구니--%>
                         </a>
                         <a href="${path2}/member/logout.do" class="button is-link2 is-rounded b2"  style="margin-bottom: 0">
-                            로그아웃
+                            <img src="${path2}/resources/img/logout_thin.svg" alt="" width="26px">
+<%--                            로그아웃--%>
                         </a>
                     </c:if>
                     <c:if test="${empty sid}"> <%-- 로그인을 안 한 경우 --%>
-                        <a href="${path2}/member/term.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
-                            회원가입
-                        </a>
                         <a href="${path2}/member/login.do" class="button is-link2 is-rounded b2"  style="margin-bottom: 0">
                             로그인
+                            <img src="${path2}/resources/img/login_thin.svg" alt="" width="26px">
+
                         </a>
+                        <a href="${path2}/member/term.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                            회원가입
+                            <img src="${path2}/resources/img/person_add_thin.svg" alt="" width="26px">
+                        </a>
+
                     </c:if>
                     <c:if test="${sid eq 'admin'}"> <%-- 관리자로 로그인 한 경우 --%>
                         <a href="${path2}/admin/adminMain.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
-                            관리자페이지
+                            <img src="${path2}/resources/img/settings_thin.svg" alt="" width="26px">
+                        <%--                            관리자페이지--%>
                         </a>
                     </c:if>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link is-arrowless">
-                        <strong>고객센터</strong>
+                        <img src="${path2}/resources/img/help_thin.svg" alt="" width="26px">
+                    <%--                        <strong>고객센터</strong>--%>
                     </a>
                     <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
                         <a href="${path2}/notice/list.do" class="navbar-item">

@@ -155,39 +155,44 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div style="padding-right: 10px">
-                    <c:if test="${not empty sid}">
-                        ${sid} 회원님 환영합니다.
-                    </c:if>
+<%--                    <c:if test="${not empty sid}">--%>
+<%--                        ${sid} 회원님--%>
+<%--                    </c:if>--%>
                 </div>
                 <div class="buttons" style="margin-bottom: 0">
                     <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
                         <a href="${path}/member/mypage.do" class="button is-link is-rounded b2" >
-                            마이페이지
+                            <img src="${path}/resources/img/account.svg" alt="${sid}" width="30px">
+                            &nbsp;${sid}님
                         </a>
                         <a href="${path}/cart/cartList.do" class="button is-link2 is-rounded b2" >
-                            장바구니
+                            <img src="${path}/resources/img/cart.svg" alt="장바구니" width="30px">
+<%--                            장바구니--%>
                         </a>
                         <a href="${path}/member/logout.do" class="button is-link2 is-rounded b2" >
-                            로그아웃
+                            <img src="${path}/resources/img/logout.svg" alt="로그아웃" width="30px">
+<%--                            로그아웃--%>
                         </a>
                     </c:if>
                     <c:if test="${empty sid}"> <%-- 로그인을 안 한 경우 --%>
-                        <a href="${path}/member/term.do" class="button is-link is-rounded b2" >
-                            회원가입
-                        </a>
                         <a href="${path}/member/login.do" class="button is-link2 is-rounded b2" >
-                            로그인
+                            로그인&nbsp;<img src="${path}/resources/img/login.svg" alt="" width="30px">
+                        </a>
+                        <a href="${path}/member/term.do" class="button is-link is-rounded b2" >
+                            회원가입&nbsp;<img src="${path}/resources/img/person_add.svg" alt="" width="30px">
                         </a>
                     </c:if>
                     <c:if test="${sid eq 'admin'}"> <%-- 관리자로 로그인 한 경우 --%>
                         <a href="${path}/admin/adminMain.do" class="button is-link is-rounded b2" >
-                            관리자페이지
+                            <img src="${path}/resources/img/settings.svg" alt="" width="30px">
+<%--                            관리자페이지--%>
                         </a>
                     </c:if>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link is-arrowless">
-                        <strong>고객센터</strong>
+                        <img src="${path}/resources/img/help.svg" alt="" width="30px">
+<%--                        <strong>고객센터</strong>--%>
                     </a>
                     <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
                         <a href="${path}/notice/list.do" class="navbar-item">
