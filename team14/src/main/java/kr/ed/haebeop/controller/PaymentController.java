@@ -29,6 +29,8 @@ public class PaymentController {
     @Autowired
     private CartServiceImpl cartService;        // 장바구니
     @Autowired
+    private CourseService courseService;    // 수강
+    @Autowired
     HttpSession session;                        // 세션 생성
 
     // 수강 신청, 결제 폼
@@ -76,6 +78,14 @@ public class PaymentController {
         memberService.memberPointSub(member); // 사용한 포인트 차감
         lectureService.countUpLec(lec_no); // 수강 인원 현황 +1
 
+
+        //수강 신청
+        Course course = new Course();
+        course.setSid(id);
+        course.setLec_no(lec_no);
+        courseService.courseInsert(course);
+
+
         Cart cart = new Cart();
         cart.setLec_no(lec_no);
         cart.setId(payment.getId());
@@ -89,6 +99,8 @@ public class PaymentController {
         }
         return "redirect:/";
     }
+
+
 
     // 결제 목록
     @GetMapping("paymentList.do")
