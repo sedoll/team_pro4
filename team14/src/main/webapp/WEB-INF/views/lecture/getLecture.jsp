@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="<%=request.getContextPath() %>" />
+<c:set var="path" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +110,7 @@
                             </tr>
                             <tr>
                                 <th>수강 기간</th>
-                                <td>${pro.studyStart} ~ ${pro.studyEnd}</td>
+                                <td>${pro.endDay} 일</td>
                             </tr>
                             <tr>
                                 <th>수강료</th>
@@ -193,62 +193,64 @@
 
                 <table class="table is-fullwidth">
                     <thead>
-                    <tr class="title">
-                        <th colspan="5">상세 설명</th>
-                    </tr>
+                        <tr class="title">
+                            <th colspan="5">강의 설명</th>
+                        </tr>
                     </thead>
-                </table>
-                <table class="table is-fullwidth">
-                    <tr>
-                        <td class="adminbtn" colspan="5">
-                            ${pro.content}
-                            <br><br><br>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td class="adminbtn" colspan="5">
+                                ${pro.content}
+                                <br><br><br>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <table class="table is-fullwidth">
                     <thead>
-                    <tr class="title">
-                        <th colspan="5">QNA</th>
-                    </tr>
+                        <tr class="title">
+                            <th colspan="5">강의 영상</th>
+                        </tr>
                     </thead>
-                </table>
-                <table class="table is-fullwidth">
-                    <tr>
-                        <td class="adminbtn" colspan="5">
-                            ${pro.content}
-                            <br><br><br>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <c:forEach var="video" items="${videoList }" varStatus="status">
+                            <tr>
+                                <td class="adminbtn" colspan="5">
+                                    ${status.count}.${video}
+                                    <br><br>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
                 </table>
 
                 <table class="table is-fullwidth" id="myTable">
                     <thead>
-                    <tr class="title">
-                        <th colspan="5">후기</th>
-                    </tr>
-                    <tr>
-                        <th class="item1">작성자</th>
-                        <th class="item2">댓글</th>
-                        <th class="item3">작성일</th>
-                        <th class="item4"></th>
-                    </tr>
+                        <tr class="title">
+                            <th colspan="5">후기</th>
+                        </tr>
+                        <tr>
+                            <th class="item1">작성자</th>
+                            <th class="item2">댓글</th>
+                            <th class="item3">작성일</th>
+                            <th class="item4"></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="lev" items="${revList }">
-                        <tr>
-                            <td class="item1">${lev.cid}</td>
-                            <td class="item2">${lev.content}</td>
-                            <td class="item3">${lev.resdate}</td>
-                            <td class="item4">
-                                <c:if test="${sid eq lev.cid || sid eq 'admin'}">
-                                    <a href="${path}/UpdateReview.do?cid=${lev.cid}&par=${pro.no}" class="button is-info inbtn">수정</a>
-                                    <a href="${path}/DeleteReview.do?cid=${lev.cid}&par=${pro.no}" class="button is-danger inbtn delete_btn"> 삭제 </a>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                        <c:forEach var="lev" items="${revList }">
+                            <tr>
+                                <td class="item1">${lev.cid}</td>
+                                <td class="item2">${lev.content}</td>
+                                <td class="item3">${lev.resdate}</td>
+                                <td class="item4">
+                                    <c:if test="${sid eq lev.cid || sid eq 'admin'}">
+                                        <a href="${path}/UpdateReview.do?cid=${lev.cid}&par=${pro.no}" class="button is-info inbtn">수정</a>
+                                        <a href="${path}/DeleteReview.do?cid=${lev.cid}&par=${pro.no}" class="button is-danger inbtn delete_btn"> 삭제 </a>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
                 <script>
