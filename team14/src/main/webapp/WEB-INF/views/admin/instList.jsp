@@ -73,7 +73,7 @@
                 <div class="hero-body">
                     <div class="container">
                         <h1 class="title" style="text-align: center">
-                            회원 목록
+                            강사 목록
                         </h1>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     <option value="2">이름</option>
                     <option value="3">전화번호</option>
                     <option value="4">이메일</option>
-                    <option value="5">가입일</option>
+                    <option value="5">신고일</option>
                 </select>
                 <input type="text" name="search_filter" id="search_filter">
             </div>
@@ -96,7 +96,6 @@
                     <th>Name</th>
                     <th>Tel</th>
                     <th>Email</th>
-                    <th>RegDate</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -107,10 +106,6 @@
                         <td>${member.name}</td>
                         <td>${member.tel}</td>
                         <td>${member.email}</td>
-                        <td>
-                            <fmt:parseDate value="${member.regdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                            <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" />
-                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

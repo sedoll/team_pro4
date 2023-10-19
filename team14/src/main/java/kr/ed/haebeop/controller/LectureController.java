@@ -4,6 +4,7 @@ import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.service.PaymentService;
+import kr.ed.haebeop.service.ReviewService;
 import kr.ed.haebeop.util.DateCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class LectureController {
     private InstService instService;
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private ReviewService reviewService;
     @Autowired
     HttpSession session; // 세션 생성
 
@@ -217,6 +220,8 @@ public class LectureController {
         Lecture product = lectureService.getLecture(no); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
         Instructor inst = instService.getInstructorName(product.getIno()); // 강사 번호로 이름 추출
         List<String> videoList = new ArrayList<>(); // 비디오 이름 받기
+        int check = 0; // 구매를 확정하고 리뷰를 작성하지 않은 경우를 확인하기 위해 사용한 변수
+
         // 강의 영상 개수 카운트
         int cnt = 0;
         if(product.getSfile2()!=null) {
@@ -240,10 +245,35 @@ public class LectureController {
             videoList.add(realName);
         }
 
+        // 리뷰 작성을 위한 조건 (구매 확정 + 리뷰 작성 안함)
+        if((String) session.getAttribute("sid") != null) {
+            String id = (String) session.getAttribute("sid");
+            Payment payment = new Payment();
+            payment.setLec_no(no);
+            payment.setId(id);
+
+            Review review = new Review();
+            review.setId(id);
+            review.setPar(no);
+            try {
+                int rc1 = paymentService.statePayemnt(payment); // 결제 확인을 했는지 확인
+                int rc2 = reviewService.reviewCheck(review);
+                if(rc1 == 1 && rc2 == 0) {
+                    check = 1;
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+        List<Review> revList = reviewService.getReviewListPar(no); // 해당 강의 리뷰 정보 출력
+
+        model.addAttribute("revList", revList);
         model.addAttribute("pro", product);
         model.addAttribute("videoList", videoList);
         model.addAttribute("cnt", cnt);
         model.addAttribute("inst", inst);
+        model.addAttribute("check", check);
         return "lecture/getLecture";
     }
 
