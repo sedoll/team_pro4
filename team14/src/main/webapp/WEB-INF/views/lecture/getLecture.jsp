@@ -45,6 +45,30 @@
         table .lec{
             text-align: center;
         }
+        .score{
+            width: 100%; /* select 태그의 너비를 가로로 꽉 차게 설정 */
+            padding: 10px; /* 내부 패딩을 추가하여 텍스트와 경계 사이의 간격을 설정 */
+            border: 1px solid #ccc; /* 테두리 스타일 설정 */
+            border-radius: 5px; /* 테두리의 모서리를 둥글게 만듭니다. */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+            background-color: #fff; /* 배경색 설정 */
+        }
+        textarea {
+            resize: none;
+        }
+        #myTable td{
+            text-align: center; /* 가로 가운데 정렬 */
+            vertical-align: middle; /* 세로 가운데 정렬 */
+        }
+        .rev{
+            width: 10%;
+        }
+        .rev2{
+            width: 20%;
+        }
+        .rev-con {
+            width: 40%;
+        }
     </style>
 </head>
 
@@ -217,7 +241,7 @@
                         <c:forEach var="video" items="${videoList }" varStatus="status">
                             <tr>
                                 <td class="adminbtn" colspan="5">
-                                    ${status.count}.${video}
+                                    ${status.count}. &nbsp; ${video}
                                     <br><br>
                                 </td>
                             </tr>
@@ -231,22 +255,24 @@
                             <th colspan="5">후기</th>
                         </tr>
                         <tr>
-                            <th class="item1">작성자</th>
-                            <th class="item2">댓글</th>
-                            <th class="item3">작성일</th>
-                            <th class="item4"></th>
+                            <th class="rev">작성자</th>
+                            <th class="rev">점수</th>
+                            <th class="rev-con">댓글</th>
+                            <th class="rev2">작성일</th>
+                            <th class="rev2">비고</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="lev" items="${revList }">
                             <tr>
-                                <td class="item1">${lev.cid}</td>
-                                <td class="item2">${lev.content}</td>
-                                <td class="item3">${lev.resdate}</td>
-                                <td class="item4">
-                                    <c:if test="${sid eq lev.cid || sid eq 'admin'}">
-                                        <a href="${path}/UpdateReview.do?cid=${lev.cid}&par=${pro.no}" class="button is-info inbtn">수정</a>
-                                        <a href="${path}/DeleteReview.do?cid=${lev.cid}&par=${pro.no}" class="button is-danger inbtn delete_btn"> 삭제 </a>
+                                <td>${lev.id}</td>
+                                <td>${lev.score}</td>
+                                <td>${lev.content}</td>
+                                <td>${lev.resdate}</td>
+                                <td>
+                                    <c:if test="${sid eq lev.id || sid eq 'admin'}">
+                                        <a href="${path}/review/updateReviewForm.do?par=${pro.no}" class="button is-info">수정</a>
+                                        <a href="${path}/review/deleteReview.do?par=${pro.no}" class="button is-danger"> 삭제 </a>
                                     </c:if>
                                 </td>
                             </tr>
@@ -275,34 +301,51 @@
                         });
                     } );
                 </script>
-                <form action="${path}/AddReview.do" id="login_frm" class="frm">
+                <form action="${path}/review/insertReview.do" id="login_frm" class="frm" method="post">
                     <table class="table is-fullwidth">
                         <tbody>
-                        <tr>
                             <c:choose>
-                                <c:when test="${check == '2'}">
-                                    <th>${sid}</th>
-                                    <th><textarea name="content" id="content" class="textarea" placeholder="리뷰 작성" required></textarea></th>
-                                    <th><input type="submit" value="글쓰기" class="button is-success inbtn" id="ans_btn"></th>
-                                    <input type="hidden" name="pno" value="${pro.no}" readonly>
+                                <c:when test="${check == 1}">
+                                    <tr>
+                                        <th>
+                                            <label for="score">점수</label>
+                                        </th>
+                                        <td colspan="5">
+                                            <select name="score" id="score" class="score" required>
+                                                <option value="5" selected>5</option>
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="submit" value="작성" class="button is-success inbtn" id="ans_btn">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="content">후기</label>
+                                        </th>
+                                        <td colspan="5">
+                                            <textarea name="content" id="content" class="textarea" placeholder="리뷰 작성" required></textarea>
+                                        </td>
+                                    </tr>
+                                    <input type="hidden" name="par" value="${pro.no}" readonly>
                                 </c:when>
-<%--                                <c:when test="${check == '1'}">--%>
-<%--                                    <p id="nologin_comment">구매 확정을 해야 후기 작성이 가능합니다.</p>--%>
-<%--                                </c:when>--%>
                                 <c:otherwise>
-                                    <p id="nologin_comment">수강생만 작성 가능합니다.</p>
+                                    <p id="nologin_comment">수강생 및 리뷰를 작성하지 않은 사람만 작성 가능합니다.</p>
                                 </c:otherwise>
                             </c:choose>
-                        </tr>
                         </tbody>
                     </table>
                 </form>
             </div>
-            <footer class="ft" id="ft">
-                <%@ include file="../include/footer.jsp" %>
-            </footer>
         </section>
     </div>
+    <footer class="ft" id="ft">
+        <%@ include file="../include/footer.jsp" %>
+    </footer>
 </div>
 </body>
 </html>

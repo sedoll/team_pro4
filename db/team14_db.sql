@@ -442,6 +442,39 @@ create table boardlikes (
     PRIMARY KEY (userid, boardno)   -- 사용자 ID와 게시글 no 조합으로 각 레코드를 유일하게 식별
 );
 
+db수정 및 추가
+
+======= course 테이블에 데이터 타입 수정 ==============
+CREATE TABLE course(
+	NO INT PRIMARY KEY AUTO_INCREMENT,
+	lec_no INT, -- 강의코드(FK)
+	sid VARCHAR(20), -- 학생아이디(FK)
+	ctime INT DEFAULT 0, -- 수강 총 시간 
+	CHECK1 int default 1, -- 1:수강 중, 2.수강정지 3.수강완료
+	FOREIGN KEY(lec_no) REFERENCES lecture(no), 
+	FOREIGN KEY(sid) REFERENCES member(id)
+	);
+
+-- myclass 뷰테이블 추가 (나의 학습방 데이터) 
+-- mystudy 뷰 생성
+CREATE VIEW myclass  AS
+SELECT 
+    c.sid AS id, 
+    l.cate AS lecCate, 
+    l.title AS lecTitle, 
+    l.studystart AS lecStudystart, 
+    l.studyend AS lecStudyend,  
+    ins.name AS insName,
+   c.CHECK1 AS ck
+FROM 
+    course c   
+JOIN
+	member m ON c.sid = m.id	   
+JOIN 
+   lecture l ON c.lec_no = l.NO     
+JOIN 
+   instructor ins ON l.ino = ins.NO;
+
 
 -- 강의 배정
 -- 과목, 강사, 교재 정보를 강의 테이블에 등록하는 행위
