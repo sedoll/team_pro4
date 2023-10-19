@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path" value="<%=request.getContextPath() %>" />
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,21 +82,23 @@
         <div class="container">
             <div  id="search_from">
                 <select name="select_filter" id="select_filter">
-                    <option value="0">#</option>
                     <option value="1">과목</option>
                     <option value="2">학년</option>
                     <option value="3">제목</option>
+                    <option value="6">상태</option>
                 </select>
                 <input type="text" name="search_filter" id="search_filter">
             </div>
             <table id="myTable">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>프로필</th>
                     <th>과목</th>
                     <th>학년</th>
                     <th>제목</th>
                     <th>조회수</th>
+                    <th>수강인원</th>
+                    <th>상태</th>
                     <th>비고</th>
                 </tr>
                 </thead>
@@ -119,19 +121,32 @@
                             <p>${pro.cnt}</p>
                         </td>
                         <td>
+                            <p>${pro.lec} / ${pro.lec_max}</p>
+                        </td>
+                        <td>
+                            <c:if test="${pro.lec == pro.lec_max}">
+                                <p style="color: red">수강불가</p>
+                            </c:if>
+                            <c:if test="${pro.lec < pro.lec_max}">
+                                <p style="color: #3273dc">수강가능</p>
+                            </c:if>
+                        </td>
+                        <td>
                             <c:if test="${not empty sid}">
                                 <c:set var="isLiked" value="${likedProductIds.contains(pro.no)}" />
-                                <a href="${path }/payment/addPayment.do?lec_no=${pro.no }" class="button is-link is-outlined">수강신청</a>
-                                <a href="${path }/cart/cartInsert.do?lec_no=${pro.no }" class="button is-link is-outlined">장바구니</a>
-                                <c:choose>
-                                    <c:when test="${isLiked }">
-                                        <%-- 눌러도 새로고침 안되게 처리 ///                         현재 로그인한 사용자 ID                 pro.no을 저장하기 위한 역할 --%>
-                                        <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="button is-link is-outlined" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="button is-link is-outlined" data-product-id="${pro.no}"  style="color: #b4b4b4">♥</a>
-                                    </c:otherwise>
-                                </c:choose>
+                                <c:if test="${pro.lec < pro.lec_max}">
+                                    <a href="${path }/payment/addPayment.do?lec_no=${pro.no }" class="button is-link is-outlined">수강신청</a>
+                                    <a href="${path }/cart/cartInsert.do?lec_no=${pro.no }" class="button is-link is-outlined">장바구니</a>
+                                    <c:choose>
+                                        <c:when test="${isLiked }">
+                                            <%-- 눌러도 새로고침 안되게 처리 ///                         현재 로그인한 사용자 ID                 pro.no을 저장하기 위한 역할 --%>
+                                            <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="button is-link is-outlined" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="button is-link is-outlined" data-product-id="${pro.no}"  style="color: #b4b4b4">♥</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
                             </c:if>
                             <c:if test="${sid eq 'admin'}">
                                 <a href="${path }/lecture/updateLectureForm.do?no=${pro.no }" class="button is-link is-outlined">수정</a>
