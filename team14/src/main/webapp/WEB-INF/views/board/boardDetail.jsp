@@ -17,6 +17,11 @@
 
     <!-- 플러그인 연결-->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <%-- cleditor --%>
+    <script type="text/javascript" src="${path}/resources/cleditor/jquery.cleditor.js"></script>
+    <link rel="stylesheet" href="${path}/resources/cleditor/jquery.cleditor.css">
+
     <!-- datatables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>

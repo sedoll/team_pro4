@@ -151,7 +151,7 @@ public class MemberRepositoryImpl implements MemberRepository {
         sqlSession.update("member.updateAuthStatus", map);
     }
 
-
+    //내가 신고한 게시글
     @Override
     public List<Board> myReportList(String id) throws Exception {
         return sqlSession.selectList("member.myReportList",id);
@@ -170,6 +170,26 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public void parReportCancel(int bno) throws Exception {
         sqlSession.delete("member.parReportCancel", bno);
+    }
+
+    //내가 추천한 게시글
+    @Override
+    public List<BoardLikes> myLikeList(String id) throws Exception {
+        return sqlSession.selectList("member.myLikeList",id);
+    }
+    @Override
+    public void boardLikeRemove(int bno) throws Exception {
+        sqlSession.delete("member.boardLikeRemove", bno);
+    }
+
+    @Override
+    public void teaLikeRemove(int bno) throws Exception {
+        sqlSession.delete("member.teaLikeRemove", bno);
+    }
+
+    @Override
+    public void parLikeRemove(int bno) throws Exception {
+        sqlSession.delete("member.parLikeRemove", bno);
     }
 
     @Override

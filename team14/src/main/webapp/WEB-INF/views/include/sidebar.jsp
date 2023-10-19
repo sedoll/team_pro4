@@ -19,6 +19,11 @@
                 </a>
             </li>
             <li>
+                <a href="${path4}/member/myLikeList.do">
+                    추천한 게시글
+                </a>
+            </li>
+            <li>
                 <a href="${path4}/member/myReportList.do">
                     신고한 게시글
                 </a>

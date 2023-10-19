@@ -757,4 +757,35 @@ public class MemberController {
 
     }
 
+    //추천한 게시글 목록
+    @GetMapping("myLikeList.do")
+    public String myLikeList(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        List<BoardLikes> boardList = memberService.myLikeList(id);
+        model.addAttribute("likeList", boardList);
+        System.out.println(boardList.toString());
+        return "/member/myPage/myLikeList";
+    }
+
+    @GetMapping("myLikeRemove.do")
+    public String myLikeRemove(HttpServletRequest request, Model model) throws Exception {
+        String id = request.getParameter("id");
+        int bno = Integer.parseInt(request.getParameter("bno"));
+        String category = request.getParameter("category");
+
+        if (category.equals("board")) {
+            memberService.boardLikeRemove(bno);
+            return "redirect:myLikeList.do";
+        } else if (category.equals("boardTea")) {
+            memberService.teaLikeRemove(bno);
+            return "redirect:myLikeList.do";
+        } else if (category.equals("boardPar")) {
+            memberService.parLikeRemove(bno);
+            return "redirect:myLikeList.do";
+        } else {
+            return "redirect:myLikeList.do";
+        }
+
+    }
+
 }

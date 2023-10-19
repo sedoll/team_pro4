@@ -17,4 +17,6 @@ public class Board {
     private String report_date;
     private int report_count;
     private String board_type;
+    private String liketime;
+    private int like_count;
 }

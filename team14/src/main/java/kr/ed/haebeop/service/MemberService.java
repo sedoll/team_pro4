@@ -1,9 +1,6 @@
 package kr.ed.haebeop.service;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.BoardlistVO;
-import kr.ed.haebeop.domain.CommentlistVO;
-import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -49,6 +46,12 @@ public interface MemberService {
     public  void boardReportCancel(int bno) throws Exception;
     public  void teaReportCancel(int bno) throws Exception;
     public  void parReportCancel(int bno) throws Exception;
+
+    //내가 추천한 게시글
+    public List<BoardLikes> myLikeList(String id) throws Exception;
+    public void boardLikeRemove(int bno) throws Exception;
+    public  void teaLikeRemove(int bno) throws Exception;
+    public  void parLikeRemove(int bno) throws Exception;
 
     //이메일 가져오기
     public Member getMemberEmail (String email) throws Exception;

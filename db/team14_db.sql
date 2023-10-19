@@ -434,7 +434,7 @@ CREATE TABLE payment(
 	FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
 );
 
--- 추천(좋아요) 기능 테이
+-- 추천(좋아요) 기능 테이블
 create table boardlikes (
     userid VARCHAR(20) NOT NULL,      -- 사용자 ID
     boardno INT NOT NULL,           -- 게시글 no 
