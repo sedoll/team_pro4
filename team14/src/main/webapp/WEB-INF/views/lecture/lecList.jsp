@@ -222,9 +222,6 @@
                         $table.columns(Number($('#select_filter').val())).search($value).draw();
                     })
                 });
-                $(document).ready(function() {
-                });
-
             </script>
             <div class="btn_group">
                 <c:if test="${sid eq 'admin' }">
