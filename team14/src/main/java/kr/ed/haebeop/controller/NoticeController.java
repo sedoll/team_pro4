@@ -103,7 +103,7 @@ public class NoticeController {
 
             //이미지 경로 생성
 //            String path = "D:\\kim\\spring1\\pro31\\src\\main\\webapp\\resources\\upload" + "ckImage/";	// 이미지 경로 설정(폴더 자동 생성)
-            String path = "D:\\team_pro3\\team13\\src\\main\\webapp\\resources\\upload" + "ckImage/";
+            String path = "D:\\team_pro4\\team14\\src\\main\\webapp\\resources\\upload" + "ckImage/";
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
             System.out.println("path:"+path);	// 이미지 저장경로 console에 확인
