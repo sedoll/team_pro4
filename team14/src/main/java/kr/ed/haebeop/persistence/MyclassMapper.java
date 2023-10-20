@@ -9,6 +9,9 @@ import java.util.List;
 @Mapper
 public interface MyclassMapper {
 
+    @Select("SELECT * FROM myclass;")
+    public List<MyClassVO> myclassList();
+
     @Select("SELECT * FROM myclass WHERE id = #{id};")
     public List<MyClassVO> getMyclassList(String id);
 }

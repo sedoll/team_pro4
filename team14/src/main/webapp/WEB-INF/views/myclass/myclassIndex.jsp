@@ -66,6 +66,16 @@
                                 </div>
 
 
+                                <div class="lecday" style="width: 10%;">
+                                    <script>
+                                        var lecStartDate = new Date("${myclass.lecStudystart}");
+                                        var lecEndDate = new Date("${myclass.lecStudyend}");
+                                        var formattedStartDate = lecStartDate.toLocaleDateString();
+                                        var formattedEndDate = lecEndDate.toLocaleDateString();
+                                        document.write(formattedStartDate + " - <br>" + formattedEndDate);
+                                    </script>
+                                </div>
+
                                 <c:set var="Ddays" value="${myclass.myclassMap.Ddays}" />
                                 <div class="deaddate" style="width: 10%">
                                     <c:choose>

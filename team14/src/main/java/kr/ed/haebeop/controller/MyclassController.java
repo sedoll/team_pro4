@@ -8,8 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,8 +43,15 @@ public class MyclassController {
     @Autowired
     HttpSession session;
 
+    @GetMapping("myclassList.do")		// board/list.do
+    public String myclassList(Model model) throws Exception {
+        List<MyClassVO> myclassList= myclassService.myclassList();
+        model.addAttribute("myclassList", myclassList);
+        return "/myclass/";
+    }
 
-    // 수강 중인 강의 리스트 가져오기
+
+    // 해당회원이 수강 중인 강의 리스트 가져오기
     @RequestMapping("myclassIndex.do")
     public String myclassIndex(Model model) throws Exception {
         DateCalculator dateCalculator = new DateCalculator();
@@ -110,9 +120,16 @@ public class MyclassController {
 
 
     // 수강신청한 강좌 디테일
-    @RequestMapping(value = "/myclassDetail", method = RequestMethod.GET)
-    public String myclassDetail(Model model, HttpServletRequest req) {
+    @RequestMapping(value = "/myclassDetail.do", method = RequestMethod.GET)
+    public String myclassDetail(Model model, HttpServletRequest req) throws Exception {
         int no = Integer.parseInt(req.getParameter("no"));
+        String id = (String) session.getAttribute("sid");
+        List<MyClassVO> myclassList = myclassService.getMyclassList(id);
+
+        /* 1. 강의소개 메뉴 */
+        /* 2. 강의목차 메뉴 */
+
+        model.addAttribute("myclassList", myclassList);
 
         // region 강좌 목차 기능 부분
         String id = (String) session.getAttribute("sid");
@@ -178,13 +195,27 @@ public class MyclassController {
     }
 
 
-    // 강좌안에 강의목차 리스트
-    @RequestMapping(value = "/myclassDetailList", method = RequestMethod.GET)
-    public String myclassList(Model model, HttpServletRequest req) {
+    /* 1. 강의소개 메뉴 */
+    @RequestMapping(value = "/myclassDetail/myclassIntro.do", method = RequestMethod.GET)
+    public String myclassIntro(Model model, HttpServletRequest req , RedirectAttributes rattr) throws Exception {
         int no = Integer.parseInt(req.getParameter("no"));
+        String id = (String) session.getAttribute("sid");
+        List<MyClassVO> myclassList = myclassService.getMyclassList(id);
+        //model.addAttribute("myclassList", myclassList);
 
-        return "myclass/myclassDetailList";
+        // 데이터를 전달합니다.
+        rattr.addFlashAttribute("myclassList", myclassList);
+
+        // 리다이렉트할 경로를 반환합니다.
+        return "redirect:/myclass/myclassIntro";
     }
+
+    @RequestMapping("/myclass/myclassIntro")
+    public ModelAndView intro(HttpServletRequest request){
+
+        return
+    }
+
 
     // 강의 영상 보기
     @RequestMapping(value = "/getLecVideo", method = RequestMethod.GET)

@@ -111,14 +111,12 @@ public class PaymentController {
         model.addAttribute("payList", payList);
         return "/member/myPage/paymentList";
     }
-    
+
     // 강의 구매 확정
     @GetMapping("buyPayment.do")
     public String buyPayment(HttpServletRequest req, Model model) throws Exception {
         int sno = Integer.parseInt(req.getParameter("sno"));
-
         DateCalculator dateCalculator = new DateCalculator();
-
         Member member = new Member();
         String id = (String) session.getAttribute("sid");
         int pt = (int) Double.parseDouble(req.getParameter("pt"));
@@ -126,9 +124,7 @@ public class PaymentController {
         member.setPt(pt);
 
         paymentService.buyPayemnt(sno);
-
         Payment payment = paymentService.getPayment(sno);
-
         String buyDate = payment.getBuydate(); // 사용자가 강의를 구매한 날
         Lecture lec = lectureService.getLecture(payment.getLec_no());
         int endDay = lec.getEndDay(); // 강의 정보에 게시된 수강일

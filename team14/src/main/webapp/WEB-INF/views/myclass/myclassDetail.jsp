@@ -83,11 +83,85 @@
                     <label for="tab6">자료실</label>
 
 
-                    <%--강좌 소개--%>
-                    <div id="ud_tab-content1" class="ud_content">
-                        <%--<h5> 강좌 소개 </h5>--%>
-                        <table>
+                <%--강의 소개--%>
+                <jsp:include page="myclassIntro.jsp"></jsp:include>
 
+
+
+
+
+
+                <%--강의 목차--%>
+                <div id="ud_tab-content2" class="ud_content">
+                    <%-- <tr>
+                            <th style="width: 10%">학습상태</th>
+                            <th style="width: 65%; text-align: center">수강기간</th>
+                            <th style="width: 25%; text-align: center">수강 일시정지 기간</th>
+                            <th style="width: 25%; text-align: center">진도율</th>
+                        </tr>
+
+                    <%--<h5> 강의 목차 </h5>--%>
+                    <table>
+                        <thead>
+
+                        <tr>
+                            <th style="width: 10%">순번</th>
+                            <th style="width: 50%; text-align: center">강의명</th>
+                            <th style="width: 10%; text-align: center">강의 시간</th>
+                            <th style="width: 10%; text-align: center">최근 학습일</th>
+                            <th style="width: 10%; text-align: center">학습 완료</th>
+                            <th style="width: 10%; text-align: center">학습 하기</th>
+                        </tr>
+                        </thead>
+
+                        <%-- <tbody>
+                         <c:forEach items="${board_comlist }" var="board_comlist">
+                             <tr class = "commentlist">
+                                 <td>${board_comlist.content}</td>
+                                 <td>${board_comlist.write_date}</td>
+                                 <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                             </tr>
+
+                         </c:forEach>
+                         </tbody>--%>
+                    </table>
+                </div>
+
+                <%--공지사항--%>
+                <div id="ud_tab-content3" class="ud_content">
+
+                    <%--<h5> 공지사항 </h5>--%>
+                    <table>
+                        공지사항 페이지 입니다
+
+                        <thead>
+
+                        <tr>
+                            <th style="width: 10%"></th>
+                            <th style="width: 65%; text-align: center"></th>
+                            <th style="width: 25%; text-align: center"></th>
+                            <th style="width: 25%; text-align: center"></th>
+                        </tr>
+
+                        </thead>
+
+                        <%-- <tbody>
+                         <c:forEach items="${board_comlist }" var="board_comlist">
+                             <tr class = "commentlist">
+                                 <td>${board_comlist.content}</td>
+                                 <td>${board_comlist.write_date}</td>
+                                 <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                             </tr>
+
+                         </c:forEach>
+                         </tbody>--%>
+                    </table>
+
+                    <%--QnA--%>
+                    <div id="ud_tab-content4" class="ud_content">
+
+                        <%--<h5> 수강 후기 </h5>--%>
+                        <table>
                             강좌 소개 페이지 입니다
                             <thead>
                             <tr>
@@ -229,6 +303,66 @@
                         </table>
                     </div>
 
+                    <%--수강 후기--%>
+                    <div id="ud_tab-content5" class="ud_content">
+
+                        <%--<h5> 수강 후기 </h5>--%>
+                        <table>
+                            수강 후기 페이지 입니다
+                            <thead>
+
+                            <tr>
+                                <th style="width: 10%"></th>
+                                <th style="width: 65%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                            </tr>
+
+                            </thead>
+
+                            <%-- <tbody>
+                             <c:forEach items="${board_comlist }" var="board_comlist">
+                                 <tr class = "commentlist">
+                                     <td>${board_comlist.content}</td>
+                                     <td>${board_comlist.write_date}</td>
+                                     <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                                 </tr>
+
+                             </c:forEach>
+                             </tbody>--%>
+                        </table>
+                    </div>
+
+                    <%--자료실--%>
+                    <div id="ud_tab-content6" class="ud_content">
+
+                        <%--<h5> 자료실 </h5>--%>
+                        <table>
+                            자료실 페이지 입니다
+                            <thead>
+
+                            <tr>
+                                <th style="width: 10%"></th>
+                                <th style="width: 65%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                            </tr>
+
+                            </thead>
+
+                            <%-- <tbody>
+                             <c:forEach items="${board_comlist }" var="board_comlist">
+                                 <tr class = "commentlist">
+                                     <td>${board_comlist.content}</td>
+                                     <td>${board_comlist.write_date}</td>
+                                     <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                                 </tr>
+
+                             </c:forEach>
+                             </tbody>--%>
+                        </table>
+                    </div>
+
                     <%--QnA--%>
                     <div id="ud_tab-content4" class="ud_content">
 
@@ -319,9 +453,12 @@
                         </table>
                     </div>
                 </div>
-            </form>
+
+
         </div>
+
     </div>
+</div>
 </div>
 
 <%-- 강의 창 띄울때 사이즈 조절하는 js 코드 --%>
