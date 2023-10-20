@@ -2,6 +2,8 @@ package kr.ed.haebeop.domain;
 
 import lombok.*;
 
+import java.util.Map;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,9 +20,6 @@ public class MyClassVO {
     String insName; // 강사이름
     int ck; // 1.수강중 , 2.수강정지, 3.수강취소
 
-
-
-
-
+    private Map<String, Object> myclassMap; // 남은일수, 수강상태(string)
 
 }

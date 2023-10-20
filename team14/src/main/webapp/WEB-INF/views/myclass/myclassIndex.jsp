@@ -54,23 +54,27 @@
                                 <div class="lectitle" style="width: 40%">${myclass.lecTitle }</div>
                                 <div class="insName" style="width: 10%">${myclass.insName }</div>
                                 <div class="lecday" style="width: 10%;">${myclass.lecStudystart} -
-                                    <br> ${myclass.lecStudyend }</div>
-                                <c:if test="${Ddays >= 0}">
-                                    <div class="deaddate" style="width: 10%">${Ddays}일</div>
-                                </c:if>
-                                <c:if test="${Ddays < 0}">
-                                    <div class="deaddate" style="width: 10%">기간만료</div>
-                                </c:if>
+                                    <br> ${myclass.lecStudyend }
+                                </div>
+
+
+                                <c:set var="Ddays" value="${myclass.myclassMap.Ddays}" />
+                                <div class="deaddate" style="width: 10%">
+                                    <c:choose>
+                                        <c:when test="${Ddays >= 0}">${Ddays}일</c:when>
+                                        <c:when test="${Ddays < 0}">기간만료</c:when>
+                                    </c:choose>
+                                </div>
+
+
+                                <c:set var="check" value="${myclass.myclassMap.ck}" />
                                 <div class="check" style="width: 10%">${check}</div>
+
                                 <div class="study" style="width: 10%">
-                                    <%--<button type="button"
-                                            onclick="location.href='${path14}/myclass/getLecVideo?no=${myclass.lec_no}' ">
+                                    <button type="button" class="button is-info"
+                                            onclick="location.href='${path14}/myclass/myclassDetail?no=${myclass.lec_no}' ">
                                         학습
-                                    </button>--%>
-                                        <button type="button" class="button is-info"
-                                                onclick="location.href='${path14}/myclass/myclassDetail?no=${myclass.lec_no}' ">
-                                            학습
-                                        </button>
+                                    </button>
                                 </div>
                             </div>
 

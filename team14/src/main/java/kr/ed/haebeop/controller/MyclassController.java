@@ -20,7 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -72,7 +74,7 @@ public class MyclassController {
 
             Ddays = (int) (calculate / ( 24*60*60*1000));
 
-            System.out.println("현재 날짜와 수강 마지막 날까지 차이일 : " + Ddays);
+            System.out.println(myClass.getLecTitle()+ " : 남은 기간: " + Ddays);
 
 
             Course course = new Course();
@@ -84,7 +86,12 @@ public class MyclassController {
                 courseService.checkUpdate(course);
             }
 
+
+            System.out.println(myClass);
+
             int check = myClass.getCk();
+
+            System.out.println(check);
 
             if(check == 1){
                 ck = "수강 중";
@@ -93,12 +100,16 @@ public class MyclassController {
             }else if(check == 3){
                 ck = "수강 완료";
             }
+
+            Map<String, Object> myclassMap = new HashMap<>();
+            myclassMap.put("Ddays", Ddays);
+            myclassMap.put("ck", ck);
+
+            System.out.println(myclassList);
+            System.out.println(myclassMap);
+            model.addAttribute("myclassList", myclassList);
+            myClass.setMyclassMap(myclassMap);
         }
-
-        model.addAttribute("Ddays" , Ddays);
-        model.addAttribute("check", ck);
-        model.addAttribute("myclassList", myclassList);
-
         return "/myclass/myclassIndex";
     }
 
