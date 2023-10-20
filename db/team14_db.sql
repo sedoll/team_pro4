@@ -451,9 +451,12 @@ CREATE TABLE payment(
 	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 결제 일
 	buydate TIMESTAMP, -- 구매 확정 일
 	pt int, -- 결제 하면서 사용한 포인트
+	enddate TIMESTAMP, -- 수강일 한도
 	FOREIGN KEY(lec_no) REFERENCES lecture(NO),
 	FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
 );
+
+ALTER table payment ADD COLUMN enddate TIMESTAMP;
 
 -- 추천(좋아요) 기능 테이
 create table boardlikes (
@@ -478,26 +481,26 @@ CREATE TABLE course(
 
 -- myclass 뷰테이블 추가 (나의 학습방 데이터) 
 -- myclass 뷰 생성
--- DROP VIEW myclass; 
-CREATE VIEW myclass  AS
-SELECT 
-    c.sid AS id, 
-    c.lec_no AS lec_no, 
+DROP VIEW myclass; 
+CREATE VIEW myclass AS
+SELECT DISTINCT
+    p.id AS id, 
+    p.lec_no AS lec_no, 
     l.cate AS lecCate, 
     l.title AS lecTitle, 
-    l.studystart AS lecStudystart, 
-    l.studyend AS lecStudyend,  
-    ins.name AS insName,
-   c.CHECK1 AS ck
+    p.buydate AS lecStudystart, 
+    p.enddate AS lecStudyend,  
+    ins.NAME AS insName,
+    c.CHECK1 AS ck
 FROM 
-    course c   
-JOIN
-	member m ON c.sid = m.id	   
+    course c
 JOIN 
-   lecture l ON c.lec_no = l.NO     
+    lecture l ON c.lec_no = l.NO     
 JOIN 
-   instructor ins ON l.ino = ins.NO;
-
+    instructor ins ON l.ino = ins.NO
+LEFT JOIN
+    payment p ON p.lec_no = l.NO
+WHERE p.id IS NOT NULL;
 
 -- 강의 배정
 -- 과목, 강사, 교재 정보를 강의 테이블에 등록하는 행위

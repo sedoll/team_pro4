@@ -23,17 +23,43 @@
     <link rel="stylesheet" href="${path13}/resources/css/myPage/baseLayout.css"/>
     <link rel="stylesheet" href="${path13}/resources/css/myPage/validateUser.css"/>
     <link href="${path13}/resources/css/myStudy/com_write.css" rel="stylesheet">
-    <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>
+    <%--    <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>--%>
 
     <title>강의 상세보기</title>
 
+    <style>
+        #search_from {
+            text-align: right;
+            font-size: 18px;
+            margin-bottom: 20px; /* 아래쪽 여백 추가 */
+        }
 
+        #select_filter {
+            padding: 5px; /* 셀렉트 박스 내부 패딩 추가 */
+            border: 1px solid #ccc; /* 테두리 추가 */
+            border-radius: 5px; /* 테두리 둥글게 만듭니다. */
+            margin-right: 10px; /* 셀렉트 박스 오른쪽 여백 추가 */
+            font-size: 16px; /* 폰트 크기 조정 */
+        }
+
+        #search_filter {
+            padding: 5px; /* 입력 필드 내부 패딩 추가 */
+            border: 1px solid #ccc; /* 테두리 추가 */
+            border-radius: 5px; /* 테두리 둥글게 만듭니다. */
+            font-size: 16px; /* 폰트 크기 조정 */
+        }
+
+        /* 선택된 셀렉트 박스 옵션 스타일 */
+        #select_filter option:checked {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-
 <div class="wrap">
     <jsp:include page="../include/header.jsp"></jsp:include>
-    <%@ include file="/WEB-INF/views/myclass/myclassTopbar.jsp" %>
+    <jsp:include page="./myclassTopbar.jsp"></jsp:include>
 
     <div class="content-wrap" style="display: flex;justify-content: center;">
         <div class="content-section">
@@ -67,7 +93,7 @@
                             <tr>
                                 <th style="width: 10%"></th>
                                 <th style="width: 65%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center">/th>
+                                <th style="width: 25%; text-align: center"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -91,39 +117,86 @@
 
                     <%--강의 목차--%>
                     <div id="ud_tab-content2" class="ud_content">
-                        <%-- <tr>
-                                <th style="width: 10%">학습상태</th>
-                                <th style="width: 65%; text-align: center">수강기간</th>
-                                <th style="width: 25%; text-align: center">수강 일시정지 기간</th>
-                                <th style="width: 25%; text-align: center">진도율</th>
-                            </tr>
-
+                        <tr>
+                            <th style="width: 10%">학습상태</th>
+                            <th style="width: 65%; text-align: center">수강기간</th>
+                            <th style="width: 25%; text-align: center">수강 일시정지 기간</th>
+                            <th style="width: 25%; text-align: center">진도율</th>
+                        </tr>
                         <%--<h5> 강의 목차 </h5>--%>
-                        <table>
+                        <div id="search_from2">
+                            <select name="select_filter2" id="select_filter2">
+                                <option value="0">강의번호</option>
+                                <option value="1">강의명</option>
+                                <option value="2">작성자</option>
+                                <option value="3">내용</option>
+                            </select>
+                            <input type="text" name="search_filter2" id="search_filter2">
+                        </div>
+                        <table id="myTable2" class="table">
                             <thead>
 
-                                <tr>
-                                    <th style="width: 10%">순번</th>
-                                    <th style="width: 50%; text-align: center">강의명</th>
-                                    <th style="width: 10%; text-align: center">강의 시간</th>
-                                    <th style="width: 10%; text-align: center">최근 학습일</th>
-                                    <th style="width: 10%; text-align: center">학습 완료</th>
-                                    <th style="width: 10%; text-align: center">학습 하기</th>
-                                </tr>
+                            <tr>
+                                <th style="width: 10%">순번</th>
+                                <th style="width: 50%; text-align: center">강의명</th>
+                                <th style="width: 10%; text-align: center">강의 과목</th>
+                                <th style="width: 10%; text-align: center">강사</th>
+                                <th style="width: 10%; text-align: center">시간</th>
+<%--                                <th style="width: 10%; text-align: center">최근 학습일</th>--%>
+<%--                                <th style="width: 10%; text-align: center">학습 완료</th>--%>
+                                <th style="width: 10%; text-align: center">학습 하기</th>
+                            </tr>
                             </thead>
-
-                            <%-- <tbody>
-                             <c:forEach items="${board_comlist }" var="board_comlist">
-                                 <tr class = "commentlist">
-                                     <td>${board_comlist.content}</td>
-                                     <td>${board_comlist.write_date}</td>
-                                     <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                 </tr>
-
-                             </c:forEach>
-                             </tbody>--%>
+                            <tbody>
+                                <c:forEach var="video" items="${videoList }" varStatus="status">
+                                    <tr>
+                                        <td>${status.count}</td>
+                                        <td>${video}</td>
+                                        <td>${lecture.cate }</td>
+                                        <td>${inst.name }</td>
+    <%--                                    <td>${vtl.get(status.index)} 초</td>--%>
+                                        <td>
+                                            <a href="javascript:void(0);" onclick="openVideoWindow('${path13}/lecture/getLecVideo?sfile=${videoList2.get(status.index)}')" target="_blank">학습</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                     </div>
+                    <script>
+                        $(document).ready( function () {
+                            let $table = $('#myTable2').DataTable({
+                                //search 창 오른쪽 상단으로 이동
+                                "dom": '<"top"i>rt<"bottom"flp><"clear">',
+
+                                pageLength : 5,
+                                order: [[2, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
+                                info: false,
+                                lengthChange: false, // show entries 제거
+                                language: {
+                                    emptyTable: '등록된 리뷰(이)가 없습니다.'
+                                }
+                            });
+
+                            $('.dataTables_paginate').css({
+                                'textAlign':'center',
+                                'float': 'none',
+                                'margin-top':'10px',
+                            });
+
+                            $('.dataTables_filter').remove();  // dataTable 자체 search input 없애기
+
+                            $('#select_filter2').change(function () { // select 선택값에 따라  해당 선택 열 input이 검색하는곳 변경
+                                $table.columns('').search('').draw();
+                                $table.columns(Number($('#select_filter2').val())).search($('#search_filter2').val()).draw();
+                            });
+
+                            $('#search_filter2').keyup(function () { //input의 값대로 search
+                                let $value = $(this).val();
+                                $table.columns(Number($('#select_filter2').val())).search($value).draw();
+                            })
+                        });
+                    </script>
 
                     <%--공지사항--%>
                     <div id="ud_tab-content3" class="ud_content">
@@ -154,108 +227,115 @@
                              </c:forEach>
                              </tbody>--%>
                         </table>
-
-                        <%--QnA--%>
-                        <div id="ud_tab-content4" class="ud_content">
-
-                            <%--<h5> 수강 후기 </h5>--%>
-                            <table>
-                                QnA 페이지 입니다
-                                <thead>
-
-                                <tr>
-                                    <th style="width: 10%"></th>
-                                    <th style="width: 65%; text-align: center"></th>
-                                    <th style="width: 25%; text-align: center"></th>
-                                    <th style="width: 25%; text-align: center"></th>
-                                </tr>
-
-                                </thead>
-
-                                <%-- <tbody>
-                                 <c:forEach items="${board_comlist }" var="board_comlist">
-                                     <tr class = "commentlist">
-                                         <td>${board_comlist.content}</td>
-                                         <td>${board_comlist.write_date}</td>
-                                         <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                     </tr>
-
-                                 </c:forEach>
-                                 </tbody>--%>
-                            </table>
-                        </div>
-
-                        <%--수강 후기--%>
-                        <div id="ud_tab-content5" class="ud_content">
-
-                            <%--<h5> 수강 후기 </h5>--%>
-                            <table>
-                                수강 후기 페이지 입니다
-                                <thead>
-
-                                <tr>
-                                    <th style="width: 10%"></th>
-                                    <th style="width: 65%; text-align: center"></th>
-                                    <th style="width: 25%; text-align: center"></th>
-                                    <th style="width: 25%; text-align: center"></th>
-                                </tr>
-
-                                </thead>
-
-                                <%-- <tbody>
-                                 <c:forEach items="${board_comlist }" var="board_comlist">
-                                     <tr class = "commentlist">
-                                         <td>${board_comlist.content}</td>
-                                         <td>${board_comlist.write_date}</td>
-                                         <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                     </tr>
-
-                                 </c:forEach>
-                                 </tbody>--%>
-                            </table>
-                        </div>
-
-                        <%--자료실--%>
-                        <div id="ud_tab-content6" class="ud_content">
-
-                            <%--<h5> 자료실 </h5>--%>
-                            <table>
-                                자료실 페이지 입니다
-                                <thead>
-
-                                <tr>
-                                    <th style="width: 10%"></th>
-                                    <th style="width: 65%; text-align: center"></th>
-                                    <th style="width: 25%; text-align: center"></th>
-                                    <th style="width: 25%; text-align: center"></th>
-                                </tr>
-
-                                </thead>
-
-                                <%-- <tbody>
-                                 <c:forEach items="${board_comlist }" var="board_comlist">
-                                     <tr class = "commentlist">
-                                         <td>${board_comlist.content}</td>
-                                         <td>${board_comlist.write_date}</td>
-                                         <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                     </tr>
-
-                                 </c:forEach>
-                                 </tbody>--%>
-                            </table>
-                        </div>
-
-
                     </div>
 
+                    <%--QnA--%>
+                    <div id="ud_tab-content4" class="ud_content">
 
+                        <%--<h5> 수강 후기 </h5>--%>
+                        <table>
+                            QnA 페이지 입니다
+                            <thead>
+
+                            <tr>
+                                <th style="width: 10%"></th>
+                                <th style="width: 65%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                            </tr>
+
+                            </thead>
+
+                            <%-- <tbody>
+                             <c:forEach items="${board_comlist }" var="board_comlist">
+                                 <tr class = "commentlist">
+                                     <td>${board_comlist.content}</td>
+                                     <td>${board_comlist.write_date}</td>
+                                     <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                                 </tr>
+
+                             </c:forEach>
+                             </tbody>--%>
+                        </table>
+                    </div>
+
+                    <%--수강 후기--%>
+                    <div id="ud_tab-content5" class="ud_content">
+
+                        <%--<h5> 수강 후기 </h5>--%>
+                        <table>
+                            수강 후기 페이지 입니다
+                            <thead>
+
+                            <tr>
+                                <th style="width: 10%"></th>
+                                <th style="width: 65%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                            </tr>
+
+                            </thead>
+
+                            <%-- <tbody>
+                             <c:forEach items="${board_comlist }" var="board_comlist">
+                                 <tr class = "commentlist">
+                                     <td>${board_comlist.content}</td>
+                                     <td>${board_comlist.write_date}</td>
+                                     <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                                 </tr>
+
+                             </c:forEach>
+                             </tbody>--%>
+                        </table>
+                    </div>
+
+                    <%--자료실--%>
+                    <div id="ud_tab-content6" class="ud_content">
+
+                        <%--<h5> 자료실 </h5>--%>
+                        <table>
+                            자료실 페이지 입니다
+                            <thead>
+
+                            <tr>
+                                <th style="width: 10%"></th>
+                                <th style="width: 65%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                                <th style="width: 25%; text-align: center"></th>
+                            </tr>
+
+                            </thead>
+
+                            <%-- <tbody>
+                             <c:forEach items="${board_comlist }" var="board_comlist">
+                                 <tr class = "commentlist">
+                                     <td>${board_comlist.content}</td>
+                                     <td>${board_comlist.write_date}</td>
+                                     <td><button type="button" class ="origin" onclick="location.href='${path13}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
+                                 </tr>
+
+                             </c:forEach>
+                             </tbody>--%>
+                        </table>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<%-- 강의 창 띄울때 사이즈 조절하는 js 코드 --%>
+<script>
+    function openVideoWindow(url) {
+        var width = 800;
+        var height = 400;
+        var left = (window.innerWidth - width) / 2;
+        var top = (window.innerHeight - height) / 2;
 
+        window.open(url, 'VideoPlayer', 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+    }
+</script>
+<script src="/resources/js/myStudy/myclassDetail.js"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

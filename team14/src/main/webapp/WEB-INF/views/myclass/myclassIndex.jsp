@@ -53,8 +53,16 @@
                                 <div class="leccate" style="width: 10%">${myclass.lecCate }</div>
                                 <div class="lectitle" style="width: 40%">${myclass.lecTitle }</div>
                                 <div class="insName" style="width: 10%">${myclass.insName }</div>
-                                <div class="lecday" style="width: 10%;">${myclass.lecStudystart} -
-                                    <br> ${myclass.lecStudyend }
+                                <div class="lecday" style="width: 10%;">
+                                    <script>
+                                        var lecStartDate = new Date("${myclass.lecStudystart}");
+                                        var lecEndDate = new Date("${myclass.lecStudyend}");
+
+                                        var formattedStartDate = lecStartDate.toLocaleDateString();
+                                        var formattedEndDate = lecEndDate.toLocaleDateString();
+
+                                        document.write(formattedStartDate + " - <br>" + formattedEndDate);
+                                    </script>
                                 </div>
 
 

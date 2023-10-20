@@ -346,6 +346,7 @@
     <footer class="ft" id="ft">
         <%@ include file="../include/footer.jsp" %>
     </footer>
+    <script src="/resources/js/vdo.js"></script>
 </div>
 </body>
 </html>

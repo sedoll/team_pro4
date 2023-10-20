@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.DateCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -116,13 +117,25 @@ public class PaymentController {
     public String buyPayment(HttpServletRequest req, Model model) throws Exception {
         int sno = Integer.parseInt(req.getParameter("sno"));
 
+        DateCalculator dateCalculator = new DateCalculator();
+
         Member member = new Member();
         String id = (String) session.getAttribute("sid");
         int pt = (int) Double.parseDouble(req.getParameter("pt"));
         member.setId(id);
         member.setPt(pt);
+
         paymentService.buyPayemnt(sno);
+
+        Payment payment = paymentService.getPayment(sno);
+
+        String buyDate = payment.getBuydate(); // 사용자가 강의를 구매한 날
+        Lecture lec = lectureService.getLecture(payment.getLec_no());
+        int endDay = lec.getEndDay(); // 강의 정보에 게시된 수강일
+        String endDate = dateCalculator.endDays(buyDate, endDay); // 마지막 날 구하기
+        payment.setEnddate(endDate);
         memberService.memberPoint(member);
+        paymentService.updateEndPayment(payment);
         return "redirect:/payment/paymentList.do";
     }
     

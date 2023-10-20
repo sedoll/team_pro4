@@ -80,8 +80,8 @@ public class LectureController {
         lecture.setEndDay(Integer.parseInt(files.getParameter("endDay")));
 
         // 개발 서버 파일 저장 경로
-        String uploadDir = "D:/spring_study/pro04/src/main/webapp/resources/upload/"; // 회사
-        // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
+         String uploadDir = "D:/team_pro4/team14/src/main/webapp/resources/upload/"; // 회사
+//         String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
         // 실제 서버 파일 저장 경로
         String uploadSev = req.getRealPath("/resources/upload/");
 
@@ -278,8 +278,8 @@ public class LectureController {
     }
 
     // 강의 영상 보기
-    @RequestMapping(value = "/getLecVideo", method = RequestMethod.GET)
-    public String getLecture(Model model, HttpServletRequest req) {
+    @RequestMapping(value = "/getLecVideo2", method = RequestMethod.GET)
+    public String getLecture2(Model model, HttpServletRequest req) {
         int no = Integer.parseInt(req.getParameter("no"));
         Lecture product = lectureService.getLecture(no); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
         Instructor inst = instService.getInstructorName(product.getIno()); // 강사 번호로 이름 추출
@@ -287,6 +287,14 @@ public class LectureController {
         model.addAttribute("pro", product);
         model.addAttribute("inst", inst);
         return "member/myPage/lecVideo";
+    }
+
+    @RequestMapping(value = "/getLecVideo", method = RequestMethod.GET)
+    public String getLecture(Model model, HttpServletRequest req) {
+        String video = req.getParameter("sfile");
+
+        model.addAttribute("video", video);
+        return "myclass/lecVideo";
     }
 
     // 강의 정보 수정폼 이동
@@ -347,11 +355,19 @@ public class LectureController {
             try {
                 simg.transferTo(new File(uploadDir + RandomFileName));
                 simg.transferTo(new File(uploadSev + RandomFileName));
-                int no2 = lectureService.selectLecFile(lecture2.getSimg());
-                lecFile.setNo(no2);
-                lecFile.setSfile(RandomFileName);
-                lecFile.setRealName(OriginalFilename);
-                lectureService.updateLecFile(lecFile);
+                int check = lectureService.selectLecFileCheck(lecture2.getSimg());
+                if(check > 0) { // 이미 파일이 있는경우
+                    int no2 = lectureService.selectLecFile(lecture2.getSimg());
+                    lecFile.setNo(no2);
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.updateLecFile(lecFile);
+                } else { // 이미 파일이 없는 경우
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.setLecFile(lecFile);
+                    lectureService.updateLecFile(lecFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
@@ -369,11 +385,19 @@ public class LectureController {
             try {
                 sfile1.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile1.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int no2 = lectureService.selectLecFile(lecture2.getSfile1());
-                lecFile.setNo(no2);
-                lecFile.setSfile(RandomFileName);
-                lecFile.setRealName(OriginalFilename);
-                lectureService.updateLecFile(lecFile);
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile1());
+                if(check > 0) { // 이미 파일이 있는경우
+                    int no2 = lectureService.selectLecFile(lecture2.getSfile1());
+                    lecFile.setNo(no2);
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.updateLecFile(lecFile);
+                } else { // 이미 파일이 없는 경우
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.setLecFile(lecFile);
+                    lectureService.updateLecFile(lecFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
@@ -391,11 +415,19 @@ public class LectureController {
             try {
                 sfile2.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile2.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int no2 = lectureService.selectLecFile(lecture2.getSfile2());
-                lecFile.setNo(no2);
-                lecFile.setSfile(RandomFileName);
-                lecFile.setRealName(OriginalFilename);
-                lectureService.updateLecFile(lecFile);
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile2());
+                if(check > 0) { // 이미 파일이 있는경우
+                    int no2 = lectureService.selectLecFile(lecture2.getSfile2());
+                    lecFile.setNo(no2);
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.updateLecFile(lecFile);
+                } else { // 이미 파일이 없는 경우
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.setLecFile(lecFile);
+                    lectureService.updateLecFile(lecFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
@@ -413,11 +445,19 @@ public class LectureController {
             try {
                 sfile3.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile3.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int no2 = lectureService.selectLecFile(lecture2.getSfile3());
-                lecFile.setNo(no2);
-                lecFile.setSfile(RandomFileName);
-                lecFile.setRealName(OriginalFilename);
-                lectureService.updateLecFile(lecFile);
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile3());
+                if(check > 0) { // 이미 파일이 있는경우
+                    int no2 = lectureService.selectLecFile(lecture2.getSfile3());
+                    lecFile.setNo(no2);
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.updateLecFile(lecFile);
+                } else { // 이미 파일이 없는 경우
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.setLecFile(lecFile);
+                    lectureService.updateLecFile(lecFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
@@ -435,11 +475,19 @@ public class LectureController {
             try {
                 sfile4.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile4.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int no2 = lectureService.selectLecFile(lecture2.getSfile4());
-                lecFile.setNo(no2);
-                lecFile.setSfile(RandomFileName);
-                lecFile.setRealName(OriginalFilename);
-                lectureService.updateLecFile(lecFile);
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile3());
+                if(check > 0) { // 이미 파일이 있는경우
+                    int no2 = lectureService.selectLecFile(lecture2.getSfile4());
+                    lecFile.setNo(no2);
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.updateLecFile(lecFile);
+                } else { // 이미 파일이 없는 경우
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.setLecFile(lecFile);
+                    lectureService.updateLecFile(lecFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
@@ -457,11 +505,19 @@ public class LectureController {
             try {
                 sfile5.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile5.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int no2 = lectureService.selectLecFile(lecture2.getSfile5());
-                lecFile.setNo(no2);
-                lecFile.setSfile(RandomFileName);
-                lecFile.setRealName(OriginalFilename);
-                lectureService.updateLecFile(lecFile);
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile3());
+                if(check > 0) { // 이미 파일이 있는경우
+                    int no2 = lectureService.selectLecFile(lecture2.getSfile5());
+                    lecFile.setNo(no2);
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.updateLecFile(lecFile);
+                } else { // 이미 파일이 없는 경우
+                    lecFile.setSfile(RandomFileName);
+                    lecFile.setRealName(OriginalFilename);
+                    lectureService.setLecFile(lecFile);
+                    lectureService.updateLecFile(lecFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
