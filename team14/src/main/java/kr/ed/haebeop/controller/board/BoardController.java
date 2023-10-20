@@ -1,6 +1,7 @@
 package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
+import kr.ed.haebeop.domain.Like;
 import kr.ed.haebeop.domain.Qna;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
@@ -29,7 +30,7 @@ public class BoardController {
     @Autowired
     HttpSession session; // 세션 생성
     
-    // 게시판 목록
+    // 게시글 목록
     @GetMapping("list.do")		// board/list.do
     public String getBoardList(Model model) throws Exception {
         List<Board> boardList = boardService.boardList();
@@ -37,7 +38,7 @@ public class BoardController {
         return "/board/boardList";
     }
     
-    // 게시판 상세
+    // 게시글 상세
     @GetMapping("detail.do")	// board/detail.do?bno=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
@@ -45,17 +46,40 @@ public class BoardController {
         List<Board> comment = boardService.commentList(bno);
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
+
+        //신고 누적 수 가져오기
+        System.out.println("bno : "+bno);
+        int cntReport = boardService.cntReport(bno);
+        model.addAttribute("cntReport",cntReport);
+        System.out.println("cntReport : "+cntReport);
+
+        //추천(좋아요) 기능 처리
+        String sid = (String) session.getAttribute("sid");
+        System.out.println("detail sid : "+sid);
+        Like like = new Like();
+        like.setUserId(sid);
+        like.setBoardNo(bno);
+        System.out.println(like.toString());
+        boolean isLiked = false;
+        int chk= boardService.checkLiked(like);
+        if(chk==1){
+            isLiked = true;
+        }
+        model.addAttribute("isLiked",isLiked);
+
+
+
         System.out.println(comment.toString());
         return "/board/boardDetail";
     }
     
-    // 게시판 추가 폼 이동
+    // 게시글 추가 폼
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
         return "/board/boardInsert";
     }
     
-    // 게시판 추가
+    // 게시글 추가
     @PostMapping("insert.do")
     public String boardInsert(HttpServletRequest request, Model model) throws Exception {
         Board dto = new Board();
@@ -66,7 +90,7 @@ public class BoardController {
         return "redirect:/board/list.do";
     }
     
-    // 게시판 댓글 추가
+    // 댓글 추가
     @PostMapping("commentInsert.do")
     public String commentInsert(HttpServletRequest request, Model model) throws Exception {
         Board dto = new Board();
@@ -74,7 +98,7 @@ public class BoardController {
         dto.setBno(Integer.parseInt(request.getParameter("bno")));
         dto.setContent(request.getParameter("content"));
         boardService.commentInsert(dto);
-        return "redirect:/board/list.do";
+        return "redirect:/board/detail.do?bno="+dto.getBno();
     }
     
     // 게시판 글 삭제
@@ -86,9 +110,9 @@ public class BoardController {
         return "redirect:/board/list.do";
     }
     
-    // 게시판 댓글 삭제
+    // 댓글 삭제
     @GetMapping("comDelete.do")
-    public String ComDelete(HttpServletRequest request, Model model) throws Exception {
+    public String qnaComDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         int par = Integer.parseInt(request.getParameter("par"));
         Qna dto = new Qna();
@@ -97,7 +121,7 @@ public class BoardController {
         return "redirect:/board/detail.do?bno="+dto.getPar();
     }
     
-    // 게시판 수정 폼 이동
+    // 게시글 수정 폼
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
@@ -106,7 +130,7 @@ public class BoardController {
         return "/board/boardEdit";
     }
 
-    // 게시판 수정
+    // 게시글 수정
     @PostMapping("edit.do")
     public String boardEdit(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
@@ -115,21 +139,21 @@ public class BoardController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         boardService.boardEdit(dto);
-        return "redirect:/board/list.do";
+        return "redirect:/board/detail.do?bno="+dto.getBno();
     }
-    
-    // 댓글 수정 폼 이동
+
+    // 댓글 수정 폼
     @GetMapping("commentEdit.do")
-    public String editCommentForm(HttpServletRequest request, Model model) throws Exception {
+    public String comEditForm(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         Board dto = boardService.boardDetail(bno);
         model.addAttribute("dto", dto);
         return "/board/ComEdit";
     }
-    
+
     // 댓글 수정
     @PostMapping("commentEdit.do")
-    public String boardCommentEdit(HttpServletRequest request, Model model) throws Exception {
+    public String qnaCommentEdit(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         int par = Integer.parseInt(request.getParameter("par"));
         Board dto = new Board();
@@ -141,6 +165,7 @@ public class BoardController {
         boardService.boardEdit(dto);
         return "redirect:/board/detail.do?bno="+dto.getPar();
     }
+
 
     //게시글 신고 팝업 창
     @RequestMapping("reportPopup.do")
@@ -201,4 +226,62 @@ public class BoardController {
         out.println(json.toString());
     }
 
+    //좋아요 ajax 처리
+    @PostMapping(value = "boardLike.do")
+    public void boardLike(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        String id = request.getParameter("sid");
+        int bno = Integer.parseInt(request.getParameter("boardNo"));
+        String result = "unliked";
+
+        Like like=new Like();
+        like.setUserId(id);
+        like.setBoardNo(bno);
+        int chk = boardService.checkLiked(like);
+        if(chk==0) {
+            //추가
+            boardService.addLike(like);
+            result = "liked";
+        } else if (chk==1){
+            //삭제
+            boardService.removeLike(like);
+            result = "unliked";
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("result", result);
+        PrintWriter out = response.getWriter();
+        out.println(json.toString());
+        System.out.println(json.toString());
+
+    }
+
+    //게시글 열람 기능
+    @PostMapping(value = "readalbeEdit.do")
+    public void readalbeEdit(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        int bno = Integer.parseInt(request.getParameter("Bno"));
+        String result = "read";
+
+        boardService.readableEdit(bno);
+        // ajax
+        // 열람가능 -> update true 1
+        // 먼저 전달받은 bno에 해당하는 게시글의 readable의 값이 뭔지 가져옴
+        // 가져온 readable값이 1 이면 ~~~~~
+        boolean select = boardService.getReadable(bno);
+        if(select) {
+            //열람가능
+            boardService.readableEdit(bno);
+            result = "True";
+        } else{
+            //열람 불가능
+            boardService.readableEdit(bno);
+            result = "False";
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("result", result);
+        PrintWriter out = response.getWriter();
+        out.println(json.toString());
+        System.out.println(json.toString());
+
+    }
 }

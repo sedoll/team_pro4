@@ -101,4 +101,14 @@ public class BoardServiceImpl implements BoardService{
     public void addLike(Like like) throws Exception {
         boardRepository.addLike(like);
     }
+
+    @Override
+    public boolean getReadable(int bno) throws Exception {
+        return boardRepository.getReadable(bno);
+    }
+
+    @Override
+    public void readableEdit(int bno) throws Exception{
+         boardRepository.readableEdit(bno);
+    }
 }

@@ -93,4 +93,14 @@ public class BoardParRepositoryImpl implements BoardRepository {
     public void addLike(Like like) throws Exception {
         sqlSession.insert("boardPar.addLike", like);
     }
+
+    @Override
+    public boolean getReadable(int bno) throws Exception {
+        return sqlSession.selectOne("boardPar.getReadable" , bno);
+    }
+
+    @Override
+    public void readableEdit(int bno) throws Exception {
+        sqlSession.update("boardPar.readableEdit", bno);
+    }
 }

@@ -43,7 +43,7 @@ public interface MemberService {
   
     //내가 신고한 게시글
     public List<Board> myReportList(String id) throws Exception;
-    public  void boardReportCancel(int bno) throws Exception;
+    public  void boardReportCancel(Report report) throws Exception;
     public  void teaReportCancel(int bno) throws Exception;
     public  void parReportCancel(int bno) throws Exception;
 

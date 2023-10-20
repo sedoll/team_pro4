@@ -158,8 +158,8 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public void boardReportCancel(int bno) throws Exception {
-        sqlSession.delete("member.boardReportCancel", bno);
+    public void boardReportCancel(Report report) throws Exception {
+        sqlSession.delete("member.boardReportCancel", report);
     }
 
     @Override

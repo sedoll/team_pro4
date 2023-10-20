@@ -19,4 +19,5 @@ public class Board {
     private String board_type;
     private String liketime;
     private int like_count;
+    private boolean readable;
 }

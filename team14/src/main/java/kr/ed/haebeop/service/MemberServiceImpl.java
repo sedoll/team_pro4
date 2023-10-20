@@ -254,8 +254,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void boardReportCancel(int bno) throws Exception {
-        memberRepository.boardReportCancel(bno);
+    public void boardReportCancel(Report report) throws Exception {
+        memberRepository.boardReportCancel(report);
     }
 
     @Override

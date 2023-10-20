@@ -93,4 +93,14 @@ public class BoardTeaRepositoryImpl implements BoardRepository {
     public void addLike(Like like) throws Exception {
         sqlSession.insert("boardTea.addLike", like);
     }
+
+    @Override
+    public boolean getReadable(int bno) throws Exception {
+        return sqlSession.selectOne("boardTea.getReadable" , bno);
+    }
+
+    @Override
+    public void readableEdit(int bno) throws Exception {
+        sqlSession.update("boardTea.readableEdit", bno);
+    }
 }

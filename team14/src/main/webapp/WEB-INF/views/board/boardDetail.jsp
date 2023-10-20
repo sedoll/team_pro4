@@ -273,11 +273,11 @@
                         <td colspan="5" class="content">
                             <div>
 <%--                                특정 신고 수 이상이면 블라인드 처리  / 일단 신고수 3이상이면 블라인드 되게 테스트 --%>
-                                <c:if test="${sid eq 'admin'}">
+                                <c:if test="${sid eq 'admin' && cntReport > 2}">
                                     <div class="select is-info">
-                                        <select id="contentSelect">
+                                        <select id="contentSelect" onchange="SelectValue">
                                             <option value="visible">열람 가능</option>
-                                            <option value="hidden">열람 불가능</option>
+                                            <option value="hidden" selected>열람 불가능</option>
                                         </select>
                                     </div>
                                 </c:if>
@@ -300,6 +300,10 @@
                                         </c:if>
                                     </c:otherwise>
                                 </c:choose>
+
+                                <script>
+
+                                </script>
 
                                 <script>
                                     // JavaScript를 사용하여 select 요소의 변경을 감지하고 content를 표시 또는 숨깁니다.

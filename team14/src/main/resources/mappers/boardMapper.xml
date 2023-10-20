@@ -45,8 +45,7 @@
     <select id="allCommentList" resultType="kr.ed.haebeop.domain.Board">
         select * from board where lev = 1 order by resdate desc
     </select>
-
-<!--    신고 기능 reportBoard-->
+    <!-- 신고 기능 reportBoard -->
     <insert id="reportBoard">
         insert into report values (default, #{board_bno}, #{reporter}, #{reason}, default)
     </insert>
@@ -68,7 +67,7 @@
         ORDER BY
             r.report_date DESC;
     </select>
-<!--    관리자 메인화면 신고리스트-->
+    <!-- 관리자 메인화면 신고리스트 -->
     <select id="recentReportList" resultType="kr.ed.haebeop.domain.Board">
         (
             SELECT r.board_bno as bno, r.reporter, r.reason, r.report_date, 'board' AS board_type, b.title
@@ -88,7 +87,7 @@
             LIMIT 10;
     </select>
 
-<!--    신고 수 카운트-->
+    <!-- 신고 수 카운트 -->
     <select id="cntReport" resultType="integer">
         select count(*) from report WHERE board_bno = #{bno}
     </select>
@@ -104,4 +103,14 @@
         insert into boardlikes values (#{userId},#{boardNo},default)
     </insert>
 
+    <!-- 열람 기능 -->
+    <select id="getReadable" resultType="boolean">
+        select readable from board where bno = #{bno}
+    </select>
+    <update id="readableEdit">
+        update board set readable = case when readable = true then false else true end where bno = #{bno}
+    </update>
+<!--    <update id="readableEdit">-->
+<!--        update board set readable = true where bno = #{bno}-->
+<!--    </update>-->
 </mapper>

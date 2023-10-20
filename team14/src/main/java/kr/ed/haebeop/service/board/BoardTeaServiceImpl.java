@@ -98,4 +98,14 @@ public class BoardTeaServiceImpl implements BoardService{
     public void addLike(Like like) throws Exception {
         boardTeaRepository.addLike(like);
     }
+
+    @Override
+    public boolean getReadable(int bno) throws Exception {
+        return boardTeaRepository.getReadable(bno);
+    }
+
+    @Override
+    public void readableEdit(int bno) throws Exception{
+        boardTeaRepository.readableEdit(bno);
+    }
 }

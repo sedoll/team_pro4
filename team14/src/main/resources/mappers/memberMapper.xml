@@ -169,7 +169,7 @@
 
     <!--    boardReportCancel-->
     <delete id="boardReportCancel">
-        delete from report where board_bno = #{bno}
+        delete from report where board_bno = #{board_bno} and reporter = #{reporter}
     </delete>
     <delete id="teaReportCancel">
         delete from report_tea where board_bno = #{bno}

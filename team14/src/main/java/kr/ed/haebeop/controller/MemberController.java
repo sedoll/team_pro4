@@ -738,12 +738,16 @@ public class MemberController {
 
     @GetMapping("myReportCancel.do")
     public String myReportCancel(HttpServletRequest request, Model model) throws Exception {
-        String id = request.getParameter("id");
+        String id = (String) session.getAttribute("sid");
         int bno = Integer.parseInt(request.getParameter("bno"));
         String category = request.getParameter("category");
 
+        Report report = new Report();
+        report.setReporter(id);
+        report.setBoard_bno(bno);
+
         if (category.equals("board")) {
-            memberService.boardReportCancel(bno);
+            memberService.boardReportCancel(report);
             return "redirect:myReportList.do";
         } else if (category.equals("boardTea")) {
             memberService.teaReportCancel(bno);
