@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -7,9 +7,9 @@
 
 <head>
 
-    <link type="text/css" rel="stylesheet" href="${path4}/resources/css/myStudy/common.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="${path4}/resources/css/myStudy/mystudy.css" media="all" />
-    <link rel="stylesheet" href="${path4}/resources/css/myStudy/layout.css" />
+    <link type="text/css" rel="stylesheet" href="${path4}/resources/css/myStudy/common.css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="${path4}/resources/css/myStudy/mystudy.css" media="all"/>
+    <link rel="stylesheet" href="${path4}/resources/css/myStudy/layout.css"/>
     <script type="text/javascript" src="${path4}/resources/js/myStudy/common.js"></script>
     <script type="text/javascript" src="${path4}/resources/js/myStudy/jquery-1.8.3.min.js"></script>
 
@@ -65,7 +65,8 @@
                         <ul class="planList2">
 
                             <div class="jb-wrap">
-                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt=""></div>
+                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt="">
+                                </div>
                                 <div class="jb-text">
                                     <div class="jb-text-table">
                                         <div class="jb-text-table-row">
@@ -79,7 +80,8 @@
                             </div>
 
                             <div class="jb-wrap">
-                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt=""></div>
+                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt="">
+                                </div>
                                 <div class="jb-text">
                                     <div class="jb-text-table">
                                         <div class="jb-text-table-row">
@@ -93,7 +95,8 @@
                             </div>
 
                             <div class="jb-wrap">
-                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt=""></div>
+                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt="">
+                                </div>
                                 <div class="jb-text">
                                     <div class="jb-text-table">
                                         <div class="jb-text-table-row">
@@ -231,10 +234,6 @@
     </div>
 </div>
 <!-- //Sec01 -->
-
-
-
-
 
 
 <script type="text/javascript">

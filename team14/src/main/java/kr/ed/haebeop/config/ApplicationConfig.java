@@ -139,6 +139,14 @@ public class ApplicationConfig {
     @Bean
     public Utils utils() {return new Utils();}
 
+
+    //mystudy
+    @Bean
+    public MyclassService myclassService() {return new MyclassService(); }
+
+
+
+
     //review
     @Bean
     public ReviewService reviewService() {return new ReviewService();}
