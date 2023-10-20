@@ -65,6 +65,7 @@
                 <span aria-hidden="true"></span>
             </a>
         </div>
+
         <!-- header menu -->
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
@@ -146,11 +147,12 @@
 
 
             <div class="navbar-item is-hoverable">
-                <a href="${path}/mystudyroom/myStudyIndex.do" class="button is-link2 is-rounded b2" >
+                <a href="${path}/myclass/myclassIndex.do"  >
                     <strong>나의 학습방</strong>
                 </a>
             </div>
         </div>
+
         <!-- header menu end -->
         <div class="navbar-end">
             <div class="navbar-item">
