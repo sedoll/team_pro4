@@ -10,6 +10,9 @@ import java.util.List;
 @Mapper
 public interface InstructorMapper {
 
+    //선생님 리스트
+    @Select("select * from instructor")
+    public List<Instructor> getInstructorList();
     //강의 리스트
     @Select("select * from lecture where instructorname = #{instructorname}")
     public List<Lecture> getInstructorLectureList(String instructorname);
@@ -35,4 +38,6 @@ public interface InstructorMapper {
 
     @Update("update instructor set instructorid=#{instructorid},instructorname=#{instructorname},category=#{category}")
     public void instructorUpdate(Instructor instructor);
+
+
 }

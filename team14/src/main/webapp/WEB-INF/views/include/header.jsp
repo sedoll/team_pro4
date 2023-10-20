@@ -23,10 +23,12 @@
         <!-- header menu -->
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
+                <a class="navbar-link is-arrowless" id="hovertest" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
+                   onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>강의</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#hovertest').css({'background-color': '#ebebeb', 'color': 'white'});"
+                     onmouseout="$('#hovertest').css({'background-color': '', 'color': ''});">
                     <a href="${path2}/lecture/lecList" class="button is-link2 is-rounded b2" >
                         강의 목록
                     </a>

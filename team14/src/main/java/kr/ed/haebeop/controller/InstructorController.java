@@ -26,7 +26,6 @@ public class InstructorController {
 
     @GetMapping("instructorList")		// board/list.do
     public String getInstructorList(HttpServletRequest request,Model model) throws Exception {
-
         String instructor = request.getParameter("instructor");
 
         //모든 강사 정보 불러옴.
@@ -34,8 +33,9 @@ public class InstructorController {
         //정렬 기준 : 수강생 수?
         //
         //
-
-
+        List<Instructor> instructorList = instructorService.getInstructorList();
+        System.out.println(instructorList.toString());
+        model.addAttribute("instructorList",instructorList);
 
         return "/instructor/instructorList";
     }
