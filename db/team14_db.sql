@@ -311,15 +311,14 @@ SELECT * FROM grade WHERE stuid='kang';
 
 -- 관리자 게시판 관리 테이블
 CREATE TABLE report (
-    report_id INT PRIMARY KEY AUTO_INCREMENT,
-    board_bno INT,
-    reporter VARCHAR(16),
-    reason VARCHAR(255),
-    report_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    report_id INT PRIMARY KEY AUTO_INCREMENT, -- 신고 번호
+    board_bno INT, -- 게시글 번호
+    reporter VARCHAR(16), -- 신고자
+    reason VARCHAR(255), -- 이유
+    report_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 신고일
     FOREIGN KEY(board_bno) REFERENCES board(bno) ON DELETE CASCADE,
     FOREIGN KEY(reporter) REFERENCES member(id) ON DELETE CASCADE
 );
-
 
 -- 공지사항(순번, 제목, 내용, 작성자, 작성일, 읽은 횟수)
 create table notice(
@@ -372,6 +371,28 @@ CREATE TABLE lecture(
 	FOREIGN KEY(ino) REFERENCES instructor(NO) -- 강사 번호를 외래키로 사용
 );
 -- UPDATE lecture SET endday = 100; 
+
+-- 강의 리뷰
+CREATE TABLE review(
+    NO INT AUTO_INCREMENT PRIMARY KEY, -- 번호
+    id VARCHAR(20) NOT NULL, -- 작성 아이디
+    content VARCHAR(300) NOT NULL, -- 후기
+    resdate timestamp DEFAULT CURRENT_TIMESTAMP(), -- 작성일
+    score INT CHECK (score >= 1 AND score <= 5), -- 점수 (1부터 5까지의 정수)
+    par INT, -- 강의 번호
+    FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE -- 회원 아이디를 외래키로 선언
+);
+
+-- 관리자 댓글 관리 테이블
+CREATE TABLE report_rev (
+    report_id INT PRIMARY KEY AUTO_INCREMENT, -- 신고 번호
+    board_bno INT, -- 댓글 번호
+    reporter VARCHAR(16), -- 신고자
+    reason VARCHAR(255), -- 이유
+    report_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 신고일
+    FOREIGN KEY(board_bno) REFERENCES review(no) ON DELETE CASCADE,
+    FOREIGN KEY(reporter) REFERENCES member(id) ON DELETE CASCADE
+);
 
 -- 실제 파일 이름 저장 경로
 CREATE TABLE lecfile (
@@ -441,6 +462,41 @@ create table boardlikes (
     liketime TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 좋아요를 누른 시간
     PRIMARY KEY (userid, boardno)   -- 사용자 ID와 게시글 no 조합으로 각 레코드를 유일하게 식별
 );
+
+db수정 및 추가
+
+======= course 테이블에 데이터 타입 수정 ==============
+CREATE TABLE course(
+	NO INT PRIMARY KEY AUTO_INCREMENT,
+	lec_no INT, -- 강의코드(FK)
+	sid VARCHAR(20), -- 학생아이디(FK)
+	ctime INT DEFAULT 0, -- 수강 총 시간 
+	CHECK1 int default 1, -- 1:수강 중, 2.수강정지 3.수강완료
+	FOREIGN KEY(lec_no) REFERENCES lecture(no), 
+	FOREIGN KEY(sid) REFERENCES member(id)
+	);
+
+-- myclass 뷰테이블 추가 (나의 학습방 데이터) 
+-- myclass 뷰 생성
+-- DROP VIEW myclass; 
+CREATE VIEW myclass  AS
+SELECT 
+    c.sid AS id, 
+    c.lec_no AS lec_no, 
+    l.cate AS lecCate, 
+    l.title AS lecTitle, 
+    l.studystart AS lecStudystart, 
+    l.studyend AS lecStudyend,  
+    ins.name AS insName,
+   c.CHECK1 AS ck
+FROM 
+    course c   
+JOIN
+	member m ON c.sid = m.id	   
+JOIN 
+   lecture l ON c.lec_no = l.NO     
+JOIN 
+   instructor ins ON l.ino = ins.NO;
 
 
 -- 강의 배정

@@ -78,10 +78,16 @@ a {
 }
 
 .board_list > div > div {
+    vertical-align: top;
     display: inline-block;
-    padding: 15px 0;
+    padding: 14px 0px;
     text-align: center;
     font-size: 1.4rem;
+    line-height: 42px;
+}
+
+.board_list > div > div.lecday {
+    line-height: 1.5;
 }
 
 .board_list > div.top > div {
