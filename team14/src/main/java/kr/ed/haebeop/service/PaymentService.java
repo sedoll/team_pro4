@@ -43,4 +43,5 @@ public class PaymentService {
 
     // 리뷰 작성을 위해 state 확인
     public int statePayemnt(Payment payment) { return paymentMapper.statePayemnt(payment); }
+    public void updateEndPayment(Payment payment) {paymentMapper.updateEndPayment(payment);}
 }

@@ -9,12 +9,18 @@ import java.util.List;
 @Service
 public class MyclassService {
 
-    // 수강 중인 강좌 가져오기
+
     @Autowired
     private MyclassMapper myclassMapper;
 
-    public List<MyClassVO> getMyclassList(String id) throws Exception {
 
+    // 전체 수강 강좌 가져오기
+    public List<MyClassVO> myclassList() throws Exception{
+        return myclassMapper.myclassList();
+    }
+
+    // 해당 수강 중인 강좌 가져오기
+    public List<MyClassVO> getMyclassList(String id) throws Exception {
         return myclassMapper.getMyclassList(id);
     }
 
