@@ -9,10 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +63,9 @@ public class BoardController {
             isLiked = true;
         }
         model.addAttribute("isLiked",isLiked);
+
+        //열람 기능
+
 
 
 
@@ -256,24 +256,31 @@ public class BoardController {
     }
 
     //게시글 열람 기능
-    @PostMapping(value = "readalbeEdit.do")
-    public void readalbeEdit(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
-        int bno = Integer.parseInt(request.getParameter("Bno"));
-        String result = "read";
+    @PostMapping(value = "readableEdit.do")
+    public void readalbeEdit(HttpServletResponse response, Model model, @RequestParam("Bno") int bno, @RequestParam("selected") String selected) throws Exception {
 
-        boardService.readableEdit(bno);
+        System.out.println("--------------------");
+        System.out.println("들어옴");
+
+        System.out.println(selected);
+        String result = "read";
+        //boardService.readableEdit(bno);
+
+        System.out.println(bno);
+
+/*
         // ajax
         // 열람가능 -> update true 1
         // 먼저 전달받은 bno에 해당하는 게시글의 readable의 값이 뭔지 가져옴
         // 가져온 readable값이 1 이면 ~~~~~
-        boolean select = boardService.getReadable(bno);
-        if(select) {
+       boolean select = boardService.getReadable(bno);
+        if(select==true) {
             //열람가능
-            boardService.readableEdit(bno);
+            //boardService.readableEdit(bno);
             result = "True";
         } else{
             //열람 불가능
-            boardService.readableEdit(bno);
+            //boardService.readableEdit(bno);
             result = "False";
         }
 
@@ -281,7 +288,6 @@ public class BoardController {
         json.put("result", result);
         PrintWriter out = response.getWriter();
         out.println(json.toString());
-        System.out.println(json.toString());
-
+        System.out.println(json.toString());*/
     }
 }
