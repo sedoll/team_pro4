@@ -40,4 +40,7 @@ public class PaymentService {
 
     // 결제 번호를 통한 결제 정보
     public Payment getPayment(int sno) {return paymentMapper.getPayment(sno);}
+
+    // 리뷰 작성을 위해 state 확인
+    public int statePayemnt(Payment payment) { return paymentMapper.statePayemnt(payment); }
 }

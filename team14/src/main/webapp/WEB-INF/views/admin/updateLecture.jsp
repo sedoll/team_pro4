@@ -1,89 +1,48 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="<%=request.getContextPath() %>" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 정보 작성</title>
+    <title>게시판 입력</title>
     <%@ include file="../include/head.jsp" %>
+
+    <!-- 스타일 초기화 : reset.css 또는 normalize.css -->
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
 
     <!-- 플러그인 연결-->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- 스타일 초기화 -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <!-- 웹 폰트 -->
+    <link rel="stylesheet" href="../css/font.css">
 
+    <!-- css 모듈화 -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/hd.css">
+    <link rel="stylesheet" href="../css/ft.css">
     <style>
-        /* 본문 영역 스타일 */
-        .contents { clear:both; min-height: 100vh; background-image: url("${path}/img/login.jpg");
-            background-repeat: no-repeat; background-position: center -250px; }
-        .contents::after { content:""; clear:both; display:block; width:100%; }
-
-        .page { clear:both; width: 100vw; position:relative; }
-        .page::after { content:""; display:block; width: 100%; clear:both; }
-
-        .page_wrap { clear:both; width: 1200px; height: auto; margin:0 auto; }
-        .page_tit { font-size:48px; text-align: center;  color:#fff;
-            padding-bottom: 1.3em; }
-
-        .breadcrumb { clear:both;
-            width:1200px; margin: 0 auto; text-align: right; color:#fff;
-            padding-top: 28px; padding-bottom: 28px; }
-        .breadcrumb a { color:#fff; }
-
-        .tb1 { margin:0 auto; font-size: 24px;}
-        .tb1 th { width: 200px; line-height: 32px; padding-top:16px; padding-bottom:16px;
-            border-bottom: 1px solid #333; border-top: 1px solid #333; box-sizing: border-box; text-align: center;}
-        .tb1 td { width: 400px; line-height: 32px; padding-top:16px; padding-bottom:16px;
-            border-bottom: 1px solid #333; border-top: 1px solid #333; box-sizing: border-box; text-align: center;}
-
-        .tb1 td:last-child { line-height: 48px; padding-top:24px; padding-bottom:24px; }
-
-
-        .inbtn { display:block;
-            border-radius:10px;
-            min-width:120px;
-            padding-left: 24px;
-            padding-right: 24px;
-            text-align: center;
-            line-height: 38px;
-            background-color: #333;
-            color:#fff;
-            font-size: 18px;
-            cursor: pointer; }
-        .inbtn:first-child { float:left; }
-        .inbtn:last-child { float:right; }
-
-        .inbtn:hover {
-            background-color: #666666;
-        }
-        .indata {
-            display:inline-block;
-            width: 590px;
-            height: 40px;
-            line-height: 40px;
-            text-indent:10px;
-            font-size:16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px 15px;
+        .hero {
+            height: 250px;
+            margin-top: 40px;
         }
 
-        textarea {
-            resize: none;
-            width: 600px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+        th {
+            background-color: #dcdcdc;
+            text-align: left;
         }
+    </style>
     </style>
 </head>
 <body>
-<div class="wrap">
-    <header class="hd" id="hd">
-        <%@ include file="../include/header.jsp" %>
-    </header>
+<div class="container is-fullhd">
+    <!-- 헤더 부분 인클루드 -->
+    <jsp:include page="../include/header.jsp"></jsp:include>
     <figure class="visual" id="vs1">
         <ul class="imgbox">
             <li class="hero is-medium is-white">
@@ -92,15 +51,15 @@
                         강의
                     </p>
                     <p class="subtitle is-size-5">
-                        등록
+                        수정
                     </p>
                 </div>
             </li>
         </ul>
     </figure>
-    <div class="contents" id="contents">
-        <section class="page" id="page1">
-            <div class="page_wrap">
+    <div class="content" id="contents">
+        <div class="row column text-center">
+            <div class="container">
                 <form action="${path}/lecture/updateLecture.do" class="frm" method="post" enctype="multipart/form-data">
                     <table class="tb1">
                         <tbody>
@@ -108,7 +67,7 @@
                             <th>과목</th>
                             <td colspan="2">
                                 <input type="hidden" name="no" id="no" value="${lecture.no}" readonly>
-                                <select name="cate" id="cate" class="indata" autofocus required>
+                                <select name="cate" id="cate" class="select is-fullwidth" autofocus required>
                                     <c:choose>
                                         <c:when test="${lecture.cate eq '국어'}">
                                             <option value="국어" selected>국어</option>
@@ -160,7 +119,7 @@
                                 <c:set var="level1" value="${splitValues[0]}" />
                                 <c:set var="level2" value="${splitValues[1]}" />
 
-                                <select name="level1" id="level1" class="indata" autofocus required>
+                                <select name="level1" id="level1" class="select is-fullwidth" autofocus required>
                                     <c:choose>
                                         <c:when test="${level1 eq '초등학교'}">
                                             <option value="초등학교" selected>초등학교</option>
@@ -187,7 +146,7 @@
                                     </c:choose>
                                 </select>
 
-                                <select name="level2" id="level2" class="indata" autofocus required>
+                                <select name="level2" id="level2" class="select is-fullwidth" autofocus required>
                                     <c:choose>
                                         <c:when test="${level2 eq '1학년'}">
                                             <option value="1학년" selected>1학년</option>
@@ -265,12 +224,12 @@
                         </tr>
                         <tr>
                             <th>강의 이름</th>
-                            <td colspan="2"><input type="text" name="title" id="title" class="indata" value="${lecture.title}" placeholder="상품 이름 입력" required></td>
+                            <td colspan="2"><input type="text" name="title" id="title" class="input" value="${lecture.title}" placeholder="상품 이름 입력" required></td>
                         </tr>
                         <tr>
                             <th>강사 이름</th>
                             <td colspan="2">
-                                <select name="ino" id="ino" class="indata" autofocus required>
+                                <select name="ino" id="ino" class="input" autofocus required>
                                     <c:forEach items="${instList}" var="inst">
                                         <c:choose>
                                             <c:when test="${inst.name eq instructor.name}">
@@ -287,51 +246,50 @@
                         <tr>
                             <th>강의 설명</th>
                             <td colspan="2">
-                                <textarea name="content" id="content" cols="50" rows="15" placeholder="상품 설명 입력" required>
+                                <textarea name="content" id="content" class="textarea" cols="50" rows="15" placeholder="상품 설명 입력" required>
                                     ${lecture.content}
                                 </textarea>
                             </td>
                         </tr>
                         <tr>
                             <th>표지 이미지</th>
-                            <td colspan="2"><input type="file" name="simg" id="simg" class="indata" placeholder="표지 이미지" accept=".jpg, .png"></td>
+                            <td colspan="2"><input type="file" name="simg" id="simg" class="input" placeholder="표지 이미지" accept=".jpg, .png"></td>
                         </tr>
                         <tr>
                             <th>샘플(OT) 영상</th>
-                            <td colspan="2"><input type="file" name="sfile1" id="sfile1" class="indata" placeholder="샘플 영상1" accept=".mp4"></td>
+                            <td colspan="2"><input type="file" name="sfile1" id="sfile1" class="input" placeholder="샘플 영상1" accept=".mp4"></td>
                         </tr>
                         <tr>
                             <th>강의 영상 1</th>
-                            <td colspan="2"><input type="file" name="sfile2" id="sfile2" class="indata" placeholder="강의 영상1" accept=".mp4"></td>
+                            <td colspan="2"><input type="file" name="sfile2" id="sfile2" class="input" placeholder="강의 영상1" accept=".mp4"></td>
                         </tr>
                         <tr>
                             <th>강의 영상 2</th>
-                            <td colspan="2"><input type="file" name="sfile3" id="sfile3" class="indata" placeholder="강의 영상2" accept=".mp4"></td>
+                            <td colspan="2"><input type="file" name="sfile3" id="sfile3" class="input" placeholder="강의 영상2" accept=".mp4"></td>
                         </tr>
                         <tr>
                             <th>강의 영상 3</th>
-                            <td colspan="2"><input type="file" name="sfile4" id="sfile4" class="indata" placeholder="강의 영상3" accept=".mp4"></td>
+                            <td colspan="2"><input type="file" name="sfile4" id="sfile4" class="input" placeholder="강의 영상3" accept=".mp4"></td>
                         </tr>
                         <tr>
                             <th>강의 영상 4</th>
-                            <td colspan="2"><input type="file" name="sfile5" id="sfile5" class="indata" placeholder="강의 영상4" accept=".mp4"></td>
+                            <td colspan="2"><input type="file" name="sfile5" id="sfile5" class="input" placeholder="강의 영상4" accept=".mp4"></td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" value="상품등록" class="inbtn">
-                                <input type="reset" value="취소" class="inbtn" onclick="window.history.back();">
-                                <a href="${path}/lecture/lecList" class="inbtn">상품목록</a>
+                                <input type="submit" value="상품등록" class="button is-info">
+                                <input type="reset" value="취소" class="button is-danger" onclick="window.history.back();">
+                                <a href="${path}/lecture/lecList" class="button is-info">상품목록</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </form>
             </div>
-        </section>
+        </div>
     </div>
-    <footer class="ft" id="ft">
-        <%@ include file="../include/footer.jsp" %>
-    </footer>
 </div>
+<!-- footer imclude -->
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
