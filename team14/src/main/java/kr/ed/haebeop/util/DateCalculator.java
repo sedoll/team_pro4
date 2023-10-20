@@ -26,7 +26,7 @@ public class DateCalculator {
         String todayDateStr = getTodayAsString();
         
         // 수강 기간 테스트용
-//        String todayDateStr = "2023-11-20";
+//        String todayDateStr = "2023-10-22";
 //        String todayDateStr = "2024-01-25";
 
         // 날짜 문자열을 LocalDate 객체로 파싱합니다.
@@ -45,7 +45,7 @@ public class DateCalculator {
         String todayDateStr = getTodayAsString();
 
         // 수강 기간 테스트용
-//        String todayDateStr = "2023-11-20";
+//        String todayDateStr = "2023-10-22";
 //        String todayDateStr = "2024-01-25";
 
         // 날짜 문자열을 LocalDate 객체로 파싱합니다.
