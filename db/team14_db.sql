@@ -98,6 +98,7 @@ CREATE TABLE board(
 	cnt INT DEFAULT 0, -- 조회수
 	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
 	par INT, -- 부모 게시글 번호
+	readable boolean default false,
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
@@ -455,7 +456,7 @@ CREATE TABLE payment(
 	FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
 );
 
--- 추천(좋아요) 기능 테이블
+-- 추천(좋아요) 기능 테이
 create table boardlikes (
     userid VARCHAR(20) NOT NULL,      -- 사용자 ID
     boardno INT NOT NULL,           -- 게시글 no 
@@ -508,4 +509,3 @@ JOIN
 -- 강의 정보를 보고, 학생이 수강 신청을 하는 행위,
 -- 학생별로 모든 강의 정보가 등록되어야 하며, 
 -- 만약 수강신청시 수강인원이 초과될 경우 수강신청을 할 수 없다.
-
