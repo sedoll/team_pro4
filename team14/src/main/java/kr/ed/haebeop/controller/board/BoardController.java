@@ -26,7 +26,7 @@ public class BoardController {
 
     @Autowired
     HttpSession session; // 세션 생성
-    
+
     // 게시글 목록
     @GetMapping("list.do")		// board/list.do
     public String getBoardList(Model model) throws Exception {
@@ -34,7 +34,7 @@ public class BoardController {
         model.addAttribute("boardList", boardList);
         return "/board/boardList";
     }
-    
+
     // 게시글 상세
     @GetMapping("detail.do")	// board/detail.do?bno=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
@@ -72,13 +72,13 @@ public class BoardController {
         System.out.println(comment.toString());
         return "/board/boardDetail";
     }
-    
+
     // 게시글 추가 폼
     @GetMapping("insert.do")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
         return "/board/boardInsert";
     }
-    
+
     // 게시글 추가
     @PostMapping("insert.do")
     public String boardInsert(HttpServletRequest request, Model model) throws Exception {
@@ -89,7 +89,7 @@ public class BoardController {
         boardService.boardInsert(dto);
         return "redirect:/board/list.do";
     }
-    
+
     // 댓글 추가
     @PostMapping("commentInsert.do")
     public String commentInsert(HttpServletRequest request, Model model) throws Exception {
@@ -100,7 +100,7 @@ public class BoardController {
         boardService.commentInsert(dto);
         return "redirect:/board/detail.do?bno="+dto.getBno();
     }
-    
+
     // 게시판 글 삭제
     @GetMapping("delete.do")
     public String boardDelete(HttpServletRequest request, Model model) throws Exception {
@@ -109,7 +109,7 @@ public class BoardController {
         boardService.commentDeleteAll(bno);
         return "redirect:/board/list.do";
     }
-    
+
     // 댓글 삭제
     @GetMapping("comDelete.do")
     public String qnaComDelete(HttpServletRequest request, Model model) throws Exception {
@@ -120,7 +120,7 @@ public class BoardController {
         boardService.boardDelete(bno);
         return "redirect:/board/detail.do?bno="+dto.getPar();
     }
-    
+
     // 게시글 수정 폼
     @GetMapping("edit.do")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
@@ -259,35 +259,23 @@ public class BoardController {
     @PostMapping(value = "readableEdit.do")
     public void readalbeEdit(HttpServletResponse response, Model model, @RequestParam("Bno") int bno, @RequestParam("selected") String selected) throws Exception {
 
-        System.out.println("--------------------");
-        System.out.println("들어옴");
+        boolean readable = Boolean.parseBoolean(selected);
+        Board board = new Board();
+        board.setBno(bno);
+        board.setReadable(readable);
 
-        System.out.println(selected);
-        String result = "read";
-        //boardService.readableEdit(bno);
+        boardService.readableEdit(board);
 
-        System.out.println(bno);
+        boolean result = boardService.getReadable(bno);
 
-/*
-        // ajax
-        // 열람가능 -> update true 1
-        // 먼저 전달받은 bno에 해당하는 게시글의 readable의 값이 뭔지 가져옴
-        // 가져온 readable값이 1 이면 ~~~~~
-       boolean select = boardService.getReadable(bno);
-        if(select==true) {
-            //열람가능
-            //boardService.readableEdit(bno);
-            result = "True";
-        } else{
-            //열람 불가능
-            //boardService.readableEdit(bno);
-            result = "False";
-        }
-
+        // json으로 만들어주는 부분
         JSONObject json = new JSONObject();
         json.put("result", result);
+
+        // json으로 ajax에 보내는 부분
         PrintWriter out = response.getWriter();
         out.println(json.toString());
-        System.out.println(json.toString());*/
+
+        System.out.println(json.toString());
     }
 }

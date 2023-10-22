@@ -107,10 +107,12 @@
     <select id="getReadable" resultType="boolean">
         select readable from board where bno = #{bno}
     </select>
+    <!-- 열람 기능 - view에서 readable,bno 값을 받아옴 -->
     <update id="readableEdit">
-        update board set readable = case when readable = true then false else true end where bno = #{bno}
+        UPDATE board SET readable = #{readable} where bno=#{bno}
     </update>
-<!--    <update id="readableEdit">-->
-<!--        update board set readable = true where bno = #{bno}-->
-<!--    </update>-->
+    <!--  열람 기능 - view에서 readable,bno 값이 바뀌었을 때 받아옴 -->
+    <!--    <update id="readableEdit">-->
+    <!--        update board set readable = !readable where bno = #{bno}; -->
+    <!--    </update>-->
 </mapper>

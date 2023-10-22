@@ -108,7 +108,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void readableEdit(int bno) throws Exception{
+    public void readableEdit(Board bno) throws Exception{
          boardRepository.readableEdit(bno);
     }
 }

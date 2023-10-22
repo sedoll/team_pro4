@@ -59,7 +59,7 @@
             line-height: 32px;
             padding: 12px 15px; /
             /*border: 1px solid #f5f5f5; !*/
-            box-sizing: border-box;
+        box-sizing: border-box;
             background-color: #eeeeee; /* 배경색 조정 */
             font-size: 22px;
             font-weight: 600;
@@ -77,7 +77,7 @@
             width: 6%;
             text-align: center;
         }.tb1 thead td:nth-child(2) {
-            text-align: left;
+             text-align: left;
              width: 14%;
          }
         .tb1 thead td:nth-child(3) {
@@ -202,13 +202,13 @@
 
         }
         textarea {
-             resize: none;
-             padding: 10px;
-             height: 80px;
-             border: 1px solid #ccc;
-             border-radius: 5px;
-             vertical-align: middle;
-         }
+            resize: none;
+            padding: 10px;
+            height: 80px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            vertical-align: middle;
+        }
         #nologin_comment {
             width: 1200px;
             text-align: center;
@@ -249,61 +249,58 @@
                 <table class="tb1">
 
                     <thead>
-                        <tr class="title">
-                            <th colspan="5">${dto.title}</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <c:if test="${dto.author eq sid && not empty sid}">
-                                    <a href="${path}/board/edit.do?bno=${dto.bno}" class="button is-outlined is-link">수정</a>
-                                </c:if>
-                            </td>
-                            <td>
-                                <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
+                    <tr class="title">
+                        <th colspan="5">${dto.title}</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <c:if test="${dto.author eq sid && not empty sid}">
+                                <a href="${path}/board/edit.do?bno=${dto.bno}" class="button is-outlined is-link">수정</a>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
                                 <a href="${path}/board/delete.do?bno=${dto.bno}" class="button is-outlined is-danger" >삭제</a>
                             </c:if>
-                            </td>
-                            <td>${dto.author}</td>
-                            <td>${dto.resdate}</td>
-                            <td>조회수 : ${dto.cnt}</td>
-                        </tr>
+                        </td>
+                        <td>${dto.author}</td>
+                        <td>${dto.resdate}</td>
+                        <td>조회수 : ${dto.cnt}</td>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td colspan="5" class="content">
+                            <%-- 신고수 3이상이면 블라인드 / 관리자가 열람 설정 선택 --%>
                             <div>
-<%--                                특정 신고 수 이상이면 블라인드 처리  / 일단 신고수 3이상이면 블라인드 되게 테스트 --%>
                                 <c:if test="${sid eq 'admin' && cntReport > 2}">
                                     <div class="select is-info">
                                         <select id="contentSelect" onchange="readableEdit(${dto.bno})">
-                                            <option value="visible">열람 가능</option>
-                                            <option value="hidden">열람 불가능</option>
+                                            <option value="true">열람 가능</option>
+                                            <option value="false">열람 불가능</option>
                                         </select>
                                     </div>
                                 </c:if>
                                 <c:choose>
+                                    <%-- 관리자일 때 --%>
                                     <c:when test="${sid eq 'admin'}">
                                         <c:if test="${cntReport > 2}">
                                             <h4 style="text-align: center">[신고가 3건 이상 들어온 글입니다.]</h4>
                                         </c:if>
-                                        <c:if test="${cntReport >= 0}">
-                                            <div id="content" style="display: block;">${dto.content}</div>
-                                        </c:if>
+                                        <div style="display: block;">${dto.content}</div>
                                     </c:when>
-
+                                    <%-- 관리자가 아닐 때 and 신고수 3이상일 때 and readable=false --%>
+                                    <c:when test="${cntReport > 2 && dto.readable == false}">
+                                        <h4 style="text-align: center">[신고가 누적되어 블라인드 처리되었습니다. 관리자에게 문의해주세요]</h4>
+                                    </c:when>
+                                    <%-- 관리자가 아닐 때 and (신고수 3미만일 때 or readable=true) --%>
                                     <c:otherwise>
-                                        <c:if test="${cntReport < 3 }">
-                                            <div id="content" style="display: block;">${dto.content}</div>
-                                        </c:if>
-                                        <c:if test="${cntReport > 2 && False}">
-                                            <h4 style="text-align: center">[신고가 누적되어 블라인드 처리되었습니다. 관리자에게 문의해주세요]</h4>
-                                        </c:if>
+                                        <div style="display: block;">${dto.content}</div>
                                     </c:otherwise>
                                 </c:choose>
 
                                 <script>
                                     function readableEdit(Bno) {
-
                                         let selected =  $("#contentSelect option:selected").val();
                                         //alert(selected);
                                         let params = {"Bno": parseInt(Bno), "selected" : selected};
@@ -312,9 +309,7 @@
                                             type:"POST",
                                             data:params,
                                             success: function(result) {
-                                                //var readableEdit = $("[data-board-id='" + Bno + "");
                                                 console.log(result);
-                                                //var select = result.result;
                                             },
                                             error: function (request, status, error) {
                                                 console.log("code: " + request.status)
@@ -323,7 +318,6 @@
                                             }
                                         });
                                     }
-
                                 </script>
 
                                 <script>
@@ -332,19 +326,18 @@
                                     const content = document.getElementById('content');
 
                                     contentSelect.addEventListener('change', function () {
-                                        if (contentSelect.value === 'visible') {
+                                        if (contentSelect.value === 'true') {
                                             content.style.display = 'block';
-                                        } else if (contentSelect.value === 'hidden') {
+                                        } else if (contentSelect.value === 'false') {
                                             content.style.display = 'none';
                                         }
                                     });
                                 </script>
-
                             </div>
                         </td>
                     </tr>
                     <c:if test="${not empty sid}">
-                        <tr >
+                        <tr>
                             <td colspan="5" style="text-align: right" >
                                 <c:choose>
                                     <c:when test="${isLiked }">
@@ -484,4 +477,9 @@
     </footer>
 </div>
 </body>
+
+<script>
+
+</script>
+
 </html>

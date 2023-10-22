@@ -100,7 +100,7 @@ public class BoardParRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public void readableEdit(int bno) throws Exception {
+    public void readableEdit(Board bno) throws Exception {
         sqlSession.update("boardPar.readableEdit", bno);
     }
 }
