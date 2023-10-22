@@ -127,12 +127,10 @@ public class MyclassController {
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
 
         /* 1. 강의소개 메뉴 */
-        /* 2. 강의목차 메뉴 */
 
         model.addAttribute("myclassList", myclassList);
 
-        // region 강좌 목차 기능 부분
-        String id = (String) session.getAttribute("sid");
+        // region 2. 강의목차 메뉴
         Lecture lecture = lectureService.getLecture(no); // 강의 정보 추출
         List<String> videoList = new ArrayList<>(); // 비디오 이름 받기
         List<String> videoList2 = new ArrayList<>(); // 실제 저장된 UUID 비디오 이름
@@ -141,9 +139,9 @@ public class MyclassController {
         
         // 서버 절대경로 주소
 //        String path = req.getSession().getServletContext().getRealPath("/");
-        String path2 = req.getContextPath();
+//        String path2 = req.getContextPath();
 //        path = path.replace("\\", "/");
-        path2 = path2.replace("\\", "/");
+//        path2 = path2.replace("\\", "/");
 
         if(lecture.getSfile2()!=null) {
             String sfileName = lecture.getSfile2();
@@ -210,11 +208,11 @@ public class MyclassController {
         return "redirect:/myclass/myclassIntro";
     }
 
-    @RequestMapping("/myclass/myclassIntro")
-    public ModelAndView intro(HttpServletRequest request){
-
-        return
-    }
+//    @RequestMapping("/myclass/myclassIntro")
+//    public ModelAndView intro(HttpServletRequest request){
+//
+//        return
+//    }
 
 
     // 강의 영상 보기

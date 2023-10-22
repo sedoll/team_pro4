@@ -69,7 +69,7 @@ public class LectureController {
         lecture.setCate(files.getParameter("cate"));
         lecture.setSlevel(files.getParameter("level1") + " " + files.getParameter("level2"));
         lecture.setTitle(files.getParameter("title"));
-        lecture.setContent(files.getParameter("content"));
+        lecture.setContent(files.getParameter("content").trim());
         lecture.setPrice(Integer.parseInt(files.getParameter("price")));
         lecture.setIno(Integer.parseInt(files.getParameter("ino")));
         lecture.setLec_max(Integer.parseInt(files.getParameter("lec_max")));
@@ -96,8 +96,8 @@ public class LectureController {
             lecture.setSimg(RandomFileName);
 
             try {
-                simg.transferTo(new File(uploadDir + RandomFileName));
-                simg.transferTo(new File(uploadSev + RandomFileName));
+//                simg.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+                simg.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 lecFile.setSfile(RandomFileName);
                 lecFile.setRealName(OriginalFilename);
                 lectureService.setLecFile(lecFile);
@@ -114,7 +114,7 @@ public class LectureController {
             lecture.setSfile1(RandomFileName);
 
             try {
-                sfile1.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile1.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile1.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 lecFile.setSfile(RandomFileName);
                 lecFile.setRealName(OriginalFilename);
@@ -132,7 +132,7 @@ public class LectureController {
             lecture.setSfile2(RandomFileName);
 
             try {
-                sfile2.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile2.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile2.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 lecFile.setSfile(RandomFileName);
                 lecFile.setRealName(OriginalFilename);
@@ -150,7 +150,7 @@ public class LectureController {
             lecture.setSfile3(RandomFileName);
 
             try {
-                sfile3.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile3.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile3.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 lecFile.setSfile(RandomFileName);
                 lecFile.setRealName(OriginalFilename);
@@ -168,7 +168,7 @@ public class LectureController {
             lecture.setSfile4(RandomFileName);
 
             try {
-                sfile4.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile4.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile4.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 lecFile.setSfile(RandomFileName);
                 lecFile.setRealName(OriginalFilename);
@@ -186,7 +186,7 @@ public class LectureController {
             lecture.setSfile5(RandomFileName);
 
             try {
-                sfile5.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile5.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile5.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 lecFile.setSfile(RandomFileName);
                 lecFile.setRealName(OriginalFilename);
@@ -241,7 +241,7 @@ public class LectureController {
         }
         if(product.getSfile5()!=null) {
             cnt += 1;
-            String realName = lectureService.getLecFileName(product.getSfile4());
+            String realName = lectureService.getLecFileName(product.getSfile5());
             videoList.add(realName);
         }
 
@@ -323,13 +323,12 @@ public class LectureController {
         MultipartFile sfile4 = files.getFile("sfile4");
         MultipartFile sfile5 = files.getFile("sfile5");
 
-        // 다른 폼 필드 처리
-        Lecture lecture = new Lecture();
-        lecture.setNo(Integer.parseInt(files.getParameter("no")));
+        // 기존의 값을 가져와서 수정된 정보들 대입
+        Lecture lecture = lectureService.getLecture(Integer.parseInt(files.getParameter("no")));
         lecture.setCate(files.getParameter("cate"));
         lecture.setSlevel(files.getParameter("level1") + " " + files.getParameter("level2"));
         lecture.setTitle(files.getParameter("title"));
-        lecture.setContent(files.getParameter("content"));
+        lecture.setContent(files.getParameter("content").trim());
         lecture.setIno(Integer.parseInt(files.getParameter("ino")));
 
         // 개발 서버 파일 저장 경로
@@ -338,14 +337,13 @@ public class LectureController {
         // 실제 서버 파일 저장 경로
         String uploadSev = req.getRealPath("/resources/upload/");
 
-        // 실제 파일 이름 db 저장
-        LecFile lecFile = new LecFile();
-
         // 기존 파일 이름 가져오기
         int no = lecture.getNo();
         Lecture lecture2 = lectureService.getLecture(no);
 
         if (!simg.isEmpty()) {
+            // 실제 파일 이름 db 저장
+            LecFile lecFile = new LecFile();
             String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
             String OriginalFilename = simg.getOriginalFilename();
             String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
@@ -353,7 +351,7 @@ public class LectureController {
             lecture.setSimg(RandomFileName);
 
             try {
-                simg.transferTo(new File(uploadDir + RandomFileName));
+//                simg.transferTo(new File(uploadDir + RandomFileName));
                 simg.transferTo(new File(uploadSev + RandomFileName));
                 int check = lectureService.selectLecFileCheck(lecture2.getSimg());
                 if(check > 0) { // 이미 파일이 있는경우
@@ -362,20 +360,19 @@ public class LectureController {
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.updateLecFile(lecFile);
-                } else { // 이미 파일이 없는 경우
+                } else { // 파일이 없는 경우
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.setLecFile(lecFile);
-                    lectureService.updateLecFile(lecFile);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
-        } else {
-            lecture.setSimg(lecture2.getSimg());
         }
 
         if (!sfile1.isEmpty()) {
+            // 실제 파일 이름 db 저장
+            LecFile lecFile = new LecFile();
             String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
             String OriginalFilename = sfile1.getOriginalFilename();
             String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
@@ -383,7 +380,7 @@ public class LectureController {
             lecture.setSfile1(RandomFileName);
 
             try {
-                sfile1.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile1.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile1.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 int check = lectureService.selectLecFileCheck(lecture2.getSfile1());
                 if(check > 0) { // 이미 파일이 있는경우
@@ -392,20 +389,19 @@ public class LectureController {
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.updateLecFile(lecFile);
-                } else { // 이미 파일이 없는 경우
+                } else { // 파일이 없는 경우
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.setLecFile(lecFile);
-                    lectureService.updateLecFile(lecFile);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
-        } else {
-            lecture.setSfile1(lecture2.getSfile1());
         }
 
         if (!sfile2.isEmpty()) {
+            // 실제 파일 이름 db 저장
+            LecFile lecFile = new LecFile();
             String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
             String OriginalFilename = sfile2.getOriginalFilename();
             String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
@@ -413,7 +409,7 @@ public class LectureController {
             lecture.setSfile2(RandomFileName);
 
             try {
-                sfile2.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile2.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile2.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 int check = lectureService.selectLecFileCheck(lecture2.getSfile2());
                 if(check > 0) { // 이미 파일이 있는경우
@@ -422,20 +418,19 @@ public class LectureController {
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.updateLecFile(lecFile);
-                } else { // 이미 파일이 없는 경우
+                } else { // 파일이 없는 경우
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.setLecFile(lecFile);
-                    lectureService.updateLecFile(lecFile);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
-        } else {
-            lecture.setSfile2(lecture2.getSfile2());
         }
 
         if (!sfile3.isEmpty()) {
+            // 실제 파일 이름 db 저장
+            LecFile lecFile = new LecFile();
             String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
             String OriginalFilename = sfile3.getOriginalFilename();
             String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
@@ -443,7 +438,7 @@ public class LectureController {
             lecture.setSfile3(RandomFileName);
 
             try {
-                sfile3.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile3.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile3.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
                 int check = lectureService.selectLecFileCheck(lecture2.getSfile3());
                 if(check > 0) { // 이미 파일이 있는경우
@@ -452,20 +447,19 @@ public class LectureController {
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.updateLecFile(lecFile);
-                } else { // 이미 파일이 없는 경우
+                } else { // 파일이 없는 경우
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.setLecFile(lecFile);
-                    lectureService.updateLecFile(lecFile);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
-        }  else {
-            lecture.setSfile3(lecture2.getSfile3());
         }
 
         if (!sfile4.isEmpty()) {
+            // 실제 파일 이름 db 저장
+            LecFile lecFile = new LecFile();
             String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
             String OriginalFilename = sfile4.getOriginalFilename();
             String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
@@ -473,29 +467,28 @@ public class LectureController {
             lecture.setSfile4(RandomFileName);
 
             try {
-                sfile4.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile4.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile4.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int check = lectureService.selectLecFileCheck(lecture2.getSfile3());
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile4());
                 if(check > 0) { // 이미 파일이 있는경우
                     int no2 = lectureService.selectLecFile(lecture2.getSfile4());
                     lecFile.setNo(no2);
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.updateLecFile(lecFile);
-                } else { // 이미 파일이 없는 경우
+                } else { // 파일이 없는 경우
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.setLecFile(lecFile);
-                    lectureService.updateLecFile(lecFile);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
-        }  else {
-            lecture.setSfile4(lecture2.getSfile4());
         }
 
         if (!sfile5.isEmpty()) {
+            // 실제 파일 이름 db 저장
+            LecFile lecFile = new LecFile();
             String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
             String OriginalFilename = sfile5.getOriginalFilename();
             String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
@@ -503,26 +496,23 @@ public class LectureController {
             lecture.setSfile5(RandomFileName);
 
             try {
-                sfile5.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
+//                sfile5.transferTo(new File(uploadDir + RandomFileName)); // 개발 서버용
                 sfile5.transferTo(new File(uploadSev + RandomFileName)); // 운영 서버용
-                int check = lectureService.selectLecFileCheck(lecture2.getSfile3());
+                int check = lectureService.selectLecFileCheck(lecture2.getSfile5());
                 if(check > 0) { // 이미 파일이 있는경우
                     int no2 = lectureService.selectLecFile(lecture2.getSfile5());
                     lecFile.setNo(no2);
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.updateLecFile(lecFile);
-                } else { // 이미 파일이 없는 경우
+                } else { // 파일이 없는 경우
                     lecFile.setSfile(RandomFileName);
                     lecFile.setRealName(OriginalFilename);
                     lectureService.setLecFile(lecFile);
-                    lectureService.updateLecFile(lecFile);
                 }
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리
             }
-        } else {
-            lecture.setSfile5(lecture2.getSfile5());
         }
 
         lectureService.updateLecture(lecture);

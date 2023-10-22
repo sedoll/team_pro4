@@ -57,19 +57,6 @@
                                     <script>
                                         var lecStartDate = new Date("${myclass.lecStudystart}");
                                         var lecEndDate = new Date("${myclass.lecStudyend}");
-
-                                        var formattedStartDate = lecStartDate.toLocaleDateString();
-                                        var formattedEndDate = lecEndDate.toLocaleDateString();
-
-                                        document.write(formattedStartDate + " - <br>" + formattedEndDate);
-                                    </script>
-                                </div>
-
-
-                                <div class="lecday" style="width: 10%;">
-                                    <script>
-                                        var lecStartDate = new Date("${myclass.lecStudystart}");
-                                        var lecEndDate = new Date("${myclass.lecStudyend}");
                                         var formattedStartDate = lecStartDate.toLocaleDateString();
                                         var formattedEndDate = lecEndDate.toLocaleDateString();
                                         document.write(formattedStartDate + " - <br>" + formattedEndDate);
@@ -90,7 +77,7 @@
 
                                 <div class="study" style="width: 10%">
                                     <button type="button" class="button is-info"
-                                            onclick="location.href='${path14}/myclass/myclassDetail?no=${myclass.lec_no}' ">
+                                            onclick="location.href='${path14}/myclass/myclassDetail.do?no=${myclass.lec_no}' ">
                                         학습
                                     </button>
                                 </div>

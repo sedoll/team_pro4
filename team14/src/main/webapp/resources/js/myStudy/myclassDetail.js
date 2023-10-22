@@ -1,10 +1,11 @@
+// region 강의 목차 datatables 코드
 $(document).ready( function () {
     let $table = $('#myTable2').DataTable({
         //search 창 오른쪽 상단으로 이동
         "dom": '<"top"i>rt<"bottom"flp><"clear">',
 
         pageLength : 5,
-        order: [[2, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
+        order: [[0, 'asc']], // 0번째 컬럼을 기준으로 내림차순 정렬
         info: false,
         lengthChange: false, // show entries 제거
         language: {
@@ -30,3 +31,4 @@ $(document).ready( function () {
         $table.columns(Number($('#select_filter2').val())).search($value).draw();
     })
 });
+// endregion
