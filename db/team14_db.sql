@@ -28,7 +28,7 @@ CREATE TABLE member(
 	cnt INT DEFAULT 0, -- 방문횟수,
 	login_tp_cd INT DEFAULT 1, -- 로그인 타입 1: 일반 2: 카카오 3: 네이버
 	state_cd INT DEFAULT 1, -- 상태코드 1: 정상 2: 신고정지 3: 탈퇴 4: 휴면
-	job INT DEFAULT 1,
+	job INT DEFAULT 1
 );
 -- ALTER TABLE member add COLUMN job INT;
 
@@ -41,56 +41,28 @@ CREATE TABLE member(
 INSERT INTO member VALUES(
 'admin', '1234', '관리자', 'admin@edu.com', '010-1234-5678', 
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
-	DEFAULT, DEFAULT,DEFAULT);
+	DEFAULT, DEFAULT, DEFAULT, DEFAULT, 0);
 
+-- 일반 회원
 INSERT INTO member VALUES(
 'oh1234', '1234', '오세훈', 'do11anm@naver.com', '010-1234-5678', 
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
-	DEFAULT, DEFAULT,DEFAULT);
-	
-UPDATE member SET email='admin@edu.com' WHERE email='do11anm@naver.com';
-UPDATE member SET email='jk3473@naver.com' WHERE id='admin';
-UPDATE member SET email='spospotv@naver.com' WHERE email='kooyj92@naver.com';
-
-INSERT INTO member VALUES(
-'ku1234', '1234', '구예진', 'kooyj92@naver.com', '010-1234-5678', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
-	DEFAULT, DEFAULT, DEFAULT);
-
--- 학생
+	DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1);
 INSERT INTO member VALUES(
 'hong', '1234', '홍길동', 'hong@edu.com', '010-2222-3333', 
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1980-04-22',
-	DEFAULT, DEFAULT, 1);
+	DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1);
 	INSERT INTO member VALUES(
 'kang', '1234', '강감찬', 'kang@edu.com', '010-1212-1212', 
 	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1975-04-22',
-	DEFAULT, DEFAULT, 1);
-
--- 선생
-INSERT INTO member VALUES(
-'son', '1234', '손흥민', 'son@edu.com', '010-5555-6666', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1983-04-22',
-	DEFAULT, DEFAULT, 2);
-	INSERT INTO member VALUES(
-'lee', '1234', '이순신', 'lee@edu.com', '010-3434-3434', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1990-04-22',
-	DEFAULT, DEFAULT, 2);
-
-INSERT INTO member VALUES(
-'user', '1234', '김유저', 'user1@edu.com', '010-1234-5678', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
-	DEFAULT, DEFAULT,DEFAULT);
+	DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1);
 
 -- 비밀번호 1234 spring 암호화 버전
-UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi'
-
 UPDATE member SET pw='$2a$10$3zl8fmNyd1IsP1Ru0TNVee9AMtpM9E7yz5ZR9Qiofbj8zqqjJiqIi' WHERE pw='1234';
 
-
-
+-- 자유 게시판
 CREATE TABLE board(
-	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
+	bno INT PRIMARY KEY AUTO_INCREMENT, -- 글 번호
 	title VARCHAR(200) NOT NULL, -- 제목
 	content VARCHAR(1000), -- 내용
 	author VARCHAR(16), -- 작성자
@@ -131,31 +103,6 @@ INSERT INTO board(title, content, author, lev, par) VALUES('댓글', '댓글내�
 
 select * from board where par = 7 and lev = 1 order by resdate DESC;
 
-
-CREATE TABLE board_tea(
-	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
-	title VARCHAR(200) NOT NULL, -- 제목
-	content VARCHAR(1000), -- 내용
-	author VARCHAR(16), -- 작성자
-	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
-	cnt INT DEFAULT 0, -- 조회수
-	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
-	par INT, -- 부모 게시글 번호
-	FOREIGN KEY(author) REFERENCES member(id) ON DELETE CASCADE -- 작성자를 member id를 이용해 외래키로 사용
-);
-
-CREATE TABLE board_par(
-	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
-	title VARCHAR(200) NOT NULL, -- 제목
-	content VARCHAR(1000), -- 내용
-	author VARCHAR(16), -- 작성자
-	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
-	cnt INT DEFAULT 0, -- 조회수
-	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
-	par INT, -- 부모 게시글 번호
-	FOREIGN KEY(author) REFERENCES member(id) ON DELETE CASCADE -- 작성자를 member id를 이용해 외래키로 사용
-);
-
 -- 공지사항(notice) 테이블 생성
 create table notice(
 	no int primary KEY AUTO_INCREMENT, -- notice 글 번호
@@ -166,7 +113,6 @@ create table notice(
 );
 
 -- 공지사항 더미글 추가 10건
-
 INSERT INTO notice(title, content) VALUES ('공지사항1', '공지사항1 더미글입니다.');
 INSERT INTO notice(title, content) VALUES ('공지사항2', '공지사항2 더미글입니다.');
 INSERT INTO notice(title, content) VALUES ('공지사항3', '공지사항3 더미글입니다.');
@@ -236,9 +182,6 @@ CREATE TABLE info_uni(
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
 
-INSERT INTO free(title, content, author) VALUES('본문 제목1', '본문 내용1', 'admin');
-
-
 -- qna
 CREATE TABLE qna(
 	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
@@ -260,7 +203,7 @@ CREATE TABLE school(
 	eo_name VARCHAR(100), -- 교육청 이름
 	sc_code VARCHAR(50), -- 학교 코드
 	sc_name VARCHAR(100) -- 학교 이름
-	);
+);
 
 -- 자료실 db
 CREATE TABLE fileobj (
@@ -401,20 +344,6 @@ CREATE TABLE lecfile (
 	realname VARCHAR(250) -- 실제 파일 이름
 )
 
-
--- 수강(수강코드(PK), 강의코드(FK), 학생아이디(FK), 수강총시간, 수강완료 여부)
--- DROP table course;
-CREATE TABLE course(
-	NO INT PRIMARY KEY AUTO_INCREMENT,
-	lec_no INT,
-	sid VARCHAR(20),
-	CHECK1 VARCHAR(10)
-	-- FOREIGN KEY(lec_no) REFERENCES lecture(no), 
-	-- FOREIGN KEY(sid) REFERENCES member(id)
-	);
-
--- payment 
-
 -- 교재(교재코드(PK), 교재명, 교재목차, 출판사, 출판일, 저자, 가격, 기타메모)
 CREATE TABLE textbook(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
@@ -451,9 +380,11 @@ CREATE TABLE payment(
 	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 결제 일
 	buydate TIMESTAMP, -- 구매 확정 일
 	pt int, -- 결제 하면서 사용한 포인트
+	enddate TIMESTAMP, -- 수강일 한도
 	FOREIGN KEY(lec_no) REFERENCES lecture(NO),
 	FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
 );
+-- ALTER table payment ADD COLUMN enddate TIMESTAMP;
 
 -- 추천(좋아요) 기능 테이
 create table boardlikes (
@@ -463,9 +394,7 @@ create table boardlikes (
     PRIMARY KEY (userid, boardno)   -- 사용자 ID와 게시글 no 조합으로 각 레코드를 유일하게 식별
 );
 
-db수정 및 추가
-
-======= course 테이블에 데이터 타입 수정 ==============
+-- course 테이블에 데이터 타입 수정
 CREATE TABLE course(
 	NO INT PRIMARY KEY AUTO_INCREMENT,
 	lec_no INT, -- 강의코드(FK)
@@ -478,26 +407,26 @@ CREATE TABLE course(
 
 -- myclass 뷰테이블 추가 (나의 학습방 데이터) 
 -- myclass 뷰 생성
--- DROP VIEW myclass; 
-CREATE VIEW myclass  AS
-SELECT 
-    c.sid AS id, 
-    c.lec_no AS lec_no, 
+DROP VIEW myclass; 
+CREATE VIEW myclass AS
+SELECT DISTINCT
+    p.id AS id, 
+    p.lec_no AS lec_no, 
     l.cate AS lecCate, 
     l.title AS lecTitle, 
-    l.studystart AS lecStudystart, 
-    l.studyend AS lecStudyend,  
-    ins.name AS insName,
-   c.CHECK1 AS ck
+    p.buydate AS lecStudystart, 
+    p.enddate AS lecStudyend,  
+    ins.NAME AS insName,
+    c.CHECK1 AS ck
 FROM 
-    course c   
-JOIN
-	member m ON c.sid = m.id	   
+    course c
 JOIN 
-   lecture l ON c.lec_no = l.NO     
+    lecture l ON c.lec_no = l.NO     
 JOIN 
-   instructor ins ON l.ino = ins.NO;
-
+    instructor ins ON l.ino = ins.NO
+LEFT JOIN
+    payment p ON p.lec_no = l.NO
+WHERE p.id IS NOT NULL AND p.buydate IS NOT NULL AND p.enddate IS NOT null;
 
 -- 강의 배정
 -- 과목, 강사, 교재 정보를 강의 테이블에 등록하는 행위

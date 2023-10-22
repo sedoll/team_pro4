@@ -1,11 +1,9 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.CourseService;
-import kr.ed.haebeop.service.InstService;
-import kr.ed.haebeop.service.LectureService;
-import kr.ed.haebeop.service.MyclassService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.DateCalculator;
+import kr.ed.haebeop.util.VideoTimeCut;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -41,6 +36,9 @@ public class MyclassController {
 
     @Autowired
     private InstService instService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @Autowired
     HttpSession session;
@@ -129,9 +127,67 @@ public class MyclassController {
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
 
         /* 1. 강의소개 메뉴 */
-        /* 2. 강의목차 메뉴 */
 
         model.addAttribute("myclassList", myclassList);
+
+        // region 2. 강의목차 메뉴
+        Lecture lecture = lectureService.getLecture(no); // 강의 정보 추출
+        List<String> videoList = new ArrayList<>(); // 비디오 이름 받기
+        List<String> videoList2 = new ArrayList<>(); // 실제 저장된 UUID 비디오 이름
+        List<String> vtl = new ArrayList<>(); // 비디오 길이 추출
+        Instructor inst = instService.getInstructorName(lecture.getIno());
+        
+        // 서버 절대경로 주소
+//        String path = req.getSession().getServletContext().getRealPath("/");
+//        String path2 = req.getContextPath();
+//        path = path.replace("\\", "/");
+//        path2 = path2.replace("\\", "/");
+
+        if(lecture.getSfile2()!=null) {
+            String sfileName = lecture.getSfile2();
+            String realName = lectureService.getLecFileName(sfileName);
+            videoList.add(realName);
+            videoList2.add(sfileName);
+//            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
+//            vtl.add(t);
+        }
+        if(lecture.getSfile3()!=null) {
+            String sfileName = lecture.getSfile3();
+            String realName = lectureService.getLecFileName(sfileName);
+            videoList.add(realName);
+            videoList2.add(sfileName);
+//            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
+//            vtl.add(t);
+        }
+        if(lecture.getSfile4()!=null) {
+            String sfileName = lecture.getSfile4();
+            String realName = lectureService.getLecFileName(sfileName);
+            videoList.add(realName);
+            videoList2.add(sfileName);
+//            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
+//            vtl.add(t);
+        }
+        if(lecture.getSfile5()!=null) {
+            String sfileName = lecture.getSfile5();
+            String realName = lectureService.getLecFileName(sfileName);
+            videoList.add(realName);
+            videoList2.add(sfileName);
+//            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
+//            vtl.add(t);
+        }
+
+        System.out.println(videoList);
+        System.out.println(videoList2);
+        System.out.println(lecture);
+        System.out.println(inst);
+        System.out.println(vtl);
+
+//        model.addAttribute("vtl", vtl);
+        model.addAttribute("videoList", videoList);
+        model.addAttribute("videoList2", videoList2);
+        model.addAttribute("lecture", lecture);
+        model.addAttribute("inst", inst);
+        // endregion
 
         return "myclass/myclassDetail";
     }
@@ -152,11 +208,11 @@ public class MyclassController {
         return "redirect:/myclass/myclassIntro";
     }
 
-    @RequestMapping("/myclass/myclassIntro")
-    public ModelAndView intro(HttpServletRequest request){
-
-        return
-    }
+//    @RequestMapping("/myclass/myclassIntro")
+//    public ModelAndView intro(HttpServletRequest request){
+//
+//        return
+//    }
 
 
     // 강의 영상 보기
