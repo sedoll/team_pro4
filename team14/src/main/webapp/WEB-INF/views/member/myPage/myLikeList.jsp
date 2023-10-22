@@ -58,12 +58,12 @@
                         <thead>
                         <tr>
                             <th style="width: 6%">No</th>
-                            <th style="width: 14%">제목</th>
+                            <th style="width: 24%">분류</th>
+                            <th style="width: 40%">제목</th>
                             <th style="width: 20%">추천일</th>
                             <th style="width: 10%">비고</th>
                         </tr>
                         </thead>
-
                         <tbody>
                         <c:forEach items="${likeList}" var="like" varStatus="status">
                             <tr class="boardlist1">

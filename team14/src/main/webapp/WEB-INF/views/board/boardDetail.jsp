@@ -318,6 +318,7 @@
                                             }
                                         });
                                     }
+
                                 </script>
 
                                 <script>
@@ -390,6 +391,15 @@
                                 $(this).addClass("liked");
                             }
                         });
+
+                        let readable = ${dto.readable};
+
+                        console.log(readable);
+                        if(readable == true) {
+                            $("#contentSelect").val("true");
+                        } else {
+                            $("#contentSelect").val("false");
+                        }
                     });
                 </script>
 
@@ -477,9 +487,5 @@
     </footer>
 </div>
 </body>
-
-<script>
-
-</script>
 
 </html>
