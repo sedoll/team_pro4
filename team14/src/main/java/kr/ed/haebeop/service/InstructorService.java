@@ -12,5 +12,6 @@ public interface InstructorService {
     public List<InstructorNotice> getInstructorNoticeList(String instructorname);
     public InstructorNotice getInstructorNoticeDetail(int no);
     public Instructor getInstructorId(String instructorname);
+    public List<Instructor> getInstructorList();
 
 }

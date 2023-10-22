@@ -122,6 +122,7 @@ public class PaymentController {
         int pt = (int) Double.parseDouble(req.getParameter("pt"));
         member.setId(id);
         member.setPt(pt);
+
         paymentService.buyPayemnt(sno);
         Payment payment = paymentService.getPayment(sno);
         String buyDate = payment.getBuydate(); // 사용자가 강의를 구매한 날

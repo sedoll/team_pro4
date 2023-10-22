@@ -53,8 +53,6 @@
                                 <div class="leccate" style="width: 10%">${myclass.lecCate }</div>
                                 <div class="lectitle" style="width: 40%">${myclass.lecTitle }</div>
                                 <div class="insName" style="width: 10%">${myclass.insName }</div>
-
-
                                 <div class="lecday" style="width: 10%;">
                                     <script>
                                         var lecStartDate = new Date("${myclass.lecStudystart}");
@@ -79,7 +77,7 @@
 
                                 <div class="study" style="width: 10%">
                                     <button type="button" class="button is-info"
-                                            onclick="location.href='${path14}/myclass/myclassDetail?no=${myclass.lec_no}' ">
+                                            onclick="location.href='${path14}/myclass/myclassDetail.do?no=${myclass.lec_no}' ">
                                         학습
                                     </button>
                                 </div>

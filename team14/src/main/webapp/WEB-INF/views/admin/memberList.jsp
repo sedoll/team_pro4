@@ -84,7 +84,8 @@
                     <option value="2">이름</option>
                     <option value="3">전화번호</option>
                     <option value="4">이메일</option>
-                    <option value="5">가입일</option>
+                    <option value="5">직분</option>
+                    <option value="6">가입일</option>
                 </select>
                 <input type="text" name="search_filter" id="search_filter">
             </div>
@@ -96,6 +97,7 @@
                     <th>Name</th>
                     <th>Tel</th>
                     <th>Email</th>
+                    <th>Member Type</th>
                     <th>RegDate</th>
                 </tr>
                 </thead>
@@ -107,6 +109,7 @@
                         <td>${member.name}</td>
                         <td>${member.tel}</td>
                         <td>${member.email}</td>
+                        <td>${member.job == 1 ? '일반회원' : (member.job == 2 ? '선생님' : '-')}</td>
                         <td>
                             <fmt:parseDate value="${member.regdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                             <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" />
@@ -122,7 +125,7 @@
                         "dom": '<"top"i>rt<"bottom"flp><"clear">',
 
                         pageLength : 5,
-                        order: [[2, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
+                        order: [[0, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
                         info: false,
                         lengthChange: false, // show entries 제거
                         language: {

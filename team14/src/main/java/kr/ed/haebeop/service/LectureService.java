@@ -45,6 +45,9 @@ public class LectureService {
     // 기존 파일의 no 출력
     public int selectLecFile(String sfile) {return lectureMapper.selectLecFile(sfile);}
 
+    // 현재 파일이 있는지 없는지 확인
+    public int selectLecFileCheck(String sfile) {return lectureMapper.selectLecFileCheck(sfile);}
+
     // 파일의 실제 이름 출력
     public String getLecFileName(String sfile) {return lectureMapper.getLecFileName(sfile);}
 
