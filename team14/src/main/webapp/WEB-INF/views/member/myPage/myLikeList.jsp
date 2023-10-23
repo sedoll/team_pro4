@@ -72,7 +72,7 @@
                                         href="${path14}/board/detail.do?bno=${like.bno}">${like.title}</a></td>
                                 <td><fmt:parseDate value="${like.liketime}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                                     <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" /></td>
-                                <td><a href="${path14}/member/myLikeRemove.do?bno=${like.bno}&category=${boardlist.board_type}" style="background-color: #5ab3fc; color: white; border-radius: 4px; padding: 6px">취소</a></td>
+                                <td><a href="${path14}/member/myLikeRemove.do?bno=${like.bno}" style="background-color: #5ab3fc; color: white; border-radius: 4px; padding: 6px">취소</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

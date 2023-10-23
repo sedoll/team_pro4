@@ -777,23 +777,29 @@ public class MemberController {
 
     @GetMapping("myLikeRemove.do")
     public String myLikeRemove(HttpServletRequest request, Model model) throws Exception {
-        String id = request.getParameter("id");
+        String id = (String) session.getAttribute("sid");
         int bno = Integer.parseInt(request.getParameter("bno"));
-        String category = request.getParameter("category");
+//        String category = request.getParameter("category");
 
-        if (category.equals("board")) {
-            memberService.boardLikeRemove(bno);
-            return "redirect:myLikeList.do";
-        } else if (category.equals("boardTea")) {
-            memberService.teaLikeRemove(bno);
-            return "redirect:myLikeList.do";
-        } else if (category.equals("boardPar")) {
-            memberService.parLikeRemove(bno);
-            return "redirect:myLikeList.do";
-        } else {
-            return "redirect:myLikeList.do";
-        }
+        Like like=new Like();
+        like.setUserId(id);
+        like.setBoardNo(bno);
 
+        boardService.removeLike(like);
+
+//        if (category.equals("board")) {
+//            memberService.boardLikeRemove(bno);
+//            return "redirect:myLikeList.do";
+//        } else if (category.equals("boardTea")) {
+//            memberService.teaLikeRemove(bno);
+//            return "redirect:myLikeList.do";
+//        } else if (category.equals("boardPar")) {
+//            memberService.parLikeRemove(bno);
+//            return "redirect:myLikeList.do";
+//        } else {
+//            return "redirect:myLikeList.do";
+//        }
+        return "redirect:myLikeList.do";
     }
 
 }
