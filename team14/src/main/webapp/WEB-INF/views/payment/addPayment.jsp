@@ -135,6 +135,7 @@
                                 <div class="field-body">
                                     <div class="field">
                                         <div class="control">
+                                            <input type="text" value="사용 가능 포인트 : ${member.pt}" readonly>
                                             <input type="number" name="pt" id="point" value="0" max="${member.pt}">
                                             <div class="help is-danger" id="point-check"></div>
                                         </div>
@@ -306,7 +307,9 @@
             // 포인트가 제대로 됐는지 체크
             var point = $('#point').val();
             var maxPoint = $('#point').attr('max');
-            if(point > maxPoint) {
+            console.log(point);
+            console.log(maxPoint);
+            if(parseInt(point) > parseInt(maxPoint)) {
                 alert("사용할 포인트를 수정해주세요");
                 $("#point").focus();
                 return false;
