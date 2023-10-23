@@ -11,4 +11,6 @@ public interface NoticeService {
     public void noticeDelete(int no) throws Exception;
     public void noticeEdit(Notice dto) throws Exception;
     public void countUp(int no) throws Exception;
+
+
 }

@@ -25,5 +25,9 @@ public class MyclassService {
     }
 
 
+    // 수강신청한 강좌 중 선택한 강의의 정보 selectone
+    public List<MyClassVO> gettakingClassList(int lec_no) throws Exception{
+        return myclassMapper.gettakingClassList(lec_no);
+    }
 
 }

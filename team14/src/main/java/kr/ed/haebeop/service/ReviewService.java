@@ -1,6 +1,8 @@
 package kr.ed.haebeop.service;
 
+import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.domain.Review;
+import kr.ed.haebeop.domain.ReviewVO;
 import kr.ed.haebeop.persistence.ReviewMapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +39,16 @@ public class ReviewService {
 
     // 평균 점수
     public String avgScore(int par) {return reviewMapper.avgScore(par);}
+
+    // 관리자가 리뷰 삭제
+    public void adminbDeleteReview(int no) {reviewMapper.adminbDeleteReview(no);}
+
+    // 리뷰 신고 추가
+    public void insertReportReview(Report report) {reviewMapper.insertReportReview(report);}
+
+    // 리뷰 신고 글 수
+    public int selectCheckReportCnt(Report report) { return reviewMapper.selectCheckReportCnt(report);}
+
+    // 리뷰 신고 목록
+    public List<ReviewVO> reviewReportList() {return reviewMapper.reviewReportList();}
 }
