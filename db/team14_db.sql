@@ -70,6 +70,7 @@ CREATE TABLE board(
 	cnt INT DEFAULT 0, -- 조회수
 	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
 	par INT, -- 부모 게시글 번호
+	readable boolean default false,
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
@@ -281,9 +282,17 @@ CREATE TABLE instructor(
 	email VARCHAR(100), -- 선생님 이메일
 	intro VARCHAR(1000), -- 선생님 소개글
 	cate VARCHAR(20), -- 선생님 담당 과목
-	img VARCHAR(1000) -- 선생님 프로필 이미지
+	img VARCHAR(1000), -- 선생님 프로필 이미지
+	id VARCHAR(50), -- 선생님 아이디
+	FOREIGN KEY(id) REFERENCES member(id) ON DELETE 		
+		CASCADE -- 선생님 아이디 외래키
 );
-	
+
+-- instructor 선생님 테이블 컬럼 추가
+-- ALTER TABLE instructor
+-- ADD COLUMN id VARCHAR(50),
+-- ADD FOREIGN KEY (id) REFERENCES member(id);
+
 INSERT INTO instructor VALUES(DEFAULT, '강감찬', '01011111111', 'kang@edu.com');
 INSERT INTO instructor VALUES(DEFAULT, '홍길동', '01022222222', 'hong@edu.com');
 INSERT INTO instructor VALUES(DEFAULT, '이순신', '01033333333', 'lee@edu.com');

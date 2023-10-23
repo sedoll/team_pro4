@@ -17,6 +17,11 @@
 
     <!-- 플러그인 연결-->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <%-- cleditor --%>
+    <script type="text/javascript" src="${path }/resources/cleditor/jquery.cleditor.js"></script>
+    <link rel="stylesheet" href="${path }/resources/cleditor/jquery.cleditor.css">
+
     <!-- 스타일 초기화 -->
     <link rel="stylesheet" href="../css/reset.css">
     <!-- 웹 폰트 -->
@@ -68,6 +73,11 @@
                             <th style="background-color:#dcdcdc">글 내용</th>
                             <td>
                                 <textarea name="content" id="content" class="textarea" placeholder="내용 입력" rows="8" cols="100" maxlength="900" required>${dto.content}</textarea>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#content").cleditor();
+                                    });
+                                </script>
                             </td>
                         </tr>
                         <tr>

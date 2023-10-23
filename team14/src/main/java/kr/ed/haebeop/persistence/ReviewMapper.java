@@ -38,4 +38,8 @@ public interface ReviewMapper {
     // 리뷰 삭제
     @Delete("delete from review where id=#{id} and par=#{par}")
     public void deleteReview(Review review);
+
+    // 평균 점수
+    @Select("select AVG(score) from review where par=#{par}")
+    public String avgScore(int par);
 }

@@ -738,12 +738,16 @@ public class MemberController {
 
     @GetMapping("myReportCancel.do")
     public String myReportCancel(HttpServletRequest request, Model model) throws Exception {
-        String id = request.getParameter("id");
+        String id = (String) session.getAttribute("sid");
         int bno = Integer.parseInt(request.getParameter("bno"));
         String category = request.getParameter("category");
 
+        Report report = new Report();
+        report.setReporter(id);
+        report.setBoard_bno(bno);
+
         if (category.equals("board")) {
-            memberService.boardReportCancel(bno);
+            memberService.boardReportCancel(report);
             return "redirect:myReportList.do";
         } else if (category.equals("boardTea")) {
             memberService.teaReportCancel(bno);
@@ -753,6 +757,37 @@ public class MemberController {
             return "redirect:myReportList.do";
         } else {
             return "redirect:myReportList.do";
+        }
+
+    }
+
+    //추천한 게시글 목록
+    @GetMapping("myLikeList.do")
+    public String myLikeList(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        List<BoardLikes> boardList = memberService.myLikeList(id);
+        model.addAttribute("likeList", boardList);
+        System.out.println(boardList.toString());
+        return "/member/myPage/myLikeList";
+    }
+
+    @GetMapping("myLikeRemove.do")
+    public String myLikeRemove(HttpServletRequest request, Model model) throws Exception {
+        String id = request.getParameter("id");
+        int bno = Integer.parseInt(request.getParameter("bno"));
+        String category = request.getParameter("category");
+
+        if (category.equals("board")) {
+            memberService.boardLikeRemove(bno);
+            return "redirect:myLikeList.do";
+        } else if (category.equals("boardTea")) {
+            memberService.teaLikeRemove(bno);
+            return "redirect:myLikeList.do";
+        } else if (category.equals("boardPar")) {
+            memberService.parLikeRemove(bno);
+            return "redirect:myLikeList.do";
+        } else {
+            return "redirect:myLikeList.do";
         }
 
     }
