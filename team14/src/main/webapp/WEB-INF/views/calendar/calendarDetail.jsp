@@ -34,9 +34,9 @@
                             <c:when test="${calendar.groupId == 1}">
                                 <c:out value="수업 수강 관련"/>
                             </c:when>
-                            <c:when test="${calendar.groupId == 2}">
+                            <c:otherwise>
                                 <c:out value="개인 일정 관련"/>
-                            </c:when>
+                            </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>
@@ -47,10 +47,6 @@
                     <tr>
                         <th>일정 내용</th>
                         <td class="data">${calendar.content}</td>
-                    </tr>
-                    <tr>
-                        <th>작성자</th>
-                        <td class="data">${calendar.writer}</td>
                     </tr>
                     <tr>
                         <th>시작일</th>
