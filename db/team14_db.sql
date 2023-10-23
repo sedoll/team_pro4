@@ -426,7 +426,25 @@ JOIN
     instructor ins ON l.ino = ins.NO
 LEFT JOIN
     payment p ON p.lec_no = l.NO
-WHERE p.id IS NOT NULL AND p.buydate IS NOT NULL AND p.enddate IS NOT null;
+WHERE p.id IS NOT NULL AND p.buydate IS NOT NULL AND p.enddate IS NOT NULL;
+
+create table calendar(
+	no INTEGER AUTO_INCREMENT PRIMARY KEY,
+	id VARCHAR(100) NOT null,
+	groupId integer,
+	title varchar(50) NOT null,
+	writer varchar(50),
+	content varchar(1000),
+	start date,
+	end date,
+	allDay integer,
+	textColor varchar(50),
+	backgroundColor varchar(50),
+	borderColor varchar(50)
+);
+
+-- 캘린더 더미 데이터
+INSERT INTO calendar(id, groupId, title, writer, content, START, END, textColor, backgroundColor, borderColor) VALUES ('kang', 1, 'hello', '강감찬', '더미내용', '2023-10-01', '2023-10-18', 'black', 'white', 'black');
 
 -- 강의 배정
 -- 과목, 강사, 교재 정보를 강의 테이블에 등록하는 행위

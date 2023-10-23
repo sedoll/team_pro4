@@ -7,6 +7,10 @@
     <select id="gradeList" resultType="kr.ed.haebeop.domain.Grade">
         select * from grade order by no asc
     </select>
+    <!-- 성적표(학생용) 목록 -->
+    <select id="sgradeList" resultType="kr.ed.haebeop.domain.Grade">
+        select * from grade where stuid = #{id} order by no asc
+    </select>
     <!-- 성적 상세보기  평균, 합계-->
     <select id="gradeDetail" resultType="kr.ed.haebeop.domain.Grade">
         select *, kor+math+eng+social+science as su, (kor+math+eng+social+science)/5 as av from grade where no=#{no}
@@ -23,13 +27,4 @@
     <update id="gradeEdit">
         update grade set exam=#{exam}, kor=#{kor}, math=#{math}, eng=#{eng}, social=#{social}, science=#{science} where no=#{no}
     </update>
-    <!-- 성적 합 -->
-    <select id="totGrade">
-        select sum(kor, math, eng, social, science) from grade where sname=#{sname}
-    </select>
-
-    <!-- 성적 평균 -->
-    <select id="avgGrade">
-        select avg(kor, math, eng, social, science) from grade where sname=#{sname}
-    </select>
 </mapper>
