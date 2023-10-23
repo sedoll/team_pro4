@@ -169,3 +169,5 @@ b
 2src/main/java/kr/ed/haebeop/util/VideoTimeCut.java,8\8\885bcb4ef982dd2ad2b012c514d780bce7f170ee
 b
 2src/main/webapp/WEB-INF/views/myclass/lecVideo.jsp,1\3\1351b53004b0da7ea2a870192e875b1fd447562a
+j
+:src/main/java/kr/ed/haebeop/persistence/MyclassMapper.java,1\7\17058b3d8b05cf7a21425abd8543944d6000523b

@@ -169,3 +169,5 @@ e
 5src/main/webapp/resources/js/myStudy/myclassDetail.js,a\e\ae97b9663ad4873198d091df8432d74aea43cd68
 b
 2src/main/java/kr/ed/haebeop/util/VideoTimeCut.java,8\8\885bcb4ef982dd2ad2b012c514d780bce7f170ee
+j
+:src/main/java/kr/ed/haebeop/persistence/MyclassMapper.java,1\7\17058b3d8b05cf7a21425abd8543944d6000523b
