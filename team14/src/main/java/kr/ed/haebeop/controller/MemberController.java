@@ -334,10 +334,9 @@ public class MemberController {
     }
 
     //회원 가입 - 회원가입폼 페이지 로딩
-    @PostMapping("join.do")
+    @GetMapping("join.do")
     public String getJoin(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-        String job = request.getParameter("job");
-        model.addAttribute("job", job);
+        model.addAttribute("job", "1");
         return "/member/join";
     }
 

@@ -77,6 +77,10 @@
             margin-left: 20px;
         }
 
+        a strong {
+            color: black;
+        }
+
         /*img {*/
         /*    margin-bottom: 20px;*/
         /*}*/
