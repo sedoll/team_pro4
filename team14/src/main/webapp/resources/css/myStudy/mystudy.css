@@ -6,7 +6,7 @@ Attention : utf-8 인코딩 꼭 지키기, 한글 안깨지게 하기!
 /* ==================== mystudy main : s  ==================== */
 .myStudySec01 {
     background: #e2ecf7 url(//cdndata.milkt.co.kr/high/www/Img_new/mystudy/bg_study_gnb.png) repeat-x left bottom;
-    border-bottom: 1px solid #e5e5e5;
+    /*border-bottom: 1px solid #e5e5e5;*/
     padding: 125px 0 0 0;
 }
 

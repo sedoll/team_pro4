@@ -10,7 +10,8 @@
     <link type="text/css" rel="stylesheet" href="${path21}/resources/css/myStudy/common.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="${path21}/resources/css/myStudy/mystudy.css" media="all"/>
     <link rel="stylesheet" href="${path21}/resources/css/myStudy/layout.css"/>
-    <script type="text/javascript" src="${path21}/resources/js/myStudy/common.js"></script>
+    <%--<script type="text/javascript" src="${path21}/resources/js/myStudy/common.js"></script>--%>
+    <link rel="stylesheet" href="${path21}/resources/css/header/header.css">
     <%--    <script type="text/javascript" src="${path21}/resources/js/myStudy/jquery-1.8.3.min.js"></script>--%>
 <style>
     #dep04{
@@ -47,13 +48,13 @@
 
                         </div>
                         <div class="info">
-                            <span class="name">구예진<em>님</em></span>
+                            <span class="name">${member.name}<em>님</em></span>
                             <ul class="infolist">
                                 <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급 :
                                     <span id="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1"><span
                                             class='ico grade06'>일반</span></span></li>
                                 <li class="point" onclick="document.location.href=''" style="cursor:pointer;">포인트 : <em>
-                                    1000</em>점
+                                    ${member.pt} </em>점
                                 </li>
                                 <li class="note" onclick="document.location.href=''" style="cursor:pointer;">새쪽지 : 0개
                                 </li>
@@ -169,35 +170,35 @@
         <!--// mystudyLry -->
         <div class="studyGnbArea">
             <ul class="studyGnb">
-                <li class="menu01" onfocus="menu_open('1');" onmouseover="menu_open('1');"><a href="" id="lnk0101">나의
+                <li class="menu01" onfocus="menu_open('1');" onmouseover="menu_open('1');"><a href="${path21}/myclass/myclassIndex.do"  id="lnk0101">나의
                     강의실</a>
-                    <ul class="dep02" id="dep01">
+                    <%--<ul class="dep02" id="dep01">
                         <li><a id="sub010101" href="">수강중인 강좌</a></li>
                         <li><a id="sub010102" href="">강좌 찾기</a></li>
                         <li><a id="sub010112" href="">수강 완료 강좌</a></li>
                         <li><a id="sub010103" href="">학습노트</a></li>
 
-                    </ul>
+                    </ul>--%>
                 </li>
 
                 <li class="menu02" onfocus="menu_open('2');" onmouseover="menu_open('2');"><a href="" id="lnk0111">나의
                     좋아요</a>
-                    <ul class="dep02" id="dep02">
+                    <%--<ul class="dep02" id="dep02">
                         <li><a id="sub011101" href="">서브메뉴</a></li>
                         <li><a id="sub011102" href="">서브메뉴</a></li>
                         <li><a id="sub011103" href="">서브메뉴</a></li>
                         <li><a id="sub011105" href="">서브메뉴</a></li>
                         <li><a id="sub011104" href="">서브메뉴</a></li>
-                    </ul>
+                    </ul>--%>
                 </li>
 
                 <li class="menu04" id="menu010701" onfocus="menu_open('4');" onmouseover="menu_open('4');"><a href=""
                                                                                                               id="lnk0107">내가
                     쓴 글</a>
-                    <ul class="dep02" id="dep04">
+                    <%--<ul class="dep02" id="dep04">
                         <li><a id="sub010714" href="">내가 쓴 글</a></li>
                         <li><a id="sub010712" href="">내가 남긴 댓글</a></li>
-                    </ul>
+                    </ul>--%>
                 </li>
                 <li class="menu05" onfocus="menu_open('5');" onmouseover="menu_open('5');"><a href="${path21}/grade/slist.do"id="lnk0130">성적표</a></li>
                 <li class="menu06" onfocus="menu_open('6');" onmouseover="menu_open('6');"><a href="${path21}/calendar/list.do"id="lnk1007">학습계획표</a></li>

@@ -123,7 +123,11 @@ input {
     color:  #000000;
 }
 #tab1:checked ~ #ud_tab-content1,
-#tab2:checked ~ #ud_tab-content2 {
+#tab2:checked ~ #ud_tab-content2,
+#tab3:checked ~ #ud_tab-content3,
+#tab4:checked ~ #ud_tab-content4,
+#tab5:checked ~ #ud_tab-content5,
+#tab6:checked ~ #ud_tab-content6{
     display: block;
 }
 
