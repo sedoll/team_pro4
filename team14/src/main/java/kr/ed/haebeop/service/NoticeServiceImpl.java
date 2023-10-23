@@ -1,6 +1,7 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Notice;
+import kr.ed.haebeop.persistence.MyclassMapper;
 import kr.ed.haebeop.repository.NoticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Autowired
     private NoticeRepository noticeRepository;
+
+    @Autowired
+    private MyclassMapper myclassMapper;
 
     @Override
     public List<Notice> noticeList() throws Exception {
@@ -42,4 +46,6 @@ public class NoticeServiceImpl implements NoticeService{
     public void countUp(int no) throws Exception {
 
     }
+
+
 }

@@ -25,6 +25,9 @@
     <link href="${path}/resources/css/myStudy/com_write.css" rel="stylesheet">
     <%--    <script type="text/javascript" src="${path}/resources/js/com_write.js" charset="UTF-8"></script>--%>
 
+
+
+
     <title>강의 상세보기</title>
 
     <style>
@@ -56,16 +59,32 @@
             background-color: #f2f2f2;
             font-weight: bold;
         }
+
+        #ud_tab-content1 th {
+            width: 170px;
+        }
+
+        #ud_tab-content1 td {
+            padding-right: 100px;
+        }
+
+        #myTable2{
+            font-size: 20px;
+        }
+
+
+
+
     </style>
 </head>
 <body>
+<jsp:include page="../include/header.jsp"></jsp:include>
 <div class="wrap">
-    <jsp:include page="../include/header.jsp"></jsp:include>
     <jsp:include page="./myclassTopbar.jsp"></jsp:include>
+
 
     <div class="content-wrap" style="display: flex;justify-content: center;">
         <div class="content-section">
-            <%--<h5 class="font"> 작성글관리 > </h5>--%>
             <br>
             <div class="content">
                 <div id="ud_tab" style="">
@@ -84,7 +103,60 @@
 
 
                     <%--강의 소개--%>
-                    <jsp:include page="./myclassIntro.jsp"></jsp:include>
+                    <div id="ud_tab-content1" class="ud_content">
+                        <h3> 강좌 정보 </h3>
+                        <table style="font-size: 25px">
+                            <c:forEach items="${takingList }" var="takingList" varStatus="status">
+                                <tr>
+                                    <th>강좌 제목</th>
+                                    <td> ${takingList.lecTitle }</td>
+                                </tr>
+
+                                <tr>
+                                    <th>강좌 설명</th>
+                                    <td>${takingList.lecContent }</td>
+                                </tr>
+
+                                <tr>
+                                    <th>강사</th>
+                                    <td>${takingList.insName }</td>
+                                </tr>
+
+                                <tr>
+                                    <th>대상 학년</th>
+                                    <td> ${takingList.slevel} </td>
+                                </tr>
+
+                                <tr>
+                                    <th>제작 강의수</th>
+                                    <td>${cnt}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>강좌 관심수</th>
+                                    <td> 강좌 관심수</td>
+                                </tr>
+
+                                <tr>
+                                    <th>평균 별점</th>
+                                    <c:choose>
+                                        <c:when test="${empty avg || avg eq ''}">
+                                            <td>0/5</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>${avg}/5</td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tr>
+
+                                <tr>
+                                    <th>관련 교재</th>
+                                    <td> 교재</td>
+                                </tr>
+                            </c:forEach>
+
+                        </table>
+                    </div>
 
 
                     <%--강의 목차--%>
@@ -107,7 +179,7 @@
                                 <th style="width: 50%; text-align: center">강의명</th>
                                 <th style="width: 10%; text-align: center">강의 과목</th>
                                 <th style="width: 10%; text-align: center">강사</th>
-<%--                                <th style="width: 10%; text-align: center">시간</th>--%>
+                                <%--                                <th style="width: 10%; text-align: center">시간</th>--%>
                                 <%--                                <th style="width: 10%; text-align: center">최근 학습일</th>--%>
                                 <%--                                <th style="width: 10%; text-align: center">학습 완료</th>--%>
                                 <th style="width: 10%; text-align: center">학습 하기</th>
@@ -122,7 +194,9 @@
                                     <td>${inst.name }</td>
                                         <%--                                    <td>${vtl.get(status.index)} 초</td>--%>
                                     <td>
-                                        <a href="javascript:void(0);" onclick="openVideoWindow('${path}/lecture/getLecVideo?sfile=${videoList2.get(status.index)}')" target="_blank">학습</a>
+                                        <a href="javascript:void(0);"
+                                           onclick="openVideoWindow('${path}/lecture/getLecVideo?sfile=${videoList2.get(status.index)}')"
+                                           target="_blank">학습</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -130,96 +204,140 @@
                         </table>
                     </div>
 
+
+
+
                     <%--공지사항--%>
                     <div id="ud_tab-content3" class="ud_content">
 
-                        <%--<h5> 공지사항 </h5>--%>
-                        <table>
-                            공지사항 페이지 입니다
+                        <div class="content" id="content">
+                            <div class="row column text-center">
+                                <div class="container">
+                                    <table id="myTable2">
+                                        <thead>
+                                        <tr>
+                                            <th width="80">No</th>
+                                            <th>Title</th>
+                                            <th width="120">RegDate</th>
+                                            <th width="100">Visited</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${instructorNotices}" var="notice" varStatus="status">
+                                            <tr>
+                                                <td>${status.count }</td>
+                                                <td><a href="${path14}/instructor/instructorNoticeDetail.do?noticeNo=${notice.no }&no=${instructor.no}">${notice.title }</a></td>
+                                                <td>
+                                                    <fmt:parseDate value="${notice.resdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                                    <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
+                                                </td>
+                                                <td>${notice.cnt }</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                    <c:if test='${sid eq "admin"}'>
+                                        <div class="button-group">
+                                            <a class="button is-link is-outlined" href="${path}/notice/insert.do">글쓰기</a>
+                                        </div>
+                                    </c:if>
 
-                            <thead>
+                                </div>
 
-                            <tr>
-                                <th style="width: 10%"></th>
-                                <th style="width: 65%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
-                            </tr>
-
-                            </thead>
-
-                            <%-- <tbody>
-                             <c:forEach items="${board_comlist }" var="board_comlist">
-                                 <tr class = "commentlist">
-                                     <td>${board_comlist.content}</td>
-                                     <td>${board_comlist.write_date}</td>
-                                     <td><button type="button" class ="origin" onclick="location.href='${path}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                 </tr>
-
-                             </c:forEach>
-                             </tbody>--%>
-                        </table>
+                            </div>
+                        </div>
                     </div>
+
+
+
+
+
+
 
                     <%--QnA--%>
                     <div id="ud_tab-content4" class="ud_content">
 
-                        <%--<h5> 수강 후기 </h5>--%>
-                        <table>
-                            QnA 페이지 입니다
-                            <thead>
+                        <div class="container">
+                            <table id="myTable2">
+                                <thead>
+                                <tr>
+                                    <th width="80">No</th>
+                                    <th>제목</th>
+                                    <th width="120">등록일</th>
+                                    <th width="100">조회수</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${qnaList }" var="board" varStatus="status">
+                                    <tr>
+                                        <td>${status.count }</td>
+                                        <c:choose>
+                                            <c:when test="${empty board.pw || board.pw eq ''}">
+                                                <td><a href="${path}/qna/detail.do?bno=${board.bno}">${board.title}</a>
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>
+                                                    <a href="${path}/qna/qnapw.do?bno=${board.bno}">[비밀글] ${board.title}</a>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <td>
+                                            <fmt:parseDate value="${board.resdate }" var="resdate"
+                                                           pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
+                                        </td>
+                                        <td>${board.cnt }</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                            <c:if test='${not empty sid}'>
+                                <div class="button-group">
+                                    <a class="button is-link is-outlined" href="${path}/qna/insert.do">글쓰기</a>
+                                </div>
+                            </c:if>
 
-                            <tr>
-                                <th style="width: 10%"></th>
-                                <th style="width: 65%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
-                            </tr>
-
-                            </thead>
-
-                            <%-- <tbody>
-                             <c:forEach items="${board_comlist }" var="board_comlist">
-                                 <tr class = "commentlist">
-                                     <td>${board_comlist.content}</td>
-                                     <td>${board_comlist.write_date}</td>
-                                     <td><button type="button" class ="origin" onclick="location.href='${path}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                 </tr>
-
-                             </c:forEach>
-                             </tbody>--%>
-                        </table>
+                        </div>
                     </div>
+
+
 
                     <%--수강 후기--%>
                     <div id="ud_tab-content5" class="ud_content">
 
-                        <%--<h5> 수강 후기 </h5>--%>
-                        <table>
-                            수강 후기 페이지 입니다
+                        <table class="table is-fullwidth" id="myTable2">
                             <thead>
-
                             <tr>
-                                <th style="width: 10%"></th>
-                                <th style="width: 65%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
+                                <th class="rev">강의</th>
+                                <th class="rev">점수</th>
+                                <th class="rev-con">댓글</th>
+                                <th class="rev2">작성일</th>
+                                <%--                            <th class="rev2">비고</th>--%>
                             </tr>
-
                             </thead>
-
-                            <%-- <tbody>
-                             <c:forEach items="${board_comlist }" var="board_comlist">
-                                 <tr class = "commentlist">
-                                     <td>${board_comlist.content}</td>
-                                     <td>${board_comlist.write_date}</td>
-                                     <td><button type="button" class ="origin" onclick="location.href='${path}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                 </tr>
-
-                             </c:forEach>
-                             </tbody>--%>
+                            <tbody>
+                            <c:forEach var="lev" items="${reviewList }">
+                                <tr>
+                                    <td><a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a></td>
+                                    <td>${lev.score}</td>
+                                    <td>${lev.content}</td>
+                                    <td>${lev.resdate}</td>
+                                        <%--                                <td>--%>
+                                        <%--                                    <c:if test="${sid eq lev.id || sid eq 'admin'}">--%>
+                                        <%--                                        <a href="${path14}/review/updateReviewForm.do?par=${pro.no}" class="button is-info">수정</a>--%>
+                                        <%--                                        <a href="${path14}/review/deleteReview.do?par=${pro.no}" class="button is-danger"> 삭제 </a>--%>
+                                        <%--                                    </c:if>--%>
+                                        <%--                                </td>--%>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
                         </table>
                     </div>
+
+
+
+
 
                     <%--자료실--%>
                     <div id="ud_tab-content6" class="ud_content">
@@ -255,6 +373,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable({
+            pageLength : 10,
+            order: [[0, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
+            info: false,
+            dom: 't<f>p',
+            language: {
+                emptyTable: '등록된 글이 없습니다.'
+            }
+        });
+    } );
+    $(document).ready(function() {
+        $('.dataTables_paginate').css({
+            'textAlign':'left',
+            'float': 'none',
+            'margin-top':'10px',
+        });
+        $('.dataTables_filter').css({
+            'float': 'left',
+            'margin-top':'14px',
+            'margin-right':'280px'
+        });
+        $('#myTable_paginate').css({
+            'margin-right':'120px'
+        });
+    });
+</script>
 
 <%-- 강의 창 띄울때 사이즈 조절하는 js 코드 --%>
 <script>

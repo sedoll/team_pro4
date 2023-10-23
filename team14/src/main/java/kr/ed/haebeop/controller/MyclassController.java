@@ -38,7 +38,12 @@ public class MyclassController {
     private InstService instService;
 
     @Autowired
+    private InstructorService instructorService;
+
+    @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private ReviewService reviewService;
 
     @Autowired
     HttpSession session;
@@ -125,10 +130,54 @@ public class MyclassController {
         int no = Integer.parseInt(req.getParameter("no"));
         String id = (String) session.getAttribute("sid");
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
+        List<MyClassVO> takingClassList =  myclassService.gettakingClassList(no);
 
-        /* 1. 강의소개 메뉴 */
 
-        model.addAttribute("myclassList", myclassList);
+
+
+
+        /* region 1. 강의소개 메뉴 */
+        Lecture Lecture1 = lectureService.getLecture(no);
+
+        List<String> vList = new ArrayList<>(); // 비디오 이름 받기
+        String scoreAvg = reviewService.avgScore(no);
+        if(scoreAvg != null) {
+            scoreAvg = String.format("%.1f", Double.parseDouble(scoreAvg));
+        }
+
+        // 강의 영상 개수 카운트
+        int cnt = 0;
+        if(Lecture1.getSfile2()!=null) {
+            cnt += 1;
+            String realName = lectureService.getLecFileName(Lecture1.getSfile2());
+            vList.add(realName);
+        }
+        if(Lecture1.getSfile3()!=null) {
+            cnt += 1;
+            String realName = lectureService.getLecFileName(Lecture1.getSfile3());
+            vList.add(realName);
+        }
+        if(Lecture1.getSfile4()!=null) {
+            cnt += 1;
+            String realName = lectureService.getLecFileName(Lecture1.getSfile4());
+            vList.add(realName);
+        }
+        if(Lecture1.getSfile5()!=null) {
+            cnt += 1;
+            String realName = lectureService.getLecFileName(Lecture1.getSfile5());
+            vList.add(realName);
+        }
+
+        System.out.println("강의소개: " + takingClassList);
+        model.addAttribute("takingList", takingClassList);
+        model.addAttribute("cnt", cnt);
+        model.addAttribute("avg", scoreAvg);
+
+
+
+
+
+
 
         // region 2. 강의목차 메뉴
         Lecture lecture = lectureService.getLecture(no); // 강의 정보 추출
@@ -189,30 +238,36 @@ public class MyclassController {
         model.addAttribute("inst", inst);
         // endregion
 
+
+        // region 3. 공지사항 메뉴
+        Lecture lecture3 = lectureService.getLecture(no);
+        int lns_No3 = lecture3.getIno();
+
+        List<InstructorNotice> instructorNotices = instructorService.getInstructorNoticeList(lns_No3);
+        model.addAttribute("instructorNotices",instructorNotices);
+        System.out.println(instructorNotices.toString());
+
+
+        // region 4. QnA
+
+
+
+        // region 5. 수강후기
+        Lecture lecture5 = lectureService.getLecture(no);
+        int lns_No5 = lecture5.getIno();
+
+        List<Review> reviewList = instructorService.getReviewList(lns_No5);
+        model.addAttribute("reviewList",reviewList);
+
+
+        // region 6. 자료실
+
+
         return "myclass/myclassDetail";
     }
 
 
-    /* 1. 강의소개 메뉴 */
-    @RequestMapping(value = "/myclassDetail/myclassIntro.do", method = RequestMethod.GET)
-    public String myclassIntro(Model model, HttpServletRequest req , RedirectAttributes rattr) throws Exception {
-        int no = Integer.parseInt(req.getParameter("no"));
-        String id = (String) session.getAttribute("sid");
-        List<MyClassVO> myclassList = myclassService.getMyclassList(id);
-        //model.addAttribute("myclassList", myclassList);
 
-        // 데이터를 전달합니다.
-        rattr.addFlashAttribute("myclassList", myclassList);
-
-        // 리다이렉트할 경로를 반환합니다.
-        return "redirect:/myclass/myclassIntro";
-    }
-
-//    @RequestMapping("/myclass/myclassIntro")
-//    public ModelAndView intro(HttpServletRequest request){
-//
-//        return
-//    }
 
 
     // 강의 영상 보기
