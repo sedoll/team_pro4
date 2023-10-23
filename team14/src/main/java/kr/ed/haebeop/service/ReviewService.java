@@ -2,6 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Review;
 import kr.ed.haebeop.persistence.ReviewMapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,4 +34,7 @@ public class ReviewService {
 
     // 리뷰 삭제
     public void deleteReview(Review review) {reviewMapper.deleteReview(review);}
+
+    // 평균 점수
+    public String avgScore(int par) {return reviewMapper.avgScore(par);}
 }
