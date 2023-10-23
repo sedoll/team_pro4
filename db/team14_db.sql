@@ -446,7 +446,6 @@ create table calendar(
 	content varchar(1000),
 	start date,
 	end date,
-	allDay integer,
 	textColor varchar(50),
 	backgroundColor varchar(50),
 	borderColor varchar(50)
