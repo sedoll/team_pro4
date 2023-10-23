@@ -226,6 +226,7 @@ CREATE TABLE fileboard (
 );
 
 -- 성적 게시판
+-- DROP TABLE grade;
 CREATE TABLE grade( 
 	no INTEGER auto_increment PRIMARY KEY,
 	stuname VARCHAR(150) NOT NULL ,
