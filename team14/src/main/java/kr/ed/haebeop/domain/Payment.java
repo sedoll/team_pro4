@@ -22,5 +22,5 @@ public class Payment {
     private String resdate;         // 결제일
     private String buydate;         // 구매 확정일
     private int pt;                 // 사용한 포인트
-
+    private String enddate;
 }

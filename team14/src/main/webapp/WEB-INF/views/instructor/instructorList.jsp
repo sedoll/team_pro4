@@ -56,15 +56,21 @@
 
         .instructorImage {
             width: 250px;
-            /*height: 320px;*/
+            height: 350px;
             /*margin: 0 auto;*/
             text-align: center;
-
+            overflow: hidden;
+            position: relative;
         }
         .instructorImage img {
             width: 250px;
             /*height: 320px;*/
             overflow: hidden;
+            position: absolute;
+            bottom: 0;
+
+            left: 50%; /* 가운데 정렬을 위해 가로 위치 조정 */
+            transform: translateX(-50%); /* 가운데 정렬 */
         }
 
         .instructorInfo {
@@ -77,7 +83,7 @@
         }
         .instructorTitle {
             font-size: 20px;
-            margin-bottom: 10px;
+            /*margin-bottom: 10px;*/
             font-weight: bold;
         }
 
@@ -103,7 +109,7 @@
 <div class="content" id="content">
     <div class="row column text-center">
         <div class="container" id="cate" style="text-align: center">
-            <h2 style="margin-top: 10px">스마트해법 선생님</h2>
+            <h2 style="margin-top: 100px">스마트해법 선생님</h2>
             <div class="tabs is-centered is-boxed">
                 <ul>
                     <li class="is-active" id="selectKor">
@@ -121,286 +127,231 @@
                             <span>영어</span>
                         </a>
                     </li>
+                    <li id="selectSoc">
+                        <a>
+                            <span>사회</span>
+                        </a>
+                    </li>
+                    <li id="selectSci">
+                        <a>
+                            <span>과학</span>
+                        </a>
+                    </li>
                     <li id="selectHis">
                         <a>
                             <span>한국사</span>
                         </a>
                     </li>
-                    <li id="selectSoc">
-                        <a>
-                            <span>사회탐구</span>
-                        </a>
-                    </li>
-                    <li id="selectSci">
-                        <a>
-                            <span>과학탐구</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
-
         </div>
 <%--       ---------------------------국어--------------------------------- --%>
         <div class="container" id="korList">
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=kimkor"><img src="${path}/resources/img/ebs_teacher_img/T0011.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국어</div>
-                        <div class="instructorTitle">김국어</div>
+
+            <c:set var="finalKoreanCount" value="0" />
+            <c:forEach items="${instructorList}" var="inst">
+                <c:if test="${inst.cate == '국어'}">
+                    <c:set var="finalKoreanCount" value="${finalKoreanCount + 1}" />
+                </c:if>
+            </c:forEach>
+
+            <c:set var="koreanCount" value="0" />
+
+            <c:forEach items="${instructorList}" var="inst">
+                <c:if test="${inst.cate == '국어'}">
+                    <c:set var="koreanCount" value="${koreanCount + 1}" />
+
+                    <c:if test="${koreanCount % 4 == 1}">
+                        <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
+                    </c:if>
+                    <div class="instructorCard">
+                        <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                        <div class="instructorInfo">
+                            <div class="instructorCate">${koreanCount}/${inst.intro}</div>
+                            <div class="instructorTitle">${inst.name}</div>
+                        </div>
                     </div>
-                </div>
-
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=이국어"><img src="${path}/resources/img/ebs_teacher_img/T0012.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국어</div>
-                        <div class="instructorTitle">이국어</div>
-                    </div>
-                </div>
-
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=박국어"><img src="${path}/resources/img/instructor_img/국어_이현민.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국어</div>
-                        <div class="instructorTitle">박국어</div>
-                    </div>
-                </div>
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=최국어"><img src="${path}/resources/img/teacher_img/국어_김진아.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국어</div>
-                        <div class="instructorTitle">최국어</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=한국어"><img src="${path}/resources/img/teacher_img/국어_서지은.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국어</div>
-                        <div class="instructorTitle">한국어</div>
-                    </div>
-                </div>
-
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=홍국어"><img src="${path}/resources/img/teacher_img/국어_모세은%20(2).jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국어</div>
-                        <div class="instructorTitle">홍국어</div>
-                    </div>
-                </div>
-
-
-
-            </div>
-
+                    <c:if test="${koreanCount % 4 == 0 || koreanCount == finalKoreanCount}">
+                        </div>
+                    </c:if>
+                </c:if>
+            </c:forEach>
         </div> <%-- 국어 end --%>
 
         <%--       ---------------------------수학--------------------------------- --%>
         <div class="container" id="mathList" style="display: none">
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=김수학"><img src="${path}/resources/img/teacher_img/수학_김라나_Img13.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 수학</div>
-                        <div class="instructorTitle">김수학</div>
+            <c:set var="finalMathCount" value="0" />
+            <c:forEach items="${instructorList}" var="inst">
+                <c:if test="${inst.cate == '수학'}">
+                    <c:set var="finalMathCount" value="${finalMathCount + 1}" />
+                </c:if>
+            </c:forEach>
+
+            <c:set var="mathCount" value="0" />
+
+            <c:forEach items="${instructorList}" var="inst">
+                <c:if test="${inst.cate == '수학'}">
+                    <c:set var="mathCount" value="${mathCount + 1}" />
+
+                    <c:if test="${mathCount % 4 == 1}">
+                        <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
+                    </c:if>
+
+                    <div class="instructorCard">
+                        <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                        <div class="instructorInfo">
+                            <div class="instructorCate">${mathCount}/${inst.intro}</div>
+                            <div class="instructorTitle">${inst.name}</div>
+                        </div>
                     </div>
-                </div>
 
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=이수학"><img src="${path}/resources/img/teacher_img/수학_김수경_0.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 수학</div>
-                        <div class="instructorTitle">이수학</div>
-                    </div>
-                </div>
-
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=박수학"><img src="${path}/resources/img/teacher_img/수학_류준상.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 수학</div>
-                        <div class="instructorTitle">박수학</div>
-                    </div>
-                </div>
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=최수학"><img src="${path}/resources/img/teacher_img/수학_서준성.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 수학</div>
-                        <div class="instructorTitle">최수학</div>
-                    </div>
-                </div>
-
-            </div>
+                    <c:if test="${mathCount % 4 == 0 || mathCount == finalMathCount}">
+                        </div>
+                    </c:if>
+                </c:if>
+            </c:forEach>
         </div> <%-- 수학 end --%>
 
-        <%--       ---------------------------영어--------------------------------- --%>
+
+    <%--       ---------------------------영어--------------------------------- --%>
         <div class="container" id="engList" style="display: none">
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=김영어"><img src="${path}/resources/img/teacher_img/영어_bella.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 영어</div>
-                        <div class="instructorTitle">김영어</div>
+            <c:set var="finalEngCount" value="0" />
+            <c:forEach items="${instructorList}" var="inst">
+                <c:if test="${inst.cate == '영어'}">
+                    <c:set var="finalEngCount" value="${finalEngCount + 1}" />
+                </c:if>
+            </c:forEach>
+
+            <c:set var="engCount" value="0" />
+
+            <c:forEach items="${instructorList}" var="inst">
+                <c:if test="${inst.cate == '영어'}">
+                    <c:set var="engCount" value="${engCount + 1}" />
+
+                    <c:if test="${engCount % 4 == 1}">
+                        <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
+                    </c:if>
+
+                    <div class="instructorCard">
+                        <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                        <div class="instructorInfo">
+                            <div class="instructorCate">${engCount}/${inst.intro}</div>
+                            <div class="instructorTitle">${inst.name}</div>
+                        </div>
                     </div>
-                </div>
+
+                    <c:if test="${engCount % 4 == 0 || engCount == finalEngCount}">
+                        </div>
+                    </c:if>
+                </c:if>
+            </c:forEach>
 
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=이영어"><img src="${path}/resources/img/teacher_img/영어_강혜진.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 영어</div>
-                        <div class="instructorTitle">이영어</div>
-                    </div>
-                </div>
-
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=박영어"><img src="${path}/resources/img/teacher_img/영어_이용희_0.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 영어</div>
-                        <div class="instructorTitle">박영어</div>
-                    </div>
-                </div>
-
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=최영어"><img src="${path}/resources/img/teacher_img/영어_신이나_0.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 영어</div>
-                        <div class="instructorTitle">최영어</div>
-                    </div>
-                </div>
-
-            </div>
         </div> <%-- 영어 end --%>
 
         <%--       ---------------------------사회탐구--------------------------------- --%>
         <div class="container" id="socList" style="display: none">
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=김사탐"><img src="${path}/resources/img/teacher_img/사회_강성빈.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 사탐</div>
-                        <div class="instructorTitle">김사탐</div>
-                    </div>
-                </div>
+                <c:set var="finalSocCount" value="0" />
+                <c:forEach items="${instructorList}" var="inst">
+                    <c:if test="${inst.cate == '사회'}">
+                        <c:set var="finalSocCount" value="${finalSocCount + 1}" />
+                    </c:if>
+                </c:forEach>
 
+                <c:set var="socCount" value="0" />
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=이사탐"><img src="${path}/resources/img/teacher_img/사회_문병일.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 사탐</div>
-                        <div class="instructorTitle">이사탐</div>
-                    </div>
-                </div>
+                <c:forEach items="${instructorList}" var="inst">
+                    <c:if test="${inst.cate == '사회'}">
+                        <c:set var="socCount" value="${socCount + 1}" />
 
+                        <c:if test="${socCount % 4 == 1}">
+                            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
+                        </c:if>
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=박사탐"><img src="${path}/resources/img/teacher_img/사회_장진민.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 사탐</div>
-                        <div class="instructorTitle">박사탐</div>
-                    </div>
-                </div>
+                        <div class="instructorCard">
+                            <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                            <div class="instructorInfo">
+                                <div class="instructorCate">${socCount}/${inst.intro}</div>
+                                <div class="instructorTitle">${inst.name}</div>
+                            </div>
+                        </div>
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=최사탐"><img src="${path}/resources/img/teacher_img/사회_주혜령_0.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 사탐</div>
-                        <div class="instructorTitle">최사탐</div>
-                    </div>
-                </div>
+                        <c:if test="${socCount % 4 == 0 || socCount == finalSocCount}">
+                            </div>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
 
-            </div>
 
         </div> <%-- 사회탐구 end --%>
 
         <%--       ---------------------------한국사 --------------------------------- --%>
         <div class="container" id="hisList" style="display: none">
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=김국사"><img src="${path}/resources/img/teacher_img/한국사_김윤숙.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국사</div>
-                        <div class="instructorTitle">김국사</div>
-                    </div>
-                </div>
+                <c:set var="finalHisCount" value="0" />
+                <c:forEach items="${instructorList}" var="inst">
+                    <c:if test="${inst.cate == '한국사'}">
+                        <c:set var="finalHisCount" value="${finalHisCount + 1}" />
+                    </c:if>
+                </c:forEach>
 
+                <c:set var="hisCount" value="0" />
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=이국사"><img src="${path}/resources/img/teacher_img/370_장호영_Img13.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국사</div>
-                        <div class="instructorTitle">이국사</div>
-                    </div>
-                </div>
+                <c:forEach items="${instructorList}" var="inst">
+                    <c:if test="${inst.cate == '한국사'}">
+                        <c:set var="hisCount" value="${hisCount + 1}" />
 
+                        <c:if test="${hisCount % 4 == 1}">
+                            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
+                        </c:if>
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=박국사"><img src="${path}/resources/img/teacher_img/405_최재희_Img13.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국사</div>
-                        <div class="instructorTitle">박국사</div>
-                    </div>
-                </div>
+                        <div class="instructorCard">
+                            <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                            <div class="instructorInfo">
+                                <div class="instructorCate">${hisCount}/${inst.intro}</div>
+                                <div class="instructorTitle">${inst.name}</div>
+                            </div>
+                        </div>
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=최국사"><img src="${path}/resources/img/teacher_img/401_김도형_img13.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 국사</div>
-                        <div class="instructorTitle">최국사</div>
-                    </div>
-                </div>
+                        <c:if test="${hisCount % 4 == 0 || hisCount == finalHisCount}">
+                            </div>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
 
-            </div>
         </div> <%-- 한국사 end --%>
 
         <%--       ---------------------------과탐--------------------------------- --%>
         <div class="container" id="sciList" style="display: none">
-            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=김과탐"><img src="${path}/resources/img/teacher_img/과학_김샛별.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 과탐</div>
-                        <div class="instructorTitle">김과탐</div>
-                    </div>
-                </div>
+                <c:set var="finalSciCount" value="0" />
+                <c:forEach items="${instructorList}" var="inst">
+                    <c:if test="${inst.cate == '과학'}">
+                        <c:set var="finalSciCount" value="${finalSciCount + 1}" />
+                    </c:if>
+                </c:forEach>
 
+                <c:set var="sciCount" value="0" />
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=이과탐"><img src="${path}/resources/img/teacher_img/과학_박남식.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 과탐</div>
-                        <div class="instructorTitle">이과탐</div>
-                    </div>
-                </div>
+                <c:forEach items="${instructorList}" var="inst">
+                    <c:if test="${inst.cate == '과학'}">
+                        <c:set var="sciCount" value="${sciCount + 1}" />
 
+                        <c:if test="${sciCount % 4 == 1}">
+                            <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
+                        </c:if>
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=박과탐"><img src="${path}/resources/img/teacher_img/과학_박인수.jpg"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 과탐</div>
-                        <div class="instructorTitle">박과탐</div>
-                    </div>
-                </div>`
+                        <div class="instructorCard">
+                            <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                            <div class="instructorInfo">
+                                <div class="instructorCate">${sciCount}/${inst.intro}</div>
+                                <div class="instructorTitle">${inst.name}</div>
+                            </div>
+                        </div>
 
-                <div class="instructorCard">
-                    <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?instructorId=최과탐"><img src="${path}/resources/img/teacher_img/과학_양진석.png"/></a></div>
-                    <div class="instructorInfo">
-                        <div class="instructorCate">이해가 잘되는 과탐</div>
-                        <div class="instructorTitle">최과탐</div>
-                    </div>
-                </div>
-
-            </div>
+                        <c:if test="${sciCount % 4 == 0 || sciCount == finalSciCount}">
+                            </div>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
         </div> <%-- 과탐 end --%>
 
 
