@@ -1,6 +1,7 @@
 /* sidebar */
 .mypage-base .sidebar {
     width: 200px;
+    margin-right: 20px;
 }
 .mypage-base .sidebar .header {
     height: 75px;
@@ -62,9 +63,9 @@
 
 .mypage-base .sidebar ul li a:hover,
 .mypage-base .sidebar ul li a.active {
-    background-color: rgb(250, 250, 250);
-    color: var(--primary-color);
-    font-weight: 500;
+    background-color: rgb(245, 245, 245);
+    /*color: var(--primary-color);*/
+    /*font-weight: 500;*/
 }
 
 .content-wrap{
@@ -77,6 +78,6 @@
     margin-top: 10px;
     min-height: 300px;
     width: 800px;
-    margin-left: -100px;
+    /*margin-left: -100px;*/
     /*background-color: #e0e0e0;*/
 }

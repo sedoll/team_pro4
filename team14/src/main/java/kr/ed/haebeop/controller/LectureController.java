@@ -332,7 +332,8 @@ public class LectureController {
         lecture.setIno(Integer.parseInt(files.getParameter("ino")));
 
         // 개발 서버 파일 저장 경로
-        String uploadDir = "D:/spring_study/pro04/src/main/webapp/resources/upload/"; // 회사
+//        String uploadDir = "D:/spring_study/pro04/src/main/webapp/resources/upload/"; // 회사
+        String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload"; // 회사
         // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
         // 실제 서버 파일 저장 경로
         String uploadSev = req.getRealPath("/resources/upload/");

@@ -9,15 +9,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Review {
+public class InstFile {
     private int no;
-    private String id;
-    private String content;
-    private String resdate;
-    private int score;
-    private int par;
-
-    private String title;
-    private int lno;
-    private int ino;
+    private String sfile;
+    private String realName;
 }

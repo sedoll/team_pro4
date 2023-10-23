@@ -36,7 +36,7 @@
 
         .instructorCard {
             width:250px;
-            height: 420px;
+            height: 370px;
             margin-right: 60px;
             background-color: #fff;
             border: 1px solid #e0e0e0;
@@ -56,7 +56,7 @@
 
         .instructorImage {
             width: 250px;
-            height: 350px;
+            height: 300px;
             /*margin: 0 auto;*/
             text-align: center;
             overflow: hidden;
@@ -68,7 +68,7 @@
             overflow: hidden;
             position: absolute;
             bottom: 0;
-
+            margin-bottom: 0;
             left: 50%; /* 가운데 정렬을 위해 가로 위치 조정 */
             transform: translateX(-50%); /* 가운데 정렬 */
         }
@@ -97,6 +97,20 @@
         }
 
     </style>
+    <script>
+        $(document).ready(function() {
+            $('.instructorCard').hover(
+                function() {
+                    // 마우스가 올라갔을 때
+                    $(this).find('.instructorImage').css('background-color', '#DEEBFA');
+                },
+                function() {
+                    // 마우스가 떠났을 때
+                    $(this).find('.instructorImage').css('background-color', '');
+                }
+            );
+        });
+    </script>
 </head>
 <body>
 <!-- 헤더 부분 인클루드 -->
@@ -165,9 +179,9 @@
                         <div class="columns" style="margin: 0 auto; padding-top: 20px; width: 1200px">
                     </c:if>
                     <div class="instructorCard">
-                        <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                        <a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><div class="instructorImage"><img src="${path}/resources/upload/${inst.img}"/></div></a>
                         <div class="instructorInfo">
-                            <div class="instructorCate">${koreanCount}/${inst.intro}</div>
+                            <div class="instructorCate">${inst.intro}</div>
                             <div class="instructorTitle">${inst.name}</div>
                         </div>
                     </div>
@@ -198,9 +212,11 @@
                     </c:if>
 
                     <div class="instructorCard">
-                        <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                        <a href="${path}/instructor/instructorDetail.do?no=${inst.no}">
+                            <div class="instructorImage"><img src="${path}/resources/upload/${inst.img}"/></div>
+                        </a>
                         <div class="instructorInfo">
-                            <div class="instructorCate">${mathCount}/${inst.intro}</div>
+                            <div class="instructorCate">${inst.intro}</div>
                             <div class="instructorTitle">${inst.name}</div>
                         </div>
                     </div>
@@ -233,9 +249,9 @@
                     </c:if>
 
                     <div class="instructorCard">
-                        <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                        <a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><div class="instructorImage"><img src="${path}/resources/upload/${inst.img}"/></div></a>
                         <div class="instructorInfo">
-                            <div class="instructorCate">${engCount}/${inst.intro}</div>
+                            <div class="instructorCate">${inst.intro}</div>
                             <div class="instructorTitle">${inst.name}</div>
                         </div>
                     </div>
@@ -269,9 +285,9 @@
                         </c:if>
 
                         <div class="instructorCard">
-                            <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                            <a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><div class="instructorImage"><img src="${path}/resources/upload/${inst.img}"/></div></a>
                             <div class="instructorInfo">
-                                <div class="instructorCate">${socCount}/${inst.intro}</div>
+                                <div class="instructorCate">${inst.intro}</div>
                                 <div class="instructorTitle">${inst.name}</div>
                             </div>
                         </div>
@@ -305,9 +321,9 @@
                         </c:if>
 
                         <div class="instructorCard">
-                            <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                            <a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><div class="instructorImage"><img src="${path}/resources/upload/${inst.img}"/></div></a>
                             <div class="instructorInfo">
-                                <div class="instructorCate">${hisCount}/${inst.intro}</div>
+                                <div class="instructorCate">${inst.intro}</div>
                                 <div class="instructorTitle">${inst.name}</div>
                             </div>
                         </div>
@@ -340,9 +356,9 @@
                         </c:if>
 
                         <div class="instructorCard">
-                            <div class="instructorImage"><a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><img src="${path}/resources/upload/${inst.img}"/></a></div>
+                            <a href="${path}/instructor/instructorDetail.do?no=${inst.no}"><div class="instructorImage"><img src="${path}/resources/upload/${inst.img}"/></div></a>
                             <div class="instructorInfo">
-                                <div class="instructorCate">${sciCount}/${inst.intro}</div>
+                                <div class="instructorCate">${inst.intro}</div>
                                 <div class="instructorTitle">${inst.name}</div>
                             </div>
                         </div>
