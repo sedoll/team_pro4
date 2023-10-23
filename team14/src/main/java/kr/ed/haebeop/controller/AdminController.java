@@ -332,6 +332,7 @@ public class AdminController {
         inst2.setName(files.getParameter("name"));
         inst2.setEmail(files.getParameter("email"));
         inst2.setTel(files.getParameter("tel"));
+        inst2.setId(files.getParameter("id"));
 
         // 개발 서버 파일 저장 경로
 //        String uploadDir = "D:/team_pro4/team14/src/main/webapp/resources/upload/"; // 회사

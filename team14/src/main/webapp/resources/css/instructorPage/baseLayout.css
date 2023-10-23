@@ -7,13 +7,13 @@
 
 .mypage-base {
     display: flex;
-    gap: 70px;
+    /*gap: 70px;*/
     width: 1050px;
     padding: 20px 0px 80px;
     margin: 0px auto;
     flex-direction: row;
     -webkit-box-pack: justify;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .mypage-base .mypage-content {

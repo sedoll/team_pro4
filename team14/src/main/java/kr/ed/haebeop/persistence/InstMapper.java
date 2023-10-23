@@ -13,7 +13,7 @@ public interface InstMapper {
     public Instructor getInstructor(String id);
     @Select("SELECT * FROM instructor WHERE no = #{no}")
     public Instructor getInstructorName(int no);
-    @Insert("INSERT INTO instructor VALUES (default, #{name}, #{tel}, #{email}, #{intro}, #{cate}, #{img})")
+    @Insert("INSERT INTO instructor VALUES (default, #{name}, #{tel}, #{email}, #{intro}, #{cate}, #{img}, #{id})")
     @Options(useGeneratedKeys=true, keyProperty="no")
     public void addInstructor(Instructor instructor);
     @Update("UPDATE instructor SET cate = #{cate}, pname = #{pname}, pcomment = #{pcomment}, plist = #{plist}, price = #{price}, imgsrc1 = #{imgSrc1}, resdate = #{resdate} WHERE no = #{no}")
