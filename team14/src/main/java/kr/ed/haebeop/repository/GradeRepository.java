@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface GradeRepository {
     public List<Grade> gradeList() throws Exception;
+    public List<Grade> sgradeList(String id) throws Exception; //학생 전용 게시판
     public Grade gradeDetail(int no) throws Exception;
     public void gradeInsert(Grade grade) throws Exception;
     public void gradeDelete(int no) throws Exception;

@@ -2,16 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path4" value="${pageContext.request.contextPath }"/>
+<c:set var="path21" value="${pageContext.request.contextPath }"/>
 
 
 <head>
 
-    <link type="text/css" rel="stylesheet" href="${path4}/resources/css/myStudy/common.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="${path4}/resources/css/myStudy/mystudy.css" media="all"/>
-    <link rel="stylesheet" href="${path4}/resources/css/myStudy/layout.css"/>
-    <script type="text/javascript" src="${path4}/resources/js/myStudy/common.js"></script>
-    <script type="text/javascript" src="${path4}/resources/js/myStudy/jquery-1.8.3.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="${path21}/resources/css/myStudy/common.css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="${path21}/resources/css/myStudy/mystudy.css" media="all"/>
+    <link rel="stylesheet" href="${path21}/resources/css/myStudy/layout.css"/>
+    <script type="text/javascript" src="${path21}/resources/js/myStudy/common.js"></script>
+<%--    <script type="text/javascript" src="${path21}/resources/js/myStudy/jquery-1.8.3.min.js"></script>--%>
 
 </head>
 <body>
@@ -27,7 +27,7 @@
                 <dl class="myProfile">
                     <dt>
                         <span>내 프로필
-                            <a href="javascript:;" onclick="mf_MoveToProfilePopup('ku1992');" class="btns btnOrgline2">
+                            <a href="javascript:;" onclick="mf_MoveToProfilePopup('ku1992');" class="btns btnOrgline2"></a>
 
                             <!-- <span class="i_org_arr4">프로필 수정</span> -->
                             </span>
@@ -36,7 +36,7 @@
                     <dd>
                         <div class="photo">
                             <!-- <a href="javascript:;" onclick="fnPopProfile();"> -->
-                            <img src="${path4}/resources/img/myStudy/basic-profile-image_re.png">
+                            <img src="${path21}/resources/img/myStudy/basic-profile-image_re.png">
 
                             </a>
 
@@ -65,7 +65,7 @@
                         <ul class="planList2">
 
                             <div class="jb-wrap">
-                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt="">
+                                <div class="jb-image"><img src="${path21}/resources/img/myStudy/mystudy1.png" alt="">
                                 </div>
                                 <div class="jb-text">
                                     <div class="jb-text-table">
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="jb-wrap">
-                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt="">
+                                <div class="jb-image"><img src="${path21}/resources/img/myStudy/mystudy1.png" alt="">
                                 </div>
                                 <div class="jb-text">
                                     <div class="jb-text-table">
@@ -95,7 +95,7 @@
                             </div>
 
                             <div class="jb-wrap">
-                                <div class="jb-image"><img src="${path4}/resources/img/myStudy/mystudy1.png" alt="">
+                                <div class="jb-image"><img src="${path21}/resources/img/myStudy/mystudy1.png" alt="">
                                 </div>
                                 <div class="jb-text">
                                     <div class="jb-text-table">
@@ -189,10 +189,10 @@
                 <li class="menu03" onfocus="menu_open('3');" onmouseover="menu_open('3');"><a href=""
                                                                                               id="lnk0140">학습서비스</a>
                     <ul class="dep02" id="dep03">
-                        <li><a id="sub014001" href="">서브메뉴</a></li>
-                        <li><a id="sub014002" href="">서브메뉴</a></li>
+                        <li><a id="sub014001" href="${path21}/grade/slist.do">성적표</a></li>
+                        <li><a id="sub014002" href="${path21}/calendar/list.do">학습계획표</a></li>
                         <li><a id="sub014003" href="">서브메뉴</a></li>
-                        <li><a id="sub014004" href="4">서브메뉴</a></li>
+                        <li><a id="sub014004" href="">서브메뉴</a></li>
                     </ul>
                 </li>
 

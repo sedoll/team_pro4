@@ -35,7 +35,10 @@
 </head>
 <body>
 <!-- 헤더 부분 인클루드 -->
-<jsp:include page="../include/header.jsp"></jsp:include>
+<section>
+    <jsp:include page="../include/header.jsp"></jsp:include>
+    <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
+</section>
 <!-- hero -->
 <section class="hero is-white is-medium">
     <div class="hero-body has-text-centered">
@@ -127,8 +130,7 @@
                 </section>
             </div>
     </div>
-</div>
-</div>
+    </div>
 <!-- 푸터 부분 인클루드 -->
 <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

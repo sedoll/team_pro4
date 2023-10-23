@@ -21,7 +21,9 @@
     </style>
 </head>
 <body>
-<jsp:include page="../include/header.jsp"></jsp:include>
+<div class="page_wrap">
+    <jsp:include page="../include/header.jsp"></jsp:include>
+    <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
 <figure class="visual" id="vs1">
     <ul class="imgbox">
         <li class="hero is-white is-medium">
@@ -103,6 +105,7 @@
             </div>
             </div>
         </div>
+</div>
 </div>
         <!-- 푸터 부분 인클루드 -->
         <jsp:include page="../include/footer.jsp"></jsp:include>

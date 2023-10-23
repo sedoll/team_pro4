@@ -18,6 +18,11 @@ public class GradeServiceImpl implements GradeService{
     }
 
     @Override
+    public List<Grade> sgradeList(String id) throws Exception {
+        return gradeRepository.sgradeList(id);
+    }
+
+    @Override
     public Grade gradeDetail(int no) throws Exception {
         return gradeRepository.gradeDetail(no);
     }
