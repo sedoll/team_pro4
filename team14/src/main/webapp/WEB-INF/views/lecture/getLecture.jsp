@@ -172,8 +172,8 @@
                             <tr>
                                 <td class="adminbtn">
                                     <c:if test="${sid eq 'admin'}">
-                                        <a href="${path}/UpdateProduct.do?no=${pro.no}" class="inbtn">수정</a>
-                                        <a href="${path}/DeleteProduct.do?no=${pro.no}" class="inbtn delete_btn">삭제</a>
+                                        <a href="${path }/lecture/updateLectureForm.do?no=${pro.no }" class="button is-info is-outlined">수정</a>
+                                        <a href="${path}/DeleteProduct.do?no=${pro.no}" class="button is-danger is-outlined">삭제</a>
                                     </c:if>
                                 </td>
                             </tr>
@@ -346,6 +346,7 @@
     <footer class="ft" id="ft">
         <%@ include file="../include/footer.jsp" %>
     </footer>
+    <script src="/resources/js/vdo.js"></script>
 </div>
 </body>
 </html>

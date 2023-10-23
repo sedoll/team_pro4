@@ -34,4 +34,10 @@ public class InstructorServiceImpl implements InstructorService{
     public Instructor getInstructorId(String instructorname) {
         return instructorMapper.getInstructorId(instructorname);
     }
+
+    //선생님 리스트
+    @Override
+    public List<Instructor> getInstructorList() {
+        return instructorMapper.getInstructorList();
+    }
 }

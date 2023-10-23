@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +73,7 @@
                 <th>관련 교재</th>
                 <td> 교재 </td>
             </tr>
+            </c:forEach>
         </div>
 
         <%-- </thead>--%>

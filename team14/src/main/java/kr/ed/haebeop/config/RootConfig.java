@@ -66,7 +66,10 @@ public class RootConfig {
     // 개발서버 저장 경로
     @Bean(name = "uploadPath")
     public String uploadPath() { // 멀티파트 업로드 디렉토리 지정
-        return "D:\\spring_study\\pro04\\src\\main\\webapp\\resources\\upload";
+        //환경에 따라 수정 필요
+//        return "D:\\spring_study\\pro04\\src\\main\\webapp\\resources\\upload";
+        return "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload";
+
     }
 
 
