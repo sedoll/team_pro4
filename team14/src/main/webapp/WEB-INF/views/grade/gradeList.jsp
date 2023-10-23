@@ -28,14 +28,13 @@
 </head>
 <body>
 <!-- 헤더 부분 인클루드 -->
-<jsp:include page="../include/header.jsp"></jsp:include>
-<section class="hero is-white is-medium">
+<div class="page_wrap">
+    <jsp:include page="../include/header.jsp"></jsp:include>
+    <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
+<section class="hero is-white is-small">
     <div class="hero-body has-text-centered">
         <p class="title is-size-3">
             성적 게시판
-        </p>
-        <p class="subtitle is-size-5">
-            목록
         </p>
     </div>
 </section>
@@ -70,7 +69,7 @@
                         </td>
                         <td colspan="2">
                             <c:if test="${sid == grade.stuid || sid == grade.tid}">
-                                <a href="${path}/grade/gradedetail.do?no=${grade.no}" class="button is-black is-outlined">상세보기</a>
+                                <a class="button is-black is-outlined">상세보기</a>
                             </c:if>
                             <c:if test="${sid == grade.tid}">
                                 <a href="${path}/grade/gradedelete.do?no=${grade.no}" class="button is-danger is-outlined">성적삭제</a>
@@ -80,7 +79,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <c:if test="${job == 2                                                                                                                                                                                              }">
+            <c:if test="${sid != grade.stuid && sid != 'admin'}">                                                                                                                                                                                              }">
             <div class="button-group">
                 <a class="button is-link is-outlined" href="${path}/grade/gradeinsert.do">성적입력</a>
             </div>
@@ -117,6 +116,7 @@
         </div>
 
     </div>
+</div>
 </div>
 <footer id="footer" class="footer-nav row expanded collapse">
     <!-- 푸터 부분 인클루드 -->
