@@ -14,14 +14,13 @@
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
     <style>
-        .hero {
-            height: 250px;
-            margin-top: 40px;
+        .view-button{
+            height: 20px;
         }
-        #content{
-            margin: 0 auto;
+        .hero-body h5{
+            margin-left: 440px;
+            margin-top: 10px;
         }
-
     </style>
 </head>
 <body>
@@ -29,20 +28,17 @@
 <div class="page_wrap">
 <jsp:include page="../include/header.jsp"></jsp:include>
 <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
-<section class="hero is-white is-medium">
-    <div class="hero-body has-text-centered">
-        <p class="title is-size-3">
+<section class="hero is-white is-small">
+    <div class="hero-body">
+        <h5 class="is-size-4">
             성적 게시판
-        </p>
-        <p class="subtitle is-size-5">
-            목록
-        </p>
+        </h5>
     </div>
 </section>
-<div class="content" id="content">
+<div class="content" id="content" style="min-height: 0px; margin-left: 40px; margin-top: 15px; margin-bottom: 30px">
     <div class="row column text-center">
-        <div class="container">
-            <table id="myTable">
+        <div class="container" style="width: 1000px; left: 400px; height: 470px;">
+            <table id="myTable" style="font-size: 16px">
                 <thead>
                 <tr>
                     <th width="80">No</th>
@@ -72,10 +68,7 @@
                         </td>
                         <td colspan="2">
                             <c:if test="${sid == sgrade.stuid || sid == sgrade.tid}">
-                                <a href="${path}/grade/gradedetail.do?no=${sgrade.no}" class="button is-black is-outlined">상세보기</a>
-                            </c:if>
-                            <c:if test="${sid == sgrade.tid}">
-                                <a href="${path}/grade/gradedelete.do?no=${sgrade.no}" class="button is-danger is-outlined">성적삭제</a>
+                                <a class="button view-button is-black is-outlined" onclick="window.open('${path}/grade/gradedetail.do?no=${sgrade.no}', '_blank', 'popup=yes', 'width=700px', 'height=700px', 'top=50px', 'left=50px')">상세보기</a>
                             </c:if>
                         </td>
                     </tr>
@@ -107,7 +100,6 @@
                     });
                     $('.dataTables_filter').css({
                         'float': 'left',
-                        'margin-top':'14px',
                         'margin-right':'280px'
                     });
                     $('#myTable_paginate').css({

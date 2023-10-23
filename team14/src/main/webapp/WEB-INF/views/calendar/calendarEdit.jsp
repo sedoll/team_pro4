@@ -61,17 +61,108 @@
                                 <th>글자색</th>
                                 <td>
                                     <div class="select">
-                                        <select name="textColor"  value="${calendar.textColor}">
-                                            <option value="red">red</option>
-                                            <option value="black">black</option>
-                                            <option value="white">white</option>
-                                            <option value="blue">blue</option>
-                                            <option value="green">green</option>
-                                            <option value="navy">navy</option>
-                                            <option value="yellow">yellow</option>
-                                            <option value="silver">silver</option>
-                                            <option value="purple">purple</option>
-                                            <option value="pink">pink</option>
+                                        <select name="textColor">
+                                            <option value="${calendar.textColor}"><c:choose>
+                                                <c:when test="${calendar.textColor eq '#EF5350'}">
+                                                    <c:out value="Red"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#ff4757'}">
+                                                    <c:out value="Water Melon"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#2d3436'}">
+                                                    <c:out value="Black"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq 'white'}">
+                                                    <c:out value="White"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#EF5350'}">
+                                                    <c:out value="Bruschetta Tomato"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#f1f2f6'}">
+                                                    <c:out value="Anti-Flash White"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#5C6BC0'}">
+                                                    <c:out value="Indigo"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#f42A5F5'}">
+                                                    <c:out value="Blue"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#70a1ff'}">
+                                                    <c:out value="Sky Blue"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#26A69A'}">
+                                                    <c:out value="Teal"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#66BB6A'}">
+                                                    <c:out value="Green"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#9CCC65'}">
+                                                    <c:out value="Light Green"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#D4E157'}">
+                                                    <c:out value="Lime"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#FFEE58'}">
+                                                    <c:out value="Yellow"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#FFCA28'}">
+                                                    <c:out value="Amber"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#FFA726'}">
+                                                    <c:out value="Orange"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#FF7043'}">
+                                                    <c:out value="Deep Orange"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#8D6E63'}">
+                                                    <c:out value="Brown"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#BDBDBD'}">
+                                                    <c:out value="Grey"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#78909C'}">
+                                                    <c:out value="Blue Grey"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#dfe4ea'}">
+                                                    <c:out value="City Lights"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#AB47BC'}">
+                                                    <c:out value="Purple"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#7E57C2'}">
+                                                    <c:out value="Deep Purple"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.textColor eq '#ff6b81'}">
+                                                    <c:out value="Pink"></c:out>
+                                                </c:when>
+                                                <c:otherwise >
+                                                    <c:out value="Light Pink"></c:out>
+                                                </c:otherwise>
+                                            </c:choose></option>
+                                            <option value="#EF5350">Red</option>
+                                            <option value="#ff4757">Water Melon</option>
+                                            <option value="#EF5350">Bruschetta Tomato</option>
+                                            <option value="#2d3436">Black</option>
+                                            <option value="white">White</option>
+                                            <option value="#f1f2f6">Anti-Flash White</option>
+                                            <option value="#5C6BC0">Indigo</option>
+                                            <option value="#42A5F5">Blue</option>
+                                            <option value="#70a1ff">Sky Blue</option>
+                                            <option value="#26A69A">Teal</option>
+                                            <option value="#66BB6A">Green</option>
+                                            <option value="#9CCC65">Light Green</option>
+                                            <option value="#D4E157">Lime</option>
+                                            <option value="#FFEE58">Yellow</option>
+                                            <option value="#FFCA28">Amber</option>
+                                            <option value="#FFA726">Orange</option>
+                                            <option value="#FF7043">Deep Orange</option>
+                                            <option value="#8D6E63">Brown</option>
+                                            <option value="#BDBDBD">Grey</option>
+                                            <option value="#78909C">Blue Grey</option>
+                                            <option value="#dfe4ea">City Lights</option>
+                                            <option value="#AB47BC">Purple</option>
+                                            <option value="#7E57C2">Deep Purple</option>
+                                            <option value="#ff6b81">Pink</option>
                                             <option value="lightpink">lightpink</option>
                                         </select>
                                     </div>
@@ -81,37 +172,108 @@
                                 <th>배경색</th>
                                 <td>
                                     <div class="select">
-                                        <select name="backgroundColor"  value="${calendar.backgroundColor}">
-                                            <option value="red">red</option>
-                                            <option value="black">black</option>
-                                            <option value="white">white</option>
-                                            <option value="blue">blue</option>
-                                            <option value="green">green</option>
-                                            <option value="navy">navy</option>
-                                            <option value="yellow">yellow</option>
-                                            <option value="silver">silver</option>
-                                            <option value="purple">purple</option>
-                                            <option value="pink">pink</option>
-                                            <option value="lightpink">lightpink</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>테두리색</th>
-                                <td>
-                                    <div class="select">
-                                        <select name="borderColor"  value="${calendar.borderColor}">
-                                            <option value="red">red</option>
-                                            <option value="black">black</option>
-                                            <option value="white">white</option>
-                                            <option value="blue">blue</option>
-                                            <option value="green">green</option>
-                                            <option value="navy">navy</option>
-                                            <option value="yellow">yellow</option>
-                                            <option value="silver">silver</option>
-                                            <option value="purple">purple</option>
-                                            <option value="pink">pink</option>
+                                        <select name="backgroundColor" >
+                                            <option value="${calendar.backgroundColor}"><c:choose>
+                                                <c:when test="${calendar.backgroundColor eq '#EF5350'}">
+                                                    <c:out value="Red"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#ff4757'}">
+                                                    <c:out value="Water Melon"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#2d3436'}">
+                                                    <c:out value="Black"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq 'white'}">
+                                                    <c:out value="White"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#EF5350'}">
+                                                    <c:out value="Bruschetta Tomato"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#f1f2f6'}">
+                                                    <c:out value="Anti-Flash White"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#5C6BC0'}">
+                                                    <c:out value="Indigo"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#f42A5F5'}">
+                                                    <c:out value="Blue"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#70a1ff'}">
+                                                    <c:out value="Sky Blue"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#26A69A'}">
+                                                    <c:out value="Teal"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#66BB6A'}">
+                                                    <c:out value="Green"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#9CCC65'}">
+                                                    <c:out value="Light Green"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#D4E157'}">
+                                                    <c:out value="Lime"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#FFEE58'}">
+                                                    <c:out value="Yellow"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#FFCA28'}">
+                                                    <c:out value="Amber"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#FFA726'}">
+                                                    <c:out value="Orange"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#FF7043'}">
+                                                    <c:out value="Deep Orange"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#8D6E63'}">
+                                                    <c:out value="Brown"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#BDBDBD'}">
+                                                    <c:out value="Grey"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#78909C'}">
+                                                    <c:out value="Blue Grey"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#dfe4ea'}">
+                                                    <c:out value="City Lights"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#AB47BC'}">
+                                                    <c:out value="Purple"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#7E57C2'}">
+                                                    <c:out value="Deep Purple"></c:out>
+                                                </c:when>
+                                                <c:when test="${calendar.backgroundColor eq '#ff6b81'}">
+                                                    <c:out value="Pink"></c:out>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:out value="Light Pink"></c:out>
+                                                </c:otherwise>
+                                            </c:choose></option>
+                                            <option value="#EF5350">Red</option>
+                                            <option value="#ff4757">Water Melon</option>
+                                            <option value="#EF5350">Bruschetta Tomato</option>
+                                            <option value="#2d3436">Black</option>
+                                            <option value="white">White</option>
+                                            <option value="#f1f2f6">Anti-Flash White</option>
+                                            <option value="#5C6BC0">Indigo</option>
+                                            <option value="#42A5F5">Blue</option>
+                                            <option value="#70a1ff">Sky Blue</option>
+                                            <option value="#26A69A">Teal</option>
+                                            <option value="#66BB6A">Green</option>
+                                            <option value="#9CCC65">Light Green</option>
+                                            <option value="#D4E157">Lime</option>
+                                            <option value="#FFEE58">Yellow</option>
+                                            <option value="#FFCA28">Amber</option>
+                                            <option value="#FFA726">Orange</option>
+                                            <option value="#FF7043">Deep Orange</option>
+                                            <option value="#8D6E63">Brown</option>
+                                            <option value="#BDBDBD">Grey</option>
+                                            <option value="#78909C">Blue Grey</option>
+                                            <option value="#dfe4ea">City Lights</option>
+                                            <option value="#AB47BC">Purple</option>
+                                            <option value="#7E57C2">Deep Purple</option>
+                                            <option value="##ff6b81">Pink</option>
                                             <option value="lightpink">lightpink</option>
                                         </select>
                                     </div>
