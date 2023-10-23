@@ -9,15 +9,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Review {
+public class InstructorFile {
     private int no;
-    private String id;
+    private String title;
     private String content;
     private String resdate;
-    private int score;
-    private int par;
+    private int cnt;
+    private int instructorno;
 
-    private String title;
-    private int lno;
-    private int ino;
+    private String sfile1; //
+    private String sfile2; //
+    private String sfile3; //
+    private String sfile4;
+    private String sfile5;
+
+
 }

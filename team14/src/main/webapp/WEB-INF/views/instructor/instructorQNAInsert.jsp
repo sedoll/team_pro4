@@ -21,7 +21,7 @@
     </style>
     <script>
         $(document).ready(function() {
-            $('#side_notice').css({
+            $('#side_qna').css({
                 'background-color': '#e5e5e5',
                 'font-weight': 'bold'
             });
@@ -38,48 +38,51 @@
             <%@ include file="./sidebar.jsp" %>
             <article class="my-page">
                 <main class="container__inner">
-                    <div>
-
-                        <table class="table is-bordered is-striped is-hoverable" style="width: 800px">
-                            <thead>
-                            <tr class="title">
-                                <th colspan="5">${instructorNotice.title}</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <c:if test='${sid eq instructor.id}'>
-                                        <a href="${path14}/instructor/instructorNoticeEdit.do?noticeNo=${instructorNotice.no}&no=${instructor.no}" class="button is-outlined is-link">수정</a>
-                                    </c:if>
-                                </td>
-                                <td>
-                                    <c:if test="${sid eq instructor.id || sid eq 'admin'}">
-
-                                        <a href="${path14}/instructor/instructorNoticeDelete.do?noticeNo=${instructorNotice.no}&no=${instructor.no}" class="button is-outlined is-danger">삭제</a>
-                                    </c:if>
-                                </td>
-                                <td>${instructor.name}</td>
-                                <td>${instructorNotice.resdate}</td>
-                                <td>조회수 : ${instructorNotice.cnt}</td>
-                            </tr>
-                            </thead>
+                    <form action="${path14}/instructor/instructorQNAInsert.do?no=${instructor.no}" method="post">
+                        <table id="table1">
                             <tbody>
                             <tr>
-                                <td colspan="5" class="content">
-                                    <div style="min-height: 200px">
-                                        ${instructorNotice.content}
-                                    </div>
+                                <th style="background-color:#dcdcdc">글 제목</th>
+                                <td>
+                                    <input type="text" name="title" id="title" class="input" placeholder="제목 입력" maxlength="98" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="background-color:#dcdcdc">비밀번호</th>
+                                <td>
+                                    <input type="password" name="pw" id="pw" class="input" placeholder="비밀글로 하고 싶은 경우 비밀번호 입력" maxlength="18">
+                                    <div id="keyShow" class="button is-link">SHOW</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="background-color:#dcdcdc">글 내용</th>
+                                <td>
+                                    <textarea name="content" id="content" class="textarea" placeholder="내용 입력" rows="8" cols="100" maxlength="900" required></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="submit" class="submit button is-link is-outlined" value="글 등록" >
+                                    <a class="button is-black is-outlined" href="${path14}/instructor/instructorQNA.do?no=${instructor.no}">글 목록</a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-
-
-
-                    </div>
+                    </form>
 
                 </main>
             </article>
-
+            <script>
+                $("#keyShow").on("click", function() {
+                    if ($("#pw").attr("type") == "password") {
+                        $("#pw").attr("type", "text");
+                        $($(this)).text("H I D E");
+                    } else {
+                        $("#pw").attr("type", "password");
+                        $($(this)).text("SHOW");
+                    }
+                });
+            </script>
 
         </div>
 

@@ -136,7 +136,7 @@ public class MyclassController {
         List<String> videoList2 = new ArrayList<>(); // 실제 저장된 UUID 비디오 이름
         List<String> vtl = new ArrayList<>(); // 비디오 길이 추출
         Instructor inst = instService.getInstructorName(lecture.getIno());
-        
+
         // 서버 절대경로 주소
 //        String path = req.getSession().getServletContext().getRealPath("/");
 //        String path2 = req.getContextPath();

@@ -6,14 +6,26 @@
 
 <html>
 <head>
-    <title>${instructorName} 선생님</title>
+    <title>${instructor.name} 선생님</title>
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/baseLayout.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/sidebar.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/validateUser.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/myPageindex.css"/>
-
+    <style>
+        #container {
+            margin-top: 80px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#side_review').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -25,9 +37,55 @@
             <%@ include file="./sidebar.jsp" %>
             <article class="my-page">
                 <main class="container__inner">
-                    <div>
+                    <table class="table is-fullwidth" id="myTable">
+                        <thead>
+                        <tr>
+                            <th class="rev">강의</th>
+                            <th class="rev">점수</th>
+                            <th class="rev-con">댓글</th>
+                            <th class="rev2">작성일</th>
+<%--                            <th class="rev2">비고</th>--%>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="lev" items="${reviewList }">
+                            <tr>
+                                <td><a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a></td>
+                                <td>${lev.score}</td>
+                                <td>${lev.content}</td>
+                                <td>${lev.resdate}</td>
+<%--                                <td>--%>
+<%--                                    <c:if test="${sid eq lev.id || sid eq 'admin'}">--%>
+<%--                                        <a href="${path14}/review/updateReviewForm.do?par=${pro.no}" class="button is-info">수정</a>--%>
+<%--                                        <a href="${path14}/review/deleteReview.do?par=${pro.no}" class="button is-danger"> 삭제 </a>--%>
+<%--                                    </c:if>--%>
+<%--                                </td>--%>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <script>
+                        $(document).ready( function () {
+                            $('#myTable').DataTable({
+                                // sorting 화살표 제거
+                                "targets": 'no-sort',
+                                "bSort": false,
 
-                    </div>
+                                // 3번째 컬럼을 기준으로 내림차순 정렬
+                                order: [[3, 'asc']],
+                                pageLength : 5,
+                                searching: false, //검색 제거
+                                lengthChange: false, // show entries 제거
+                                info: false,
+                                language: {
+                                    emptyTable: '작성된 후기가 없습니다.'
+                                }
+                            });
+                            $('#myTable').css({
+                                'border':'none',
+                            });
+                        } );
+                    </script>
 
                 </main>
             </article>

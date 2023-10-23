@@ -6,18 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class Review {
-    private int no;
-    private String id;
-    private String content;
-    private String resdate;
-    private int score;
-    private int par;
-
+public class InstructorQna {
+    private int bno;
     private String title;
-    private int lno;
-    private int ino;
+    private String content;
+    private String author;
+    private String resdate;
+    private int cnt;
+    private int lev;
+    private int par;
+    private String pw;
+    private int instructorno;
 }
