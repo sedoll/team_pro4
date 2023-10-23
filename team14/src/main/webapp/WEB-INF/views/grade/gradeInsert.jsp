@@ -262,8 +262,9 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../include/header.jsp"></jsp:include>
 <div class="wrap">
+    <jsp:include page="../include/header.jsp"></jsp:include>
+    <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
     <section class="hero is-white is-medium">
         <div class="hero-body has-text-centered">
             <p class="title is-size-3">성적표 입력</p>

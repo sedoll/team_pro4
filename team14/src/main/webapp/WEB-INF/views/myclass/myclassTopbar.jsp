@@ -189,10 +189,10 @@
                 <li class="menu03" onfocus="menu_open('3');" onmouseover="menu_open('3');"><a href=""
                                                                                               id="lnk0140">학습서비스</a>
                     <ul class="dep02" id="dep03">
-                        <li><a id="sub014001" href="">서브메뉴</a></li>
-                        <li><a id="sub014002" href="">서브메뉴</a></li>
+                        <li><a id="sub014001" href="${path21}/grade/slist.do">성적표</a></li>
+                        <li><a id="sub014002" href="${path21}/calendar/list.do">학습계획표</a></li>
                         <li><a id="sub014003" href="">서브메뉴</a></li>
-                        <li><a id="sub014004" href="4">서브메뉴</a></li>
+                        <li><a id="sub014004" href="">서브메뉴</a></li>
                     </ul>
                 </li>
 
