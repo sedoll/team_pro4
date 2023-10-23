@@ -46,7 +46,26 @@ public class MyclassController {
     private ReviewService reviewService;
 
     @Autowired
+    private MemberService memberService;
+
+    @Autowired
     HttpSession session;
+
+
+
+
+    // 내 정보 가져오기
+    @GetMapping("mypage.do")
+    public String mypage(HttpServletRequest request, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        Member member = memberService.getMember(id);
+        System.out.println("내 정보: " + member);
+        model.addAttribute("member", member);
+
+        return "/myclass/myclassTopbar";
+    }
+
+
 
     @GetMapping("myclassList.do")		// board/list.do
     public String myclassList(Model model) throws Exception {
@@ -62,6 +81,11 @@ public class MyclassController {
         DateCalculator dateCalculator = new DateCalculator();
         String id = (String) session.getAttribute("sid");
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
+
+        //topbar정보
+        Member member = memberService.getMember(id);
+        System.out.println("내 정보: " + member);
+        model.addAttribute("member", member);
 
         //출력해보기
         System.out.println(myclassList.toString());
