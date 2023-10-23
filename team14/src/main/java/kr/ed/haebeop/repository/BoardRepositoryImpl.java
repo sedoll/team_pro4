@@ -98,6 +98,11 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
+    public List<Board> boardLikeList(String id) throws Exception {
+        return sqlSession.selectList("board.boardLikeList",id);
+    }
+
+    @Override
     public boolean getReadable(int bno) throws Exception {
         return sqlSession.selectOne("board.getReadable" , bno);
     }

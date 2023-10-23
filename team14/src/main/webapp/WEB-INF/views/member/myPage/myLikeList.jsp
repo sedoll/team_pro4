@@ -50,15 +50,13 @@
             <div id="ud_tab" style="float:left; margin-left: -20px">
                 <input type="radio" name="ud_tabs" id="tab1" checked>
                 <label for="tab1">추천 목록</label>
-                <c:forEach items="" var="like">
-                <p>${like.userid}</p>
-                </c:forEach>
                 <div id="ud_tab-content1" class="ud_content" style="float:left; margin-left: -20px">
                     <table style="width: 800px; margin-left: -20px">
                         <thead>
                         <tr>
                             <th style="width: 6%">No</th>
-                            <th style="width: 24%">분류</th>
+                            <th style="width: 14%"></th>
+                            <th style="width: 10%"></th>
                             <th style="width: 40%">제목</th>
                             <th style="width: 20%">추천일</th>
                             <th style="width: 10%">비고</th>
@@ -68,8 +66,13 @@
                         <c:forEach items="${likeList}" var="like" varStatus="status">
                             <tr class="boardlist1">
                                 <td>${status.count}</td>
-                                <td>${like.boardno}</td>
-                                <td><a href="${path13}/member/myLikeRemove.do?bno=${like.boardno}&category=${boardlist.board_type}" style="background-color: #5ab3fc; color: white; border-radius: 4px; padding: 6px">취소</a></td>
+                                <td></td>
+                                <td></td>
+                                <td><a class="path"
+                                        href="${path13}/board/detail.do?bno=${like.bno}">${like.title}</a></td>
+                                <td><fmt:parseDate value="${like.liketime}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                    <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" /></td>
+                                <td><a href="${path13}/member/myLikeRemove.do?bno=${like.bno}" style="background-color: #5ab3fc; color: white; border-radius: 4px; padding: 6px">취소</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

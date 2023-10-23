@@ -90,7 +90,10 @@
     <insert id="addLike">
         insert into boardlikes values (#{userId},#{boardNo},default)
     </insert>
-
+    <select id="boardLikeList" resultType="kr.ed.haebeop.domain.Board">
+        select l.boardno as bno, l.userid, l.liketime, b.title
+        from boardlikes l join board b on l.boardno=b.bno where userid = #{id}
+    </select>
     <!-- 열람 기능 -->
     <select id="getReadable" resultType="boolean">
         select readable from board where bno = #{bno}

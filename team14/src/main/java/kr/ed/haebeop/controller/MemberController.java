@@ -6,6 +6,7 @@ import kr.ed.haebeop.repository.AuthRepositoryImpl;
 import kr.ed.haebeop.repository.MemberRepository;
 import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.board.BoardService;
 import kr.ed.haebeop.util.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -44,6 +45,9 @@ public class MemberController {
 
     @Autowired
     private InstService instService; // 강사 로그인을 위해 사용
+
+    @Autowired
+    private BoardService boardService;
 
     @Autowired
     HttpSession session; // 세션 생성
@@ -765,7 +769,7 @@ public class MemberController {
     @GetMapping("myLikeList.do")
     public String myLikeList(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
-        List<BoardLikes> boardList = memberService.myLikeList(id);
+        List<Board> boardList = boardService.boardLikeList(id);
         model.addAttribute("likeList", boardList);
         System.out.println(boardList.toString());
         return "/member/myPage/myLikeList";

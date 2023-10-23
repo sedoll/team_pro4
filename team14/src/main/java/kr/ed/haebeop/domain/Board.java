@@ -20,4 +20,5 @@ public class Board {
     private String liketime;
     private int like_count;
     private boolean readable;
+    private String userid;
 }
