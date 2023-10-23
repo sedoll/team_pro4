@@ -1,7 +1,6 @@
 package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.Qna;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
 import org.json.JSONObject;
@@ -74,7 +73,7 @@ public class BoardController {
         dto.setBno(Integer.parseInt(request.getParameter("bno")));
         dto.setContent(request.getParameter("content"));
         boardService.commentInsert(dto);
-        return "redirect:/board/list.do";
+        return "redirect:/board/detail.do?bno="+dto.getBno();
     }
     
     // 게시판 글 삭제
@@ -91,7 +90,7 @@ public class BoardController {
     public String ComDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         int par = Integer.parseInt(request.getParameter("par"));
-        Qna dto = new Qna();
+        Board dto = new Board();
         dto.setPar(par);
         boardService.boardDelete(bno);
         return "redirect:/board/detail.do?bno="+dto.getPar();
@@ -115,7 +114,7 @@ public class BoardController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         boardService.boardEdit(dto);
-        return "redirect:/board/list.do";
+        return "redirect:/board/detail.do?bno="+dto.getBno();
     }
     
     // 댓글 수정 폼 이동

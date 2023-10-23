@@ -159,3 +159,13 @@ b
 2src/main/webapp/WEB-INF/views/admin/memberList.jsp,4\a\4ab8704be080a69c9dd222fe3f799315ad34c8cb
 f
 6src/main/webapp/WEB-INF/views/myclass/myclassIndex.jsp,f\7\f7188bb8ee071544e52a6c777cccd15e7e896b60
+e
+5src/main/webapp/resources/js/myStudy/myclassDetail.js,a\e\ae97b9663ad4873198d091df8432d74aea43cd68
+g
+7src/main/webapp/WEB-INF/views/myclass/myclassDetail.jsp,e\6\e6a7795e510349bd0a1e061eaf46634984f87b5d
+S
+#src/main/webapp/resources/js/vdo.js,5\b\5b96f8cf7f19960d5202b67137ef4124476bde26
+b
+2src/main/java/kr/ed/haebeop/util/VideoTimeCut.java,8\8\885bcb4ef982dd2ad2b012c514d780bce7f170ee
+b
+2src/main/webapp/WEB-INF/views/myclass/lecVideo.jsp,1\3\1351b53004b0da7ea2a870192e875b1fd447562a
