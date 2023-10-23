@@ -103,6 +103,11 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
+    public List<Board> boardLikeList(String id) throws Exception {
+        return boardRepository.boardLikeList(id);
+    }
+
+    @Override
     public boolean getReadable(int bno) throws Exception {
         return boardRepository.getReadable(bno);
     }

@@ -25,6 +25,7 @@ public interface BoardService {
     public int checkLiked(Like like) throws Exception;
     public void removeLike(Like like) throws Exception;
     public void addLike(Like like) throws Exception;
+    public List<Board> boardLikeList(String id) throws Exception;
     public boolean getReadable(int bno) throws Exception;
     public void readableEdit(Board bno) throws Exception;
 }
