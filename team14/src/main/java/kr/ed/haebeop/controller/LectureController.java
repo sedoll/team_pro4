@@ -223,6 +223,9 @@ public class LectureController {
         Instructor inst = instService.getInstructorName(product.getIno()); // 강사 번호로 이름 추출
         List<String> videoList = new ArrayList<>(); // 비디오 이름 받기
         String scoreAvg = reviewService.avgScore(no);
+
+        List<Integer> likedProductIds = new ArrayList<>();
+
         if(scoreAvg != null) {
             scoreAvg = String.format("%.1f", Double.parseDouble(scoreAvg));
         }
@@ -258,6 +261,8 @@ public class LectureController {
             payment.setLec_no(no);
             payment.setId(id);
 
+            likedProductIds = lectureService.getLikedProductsByUser(id);
+
             Review review = new Review();
             review.setId(id);
             review.setPar(no);
@@ -274,6 +279,7 @@ public class LectureController {
 
         List<Review> revList = reviewService.getReviewListPar(no); // 해당 강의 리뷰 정보 출력
 
+        model.addAttribute("likedProductIds", likedProductIds);
         model.addAttribute("revList", revList);
         model.addAttribute("pro", product);
         model.addAttribute("videoList", videoList);
