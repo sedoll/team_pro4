@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path13" value="<%=request.getContextPath() %>"/>
+<c:set var="path14" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +25,11 @@
 
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../../include/head.jsp"></jsp:include>
-    <link rel="stylesheet" href="${path13}/resources/css/myPage/baseLayout.css"/>
-    <link rel="stylesheet" href="${path13}/resources/css/myPage/sidebar.css"/>
-    <link rel="stylesheet" href="${path13}/resources/css/myPage/validateUser.css"/>
-    <link href="${path13}/resources/css/myPage/com_write.css" rel="stylesheet">
-    <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="${path14}/resources/css/myPage/baseLayout.css"/>
+    <link rel="stylesheet" href="${path14}/resources/css/myPage/sidebar.css"/>
+    <link rel="stylesheet" href="${path14}/resources/css/myPage/validateUser.css"/>
+    <link href="${path14}/resources/css/myPage/com_write.css" rel="stylesheet">
+    <script type="text/javascript" src="${path14}/resources/js/com_write.js" charset="UTF-8"></script>
 
     <title>추천한 게시글</title>
 
@@ -50,15 +50,13 @@
             <div id="ud_tab" style="float:left; margin-left: -20px">
                 <input type="radio" name="ud_tabs" id="tab1" checked>
                 <label for="tab1">추천 목록</label>
-                <c:forEach items="" var="like">
-                <p>${like.userid}</p>
-                </c:forEach>
                 <div id="ud_tab-content1" class="ud_content" style="float:left; margin-left: -20px">
                     <table style="width: 800px; margin-left: -20px">
                         <thead>
                         <tr>
                             <th style="width: 6%">No</th>
-                            <th style="width: 24%">분류</th>
+                            <th style="width: 14%"></th>
+                            <th style="width: 10%"></th>
                             <th style="width: 40%">제목</th>
                             <th style="width: 20%">추천일</th>
                             <th style="width: 10%">비고</th>
@@ -68,8 +66,13 @@
                         <c:forEach items="${likeList}" var="like" varStatus="status">
                             <tr class="boardlist1">
                                 <td>${status.count}</td>
-                                <td>${like.boardno}</td>
-                                <td><a href="${path13}/member/myLikeRemove.do?bno=${like.boardno}&category=${boardlist.board_type}" style="background-color: #5ab3fc; color: white; border-radius: 4px; padding: 6px">취소</a></td>
+                                <td></td>
+                                <td></td>
+                                <td><a class="path"
+                                        href="${path14}/board/detail.do?bno=${like.bno}">${like.title}</a></td>
+                                <td><fmt:parseDate value="${like.liketime}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                    <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" /></td>
+                                <td><a href="${path14}/member/myLikeRemove.do?bno=${like.bno}" style="background-color: #5ab3fc; color: white; border-radius: 4px; padding: 6px">취소</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

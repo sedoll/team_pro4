@@ -100,6 +100,11 @@ public class BoardTeaServiceImpl implements BoardService{
     }
 
     @Override
+    public List<Board> boardLikeList(String id) throws Exception {
+        return boardTeaRepository.boardLikeList(id);
+    }
+
+    @Override
     public boolean getReadable(int bno) throws Exception {
         return boardTeaRepository.getReadable(bno);
     }
