@@ -23,12 +23,12 @@
         <!-- header menu -->
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless" id="hovertest" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
+                <a class="navbar-link is-arrowless" id="menu1" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
                    onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>강의</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#hovertest').css({'background-color': '#ebebeb', 'color': 'white'});"
-                     onmouseout="$('#hovertest').css({'background-color': '', 'color': ''});">
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu1').css({'background-color': '#ebebeb', 'color': 'white'});"
+                     onmouseout="$('#menu1').css({'background-color': '', 'color': ''});">
                     <a href="${path2}/lecture/lecList" class="button is-link2 is-rounded b2" >
                         강의 목록
                     </a>
@@ -36,10 +36,12 @@
             </div>
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
+                <a class="navbar-link is-arrowless" id="menu2" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
+                   onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>선생님</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu2').css({'background-color': '#ebebeb', 'color': 'white'});"
+                     onmouseout="$('#menu2').css({'background-color': '', 'color': ''});">
                     <a href="${path2}/instructor/instructorList" class="button is-link2 is-rounded b2" >
                         선생님 목록
                     </a>
@@ -70,10 +72,12 @@
 <%--            </div>--%>
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless">
+                <a class="navbar-link is-arrowless" id="menu3" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
+                   onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>입시 커뮤니티</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu3').css({'background-color': '#ebebeb', 'color': 'white'});"
+                     onmouseout="$('#menu3').css({'background-color': '', 'color': ''});">
                     <a href="${path2}/board/list.do" class="navbar-item">
                         자유 게시판
                     </a>
@@ -101,8 +105,9 @@
                 </div>
             </div>
 
-            <div class="navbar-item is-hoverable">
-                <a href="${path2}/myclass/myclassIndex.do" style="color:black;" > <%--class="button is-link2 is-rounded b2" --%>
+            <div class="navbar-item is-hoverable has-dropdown" >
+                <a class="navbar-link is-arrowless" href="${path2}/myclass/myclassIndex.do" style="color:black;"  id="menu5" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
+                   onmouseout="$(this).css({'background-color': '', 'color': ''});" > <%--class="button is-link2 is-rounded b2" --%>
                     <strong>나의 학습방</strong>
                 </a>
             </div>
@@ -165,11 +170,13 @@
                     </c:if>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link is-arrowless">
+                    <a class="navbar-link is-arrowless" id="menu4" onmouseover="$(this).css({'background-color': '#ebebeb', 'color': 'white'});"
+                       onmouseout="$(this).css({'background-color': '', 'color': ''});">
                         <img src="${path2}/resources/img/help_thin.svg" alt="" width="26px">
                     <%--                        <strong>고객센터</strong>--%>
                     </a>
-                    <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">
+                    <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu4').css({'background-color': '#ebebeb', 'color': 'white'});"
+                         onmouseout="$('#menu4').css({'background-color': '', 'color': ''});">
                         <a href="${path2}/notice/list.do" class="navbar-item">
                             공지 사항
                         </a>
