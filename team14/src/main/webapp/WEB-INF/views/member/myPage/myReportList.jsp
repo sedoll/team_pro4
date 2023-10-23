@@ -31,7 +31,7 @@
     <link href="${path13}/resources/css/myPage/com_write.css" rel="stylesheet">
     <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>
 
-    <title>작성글</title>
+    <title>신고한 게시글</title>
 
 
 </head>
@@ -91,20 +91,8 @@
 
                     </div> <%-- 작성글("ud_tab-content1") 끝--%>
 
-
-
-            <%-- ---------------------------------------------------------------------------------------------  --%>
-
-
             </form>
         </div>
-
-
-
-
-
-
-
 </div>
 </div>
 

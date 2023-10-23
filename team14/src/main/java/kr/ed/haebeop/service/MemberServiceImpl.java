@@ -1,9 +1,6 @@
 package kr.ed.haebeop.service;
 
-import kr.ed.haebeop.domain.Board;
-import kr.ed.haebeop.domain.BoardlistVO;
-import kr.ed.haebeop.domain.CommentlistVO;
-import kr.ed.haebeop.domain.Member;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -250,14 +247,15 @@ public class MemberServiceImpl implements MemberService{
         return list;
     }
 
+    // 내가 신고한 게시글
     @Override
     public List<Board> myReportList(String id) throws Exception {
         return memberRepository.myReportList(id);
     }
 
     @Override
-    public void boardReportCancel(int bno) throws Exception {
-        memberRepository.boardReportCancel(bno);
+    public void boardReportCancel(Report report) throws Exception {
+        memberRepository.boardReportCancel(report);
     }
 
     @Override
@@ -268,6 +266,27 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public void parReportCancel(int bno) throws Exception {
         memberRepository.parReportCancel(bno);
+    }
+
+    // 내가 추천한 게시글
+    @Override
+    public List<BoardLikes> myLikeList(String id) throws Exception {
+        return memberRepository.myLikeList(id);
+    }
+
+    @Override
+    public void boardLikeRemove(int bno) throws Exception {
+        memberRepository.boardLikeRemove(bno);
+    }
+
+    @Override
+    public void teaLikeRemove(int bno) throws Exception {
+        memberRepository.teaLikeRemove(bno);
+    }
+
+    @Override
+    public void parLikeRemove(int bno) throws Exception {
+        memberRepository.parLikeRemove(bno);
     }
 
     // 회원 이메일 가져오기

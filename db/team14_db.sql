@@ -70,6 +70,7 @@ CREATE TABLE board(
 	cnt INT DEFAULT 0, -- 조회수
 	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
 	par INT, -- 부모 게시글 번호
+	readable boolean default false,
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );

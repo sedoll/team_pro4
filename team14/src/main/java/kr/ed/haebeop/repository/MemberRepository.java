@@ -41,11 +41,18 @@ public interface MemberRepository {
     public Member selectMember(String email) throws Exception;
     public int pwUpdate(Member member) throws Exception;
     public void updateAuthStatus(Map<String, Integer> map) throws Exception;
+
     //내가 신고한 게시글
     public List<Board> myReportList(String id) throws Exception;
-    public  void boardReportCancel(int bno) throws Exception;
+    public  void boardReportCancel(Report report) throws Exception;
     public  void teaReportCancel(int bno) throws Exception;
     public  void parReportCancel(int bno) throws Exception;
+
+    //내가 추천한 게시글
+    public List<BoardLikes> myLikeList(String id) throws Exception;
+    public void boardLikeRemove(int bno) throws Exception;
+    public  void teaLikeRemove(int bno) throws Exception;
+    public  void parLikeRemove(int bno) throws Exception;
 
     //이메일로 유저찾기
     public Member getMemberEmail(String email) throws Exception;
