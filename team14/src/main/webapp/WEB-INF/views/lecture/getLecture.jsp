@@ -145,8 +145,15 @@
                                 <td>${inst.name}</td>
                             </tr>
                             <tr>
-                                <th>이메일</th>
-                                <td>${inst.email}</td>
+                                <th>평점</th>
+                                <c:choose>
+                                    <c:when test="${empty avg || avg eq ''}">
+                                        <td>0/5</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>${avg}/5</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <th>영상 수</th>

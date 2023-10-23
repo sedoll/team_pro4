@@ -2,7 +2,6 @@ package kr.ed.haebeop.controller.board;
 
 import kr.ed.haebeop.domain.Board;
 import kr.ed.haebeop.domain.Like;
-import kr.ed.haebeop.domain.Qna;
 import kr.ed.haebeop.domain.Report;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
 import org.json.JSONObject;
@@ -109,10 +108,10 @@ public class BoardController {
 
     // 댓글 삭제
     @GetMapping("comDelete.do")
-    public String qnaComDelete(HttpServletRequest request, Model model) throws Exception {
+    public String boardComDelete(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         int par = Integer.parseInt(request.getParameter("par"));
-        Qna dto = new Qna();
+        Board dto = new Board();
         dto.setPar(par);
         boardService.boardDelete(bno);
         return "redirect:/board/detail.do?bno="+dto.getPar();
@@ -150,7 +149,7 @@ public class BoardController {
 
     // 댓글 수정
     @PostMapping("commentEdit.do")
-    public String qnaCommentEdit(HttpServletRequest request, Model model) throws Exception {
+    public String boardCommentEdit(HttpServletRequest request, Model model) throws Exception {
         int bno = Integer.parseInt(request.getParameter("bno"));
         int par = Integer.parseInt(request.getParameter("par"));
         Board dto = new Board();
