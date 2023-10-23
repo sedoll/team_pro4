@@ -92,7 +92,7 @@
     </insert>
     <select id="boardLikeList" resultType="kr.ed.haebeop.domain.Board">
         select l.boardno as bno, l.userid, l.liketime, b.title
-        from boardlikes l join board b on l.boardno=b.bno where userid = #{id}
+        from boardlikes l join board b on l.boardno=b.bno where userid = #{id} order by liketime desc
     </select>
     <!-- 열람 기능 -->
     <select id="getReadable" resultType="boolean">

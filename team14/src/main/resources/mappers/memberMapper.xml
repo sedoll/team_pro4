@@ -179,7 +179,7 @@
     </delete>
 
     <select id="myLikeList" resultType="kr.ed.haebeop.domain.BoardLikes">
-        select * from boardlikes where userid=#{userid} order by liketime desc
+        select * from boardlikes where userid=#{id} order by liketime desc
     </select>
 
     <!--  boardLikeRemove  -->
