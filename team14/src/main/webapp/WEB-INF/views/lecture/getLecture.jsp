@@ -278,7 +278,7 @@
                         <c:forEach var="lev" items="${revList }">
                             <tr>
                                 <td>${lev.id}</td>
-                                <td>${lev.score}</td>
+                                <td class="starRating" data-score="${lev.score}"></td>
                                 <td>${lev.content}</td>
                                 <td>${lev.resdate}</td>
                                 <td>
@@ -291,6 +291,30 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <script>
+                    $(document).ready(function() {
+                        const filledStarPath = '${path}/resources/img/star.png';
+                        const emptyStarPath = '${path}/resources/img/empty_star.png';
+
+                        function renderStars($starContainer, score) {
+                            $starContainer.empty(); // 기존 내용을 지웁니다.
+                            for (let i = 1; i <= 5; i++) {
+                                const starPath = i <= score ? filledStarPath : emptyStarPath;
+                                const $star = $('<img>').attr('src', starPath)
+                                    .attr('alt', 'star')
+                                    .width(20)
+                                    .height(20);
+                                $starContainer.append($star);
+                            }
+                        }
+
+                        $('.starRating').each(function() {
+                            const $this = $(this);
+                            const score = $this.data('score');
+                            renderStars($this, score);
+                        });
+                    });
+                </script>
                 <script>
                     $(document).ready( function () {
                         $('#myTable').DataTable({

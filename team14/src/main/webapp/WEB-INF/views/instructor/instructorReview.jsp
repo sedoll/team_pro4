@@ -40,30 +40,49 @@
                     <table class="table is-fullwidth" id="myTable">
                         <thead>
                         <tr>
-                            <th class="rev">강의</th>
-                            <th class="rev">점수</th>
-                            <th class="rev-con">댓글</th>
-                            <th class="rev2">작성일</th>
+                            <th class="rev" style="width: 15%">강의</th>
+                            <th class="rev" style="width: 20%">점수</th>
+                            <th class="rev-con" style="width: 50%">후기</th>
+                            <th class="rev2" style="width: 15%">작성일</th>
 <%--                            <th class="rev2">비고</th>--%>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="lev" items="${reviewList }">
+                        <c:forEach var="lev" items="${reviewList }" varStatus="status">
                             <tr>
                                 <td><a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a></td>
-                                <td>${lev.score}</td>
+                                <td class="starRating" data-score="${lev.score}"></td>
                                 <td>${lev.content}</td>
                                 <td>${lev.resdate}</td>
-<%--                                <td>--%>
-<%--                                    <c:if test="${sid eq lev.id || sid eq 'admin'}">--%>
-<%--                                        <a href="${path14}/review/updateReviewForm.do?par=${pro.no}" class="button is-info">수정</a>--%>
-<%--                                        <a href="${path14}/review/deleteReview.do?par=${pro.no}" class="button is-danger"> 삭제 </a>--%>
-<%--                                    </c:if>--%>
-<%--                                </td>--%>
+
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
+                    <script>
+                        $(document).ready(function() {
+                            const filledStarPath = '${path14}/resources/img/star.png';
+                            const emptyStarPath = '${path14}/resources/img/empty_star.png';
+
+                            function renderStars($starContainer, score) {
+                                $starContainer.empty(); // 기존 내용을 지웁니다.
+                                for (let i = 1; i <= 5; i++) {
+                                    const starPath = i <= score ? filledStarPath : emptyStarPath;
+                                    const $star = $('<img>').attr('src', starPath)
+                                        .attr('alt', 'star')
+                                        .width(20)
+                                        .height(20);
+                                    $starContainer.append($star);
+                                }
+                            }
+
+                            $('.starRating').each(function() {
+                                const $this = $(this);
+                                const score = $this.data('score');
+                                renderStars($this, score);
+                            });
+                        });
+                    </script>
                     <script>
                         $(document).ready( function () {
                             $('#myTable').DataTable({
