@@ -392,8 +392,8 @@
                             }
                         });
 
+                        // 기존의 readable 값 불러와서 select에 값 표시
                         let readable = ${dto.readable};
-
                         console.log(readable);
                         if(readable == true) {
                             $("#contentSelect").val("true");

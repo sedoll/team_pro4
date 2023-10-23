@@ -66,9 +66,6 @@ public class BoardController {
 
         //열람 기능
 
-
-
-
         System.out.println(comment.toString());
         return "/board/boardDetail";
     }
