@@ -1,17 +1,43 @@
 package kr.ed.haebeop.service;
 
 
-import kr.ed.haebeop.domain.Instructor;
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.InstructorNotice;
+import kr.ed.haebeop.domain.*;
 
 import java.util.List;
 
 public interface InstructorService {
-    public List<Lecture> getInstructorLectureList(String instructorname);
-    public List<InstructorNotice> getInstructorNoticeList(String instructorname);
-    public InstructorNotice getInstructorNoticeDetail(int no);
-    public Instructor getInstructorId(String instructorname);
-    public List<Instructor> getInstructorList();
+    public List<Lecture> getInstructorLectureList(int no);
 
+    //공지
+    public List<InstructorNotice> getInstructorNoticeList(int no);
+    public InstructorNotice getInstructorNoticeDetail(int noticeNo);
+    public void noticeInsert(InstructorNotice dto) throws Exception;
+    public void noticeDelete(int no) throws Exception;
+    public void noticeEdit(InstructorNotice dto) throws Exception;
+
+    //
+    public List<Instructor> getInstructorList();
+    public Instructor getInstructor(int no);
+
+    //QNA
+    public List<InstructorQna> instructorQnaList(int no);
+    public InstructorQna qnaDetail(int bno) throws Exception;
+    public void qnaInsert(InstructorQna dto) throws Exception;
+    public void qnaDelete(int bno) throws Exception;
+    public void qnaEdit(InstructorQna dto) throws Exception;
+    public void commentInsert(InstructorQna dto) throws Exception;
+    public List<InstructorQna> commentList(int bno) throws Exception;
+    public void commentDeleteAll(int bno) throws Exception;
+    public boolean check(int bno, String pw) throws Exception;
+
+    //자료실 리스트
+    public List<InstructorFile> getInstructorFileList(int no);
+    public void setInstFile(InstFile instFile);
+
+    public void addInstructorFile(InstructorFile instructorFile);
+    public InstructorFile getInstructorFile(int fileNo);
+    // 파일의 실제 이름 출력
+    public String getInstFileName(String sfile);
+
+    List<Review> getReviewList(int no);
 }

@@ -6,30 +6,30 @@
 
 <nav style="margin-right: 0">
     <div class="sidebar">
-        <div class="header" style="text-align: center;"><a href="${path4}/instructor/instructorDetail.do?instructorName=${instructorName}">${instructorName} 선생님</a></div>
+        <div class="header" style="text-align: center;"><a href="${path4}/instructor/instructorDetail.do?no=${instructor.no}">${instructor.name} 선생님</a></div>
         <ul>
-            <li>
-                <a href="${path4}/instructor/instructorLecture.do?instructorName=${instructorName }" >
+            <li id="side_list">
+                <a href="${path4}/instructor/instructorLecture.do?no=${instructor.no }" >
                     강의 목록
                 </a>
             </li>
-            <li>
-                <a href="${path4}/instructor/instructorNotice.do?instructorName=${instructorName }" >
+            <li id="side_notice">
+                <a href="${path4}/instructor/instructorNotice.do?no=${instructor.no }" >
                     공지
                 </a>
             </li>
-            <li>
-                <a href="${path4}/instructor/instructorQNA.do?instructorName=${instructorName }">
+            <li id="side_qna">
+                <a href="${path4}/instructor/instructorQNA.do?no=${instructor.no }">
                     Q&A
                 </a>
             </li>
-            <li>
-                <a href="${path4}/instructor/instructorFile.do?instructorName=${instructorName }">
+            <li id="side_file">
+                <a href="${path4}/instructor/instructorFile.do?no=${instructor.no }">
                     자료실
                 </a>
             </li>
-            <li>
-                <a href="${path4}/instructor/instructorReview.do?instructorName=${instructorName }">
+            <li id="side_review">
+                <a href="${path4}/instructor/instructorReview.do?no=${instructor.no }">
                     후기
                 </a>
             </li>

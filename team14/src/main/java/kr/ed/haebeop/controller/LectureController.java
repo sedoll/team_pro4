@@ -220,6 +220,10 @@ public class LectureController {
         Lecture product = lectureService.getLecture(no); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
         Instructor inst = instService.getInstructorName(product.getIno()); // 강사 번호로 이름 추출
         List<String> videoList = new ArrayList<>(); // 비디오 이름 받기
+        String scoreAvg = reviewService.avgScore(no);
+        if(scoreAvg != null) {
+            scoreAvg = String.format("%.1f", Double.parseDouble(scoreAvg));
+        }
         int check = 0; // 구매를 확정하고 리뷰를 작성하지 않은 경우를 확인하기 위해 사용한 변수
 
         // 강의 영상 개수 카운트
@@ -274,6 +278,7 @@ public class LectureController {
         model.addAttribute("cnt", cnt);
         model.addAttribute("inst", inst);
         model.addAttribute("check", check);
+        model.addAttribute("avg", scoreAvg);
         return "lecture/getLecture";
     }
 
@@ -332,7 +337,8 @@ public class LectureController {
         lecture.setIno(Integer.parseInt(files.getParameter("ino")));
 
         // 개발 서버 파일 저장 경로
-        String uploadDir = "D:/spring_study/pro04/src/main/webapp/resources/upload/"; // 회사
+//        String uploadDir = "D:/spring_study/pro04/src/main/webapp/resources/upload/"; // 회사
+        String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload"; // 회사
         // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
         // 실제 서버 파일 저장 경로
         String uploadSev = req.getRealPath("/resources/upload/");

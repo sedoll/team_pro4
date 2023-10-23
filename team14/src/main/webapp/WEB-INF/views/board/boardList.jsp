@@ -13,6 +13,11 @@
     <title>자유게시판 목록</title>
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
+
+    <%-- cleditor --%>
+    <script type="text/javascript" src="${path }/resources/cleditor/jquery.cleditor.js"></script>
+    <link rel="stylesheet" href="${path }/resources/cleditor/jquery.cleditor.css">
+
     <style>
         .hero {
             height: 250px;

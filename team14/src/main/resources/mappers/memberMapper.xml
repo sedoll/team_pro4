@@ -169,13 +169,22 @@
 
     <!--    boardReportCancel-->
     <delete id="boardReportCancel">
-        delete from report where board_bno = #{bno}
+        delete from report where board_bno = #{board_bno} and reporter = #{reporter}
     </delete>
     <delete id="teaReportCancel">
         delete from report_tea where board_bno = #{bno}
     </delete>
     <delete id="parReportCancel">
         delete from report_par where board_bno = #{bno}
+    </delete>
+
+    <select id="myLikeList" resultType="kr.ed.haebeop.domain.BoardLikes">
+        select * from boardlikes where userid=#{userid} order by liketime desc
+    </select>
+
+    <!--  boardLikeRemove  -->
+    <delete id="boardLikeRemove">
+        delete from boardlikes where userid = #{userid} and boardno = #{boardno}
     </delete>
 
     <select id="getMemberEmail" resultType="kr.ed.haebeop.domain.Member">

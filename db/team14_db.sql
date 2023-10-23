@@ -70,6 +70,7 @@ CREATE TABLE board(
 	cnt INT DEFAULT 0, -- 조회수
 	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
 	par INT, -- 부모 게시글 번호
+	readable boolean default false,
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
@@ -281,9 +282,17 @@ CREATE TABLE instructor(
 	email VARCHAR(100), -- 선생님 이메일
 	intro VARCHAR(1000), -- 선생님 소개글
 	cate VARCHAR(20), -- 선생님 담당 과목
-	img VARCHAR(1000) -- 선생님 프로필 이미지
+	img VARCHAR(1000), -- 선생님 프로필 이미지
+	id VARCHAR(50), -- 선생님 아이디
+	FOREIGN KEY(id) REFERENCES member(id) ON DELETE 		
+		CASCADE -- 선생님 아이디 외래키
 );
-	
+
+-- instructor 선생님 테이블 컬럼 추가
+-- ALTER TABLE instructor
+-- ADD COLUMN id VARCHAR(50),
+-- ADD FOREIGN KEY (id) REFERENCES member(id);
+
 INSERT INTO instructor VALUES(DEFAULT, '강감찬', '01011111111', 'kang@edu.com');
 INSERT INTO instructor VALUES(DEFAULT, '홍길동', '01022222222', 'hong@edu.com');
 INSERT INTO instructor VALUES(DEFAULT, '이순신', '01033333333', 'lee@edu.com');
@@ -456,3 +465,55 @@ INSERT INTO calendar(id, groupId, title, writer, content, START, END, textColor,
 -- 학생별로 모든 강의 정보가 등록되어야 하며, 
 -- 만약 수강신청시 수강인원이 초과될 경우 수강신청을 할 수 없다.
 
+
+-- 선생님 공지
+create table instructornotice(
+	no int primary KEY AUTO_INCREMENT, -- notice 글 번호
+	title varchar(200) not NULL,	-- 제목
+	content varchar(1000), -- 내용
+	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
+	cnt int DEFAULT 0, -- 조회수
+	instructorno int,
+	FOREIGN KEY(instructorno) REFERENCES instructor(no) ON DELETE CASCADE
+);
+
+-- 선생님 QNA
+CREATE TABLE instructorqna(
+	bno INT PRIMARY KEY AUTO_INCREMENT, -- qna 글 번호
+	title VARCHAR(200) NOT NULL, -- 제목
+	content VARCHAR(1000), -- 내용
+	author VARCHAR(16), -- 작성자
+	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
+	cnt INT DEFAULT 0, -- 조회수
+	lev INT DEFAULT 0, -- 게시글 0, 답글 1 이상
+	par INT, -- 부모 게시글 번호
+	pw VARCHAR(330), -- 비밀글, 비밀번호
+	instructorno int, -- 선생님 구분값 
+	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
+		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
+);
+
+-- instructor 선생님 테이블 컬럼 추가
+ALTER TABLE instructor
+ADD COLUMN id VARCHAR(50),
+ADD FOREIGN KEY (id) REFERENCES member(id);
+
+-- 선생님 자료실 
+CREATE TABLE instructorfile(
+	NO INT PRIMARY KEY AUTO_INCREMENT, -- 
+	title VARCHAR(200) NOT NULL, -- 
+	content VARCHAR(2000), --
+	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
+	cnt int DEFAULT 0, -- 조회수
+	sfile1 VARCHAR(1000), -- 
+	sfile2 VARCHAR(1000), -- 
+	sfile3 VARCHAR(1000), --
+	instructorno int,
+	FOREIGN KEY(instructorno) REFERENCES instructor(NO) -- 강사 번호를 외래키로 사용
+);
+-- 선생님 자료실 파일
+CREATE TABLE instfile (
+	NO INT PRIMARY KEY AUTO_INCREMENT, -- 번호
+	sfile VARCHAR(1000), -- 난수화된 파일 이름
+	realname VARCHAR(250) -- 실제 파일 이름
+)
