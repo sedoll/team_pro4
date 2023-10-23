@@ -62,6 +62,10 @@ public class InstructorController {
         Instructor instructor = instructorService.getInstructor(no);
         model.addAttribute("instructor", instructor);
 
+        //후기 목록
+        List<Review> reviewList = instructorService.getReviewList(no);
+        model.addAttribute("reviewList",reviewList);
+
 
         return "/instructor/instructorDetail";
     }
@@ -96,8 +100,6 @@ public class InstructorController {
         List<InstructorNotice> instructorNotices = instructorService.getInstructorNoticeList(no);
         model.addAttribute("instructorNotices",instructorNotices);
         System.out.println(instructorNotices.toString());
-
-
 
 
         return "/instructor/instructorNotice";

@@ -226,6 +226,7 @@ CREATE TABLE fileboard (
 );
 
 -- 성적 게시판
+-- DROP TABLE grade;
 CREATE TABLE grade( 
 	no INTEGER auto_increment PRIMARY KEY,
 	stuname VARCHAR(150) NOT NULL ,
@@ -446,7 +447,6 @@ create table calendar(
 	content varchar(1000),
 	start date,
 	end date,
-	allDay integer,
 	textColor varchar(50),
 	backgroundColor varchar(50),
 	borderColor varchar(50)

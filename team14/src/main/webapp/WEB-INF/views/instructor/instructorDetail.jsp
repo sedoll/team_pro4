@@ -54,14 +54,38 @@
             color: #0a0a0a;
 
         }
+        .instReview a:hover {
+            text-decoration: none;
+            color: #0a0a0a;
+        }
         .reviewList {
             /*background-color: #c5d6e6;*/
             /*border-radius: 14px;*/
             width: 350px;
             height: 180px;
             margin-left: 20px;
-            margin-top: 20px;
+            margin-top: 26px;
             border-top: 1px solid black;
+        }
+        .reviewList table {
+            width:350px;
+        }
+        .reviewList tr {
+            width:350px;
+            line-height: 34px;
+            border-bottom: 1px solid #c4c4c4;
+        }
+        .reviewList img {
+            margin-top: 8px;
+        }
+        .starRating {
+            width: 90px;
+        }
+        .reviewContent{
+            max-width: 260px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 
@@ -87,14 +111,48 @@
                         </div>
                         <div class="instReview">
                                 <h5>최신 후기</h5>
-                                <h6>+ 더보기</h6>
+                                <h6>
+                                    <a href="${path14}/instructor/instructorReview.do?no=${instructor.no }">
+                                    + 더보기
+                                    </a>
+                                </h6>
 
                         </div>
                         <div class="reviewList">
-
+                            <table>
+                                <c:forEach var="lev" items="${reviewList }" begin="0" end="4">
+                                    <tr>
+                                        <td class="starRating" data-score="${lev.score}"></td>
+                                        <td class="reviewContent">${lev.content}</td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
                         </div>
                     </div>
+                    <script>
+                        $(document).ready(function() {
+                            const filledStarPath = '${path14}/resources/img/star.png';
+                            const emptyStarPath = '${path14}/resources/img/empty_star.png';
 
+                            function renderStars($starContainer, score) {
+                                $starContainer.empty(); // 기존 내용을 지웁니다.
+                                for (let i = 1; i <= 5; i++) {
+                                    const starPath = i <= score ? filledStarPath : emptyStarPath;
+                                    const $star = $('<img>').attr('src', starPath)
+                                        .attr('alt', 'star')
+                                        .width(16)
+                                        .height(16);
+                                    $starContainer.append($star);
+                                }
+                            }
+
+                            $('.starRating').each(function() {
+                                const $this = $(this);
+                                const score = $this.data('score');
+                                renderStars($this, score);
+                            });
+                        });
+                    </script>
                 </main>
             </article>
         </div>
