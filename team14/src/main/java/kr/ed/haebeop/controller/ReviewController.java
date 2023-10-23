@@ -126,8 +126,8 @@ public class ReviewController {
         PrintWriter out = response.getWriter();
         out.println(json.toString());
         System.out.println(json.toString());
-
     }
+
     @PostMapping(value = "chkReported.do")
     public void chkReported(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
         String id = request.getParameter("id");

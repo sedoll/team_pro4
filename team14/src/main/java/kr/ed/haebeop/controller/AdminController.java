@@ -422,4 +422,20 @@ public class AdminController {
         return "redirect:/admin/adminReviewList.do";
     }
 
+    // 리뷰 신고 목록
+    @GetMapping("reviewReportList.do")
+    public String getReviewReportList(HttpServletRequest request,Model model) throws Exception {
+        List<ReviewVO> revList = reviewService.reviewReportList();
+        model.addAttribute("revList", revList);
+        return "/admin/reviewReportList";
+    }
+
+    // 신고된 리뷰 삭제
+    @GetMapping("reviewReportDelete.do")
+    public String reviewReportDelete(HttpServletRequest request, Model model) throws Exception {
+        int no = Integer.parseInt(request.getParameter("no"));
+        reviewService.adminbDeleteReview(no);
+        return "redirect:/admin/reviewReportList.do";
+    }
+
 }
