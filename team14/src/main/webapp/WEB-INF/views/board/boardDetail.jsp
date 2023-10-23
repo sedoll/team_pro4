@@ -17,6 +17,11 @@
 
     <!-- 플러그인 연결-->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <%-- cleditor --%>
+    <script type="text/javascript" src="${path}/resources/cleditor/jquery.cleditor.js"></script>
+    <link rel="stylesheet" href="${path}/resources/cleditor/jquery.cleditor.css">
+
     <!-- datatables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
@@ -54,7 +59,7 @@
             line-height: 32px;
             padding: 12px 15px; /
             /*border: 1px solid #f5f5f5; !*/
-            box-sizing: border-box;
+        box-sizing: border-box;
             background-color: #eeeeee; /* 배경색 조정 */
             font-size: 22px;
             font-weight: 600;
@@ -72,7 +77,7 @@
             width: 6%;
             text-align: center;
         }.tb1 thead td:nth-child(2) {
-            text-align: left;
+             text-align: left;
              width: 14%;
          }
         .tb1 thead td:nth-child(3) {
@@ -197,13 +202,13 @@
 
         }
         textarea {
-             resize: none;
-             padding: 10px;
-             height: 80px;
-             border: 1px solid #ccc;
-             border-radius: 5px;
-             vertical-align: middle;
-         }
+            resize: none;
+            padding: 10px;
+            height: 80px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            vertical-align: middle;
+        }
         #nologin_comment {
             width: 1200px;
             text-align: center;
@@ -244,55 +249,109 @@
                 <table class="tb1">
 
                     <thead>
-                        <tr class="title">
-                            <th colspan="5">${dto.title}</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <c:if test="${dto.author eq sid && not empty sid}">
-                                    <a href="${path}/board/edit.do?bno=${dto.bno}" class="button is-outlined is-link">수정</a>
-                                </c:if>
-                            </td>
-                            <td>
-                                <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
+                    <tr class="title">
+                        <th colspan="5">${dto.title}</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <c:if test="${dto.author eq sid && not empty sid}">
+                                <a href="${path}/board/edit.do?bno=${dto.bno}" class="button is-outlined is-link">수정</a>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${not empty sid && (sid eq 'admin' || dto.author eq sid)}">
                                 <a href="${path}/board/delete.do?bno=${dto.bno}" class="button is-outlined is-danger" >삭제</a>
                             </c:if>
-                            </td>
-                            <td>${dto.author}</td>
-                            <td>${dto.resdate}</td>
-                            <td>조회수 : ${dto.cnt}</td>
-                        </tr>
+                        </td>
+                        <td>${dto.author}</td>
+                        <td>${dto.resdate}</td>
+                        <td>조회수 : ${dto.cnt}</td>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td colspan="5" class="content">
+                            <%-- 신고수 3이상이면 블라인드 / 관리자가 열람 설정 선택 --%>
                             <div>
-<%--                                특정 신고 수 이상이면 블라인드 처리  / 일단 신고수 3이상이면 블라인드 되게 테스트 --%>
+                                <c:if test="${sid eq 'admin' && cntReport > 2}">
+                                    <div class="select is-info">
+                                        <select id="contentSelect" onchange="readableEdit(${dto.bno})">
+                                            <option value="true">열람 가능</option>
+                                            <option value="false">열람 불가능</option>
+                                        </select>
+                                    </div>
+                                </c:if>
+                                <c:choose>
+                                    <%-- 관리자일 때 --%>
+                                    <c:when test="${sid eq 'admin'}">
+                                        <c:if test="${cntReport > 2}">
+                                            <h4 style="text-align: center">[신고가 3건 이상 들어온 글입니다.]</h4>
+                                        </c:if>
+                                        <div style="display: block;">${dto.content}</div>
+                                    </c:when>
+                                    <%-- 관리자가 아닐 때 and 신고수 3이상일 때 and readable=false --%>
+                                    <c:when test="${cntReport > 2 && dto.readable == false}">
+                                        <h4 style="text-align: center">[신고가 누적되어 블라인드 처리되었습니다. 관리자에게 문의해주세요]</h4>
+                                    </c:when>
+                                    <%-- 관리자가 아닐 때 and (신고수 3미만일 때 or readable=true) --%>
+                                    <c:otherwise>
+                                        <div style="display: block;">${dto.content}</div>
+                                    </c:otherwise>
+                                </c:choose>
 
-                                <c:if test="${cntReport < 3}">
-                                    ${dto.content}
-                                </c:if>
-                                <c:if test="${cntReport > 2}">
-                                    <h4 style="text-align: center">[신고가 누적되어 블라인드 처리되었습니다. 관리자에게 문의해주세요]</h4>
-                                </c:if>
+                                <script>
+                                    function readableEdit(Bno) {
+                                        let selected =  $("#contentSelect option:selected").val();
+                                        //alert(selected);
+                                        let params = {"Bno": parseInt(Bno), "selected" : selected};
+                                        $.ajax({
+                                            url:"${path }/board/readableEdit.do",
+                                            type:"POST",
+                                            data:params,
+                                            success: function(result) {
+                                                console.log(result);
+                                            },
+                                            error: function (request, status, error) {
+                                                console.log("code: " + request.status)
+                                                console.log("message: " + request.responseText)
+                                                console.log("error: " + error);
+                                            }
+                                        });
+                                    }
+
+                                </script>
+
+                                <script>
+                                    // select 요소의 변경을 감지, content를 표시 또는 숨김
+                                    const contentSelect = document.getElementById('contentSelect');
+                                    const content = document.getElementById('content');
+
+                                    contentSelect.addEventListener('change', function () {
+                                        if (contentSelect.value === 'true') {
+                                            content.style.display = 'block';
+                                        } else if (contentSelect.value === 'false') {
+                                            content.style.display = 'none';
+                                        }
+                                    });
+                                </script>
                             </div>
                         </td>
                     </tr>
                     <c:if test="${not empty sid}">
-                        <tr >
+                        <tr>
                             <td colspan="5" style="text-align: right" >
                                 <c:choose>
                                     <c:when test="${isLiked }">
                                         <!-- 좋아요를 눌렀을 경우 -->
-                                        <button type="button is-info is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}"><img src="${path1}/resources/img/like_blue.png" alt="!" style="height: 26px; margin-top: 6px "></button>
+                                        <button type="button is-info is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}"><img src="${path}/resources/img/like_blue.png" alt="!" style="height: 26px; margin-top: 6px "></button>
                                     </c:when>
                                     <c:otherwise>
                                         <!-- 좋아요를 누르지 않았을 경우 -->
-                                        <button type="button is-danger is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}"><img src="${path1}/resources/img/like_white.png" alt="!" style="height: 26px; margin-top: 6px"></button>
+                                        <button type="button is-danger is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}"><img src="${path}/resources/img/like_white.png" alt="!" style="height: 26px; margin-top: 6px"></button>
                                     </c:otherwise>
                                 </c:choose>
                                 <button class="button is-danger is-hovered" onclick="openReportPopup()">
-                                    <img src="${path1}/resources/img/report.png" alt="!" style="height: 20px; margin-right: 6px">신고</button></td>
+                                    <img src="${path}/resources/img/report.png" alt="!" style="height: 20px; margin-right: 6px">신고</button></td>
                         </tr>
                     </c:if>
                     </tbody>
@@ -301,7 +360,7 @@
                 <script>
                     function toggleLike(boardNo, ${sid }) {
                         $.ajax({
-                            url: "${path1}/board/boardLike.do",
+                            url: "${path}/board/boardLike.do",
                             method: "POST",
                             data: {
                                 boardNo: boardNo,
@@ -314,9 +373,9 @@
                                 var chk = result.result;
 
                                 if (chk === "liked") {
-                                    likeButton.html("<img src='${path1}/resources/img/like_blue.png' alt='!' style='height: 26px; margin-top: 6px'/>");
+                                    likeButton.html("<img src='${path}/resources/img/like_blue.png' alt='!' style='height: 26px; margin-top: 6px'/>");
                                 } else if (chk === "unliked") {
-                                    likeButton.html("<img src='${path1}/resources/img/like_white.png' alt='!' style='height: 26px; margin-top: 6px'/>");
+                                    likeButton.html("<img src='${path}/resources/img/like_white.png' alt='!' style='height: 26px; margin-top: 6px'/>");
                                 } else {
                                     // likeButton.css("color","#b4b4b4");
                                     alert("오류가 발생했습니다. 다시 시도해주세요.");
@@ -332,6 +391,15 @@
                                 $(this).addClass("liked");
                             }
                         });
+
+                        // 기존의 readable 값 불러와서 select에 값 표시
+                        let readable = ${dto.readable};
+                        console.log(readable);
+                        if(readable == true) {
+                            $("#contentSelect").val("true");
+                        } else {
+                            $("#contentSelect").val("false");
+                        }
                     });
                 </script>
 
@@ -394,7 +462,6 @@
                         $('#myTable').css({
                             'border':'none',
                         });
-
                     } );
                 </script>
                 <form action="${path}/board/commentInsert.do" id="login_frm" class="frm" method="post">
@@ -420,4 +487,5 @@
     </footer>
 </div>
 </body>
+
 </html>

@@ -16,4 +16,8 @@ public class Review {
     private String resdate;
     private int score;
     private int par;
+
+    private String title;
+    private int lno;
+    private int ino;
 }

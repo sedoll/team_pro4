@@ -9,6 +9,6 @@ public class InstructorNotice {
     private String content;
     private String resdate;
     private int cnt;
-    private String teacherid;
+    private int instructorno;
 
 }

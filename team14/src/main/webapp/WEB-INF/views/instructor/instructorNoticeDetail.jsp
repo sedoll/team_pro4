@@ -6,16 +6,27 @@
 
 <html>
 <head>
-    <title>${instructorName} 선생님</title>
+    <title>${instructor.name} 선생님</title>
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
-    <link rel="stylesheet" href="${path14}/resources/css/teacherPage/baseLayout.css"/>
-    <link rel="stylesheet" href="${path14}/resources/css/teacherPage/sidebar.css"/>
-    <link rel="stylesheet" href="${path14}/resources/css/teacherPage/validateUser.css"/>
-    <link rel="stylesheet" href="${path14}/resources/css/teacherPage/myPageindex.css"/>
-<style>
+    <link rel="stylesheet" href="${path14}/resources/css/instructorPage/baseLayout.css"/>
+    <link rel="stylesheet" href="${path14}/resources/css/instructorPage/sidebar.css"/>
+    <link rel="stylesheet" href="${path14}/resources/css/instructorPage/validateUser.css"/>
+    <link rel="stylesheet" href="${path14}/resources/css/instructorPage/myPageindex.css"/>
 
-</style>
+    <style>
+        #container {
+            margin-top: 80px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#side_notice').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -29,32 +40,33 @@
                 <main class="container__inner">
                     <div>
 
-                        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                        <table class="table is-bordered is-striped is-hoverable" style="width: 800px">
                             <thead>
                             <tr class="title">
-                                <th colspan="5">${teacherNotice.title}</th>
+                                <th colspan="5">${instructorNotice.title}</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <c:if test="${not empty sid && sid eq 'admin'}">
-                                        <a href="${path}/teacherNotice/teacherNoticeEdit.do?no=${dto.no}" class="button is-outlined is-link">수정</a>
+                                    <c:if test='${sid eq instructor.id}'>
+                                        <a href="${path14}/instructor/instructorNoticeEdit.do?noticeNo=${instructorNotice.no}&no=${instructor.no}" class="button is-outlined is-link">수정</a>
                                     </c:if>
                                 </td>
                                 <td>
-                                    <c:if test="${not empty sid && sid eq 'admin'}">
-                                        <a href="${path}/teacherNotice/teacherNoticeDelete.do?no=${dto.no}" class="button is-outlined is-danger">삭제</a>
+                                    <c:if test="${sid eq instructor.id || sid eq 'admin'}">
+
+                                        <a href="${path14}/instructor/instructorNoticeDelete.do?noticeNo=${instructorNotice.no}&no=${instructor.no}" class="button is-outlined is-danger">삭제</a>
                                     </c:if>
                                 </td>
-                                <td>관리자</td>
-                                <td>${teacherNotice.resdate}</td>
-                                <td>조회수 : ${teacherNotice.cnt}</td>
+                                <td>${instructor.name}</td>
+                                <td>${instructorNotice.resdate}</td>
+                                <td>조회수 : ${instructorNotice.cnt}</td>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td colspan="5" class="content">
-                                    <div>
-                                        ${teacherNotice.content}
+                                    <div style="min-height: 200px">
+                                        ${instructorNotice.content}
                                     </div>
                                 </td>
                             </tr>
