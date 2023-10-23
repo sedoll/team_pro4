@@ -139,4 +139,11 @@ public class InstructorServiceImpl implements InstructorService{
     public List<Review> getReviewList(int no) {
         return instructorMapper.getReviewList(no);
     }
+
+    // 선생님 과목 추출
+
+    @Override
+    public String getInstCate(int no) {
+        return instructorMapper.getInstCate(no);
+    }
 }

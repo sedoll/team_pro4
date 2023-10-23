@@ -165,14 +165,14 @@
                                 <td colspan="2">
                                     <a href="${path}/payment/addPayment.do?lec_no=${pro.no}" class="button is-success inbtn">수강신청</a>
                                     <a href="${path}/cart/cartInsert.do?lec_no=${pro.no}" class="button is-info inbtn">장바구니</a>
-                                    <c:choose>
-                                    <c:when test="${isLiked}">
-                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #b4b4b4">♥</a>
-                                    </c:otherwise>
-                                    </c:choose>
+<%--                                    <c:choose>--%>
+<%--                                    <c:when test="${isLiked}">--%>
+<%--                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #ff5050">♥</a>--%>
+<%--                                    </c:when>--%>
+<%--                                    <c:otherwise>--%>
+<%--                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #b4b4b4">♥</a>--%>
+<%--                                    </c:otherwise>--%>
+<%--                                    </c:choose>--%>
                                     </c:if>
                                 </td>
                             </tr>

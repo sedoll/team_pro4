@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -307,10 +309,56 @@ public class LectureController {
     public String updateLectureForm(Model model, @RequestParam("no") int no) {
         Lecture lecture = lectureService.getLecture(no); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
         Instructor inst = instService.getInstructorName(lecture.getIno());
-        List<Instructor> instList = instService.getInstructorList();
+        List<String> lecFileList = new ArrayList<>();
 
+        if(lecture.getSimg() != null || !lecture.getSimg().equals("")) {
+            String lecFile = lectureService.getLecFileName(lecture.getSimg());
+            lecFileList.add(lecFile);
+        } else {
+            lecFileList.add("");
+        }
+
+        if(lecture.getSfile1() != null || !lecture.getSfile1().equals("")) {
+            String lecFile = lectureService.getLecFileName(lecture.getSfile1());
+            lecFileList.add(lecFile);
+        } else {
+            lecFileList.add("");
+        }
+
+
+        if(lecture.getSfile2() != null || !lecture.getSfile2().equals("")) {
+            String lecFile = lectureService.getLecFileName(lecture.getSfile2());
+            lecFileList.add(lecFile);
+        } else {
+            lecFileList.add("");
+        }
+
+
+        if(lecture.getSfile3() != null || !lecture.getSfile3().equals("")) {
+            String lecFile = lectureService.getLecFileName(lecture.getSfile3());
+            lecFileList.add(lecFile);
+        } else {
+            lecFileList.add("");
+        }
+
+
+        if(lecture.getSfile4() != null || !lecture.getSfile4().equals("")) {
+            String lecFile = lectureService.getLecFileName(lecture.getSfile4());
+            lecFileList.add(lecFile);
+        } else {
+            lecFileList.add("");
+        }
+
+
+        if(lecture.getSfile5() != null || !lecture.getSfile5().equals("")) {
+            String lecFile = lectureService.getLecFileName(lecture.getSfile5());
+            lecFileList.add(lecFile);
+        } else {
+            lecFileList.add("");
+        }
+
+        model.addAttribute("lecFileList", lecFileList);
         model.addAttribute("instructor", inst);
-        model.addAttribute("instList", instList);
         model.addAttribute("lecture", lecture);
         return "admin/updateLecture";
     }
@@ -533,6 +581,13 @@ public class LectureController {
         for (Lecture lec: productList) {
             System.out.println(lec.toString());
         }
+
+        //좋아요한 상품 표시 기능 처리 부분
+        //세션의 아이디값 가져오기
+        String id = (String) session.getAttribute("sid");
+        List<Integer> likedProductIds = lectureService.getLikedProductsByUser(id);
+        model.addAttribute("likedProductIds", likedProductIds);
+
         return "lecture/lecList";
     }
 
@@ -589,5 +644,59 @@ public class LectureController {
         model.addAttribute("instList", instList);
         model.addAttribute("payChecks", payChecks);
         return "/member/myPage/lecMemList";
+    }
+
+    // 좋아요 목록
+    @GetMapping("likeList.do")
+    public String LikeList (HttpServletRequest req, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        List<LectureLikes> lectureLikes = lectureService.getByIdLikeList(id);
+        List<Lecture> lectureList = new ArrayList<>();
+
+        for (LectureLikes lec: lectureLikes) {
+            lectureList.add(lectureService.getLecture(lec.getLno()));
+        }
+
+        model.addAttribute("lectureList", lectureList);
+        model.addAttribute("likeList", lectureLikes);
+        return "/member/myPage/likeList";
+    }
+    
+    // 강의 좋아요
+    @PostMapping("lectureLike.do")
+    public void lectureLike(HttpServletResponse res, HttpServletRequest req, Model model) throws Exception {
+        int lno = Integer.parseInt(req.getParameter("lno"));
+        String id = req.getParameter("sid");
+
+        LectureLikes lectureLikes = new LectureLikes();
+        lectureLikes.setUserid(id);
+        lectureLikes.setLno(lno);
+
+        try {
+            if(lectureService.checkLiked(lectureLikes) > 0) {
+                lectureService.removeLike(lectureLikes);
+                res.getWriter().write("unliked");
+                req.setAttribute("isLiked", false);
+            } else {
+                lectureService.addLike(lectureLikes);
+                res.getWriter().write("liked");
+                req.setAttribute("isLiked", true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.getWriter().write("error");
+        }
+    }
+
+    // 좋아요 삭제
+    @GetMapping("delLike.do")
+    public String delLike (HttpServletRequest req, Model model) throws Exception {
+        int no = Integer.parseInt(req.getParameter("no"));
+        String id = (String) session.getAttribute("sid");
+        LectureLikes lectureLikes = new LectureLikes();
+        lectureLikes.setLno(no);
+        lectureLikes.setUserid(id);
+        lectureService.removeLike(lectureLikes);
+        return "redirect:/lecture/likeList.do";
     }
 }
