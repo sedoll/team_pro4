@@ -26,36 +26,19 @@
             height: 701px;
             padding-top: 24px;
         }
-        .hero {
-            height: 250px;
-            margin-top: 40px;
-        }
+
+
 
     </style>
 </head>
 <body>
-<!-- 헤더 부분 인클루드 -->
-<section>
-    <jsp:include page="../include/header.jsp"></jsp:include>
-    <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
-</section>
 <!-- hero -->
-<section class="hero is-white is-medium">
+<section class="hero is-black is-small">
     <div class="hero-body has-text-centered">
         <p class="title is-size-3">
             성적표 상세보기
         </p>
-        <p class="subtitle is-size-5">
-        </p>
     </div>
-    <nav class="breadcrumb is-small has-bullet-separator is-right" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="#">Bulma</a></li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Components</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-        </ul>
-    </nav>
 </section>
 
 <!-- content -->
@@ -65,7 +48,7 @@
             <tbody class="container">
                 <section class="page" id="page1">
                     <tbody class="page_wrap">
-                        <table class="tb1 box is-size-5" style="width: 540px; margin-left: 400px; margin-top: 50px;">
+                        <table class="tb1 box is-size-5" style="width: 50%; margin: 0 auto; margin-top: 50px; position: relative;">
                             <tbody style="">
                             <tr>
                                 <th >학생 이름</th>
@@ -120,9 +103,8 @@
                             <tr>
                                 <td colspan="2">
                                     <c:if test="${sid == grade.tid }">
-                                    <a href="${path}/grade/gradeedit.do?no=${grade.no}" class="button is-outlined is-link">성적 수정</a>
+                                    <a href="${path}/grade/gradeedit.do?no=${grade.no}" class="button re-button is-outlined is-link">성적 수정</a>
                                     </c:if>
-                                    <a href="/team14_war/" class="button is-black is-outlined">메인화면</a>
                                 </td>
                             </tr>
                         </table>
@@ -131,7 +113,5 @@
             </div>
     </div>
     </div>
-<!-- 푸터 부분 인클루드 -->
-<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

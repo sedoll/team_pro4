@@ -65,17 +65,31 @@
                                 <th>글자색</th>
                                 <td>
                                     <div class="select">
-                                        <select name="textColor"  value="${calendar.textColor}">
-                                            <option value="red">red</option>
-                                            <option value="black">black</option>
-                                            <option value="white">white</option>
-                                            <option value="blue">blue</option>
-                                            <option value="green">green</option>
-                                            <option value="navy">navy</option>
-                                            <option value="yellow">yellow</option>
-                                            <option value="silver">silver</option>
-                                            <option value="purple">purple</option>
-                                            <option value="pink">pink</option>
+                                        <select name="textColor">
+                                            <option value="#EF5350">Red</option>
+                                            <option value="#ff4757">Water Melon</option>
+                                            <option value="#EF5350">Bruschetta Tomato</option>
+                                            <option value="#2d3436">Black</option>
+                                            <option value="white">White</option>
+                                            <option value="#f1f2f6">Anti-Flash White</option>
+                                            <option value="#5C6BC0">Indigo</option>
+                                            <option value="#42A5F5">Blue</option>
+                                            <option value="#70a1ff">Sky Blue</option>
+                                            <option value="#26A69A">Teal</option>
+                                            <option value="#66BB6A">Green</option>
+                                            <option value="#9CCC65">Light Green</option>
+                                            <option value="#D4E157">Lime</option>
+                                            <option value="#FFEE58">Yellow</option>
+                                            <option value="#FFCA28">Amber</option>
+                                            <option value="#FFA726">Orange</option>
+                                            <option value="#FF7043">Deep Orange</option>
+                                            <option value="#8D6E63">Brown</option>
+                                            <option value="#BDBDBD">Grey</option>
+                                            <option value="#78909C">Blue Grey</option>
+                                            <option value="#dfe4ea">City Lights</option>
+                                            <option value="#AB47BC">Purple</option>
+                                            <option value="#7E57C2">Deep Purple</option>
+                                            <option value="##ff6b81">Pink</option>
                                             <option value="lightpink">lightpink</option>
                                         </select>
                                     </div>
@@ -85,37 +99,31 @@
                                 <th>배경색</th>
                                 <td>
                                     <div class="select">
-                                        <select name="backgroundColor"  value="${calendar.backgroundColor}">
-                                            <option value="red">red</option>
-                                            <option value="black">black</option>
-                                            <option value="white">white</option>
-                                            <option value="blue">blue</option>
-                                            <option value="green">green</option>
-                                            <option value="navy">navy</option>
-                                            <option value="yellow">yellow</option>
-                                            <option value="silver">silver</option>
-                                            <option value="purple">purple</option>
-                                            <option value="pink">pink</option>
-                                            <option value="lightpink">lightpink</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>테두리색</th>
-                                <td>
-                                    <div class="select">
-                                        <select name="borderColor"  value="${calendar.borderColor}">
-                                            <option value="red">red</option>
-                                            <option value="black">black</option>
-                                            <option value="white">white</option>
-                                            <option value="blue">blue</option>
-                                            <option value="green">green</option>
-                                            <option value="navy">navy</option>
-                                            <option value="yellow">yellow</option>
-                                            <option value="silver">silver</option>
-                                            <option value="purple">purple</option>
-                                            <option value="pink">pink</option>
+                                        <select name="backgroundColor">
+                                            <option value="#EF5350">Red</option>
+                                            <option value="#ff4757">Water Melon</option>
+                                            <option value="#EF5350">Bruschetta Tomato</option>
+                                            <option value="#2d3436">Black</option>
+                                            <option value="white">White</option>
+                                            <option value="#f1f2f6">Anti-Flash White</option>
+                                            <option value="#5C6BC0">Indigo</option>
+                                            <option value="#42A5F5">Blue</option>
+                                            <option value="#70a1ff">Sky Blue</option>
+                                            <option value="#26A69A">Teal</option>
+                                            <option value="#66BB6A">Green</option>
+                                            <option value="#9CCC65">Light Green</option>
+                                            <option value="#D4E157">Lime</option>
+                                            <option value="#FFEE58">Yellow</option>
+                                            <option value="#FFCA28">Amber</option>
+                                            <option value="#FFA726">Orange</option>
+                                            <option value="#FF7043">Deep Orange</option>
+                                            <option value="#8D6E63">Brown</option>
+                                            <option value="#BDBDBD">Grey</option>
+                                            <option value="#78909C">Blue Grey</option>
+                                            <option value="#dfe4ea">City Lights</option>
+                                            <option value="#AB47BC">Purple</option>
+                                            <option value="#7E57C2">Deep Purple</option>
+                                            <option value="##ff6b81">Pink</option>
                                             <option value="lightpink">lightpink</option>
                                         </select>
                                     </div>

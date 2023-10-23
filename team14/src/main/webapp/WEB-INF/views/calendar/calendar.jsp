@@ -28,9 +28,9 @@
         }
 
         .reg-button{
-            margin-left: 1558px;
+            margin-left: 1275px;
             height: 30px;
-            width: 102px;
+            width: 66px;
             top: 30px;
             font-size: 12px;
             background-color: #007BFF;
@@ -43,14 +43,12 @@
         .content-container{
             width: 624px;
             margin-right: 1000px;
-            border-bottom: rgb(229, 229, 229) solid 1px;
         }
 
         .container h4{
             width: 150px;
-            margin-left: 250px;
+            margin-left: 115px;
             margin-top: 50px;
-            padding-bottom: 20px;
         }
 
         .fc-day-sun a{
@@ -62,6 +60,15 @@
         .fc-day-wed a{color: black;}
         .fc-day-thu a{color: black;}
         .fc-day-fri a{color: black;}
+
+        .button.is-medium {
+            font-size: 12px;
+        }
+
+        .fc-daygrid-event{
+            font-size: 12px;
+            font-weight: bolder;
+        }
 
 
 
@@ -78,7 +85,7 @@
     </div>
     <div class="section section-middle">
     <div class="registar-btn">
-        <button class="button reg-button is-link is-medium is-outlined" onclick="window.open('${path}/calendar/insert.do', '_blank', 'popup=true')">일정등록</button>
+        <button class="button reg-button is-link is-medium" onclick="window.open('${path}/calendar/insert.do', '_blank', 'popup=true')" style="background-color: #007BFF; border-color: #007BFF; font-weight: bold">일정등록</button>
     </div>
     <div id='calendar'></div>
     </div>
@@ -105,7 +112,7 @@
                         rurl : '${path}/calendar/detail.do?no=${calen.no}',
                         textColor: '${calen.textColor}',
                         backgroundColor:'${calen.backgroundColor}',
-                        borderColor:'${calen.borderColor}'
+                        borderColor:'${calen.backgroundColor}'
                     },
                     </c:forEach>
                 ],
