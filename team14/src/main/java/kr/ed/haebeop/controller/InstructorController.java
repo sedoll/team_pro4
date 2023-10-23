@@ -98,8 +98,6 @@ public class InstructorController {
         System.out.println(instructorNotices.toString());
 
 
-
-
         return "/instructor/instructorNotice";
     }
 

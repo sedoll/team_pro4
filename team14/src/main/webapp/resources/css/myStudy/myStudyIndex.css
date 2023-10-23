@@ -3,9 +3,9 @@
     padding: 0;
 }
 
-html {
+/*html {
     font-size: 10px;
-}
+}*/
 
 ul, li {
     list-style: none;
@@ -78,11 +78,11 @@ a {
 }
 
 .board_list > div > div {
-    vertical-align: top;
+    vertical-align: middle;
     display: inline-block;
     padding: 14px 0px;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 42px;
 }
 
@@ -292,7 +292,7 @@ a {
 
 
 
-@media (max-width: 1000px) {
+/*@media (max-width: 1000px) {
     .board_wrap {
         width: 100%;
         min-width: 320px;
@@ -371,5 +371,5 @@ a {
     .board_write .info input[type="text"],
     .board_write .info input[type="password"] {
         width: 100%;
-    }
+    }*/
 }
