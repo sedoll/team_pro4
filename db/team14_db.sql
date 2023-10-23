@@ -431,10 +431,12 @@ SELECT DISTINCT
     p.id AS id, 
     p.lec_no AS lec_no, 
     l.cate AS lecCate, 
+	ins.name as insname,
+	l.slevel AS slevel,
     l.title AS lecTitle, 
+	l.content AS lecContent,
     p.buydate AS lecStudystart, 
     p.enddate AS lecStudyend,  
-    ins.NAME AS insName,
     c.CHECK1 AS ck
 FROM 
     course c
