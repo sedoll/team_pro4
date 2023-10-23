@@ -6,17 +6,26 @@
 
 <html>
 <head>
-    <title>${instructorName} 선생님</title>
+    <title>${instructor.name} 선생님</title>
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/baseLayout.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/sidebar.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/validateUser.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/myPageindex.css"/>
-<style>
-
-</style>
-
+    <style>
+        #container {
+            margin-top: 80px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#side_notice').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 </head>
 <body>
 <div id="wrap">
@@ -29,7 +38,7 @@
                 <main class="container__inner">
                     <div>
 
-                        <form action="${path }/notice/insert.do" method="post">
+                        <form action="${path14 }/instructor/instructorNoticeAdd.do?no=${instructor.no}" method="post">
                             <table id="table1">
                                 <tbody>
                                 <tr>
@@ -43,14 +52,14 @@
                                     <td>
                                         <textarea name="content" id="content" class="textarea" placeholder="내용 입력" rows="8" cols="100" maxlength="1400" required></textarea>
                                         <script>
-                                            CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path}/notice/imageUpload.do'});
+                                            CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path14}/instructorNotice/imageUpload.do'});
                                         </script>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <input type="submit" class="submit button is-link is-outlined" value="글 등록" >
-                                        <a class="button is-blac is-outlined" href="${path }/instructor/instructorNotice.do?instructorName=${teacherName}">글 목록</a>
+                                        <a class="button is-blac is-outlined" href="${path14}/instructor/instructorNotice.do?no=${instructor.no}">글 목록</a>
                                     </td>
                                 </tr>
                                 </tbody>

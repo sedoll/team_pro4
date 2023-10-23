@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>${instructorName} 선생님</title>
+    <title>${instructor.name} 선생님</title>
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/baseLayout.css"/>
@@ -14,7 +14,19 @@
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/validateUser.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/myPageindex.css"/>
 
-
+    <style>
+        #container {
+            margin-top: 80px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#side_notice').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 </head>
 <body>
 <div id="wrap">
@@ -37,22 +49,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${instructorNotices}" var="board" varStatus="status">
+                            <c:forEach items="${instructorNotices}" var="notice" varStatus="status">
                                 <tr>
                                     <td>${status.count }</td>
-                                    <td><a href="${path14}/instructor/instructorNoticeDetail.do?no=${board.no }&instructorName=${instructorName}">${board.title }</a></td>
+                                    <td><a href="${path14}/instructor/instructorNoticeDetail.do?noticeNo=${notice.no }&no=${instructor.no}">${notice.title }</a></td>
                                     <td>
-                                        <fmt:parseDate value="${board.resdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:parseDate value="${notice.resdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                                         <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
                                     </td>
-                                    <td>${board.cnt }</td>
+                                    <td>${notice.cnt }</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
-                        <c:if test='${sid eq instructor.instructorid}'>
+                        <c:if test='${sid eq instructor.id}'>
                             <div class="button-group">
-                                <a class="button is-link is-outlined" href="${path}/instructor/instructorNoticeAdd.do">글쓰기</a>
+                                <a class="button is-link is-outlined" href="${path14}/instructor/instructorNoticeAdd.do?no=${instructor.no}">글쓰기</a>
                             </div>
                         </c:if>
                         <script>

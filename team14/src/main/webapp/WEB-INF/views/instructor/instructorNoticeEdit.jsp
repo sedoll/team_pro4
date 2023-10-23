@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/sidebar.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/validateUser.css"/>
     <link rel="stylesheet" href="${path14}/resources/css/instructorPage/myPageindex.css"/>
-
     <style>
         #container {
             margin-top: 80px;
@@ -27,7 +26,6 @@
             });
         });
     </script>
-
 </head>
 <body>
 <div id="wrap">
@@ -38,44 +36,36 @@
             <%@ include file="./sidebar.jsp" %>
             <article class="my-page">
                 <main class="container__inner">
-                    <div>
-
-                        <table class="table is-bordered is-striped is-hoverable" style="width: 800px">
-                            <thead>
-                            <tr class="title">
-                                <th colspan="5">${instructorNotice.title}</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <c:if test='${sid eq instructor.id}'>
-                                        <a href="${path14}/instructor/instructorNoticeEdit.do?noticeNo=${instructorNotice.no}&no=${instructor.no}" class="button is-outlined is-link">수정</a>
-                                    </c:if>
-                                </td>
-                                <td>
-                                    <c:if test="${sid eq instructor.id || sid eq 'admin'}">
-
-                                        <a href="${path14}/instructor/instructorNoticeDelete.do?noticeNo=${instructorNotice.no}&no=${instructor.no}" class="button is-outlined is-danger">삭제</a>
-                                    </c:if>
-                                </td>
-                                <td>${instructor.name}</td>
-                                <td>${instructorNotice.resdate}</td>
-                                <td>조회수 : ${instructorNotice.cnt}</td>
-                            </tr>
-                            </thead>
+                    <form action="${path14}/instructor/instructorNoticeEdit.do?no=${instructor.no}&noticeNo=${dto.no}" method="post">
+                        <table id="table1">
                             <tbody>
                             <tr>
-                                <td colspan="5" class="content">
-                                    <div style="min-height: 200px">
-                                        ${instructorNotice.content}
-                                    </div>
+                                <th style="background-color:#dcdcdc">글 제목</th>
+                                <td>
+                                    <input type="hidden" name="noticeNo" id="noticeNo" value="${dto.no }" >
+                                    <input type="text" name="title" id="title" class="input" placeholder="제목 입력" value="${dto.title }" maxlength="98" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="background-color:#dcdcdc">글 내용</th>
+                                <td>
+			      				<textarea name="content" class="textarea" id="content" placeholder="내용 입력" rows="8" cols="100" maxlength="800" required>
+                                    ${dto.content }
+                                </textarea>
+                                    <script>
+                                        CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path14}/notice/imageUpload.do'});
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="submit" class="submit button is-link is-outlined" value="글 수정" >
+                                    <a class="button is-black is-outlined" href="${path14 }/instructor/instructorNotice.do?no=${instructor.no}">글 목록</a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-
-
-
-                    </div>
+                    </form>
 
                 </main>
             </article>

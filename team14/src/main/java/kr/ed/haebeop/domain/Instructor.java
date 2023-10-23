@@ -17,4 +17,6 @@ public class Instructor {
     private String intro;       // 소개글
     private String cate;        // 담당 과목
     private String img;         // 프로필 이미지
+
+    private String id; // ID
 }
