@@ -108,4 +108,9 @@ public interface InstructorMapper {
     //선생님 후기 목록
     @Select("select r.*, l.title ,l.no as lno, l.ino FROM review r join lecture l on r.par = l.no where ino = #{no} ORDER by resdate desc")
     List<Review> getReviewList(int no);
+    
+    
+    // 선생님 과목 추출
+    @Select("select cate from instructor where no=#{no}")
+    public String getInstCate(int no);
 }
