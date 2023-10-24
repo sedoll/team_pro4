@@ -13,7 +13,7 @@ public interface MyclassMapper {
 
 
 
-    @Select("SELECT * FROM myclass;")
+    @Select("SELECT * FROM myclass order BY lecStudystart DESC;")
     public List<MyClassVO> myclassList();
 
 
@@ -30,5 +30,9 @@ public interface MyclassMapper {
     @Select("SELECT * FROM instructornotice WHERE lec_no = #{lec_no};")
     public Notice getClassNoticeList(int lec_no);
 
+
+    //수강 중인 강의 카운트
+    @Select("SELECT COUNT(*) FROM myclass WHERE ck = 1;")
+    public int takingCount();
 
 }
