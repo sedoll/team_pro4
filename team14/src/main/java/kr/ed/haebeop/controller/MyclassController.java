@@ -46,7 +46,14 @@ public class MyclassController {
     private ReviewService reviewService;
 
     @Autowired
+    private MemberService memberService;
+
+    @Autowired
     HttpSession session;
+
+
+
+
 
     @GetMapping("myclassList.do")		// board/list.do
     public String myclassList(Model model) throws Exception {
@@ -62,6 +69,16 @@ public class MyclassController {
         DateCalculator dateCalculator = new DateCalculator();
         String id = (String) session.getAttribute("sid");
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
+
+
+        //topbar정보
+        Member member = memberService.getMember(id);
+        System.out.println("내 정보: " + member);
+        model.addAttribute("member", member);
+
+        //최근 수강 중인 강의 수
+        int count = myclassService.takingCount();
+        model.addAttribute("count",count);
 
         //출력해보기
         System.out.println(myclassList.toString());
@@ -129,8 +146,25 @@ public class MyclassController {
     public String myclassDetail(Model model, HttpServletRequest req) throws Exception {
         int no = Integer.parseInt(req.getParameter("no"));
         String id = (String) session.getAttribute("sid");
+
+
+
+        //topbar정보
+        Member member = memberService.getMember(id);
+        System.out.println("내 정보: " + member);
+        model.addAttribute("member", member);
+
+        //최근 수강 중인 강의 수
+        int count = myclassService.takingCount();
+        model.addAttribute("count",count);
+
+
+
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
         List<MyClassVO> takingClassList =  myclassService.gettakingClassList(no);
+        Lecture getLectureList = lectureService.getLecture(no);// 서비스 클래스에 비즈니스 로직을 정의하고 호출
+
+        model.addAttribute("lecList", getLectureList);
 
 
 
@@ -172,11 +206,6 @@ public class MyclassController {
         model.addAttribute("takingList", takingClassList);
         model.addAttribute("cnt", cnt);
         model.addAttribute("avg", scoreAvg);
-
-
-
-
-
 
 
         // region 2. 강의목차 메뉴
@@ -249,7 +278,11 @@ public class MyclassController {
 
 
         // region 4. QnA
+        Lecture lecture4 = lectureService.getLecture(no);
+        int lns_No4 = lecture4.getIno();
 
+        List<InstructorQna> qnaList = instructorService.instructorQnaList(lns_No4);
+        model.addAttribute("qnaList", qnaList);
 
 
         // region 5. 수강후기
@@ -262,6 +295,9 @@ public class MyclassController {
 
         // region 6. 자료실
 
+
+        System.out.println(takingClassList);
+        System.out.println(getLectureList);
 
         return "myclass/myclassDetail";
     }
