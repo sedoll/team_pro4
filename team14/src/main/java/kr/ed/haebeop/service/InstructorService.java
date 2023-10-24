@@ -40,6 +40,8 @@ public interface InstructorService {
     // 파일의 실제 이름 출력
     public String getInstFileName(String sfile);
 
+    //자료실 글 삭제
+    void instructorFileDelete(int no);
     List<Review> getReviewList(int no);
 
     // 선생님 과목 추출

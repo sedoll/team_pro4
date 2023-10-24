@@ -232,7 +232,7 @@
                                     <tr>
                                         <td>
                                             <c:if test="${dto.author eq sid && not empty sid}">
-                                                <a href="${path14}/instructor/instructorQNAEdit.do?bno=${dto.bno}&no=${instructor.no}" class="button is-outlined is-link">수정</a>
+<%--                                                <a href="${path14}/instructor/instructorQNAEdit.do?bno=${dto.bno}&no=${instructor.no}" class="button is-outlined is-link">수정</a>--%>
                                             </c:if>
                                         </td>
                                         <td>
@@ -273,8 +273,8 @@
                                             <td class="item3">${lev.resdate}</td>
                                             <td class="item4">
                                                 <c:if test="${sid eq lev.author || sid eq 'admin'}">
-                                                    <a href="${path14}/instructor/instructorCommentEdit.do?bno=${lev.bno}&no=${instructor.no}" class="button is-small is-link is-outlined is-rounded">수정</a>
-                                                    <a href="${path14}/instructor/instructorComDelete.do?bno=${lev.bno}&par=${lev.par}" class="button is-small is-danger is-outlined is-rounded"> 삭제 </a>
+<%--                                                    <a href="${path14}/instructor/instructorQNACommentEdit.do?bno=${lev.bno}&no=${instructor.no}" class="button is-small is-link is-outlined is-rounded">수정</a>--%>
+                                                    <a href="${path14}/instructor/instructorQNAComDelete.do?bno=${lev.bno}&par=${lev.par}&no=${instructor.no}" class="button is-small is-danger is-outlined is-rounded"> 삭제 </a>
                                                 </c:if>
                                             </td>
                                         </tr>

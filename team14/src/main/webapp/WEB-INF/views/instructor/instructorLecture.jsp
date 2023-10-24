@@ -88,30 +88,30 @@
                                     <c:if test="${not empty sid}">
                                         <c:set var="isLiked" value="${likedProductIds.contains(pro.no)}" />
                                         <c:if test="${pro.lec < pro.lec_max}">
-                                            <a href="${path }/payment/addPayment.do?lec_no=${pro.no }" class="button is-link is-outlined">수강신청</a>
-                                            <a href="${path }/cart/cartInsert.do?lec_no=${pro.no }" class="button is-link is-outlined">장바구니</a>
+                                            <a href="${path14}/payment/addPayment.do?lec_no=${pro.no }" class="button is-link is-outlined">수강신청</a>
+                                            <a href="${path14}/cart/cartInsert.do?lec_no=${pro.no }" class="button is-link is-outlined">장바구니</a>
                                             <c:choose>
                                                 <c:when test="${isLiked }">
                                                     <%-- 눌러도 새로고침 안되게 처리 ///                         현재 로그인한 사용자 ID                 pro.no을 저장하기 위한 역할 --%>
-                                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="button is-link is-outlined" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
+                                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="button is-link is-outlined likes" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="button is-link is-outlined" data-product-id="${pro.no}"  style="color: #b4b4b4">♥</a>
+                                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="button is-link is-outlined likes" data-product-id="${pro.no}"  style="color: #b4b4b4">♥</a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${sid eq 'admin'}">
-                                        <a href="${path }/lecture/updateLectureForm.do?no=${pro.no }" class="button is-link is-outlined">수정</a>
+                                        <a href="${path14}/lecture/updateLectureForm.do?no=${pro.no }" class="button is-link is-outlined">수정</a>
                                     </c:if>
                                     <script>
-                                        function toggleLike(productNo, ${sid }) {
+                                        function toggleLike(productNo, id) {
                                             $.ajax({
-                                                url: "ProductLike.do",
+                                                url: "${path14}/lecture/lectureLike.do",
                                                 method: "POST",
                                                 data: {
-                                                    pno: productNo,
-                                                    sid: ${sid }
+                                                    lno: productNo,
+                                                    sid: id
                                                 },
                                                 success: function(response) {
                                                     var likeButton = $("[data-product-id='" + productNo + "']");
@@ -129,7 +129,7 @@
                                         }
                                         $(document).ready(function() {
                                             // 좋아요 상태를 기반으로 버튼 색 변경
-                                            $(".inbtn").each(function() {
+                                            $(".likes").each(function() {
                                                 var isLiked = $(this).hasClass("liked");
                                                 if (isLiked) {
                                                     $(this).addClass("liked");
@@ -178,7 +178,7 @@
                     </script>
                     <div class="btn_group">
                         <c:if test="${sid eq 'admin' }">
-                            <a href="${path}/lecture/addLectureForm" class="button is-link is-outlined">강의 등록</a>
+                            <a href="${path14}/lecture/addLectureForm" class="button is-link is-outlined">강의 등록</a>
                         </c:if>
                     </div>
 

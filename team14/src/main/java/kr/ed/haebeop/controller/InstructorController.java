@@ -80,6 +80,9 @@ public class InstructorController {
         Instructor instructor = instructorService.getInstructor(no);
         model.addAttribute("instructor", instructor);
 
+        String sid = (String) session.getAttribute("sid");
+        model.addAttribute("sid",sid);
+
         //강의 리스트
         List<Lecture> lectureList = instructorService.getInstructorLectureList(no);
         System.out.println("lec List : "+lectureList.toString());
@@ -334,9 +337,11 @@ public class InstructorController {
         InstructorQna dto = new InstructorQna();
         instructorService.qnaDelete(bno);
         instructorService.commentDeleteAll(bno);
-        return "redirect:/instructor/list.do";
+        return "redirect:instructorQNA.do?no="+no;
+
     }
 
+    //댓글 삭제
     @GetMapping("instructorQNAComDelete.do")
     public String qnaComDelete(HttpServletRequest request, Model model) throws Exception {
         //선생님 정보
@@ -349,7 +354,9 @@ public class InstructorController {
         InstructorQna dto = new InstructorQna();
         dto.setPar(par);
         instructorService.qnaDelete(bno);
-        return "redirect:/instructor/detail.do?bno="+dto.getPar();
+
+        return "redirect:/instructor/instructorQNADetail.do?bno="+par+"&no="+no;
+//        instructorQNADetail.do?bno=2&no=1
     }
 
     @GetMapping("instructorQNAEdit.do")
@@ -581,19 +588,21 @@ public class InstructorController {
 
         return "/instructor/instructorFileDetail";
     }
+
     //자료실 글 삭제
-//    @RequestMapping(value = "instructorFileDelete", method = RequestMethod.GET)
-//    public String instructorFileDelete(HttpServletRequest request, @RequestParam("fileNo") int fileNo) {
-//        int no = Integer.parseInt(request.getParameter("no"));
-//
-//        //선생님 정보
-//        Instructor instructor = instructorService.getInstructor(no);
-//        model.addAttribute("instructor", instructor);
-//        instructorService.instructorFileDelete(fileNo); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
-//
-//
-//        return "redirect:/instructor/instructorFile.do?no="+no;
-//    }
+    @RequestMapping(value = "instructorFileDelete.do", method = RequestMethod.GET)
+    public String instructorFileDelete(HttpServletRequest request, @RequestParam("fileNo") int fileNo, Model model) {
+        int no = Integer.parseInt(request.getParameter("no"));
+
+        //선생님 정보
+        Instructor instructor = instructorService.getInstructor(no);
+        model.addAttribute("instructor", instructor);
+
+
+        instructorService.instructorFileDelete(fileNo); //
+
+        return "redirect:/instructor/instructorFile.do?no="+no;
+    }
 
     //후기
     @GetMapping("instructorReview.do")

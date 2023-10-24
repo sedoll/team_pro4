@@ -99,7 +99,8 @@ public interface InstructorMapper {
 
     @Select("select * from instructorfile where no=#{fileNo}")
     InstructorFile getInstructorFile(int fileNo);
-
+    @Delete("DELETE FROM instructorfile WHERE no = #{no}")
+    public void instructorFileDelete(int no);
     // 기존 파일 이름 추출
     @Select("select realname from instfile where sfile=#{sfile}")
     public String getInstFileName(String sfile);
@@ -113,4 +114,6 @@ public interface InstructorMapper {
     // 선생님 과목 추출
     @Select("select cate from instructor where no=#{no}")
     public String getInstCate(int no);
+
+
 }

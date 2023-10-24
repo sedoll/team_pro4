@@ -136,6 +136,11 @@ public class InstructorServiceImpl implements InstructorService{
     }
 
     @Override
+    public void instructorFileDelete(int no) {
+        instructorMapper.instructorFileDelete(no);
+    }
+
+    @Override
     public List<Review> getReviewList(int no) {
         return instructorMapper.getReviewList(no);
     }

@@ -48,7 +48,7 @@
                             <tr>
                                 <td>
                                     <c:if test='${sid eq instructor.id}'>
-                                        <a href="${path14}/instructor/instructorFileEdit.do?fileNo=${instructorFile.no}&no=${instructor.no}" class="button is-outlined is-link">수정</a>
+<%--                                        <a href="${path14}/instructor/instructorFileEdit.do?fileNo=${instructorFile.no}&no=${instructor.no}" class="button is-outlined is-link">수정</a>--%>
                                     </c:if>
                                 </td>
                                 <td>
