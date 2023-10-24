@@ -87,9 +87,9 @@
                         <tr>
                             <th><label for="findBtn" onclick="findAddr()">주소</label></th>
                             <td>
-                                <input type="text" name="addr1" id="addr1" class="input" value="${member.addr1 }" required readonly><br>
+                                <input type="text" name="addr1" id="addr1" class="input" value="${member.addr1 }" required><br>
                                 <input type="text" name="addr2" id="addr2" class="input" value="${member.addr2 }"><br>
-                                <input type="text" name="postcode" id="postcode"  class="input" value="${member.postcode }" required readonly>
+                                <input type="text" name="postcode" id="postcode"  class="input" value="${member.postcode }" required>
                                 <input type="button" value="주소찾기" onclick="findAddr()" id="findBtn" class="btn is-primary">
                             </td>
                         </tr>
@@ -100,58 +100,9 @@
                                 <span style="display:none">
                                         <fmt:formatDate var="br" value="${birth }" pattern="yyyy-MM-dd" />
                                     </span>
-                                <input type="date" name="birth" id="birth" value="${br }" class="input" required readonly>
+                                <input type="date" name="birth" id="birth" value="${br }" class="input" required>
                             </td>
                         </tr>
-                        <tr>
-                            <th><label for="job" >직업 </label></th>
-                            <td>
-                                <div class="select is-info">
-                                    <select id="job" name="job">
-                                        <option value="1">일반 회원</option>
-                                        <option value="2">선생님</option>
-                                    </select>
-                                </div>
-                                <div class="select is-info" style="display: none" id="categorySelect">
-                                    <select id="category" name="category">
-                                        <option value="kor">국어</option>
-                                        <option value="eng">영어</option>
-                                        <option value="math">수학</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <script>
-                            $(document).ready(function() {
-                                // 서버에서 전달받은 값을 변수에 저장
-                                var jobValue = "${member.job}";
-
-                                // 해당 value를 가진 option을 선택
-                                $("#job option[value='" + jobValue + "']").prop("selected", true);
-                            });
-                            function toggleCategory() {
-                                // "job" select 요소에서 선택된 값을 가져옴
-                                var jobValue = $("#job").val();
-
-                                // "job"의 value 값이 "2"인 경우
-                                if (jobValue == "2") {
-                                    // "categorySelect"를 나타냄.
-                                    $("#categorySelect").show();
-                                } else {
-                                    // 그렇지 않은 경우, "categorySelect"를 숨김.
-                                    $("#categorySelect").hide();
-                                }
-                            }
-                            $(document).ready(function() {
-                                // 페이지 로드 시에도 선택된 값에 따라 "categorySelect"의 표시 상태를 결정
-                                toggleCategory();
-
-                                // "job" select 요소의 값이 변경될 때마다 함수 실행
-                                $("#job").change(function() {
-                                    toggleCategory();
-                                });
-                            });
-                        </script>
                         <tr>
                             <td colspan="2">
                                 <br/>
