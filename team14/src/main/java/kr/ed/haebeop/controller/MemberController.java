@@ -7,6 +7,7 @@ import kr.ed.haebeop.repository.MemberRepository;
 import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.InstructorService;
 import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.ReviewService;
 import kr.ed.haebeop.service.board.BoardService;
 import kr.ed.haebeop.util.Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +79,9 @@ public class MemberController {
 
     // spring security 이용
     private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    private ReviewService reviewService;
 
     //로그인 폼 로딩
     @RequestMapping("login.do")
@@ -528,6 +532,48 @@ public class MemberController {
         return "/include/redirect";
     }
 
+    // 내가 쓴 댓글 (나의 학습방)
+    @GetMapping("memberWrittenComent.do")
+    public String writtenComentList(HttpSession session, Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
+
+        Member member = memberService.getMember(id);
+        model.addAttribute("member", member);
+
+        /*자유게시판*/
+        List<CommentlistVO> board_comlist = memberService.getWriteComment1(id);
+        if (board_comlist != null) {
+            model.addAttribute("board_comlist", board_comlist);
+        }
+
+        /*강의평*/
+        List<Review> revList = reviewService.getReviewListId(id);
+        if(revList != null) {
+            model.addAttribute("revList", revList);
+            System.out.println(revList.toString());
+        }
+
+        return  "/member/memberWrittenComent";
+    }
+
+    /*내가 쓴 글 (나의 학습방) */
+    @RequestMapping("memberWrittenBoard.do")
+    public String writtenBoardList(HttpSession session, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        System.out.println("id:  " + id);
+
+        Member member = memberService.getMember(id);
+        model.addAttribute("member", member);
+
+        /*자유게시판*/
+        List<BoardlistVO> boardlist = memberService.getWriteList1(id);
+        if (boardlist != null) {
+            model.addAttribute("boardlist", boardlist);
+            System.out.println(boardlist.toString());
+        }
+        return "/member/memberWrittenBoard";
+
+    }
 
     /*내가 쓴 글*/
     @RequestMapping(value = "/writtenList.do")

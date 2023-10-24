@@ -67,8 +67,8 @@
             <span>위 사항을 모두 숙지하였으며 동의합니다.</span>
         </label>
         <div class="btn-container">
-            <button class="cancel ">취소하기</button>
-            <button class="withdraw" onclick="location.href='${path15}/member/withdraw.do?id=${member.id}' " >탈퇴하기</button>
+            <button class="cancel button is-black is-outlined" >취소하기</button>
+            <button class="withdraw button is-danger is-outlined" onclick="location.href='${path15}/member/withdraw.do?id=${member.id}' " >탈퇴하기</button>
         </div>
     </div>
 

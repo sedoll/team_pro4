@@ -19,12 +19,13 @@
             margin: 40px 10px;
             padding: 0;
             font-family: 'NanumSquare' !important;
-            font-size: 16px;
+            
         }
 
         #calendar {
             max-width: 1100px;
             margin: 0 auto;
+            font-size: 12px;
         }
 
         .reg-button{
@@ -83,7 +84,7 @@
     <div class="container content-container">
         <h4 class="title is-4">학습계획표</h4>
     </div>
-    <div class="section section-middle">
+    <div class="section section-middle" style="padding-top: 0px">
     <div class="registar-btn">
         <button class="button reg-button is-link is-medium" onclick="window.open('${path}/calendar/insert.do', '_blank', 'popup=true')" style="background-color: #007BFF; border-color: #007BFF; font-weight: bold">일정등록</button>
     </div>

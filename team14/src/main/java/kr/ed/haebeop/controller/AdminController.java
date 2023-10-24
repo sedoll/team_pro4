@@ -102,7 +102,7 @@ public class AdminController {
     public String memberDelete(HttpServletRequest request) throws Exception {
         String id = request.getParameter("id");
         memberService.memberDelete(id);
-        return "/admin/memberList";
+        return "redirect:/admin/memberList.do";
     }
 
     //게시판 관리

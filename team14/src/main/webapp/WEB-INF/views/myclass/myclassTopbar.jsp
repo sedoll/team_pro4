@@ -195,12 +195,13 @@
                 <li class="menu04" id="menu010701" onfocus="menu_open('4');" onmouseover="menu_open('4');"><a href=""
                                                                                                               id="lnk0107">내가
                     쓴 글</a>
-                    <%--<ul class="dep02" id="dep04">
-                        <li><a id="sub010714" href="">내가 쓴 글</a></li>
-                        <li><a id="sub010712" href="">내가 남긴 댓글</a></li>
-                    </ul>--%>
+                    <ul class="dep02" id="dep04">
+                        <li><a id="sub010714" href="${path21}/member/memberWrittenBoard.do">내가 쓴 글</a></li>
+                        <li><a id="sub010712" href="${path21}/member/memberWrittenComent.do">내가 남긴 댓글</a></li>
+                    </ul>
                 </li>
                 <li class="menu05" onfocus="menu_open('5');" onmouseover="menu_open('5');"><a href="${path21}/grade/slist.do"id="lnk0130">성적표</a></li>
+
                 <li class="menu06" onfocus="menu_open('6');" onmouseover="menu_open('6');"><a href="${path21}/calendar/list.do"id="lnk1007">학습계획표</a></li>
             </ul>
         </div>
