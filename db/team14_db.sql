@@ -290,8 +290,8 @@ CREATE TABLE instructor(
 );
 
 -- instructor 선생님 테이블 컬럼 추가
--- ALTER TABLE instructor
--- ADD COLUMN id VARCHAR(50),
+--  ALTER TABLE instructor
+-- ADD COLUMN id VARCHAR(50);
 -- ADD FOREIGN KEY (id) REFERENCES member(id);
 
 INSERT INTO instructor VALUES(DEFAULT, '강감찬', '01011111111', 'kang@edu.com');
@@ -324,6 +324,14 @@ CREATE TABLE lecture(
 	FOREIGN KEY(ino) REFERENCES instructor(NO) -- 강사 번호를 외래키로 사용
 );
 -- UPDATE lecture SET endday = 100; 
+
+-- 추천(좋아요) 기능 테이
+create table lecturelikes (
+    userid VARCHAR(20) NOT NULL,      -- 사용자 ID
+    lno INT NOT NULL,           -- 강의 no 
+    liketime TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 좋아요를 누른 시간
+    PRIMARY KEY (userid, lno)   -- 사용자 ID와 게시글 no 조합으로 각 레코드를 유일하게 식별
+);
 
 -- 강의 리뷰
 CREATE TABLE review(
@@ -423,10 +431,12 @@ SELECT DISTINCT
     p.id AS id, 
     p.lec_no AS lec_no, 
     l.cate AS lecCate, 
+	ins.name as insname,
+	l.slevel AS slevel,
     l.title AS lecTitle, 
+	l.content AS lecContent,
     p.buydate AS lecStudystart, 
     p.enddate AS lecStudyend,  
-    ins.NAME AS insName,
     c.CHECK1 AS ck
 FROM 
     course c
@@ -492,11 +502,6 @@ CREATE TABLE instructorqna(
 	FOREIGN KEY(author) REFERENCES member(id) ON DELETE 		
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
-
--- instructor 선생님 테이블 컬럼 추가
-ALTER TABLE instructor
-ADD COLUMN id VARCHAR(50),
-ADD FOREIGN KEY (id) REFERENCES member(id);
 
 -- 선생님 자료실 
 CREATE TABLE instructorfile(

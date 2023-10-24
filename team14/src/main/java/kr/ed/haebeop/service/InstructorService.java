@@ -2,6 +2,7 @@ package kr.ed.haebeop.service;
 
 
 import kr.ed.haebeop.domain.*;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -40,4 +41,7 @@ public interface InstructorService {
     public String getInstFileName(String sfile);
 
     List<Review> getReviewList(int no);
+
+    // 선생님 과목 추출
+    public String getInstCate(int no);
 }
