@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -217,8 +218,12 @@ public class LectureController {
 
     // 강의 상세
     @RequestMapping(value = "/getLecture", method = RequestMethod.GET)
-    public String getLecture(Model model, @RequestParam("no") int no) {
-        lectureService.countUp(no); // 조회수 갱신
+    public String getLecture(HttpServletRequest request,Model model, @RequestParam("no") int no) {
+//        lectureService.countUp(no); // 조회수 갱신
+
+
+
+
         Lecture product = lectureService.getLecture(no); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
         Instructor inst = instService.getInstructorName(product.getIno()); // 강사 번호로 이름 추출
         List<String> videoList = new ArrayList<>(); // 비디오 이름 받기
@@ -278,6 +283,30 @@ public class LectureController {
         }
 
         List<Review> revList = reviewService.getReviewListPar(no); // 해당 강의 리뷰 정보 출력
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(no+":cookieLec") == null) {
+            session.setAttribute(no+":cookieLec", no + ":" + cookieValue);
+        } else {
+            session.setAttribute(no+":cookieLec ex", session.getAttribute(no+":cookieLec"));
+            if (!session.getAttribute(no+":cookieLec").equals(no + ":" + cookieValue)) {
+                session.setAttribute(no+":cookieLec", no + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(no+":cookieLec").equals(session.getAttribute(no+":cookieLec ex"))) {
+            lectureService.countUp(no);
+            product.setCnt(product.getCnt()+1);
+        }
+
+
 
         model.addAttribute("likedProductIds", likedProductIds);
         model.addAttribute("revList", revList);

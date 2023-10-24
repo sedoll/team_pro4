@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void countUp(int bno) throws Exception {
-
+        boardRepository.countUp(bno);
     }
 
     @Override

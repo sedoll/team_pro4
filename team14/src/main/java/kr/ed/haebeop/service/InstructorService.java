@@ -15,6 +15,7 @@ public interface InstructorService {
     public void noticeInsert(InstructorNotice dto) throws Exception;
     public void noticeDelete(int no) throws Exception;
     public void noticeEdit(InstructorNotice dto) throws Exception;
+    void instructorNoticeCountUp(int noticeNo);
 
     //
     public List<Instructor> getInstructorList();
@@ -30,6 +31,7 @@ public interface InstructorService {
     public List<InstructorQna> commentList(int bno) throws Exception;
     public void commentDeleteAll(int bno) throws Exception;
     public boolean check(int bno, String pw) throws Exception;
+    void qnaCountUp(int bno);
 
     //자료실 리스트
     public List<InstructorFile> getInstructorFileList(int no);
@@ -43,6 +45,8 @@ public interface InstructorService {
     //자료실 글 삭제
     void instructorFileDelete(int no);
     List<Review> getReviewList(int no);
+    //자료실 조회수
+    void fileCountUp(int fileNo);
 
     // 선생님 과목 추출
     public String getInstCate(int no);

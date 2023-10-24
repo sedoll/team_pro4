@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -63,7 +64,28 @@ public class BoardController {
         }
         model.addAttribute("isLiked",isLiked);
 
-        //열람 기능
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(bno+":cookieBoard") == null) {
+            session.setAttribute(bno+":cookieBoard", bno + ":" + cookieValue);
+        } else {
+            session.setAttribute(bno+":cookieBoard ex", session.getAttribute(bno+":cookieBoard"));
+            if (!session.getAttribute(bno+":cookieBoard").equals(bno + ":" + cookieValue)) {
+                session.setAttribute(bno+":cookieBoard", bno + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(bno+":cookieBoard").equals(session.getAttribute(bno+":cookieBoard ex"))) {
+            boardService.countUp(bno);
+            dto.setCnt(dto.getCnt()+1);
+        }
+
 
         System.out.println(comment.toString());
         return "/board/boardDetail";

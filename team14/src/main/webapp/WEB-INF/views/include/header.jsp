@@ -136,6 +136,11 @@
 <%--                    </c:if>--%>
                 </div>
                 <div class="buttons" style="margin-bottom: 0">
+                    <c:if test="${isInst==true}"> <%-- 선생님으로 로그인 한 경우 --%>
+                        <a href="${path2}/instructor/instructorDetail.do?no=${instNo}" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                            나의 선생님 페이지
+                        </a>
+                    </c:if>
                     <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
                         <a href="${path2}/member/mypage.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
                             <img src="${path2}/resources/img/account_thin.svg" alt="${sid}" width="26px">

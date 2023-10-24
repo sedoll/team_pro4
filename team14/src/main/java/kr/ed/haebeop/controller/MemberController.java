@@ -5,6 +5,7 @@ import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.repository.AuthRepositoryImpl;
 import kr.ed.haebeop.repository.MemberRepository;
 import kr.ed.haebeop.service.InstService;
+import kr.ed.haebeop.service.InstructorService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.service.board.BoardService;
 import kr.ed.haebeop.util.Utils;
@@ -50,6 +51,9 @@ public class MemberController {
     private BoardService boardService;
 
     @Autowired
+    private InstructorService instructorService;
+
+    @Autowired
     HttpSession session; // 세션 생성
 
     @Autowired
@@ -92,6 +96,29 @@ public class MemberController {
         if (check) { // 로그인 성공
             Member mem = new Member();
             mem = memberService.getMember(id);
+
+            List<Instructor> instructorList = instructorService.getInstructorList();
+            boolean isInst = false;
+            int instNo=0;
+
+            // 반복문을 사용하여 Instructor 객체와 id를 비교
+            for (Instructor instructor : instructorList) {
+                if (instructor.getId() != null && instructor.getId().equals(id)) {
+                    isInst = true;
+                    instNo = instructor.getNo();
+                    break;
+                }
+            }
+            System.out.println(isInst+" / "+instNo);
+            if (isInst) {
+                // 찾았을 때
+                session.setAttribute("isInst", isInst);
+                session.setAttribute("instNo", instNo);
+            } else {
+                // 찾지 못했을 때
+            }
+
+
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('로그인 성공');</script>");

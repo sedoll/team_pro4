@@ -10,4 +10,5 @@ public interface NoticeRepository {
     public void noticeInsert(Notice dto) throws Exception;
     public void noticeDelete(int no) throws Exception;
     public void noticeEdit(Notice dto) throws Exception;
+    void countUp(int no) throws Exception;
 }

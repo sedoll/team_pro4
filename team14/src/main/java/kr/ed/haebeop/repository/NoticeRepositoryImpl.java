@@ -19,7 +19,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 
     @Override
     public Notice noticeDetail(int no) throws Exception {
-        sqlSession.update("notice.countUp", no);
+//        sqlSession.update("notice.countUp", no);
         return sqlSession.selectOne("notice.noticeDetail", no);
     }
 
@@ -36,5 +36,10 @@ public class NoticeRepositoryImpl implements NoticeRepository {
     @Override
     public void noticeEdit(Notice dto) throws Exception {
         sqlSession.update("notice.noticeEdit", dto);
+    }
+
+    @Override
+    public void countUp(int no) throws Exception {
+        sqlSession.update("notice.countUp", no);
     }
 }
