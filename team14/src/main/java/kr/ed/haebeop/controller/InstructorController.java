@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -80,6 +81,9 @@ public class InstructorController {
         Instructor instructor = instructorService.getInstructor(no);
         model.addAttribute("instructor", instructor);
 
+        String sid = (String) session.getAttribute("sid");
+        model.addAttribute("sid",sid);
+
         //강의 리스트
         List<Lecture> lectureList = instructorService.getInstructorLectureList(no);
         System.out.println("lec List : "+lectureList.toString());
@@ -119,6 +123,29 @@ public class InstructorController {
         int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
         InstructorNotice instructorNotice = instructorService.getInstructorNoticeDetail(noticeNo);
         model.addAttribute("instructorNotice",instructorNotice);
+
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(noticeNo+":cookie") == null) {
+            session.setAttribute(noticeNo+":cookie", noticeNo + ":" + cookieValue);
+        } else {
+            session.setAttribute(noticeNo+":cookie ex", session.getAttribute(noticeNo+":cookie"));
+            if (!session.getAttribute(noticeNo+":cookie").equals(noticeNo + ":" + cookieValue)) {
+                session.setAttribute(noticeNo+":cookie", noticeNo + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(noticeNo+":cookie").equals(session.getAttribute(noticeNo+":cookie ex"))) {
+            instructorService.instructorNoticeCountUp(noticeNo);
+            instructorNotice.setCnt(instructorNotice.getCnt()+1);
+        }
 
         return "/instructor/instructorNoticeDetail";
     }
@@ -230,6 +257,35 @@ public class InstructorController {
         List<InstructorQna> comment = instructorService.commentList(bno);
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
+
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(bno+":cookie") == null) {
+            session.setAttribute(bno+":cookie", bno + ":" + cookieValue);
+        } else {
+            session.setAttribute(bno+":cookie ex", session.getAttribute(bno+":cookie"));
+            if (!session.getAttribute(bno+":cookie").equals(bno + ":" + cookieValue)) {
+                session.setAttribute(bno+":cookie", bno + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(bno+":cookie").equals(session.getAttribute(bno+":cookie ex"))) {
+            instructorService.qnaCountUp(bno);
+            dto.setCnt(dto.getCnt()+1);
+            // 가시적으로  조회수 1 추가해줌  board.setVisited(board.getVisited() + 1);
+        }
+
+
+
+
+
         System.out.println(comment.toString());
         return "/instructor/instructorQNADetail";
     }
@@ -334,9 +390,11 @@ public class InstructorController {
         InstructorQna dto = new InstructorQna();
         instructorService.qnaDelete(bno);
         instructorService.commentDeleteAll(bno);
-        return "redirect:/instructor/list.do";
+        return "redirect:instructorQNA.do?no="+no;
+
     }
 
+    //댓글 삭제
     @GetMapping("instructorQNAComDelete.do")
     public String qnaComDelete(HttpServletRequest request, Model model) throws Exception {
         //선생님 정보
@@ -349,7 +407,9 @@ public class InstructorController {
         InstructorQna dto = new InstructorQna();
         dto.setPar(par);
         instructorService.qnaDelete(bno);
-        return "redirect:/instructor/detail.do?bno="+dto.getPar();
+
+        return "redirect:/instructor/instructorQNADetail.do?bno="+par+"&no="+no;
+//        instructorQNADetail.do?bno=2&no=1
     }
 
     @GetMapping("instructorQNAEdit.do")
@@ -547,6 +607,9 @@ public class InstructorController {
         Instructor instructor = instructorService.getInstructor(no);
         model.addAttribute("instructor", instructor);
 
+
+
+
 //        instructorService.countUp(fileNo); // 조회수 갱신
         InstructorFile instructorFile = instructorService.getInstructorFile(fileNo);
 
@@ -577,23 +640,47 @@ public class InstructorController {
         model.addAttribute("fileList",fileList);
         model.addAttribute("instructorFile",instructorFile);
 
+        HttpSession session = req.getSession();
+        Cookie[] cookieFromRequest = req.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(fileNo+":cookieInst") == null) {
+            session.setAttribute(fileNo+":cookieInst", fileNo + ":" + cookieValue);
+        } else {
+            session.setAttribute(fileNo+":cookieInst ex", session.getAttribute(fileNo+":cookieInst"));
+            if (!session.getAttribute(fileNo+":cookieInst").equals(fileNo + ":" + cookieValue)) {
+                session.setAttribute(fileNo+":cookieInst", fileNo + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(fileNo+":cookieInst").equals(session.getAttribute(fileNo+":cookieInst ex"))) {
+            instructorService.fileCountUp(fileNo);
+            instructorFile.setCnt(instructorFile.getCnt()+1);
+            // 가시적으로  조회수 1 추가해줌  board.setVisited(board.getVisited() + 1);
+        }
 
 
         return "/instructor/instructorFileDetail";
     }
+
     //자료실 글 삭제
-//    @RequestMapping(value = "instructorFileDelete", method = RequestMethod.GET)
-//    public String instructorFileDelete(HttpServletRequest request, @RequestParam("fileNo") int fileNo) {
-//        int no = Integer.parseInt(request.getParameter("no"));
-//
-//        //선생님 정보
-//        Instructor instructor = instructorService.getInstructor(no);
-//        model.addAttribute("instructor", instructor);
-//        instructorService.instructorFileDelete(fileNo); // 서비스 클래스에 비즈니스 로직을 정의하고 호출
-//
-//
-//        return "redirect:/instructor/instructorFile.do?no="+no;
-//    }
+    @RequestMapping(value = "instructorFileDelete.do", method = RequestMethod.GET)
+    public String instructorFileDelete(HttpServletRequest request, @RequestParam("fileNo") int fileNo, Model model) {
+        int no = Integer.parseInt(request.getParameter("no"));
+
+        //선생님 정보
+        Instructor instructor = instructorService.getInstructor(no);
+        model.addAttribute("instructor", instructor);
+
+
+        instructorService.instructorFileDelete(fileNo); //
+
+        return "redirect:/instructor/instructorFile.do?no="+no;
+    }
 
     //후기
     @GetMapping("instructorReview.do")

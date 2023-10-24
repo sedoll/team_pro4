@@ -29,4 +29,6 @@ public interface BoardRepository {
 
     public boolean getReadable(int bno) throws Exception;
     public void readableEdit(Board bno) throws Exception;
+
+    void countUp(int bno) throws Exception;
 }

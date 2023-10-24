@@ -5,7 +5,9 @@ import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.repository.AuthRepositoryImpl;
 import kr.ed.haebeop.repository.MemberRepository;
 import kr.ed.haebeop.service.InstService;
+import kr.ed.haebeop.service.InstructorService;
 import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.ReviewService;
 import kr.ed.haebeop.service.board.BoardService;
 import kr.ed.haebeop.util.Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +52,9 @@ public class MemberController {
     private BoardService boardService;
 
     @Autowired
+    private InstructorService instructorService;
+
+    @Autowired
     HttpSession session; // 세션 생성
 
     @Autowired
@@ -75,6 +80,9 @@ public class MemberController {
     // spring security 이용
     private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
+    @Autowired
+    private ReviewService reviewService;
+
     //로그인 폼 로딩
     @RequestMapping("login.do")
     public String memberLoginForm(Model model) throws Exception {
@@ -92,6 +100,29 @@ public class MemberController {
         if (check) { // 로그인 성공
             Member mem = new Member();
             mem = memberService.getMember(id);
+
+            List<Instructor> instructorList = instructorService.getInstructorList();
+            boolean isInst = false;
+            int instNo=0;
+
+            // 반복문을 사용하여 Instructor 객체와 id를 비교
+            for (Instructor instructor : instructorList) {
+                if (instructor.getId() != null && instructor.getId().equals(id)) {
+                    isInst = true;
+                    instNo = instructor.getNo();
+                    break;
+                }
+            }
+            System.out.println(isInst+" / "+instNo);
+            if (isInst) {
+                // 찾았을 때
+                session.setAttribute("isInst", isInst);
+                session.setAttribute("instNo", instNo);
+            } else {
+                // 찾지 못했을 때
+            }
+
+
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('로그인 성공');</script>");
@@ -404,21 +435,6 @@ public class MemberController {
         String addr2 = request.getParameter("addr2");
         String postcode = request.getParameter("postcode");
         String birth = request.getParameter("birth");
-        int job = Integer.parseInt(request.getParameter("job"));
-
-        //해당 id의 기존 job값 가져오기
-        //기존 job값이 2이면 teacher테이블 update처리, 아니면 insert
-        Member chkmember = memberService.getMember(id);
-        int chkJob = chkmember.getJob();
-        System.out.println("chkJob : "+chkJob);
-
-        if (chkJob==2 && job==2) {
-            //update
-        } else if (chkJob==2 && job==1){
-            //delete
-        } else {
-            //insert
-        }
 
         Member member = new Member();
         member.setId(id);
@@ -430,7 +446,6 @@ public class MemberController {
         member.setAddr2(addr2);
         member.setPostcode(postcode);
         member.setBirth(birth);
-        /*member.setJob(job);*/
 
         memberService.memberUpdate(member);
         model.addAttribute("member", member);
@@ -517,6 +532,48 @@ public class MemberController {
         return "/include/redirect";
     }
 
+    // 내가 쓴 댓글 (나의 학습방)
+    @GetMapping("memberWrittenComent.do")
+    public String writtenComentList(HttpSession session, Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
+
+        Member member = memberService.getMember(id);
+        model.addAttribute("member", member);
+
+        /*자유게시판*/
+        List<CommentlistVO> board_comlist = memberService.getWriteComment1(id);
+        if (board_comlist != null) {
+            model.addAttribute("board_comlist", board_comlist);
+        }
+
+        /*강의평*/
+        List<Review> revList = reviewService.getReviewListId(id);
+        if(revList != null) {
+            model.addAttribute("revList", revList);
+            System.out.println(revList.toString());
+        }
+
+        return  "/member/memberWrittenComent";
+    }
+
+    /*내가 쓴 글 (나의 학습방) */
+    @RequestMapping("memberWrittenBoard.do")
+    public String writtenBoardList(HttpSession session, Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        System.out.println("id:  " + id);
+
+        Member member = memberService.getMember(id);
+        model.addAttribute("member", member);
+
+        /*자유게시판*/
+        List<BoardlistVO> boardlist = memberService.getWriteList1(id);
+        if (boardlist != null) {
+            model.addAttribute("boardlist", boardlist);
+            System.out.println(boardlist.toString());
+        }
+        return "/member/memberWrittenBoard";
+
+    }
 
     /*내가 쓴 글*/
     @RequestMapping(value = "/writtenList.do")

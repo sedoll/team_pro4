@@ -27,6 +27,11 @@
             padding-top: 24px;
         }
 
+        .re-button{
+            right: 170px;
+            top: 10px;
+        }
+
 
 
     </style>
@@ -101,9 +106,9 @@
                         </table>
                         <table class="tb2" style="margin-left: 540px">
                             <tr>
-                                <td colspan="2">
+                                <td>
                                     <c:if test="${sid == grade.tid }">
-                                    <a href="${path}/grade/gradeedit.do?no=${grade.no}" class="button re-button is-outlined is-link">성적 수정</a>
+                                    <a href="${path}/grade/gradeedit.do?no=${grade.no}" class="button re-button re-button is-outlined is-link">성적 수정</a>
                                     </c:if>
                                 </td>
                             </tr>

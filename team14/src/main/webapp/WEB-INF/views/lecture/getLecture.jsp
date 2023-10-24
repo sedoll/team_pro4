@@ -167,10 +167,10 @@
                                     <a href="${path}/cart/cartInsert.do?lec_no=${pro.no}" class="button is-info inbtn">장바구니</a>
                                     <c:choose>
                                     <c:when test="${isLiked}">
-                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
+                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="inbtn is-link is-outlined likes" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
                                     </c:when>
                                     <c:otherwise>
-                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #b4b4b4">♥</a>
+                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="inbtn is-link is-outlined likes" data-product-id="${pro.no}" style="color: #b4b4b4">♥</a>
                                     </c:otherwise>
                                     </c:choose>
                                     </c:if>
@@ -190,10 +190,10 @@
                 <script>
                     function toggleLike(productNo, id) {
                         $.ajax({
-                            url: "ProductLike.do",
+                            url: "${path}/lecture/lectureLike.do",
                             method: "POST",
                             data: {
-                                pno: productNo,
+                                lno: productNo,
                                 sid: id
                             },
                             success: function(response) {
@@ -204,17 +204,16 @@
                                     likeButton.css("color","#ff5050");
                                 } else if (response.trim() === "unliked") {
                                     alert("상품의 좋아요를 취소했습니다.");
-                                    likeButton.css("color","#b4b4b4");
-                                } else {
+                                    likeButton.css("color","#b4b4b4");                                                } else {
                                     alert("오류가 발생했습니다. 다시 시도해주세요.");
                                 }
                             }
                         });
                     }
                     $(document).ready(function() {
-                        $(".inbtn").each(function() {
-                            var isLiked = $(
-                                this).hasClass("liked");
+                        // 좋아요 상태를 기반으로 버튼 색 변경
+                        $(".likes").each(function() {
+                            var isLiked = $(this).hasClass("liked");
                             if (isLiked) {
                                 $(this).addClass("liked");
                             }

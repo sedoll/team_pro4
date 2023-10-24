@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -138,9 +139,35 @@ public class FileController {
 
     //getFileboard.do
     @GetMapping("getFileboard.do")
-    public String getFileboard(@RequestParam int postNo, Model model) throws Exception {
+    public String getFileboard(@RequestParam int postNo, Model model,HttpServletRequest request) throws Exception {
         FileVO fileboard = fileService.getFilebord(postNo);
         model.addAttribute("fileboard", fileboard);
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(postNo+":cookieFile") == null) {
+            session.setAttribute(postNo+":cookieFile", postNo + ":" + cookieValue);
+        } else {
+            session.setAttribute(postNo+":cookieFile ex", session.getAttribute(postNo+":cookieFile"));
+            if (!session.getAttribute(postNo+":cookieFile").equals(postNo + ":" + cookieValue)) {
+                session.setAttribute(postNo+":cookieFile", postNo + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(postNo+":cookieFile").equals(session.getAttribute(postNo+":cookieFile ex"))) {
+            fileService.countUp(postNo);
+
+            fileboard.getFileBoard().setVisited(fileboard.getFileBoard().getVisited()+1);
+        }
+
+
+
         return "/fileboard/getFileboard";
     }
 

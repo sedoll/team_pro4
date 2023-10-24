@@ -57,7 +57,14 @@
                                             <td><a href="${path14}/instructor/instructorQNADetail.do?bno=${board.bno}&no=${instructor.no}">${board.title}</a></td>
                                         </c:when>
                                         <c:otherwise>
-                                            <td><a href="${path14}/instructor/instructorQNApw.do?bno=${board.bno}&no=${instructor.no}">[비밀글] ${board.title}</a></td>
+                                            <c:choose>
+                                                <c:when test="${sid eq instructor.id || sid eq 'admin'}">
+                                                    <td><a href="${path14}/instructor/instructorQNADetail.do?bno=${board.bno}&no=${instructor.no}">[비밀글] ${board.title}</a></td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td><a href="${path14}/instructor/instructorQNApw.do?bno=${board.bno}&no=${instructor.no}">[비밀글] ${board.title}</a></td>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:otherwise>
                                     </c:choose>
                                     <td>

@@ -10,4 +10,5 @@ public interface InfoRepository {
     public void infoInsert(Infomation dto) throws Exception;
     public void infoDelete(int bno) throws Exception;
     public void infoEdit(Infomation dto) throws Exception;
+    void countUp(int bno) throws Exception;
 }

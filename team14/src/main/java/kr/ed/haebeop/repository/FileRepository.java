@@ -16,4 +16,5 @@ public interface FileRepository {
     public FileDTO getFile(int no) throws Exception;
     public void updateFileboard(FileVO fileboard) throws Exception;
     public void removeFileAll(int postNo) throws Exception;
+    void countUp(int postNo) throws Exception;
 }

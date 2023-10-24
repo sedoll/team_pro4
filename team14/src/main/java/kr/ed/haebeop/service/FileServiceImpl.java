@@ -62,4 +62,9 @@ public class FileServiceImpl implements FileService {
     public void removeFileAll(int postNo) throws Exception {
         fileRepository.removeFileAll(postNo);
     }
+
+    @Override
+    public void countUp(int postNo) throws Exception {
+        fileRepository.countUp(postNo);
+    }
 }
