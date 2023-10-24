@@ -93,7 +93,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>수강강의수</p>
-                                                <span>2<em>일</em></span>
+                                                <span> ${count } <em>일</em></span>
                                             </div>
                                         </div>
                                     </div>

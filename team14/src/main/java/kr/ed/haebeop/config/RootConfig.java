@@ -68,6 +68,7 @@ public class RootConfig {
     public String uploadPath() { // 멀티파트 업로드 디렉토리 지정
         //환경에 따라 수정 필요
 //        return "D:\\spring_study\\pro04\\src\\main\\webapp\\resources\\upload";
+        //       return "D:\\kuyejin\\team14\\src\\main\\webapp\\resources\\upload"; //예진
         return "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload";
 
     }

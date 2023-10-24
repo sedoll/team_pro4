@@ -1,6 +1,5 @@
-<
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="<%=request.getContextPath() %>"/>
@@ -23,7 +22,9 @@
     <link rel="stylesheet" href="${path}/resources/css/myPage/baseLayout.css"/>
     <link rel="stylesheet" href="${path}/resources/css/myPage/validateUser.css"/>
     <link href="${path}/resources/css/myStudy/com_write.css" rel="stylesheet">
-    <link href="${path}/resources/css/starrr.css"/>
+    <script src="https://kit.fontawesome.com/93f6428cee.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
     <%--    <script type="text/javascript" src="${path}/resources/js/com_write.js" charset="UTF-8"></script>--%>
 
 
@@ -72,6 +73,156 @@
         }
 
 
+        /* 강좌 정보 */
+
+        .all_lecture_info {
+            margin-top: 120px;
+            position: relative;
+            z-index: 20;
+            background-color: #f8f8f8;
+        }
+
+
+        .all_lecture_items {
+            /* position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding: 5rem 5.5rem;
+            z-index: 11; */
+            height: 370px;
+            background: #e1f5fd;
+            /* position: relative; */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding: 0px 0px 0px 21px;
+            z-index: 11;
+        }
+
+
+        .all_lecture_items .cont_wrap {
+            position: relative;
+            z-index: 4;
+            padding: 50px 10px 10px 10px;
+        }
+
+        .all_lecture_items .flag_wrap {
+            margin-bottom: 1rem;
+        }
+
+
+        .all_lecture_items .tit_wrap {
+            max-width: 60rem;
+        }
+
+        .all_lecture_items .teacher_wrap {
+            /*display: block;
+            width: 40rem;
+            !* position: absolute; *!
+            right: 10.5rem;
+            bottom: 0;
+            z-index: 5;*/
+
+            display: block;
+            width: 12rem;
+            position: absolute;
+            right: 10.5rem;
+            bottom: -14px;
+            z-index: 5;
+            margin-bottom: -5px;
+        }
+
+
+        .all_lecture_items .teacher_wrap .slide_item {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            position: relative;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: #212121;
+            outline: none;
+        }
+
+        .all_lecture_items .teacher_wrap .name {
+            display: block;
+            position: absolute;
+            left: 4rem;
+            bottom: 5rem;
+            font-size: 1.8rem;
+            text-align: left;
+            color: #0c1f3a;
+            line-height: 2.3rem;
+
+
+        }
+
+        .all_lecture_items .teacher_wrap .name strong {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+        .all_lecture_items .teacher_wrap .img {
+            width: 23.2rem;
+        }
+
+
+        .all_lecture_items .teacher_wrap .img img {
+            width: 100%;
+        }
+
+
+        [class^='flag_ro_col'] {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 0 1rem;
+            margin-right: 0.2rem;
+            height: 2.1rem;
+            font-size: 1.2rem;
+            color: #fff;
+            vertical-align: middle;
+            border-radius: 25px;
+            border-bottom-right-radius: 0;
+        }
+
+        .flag_ro_col1 {
+            background: #334075;
+        }
+
+        .flag_ro_col2 {
+            background: #1056c5;
+        }
+
+        .flag_ro_col3 {
+            background: #334075;
+        }
+
+        .flag_ro_col4 {
+            background: #334075;
+        }
+
+
     </style>
 </head>
 <body>
@@ -97,6 +248,67 @@
                     <label for="tab5">수강후기</label>
                     <input type="radio" name="ud_tabs" id="tab6">
                     <label for="tab6">자료실</label>
+
+
+                    <!-- 모든강좌정보  -->
+                    <div class="all_lecture_info">
+                        <!-- 강좌주제 -->
+                        <div class="all_lecture_items">
+                            <div class="cont_wrap">
+                                <div class="flag_wrap" style="font-size: 20px;">
+                                    <!-- <i class="fa-solid fa-message fa-flip-horizontal" style="color: #76bed0;"></i>
+                                    <i class="fa-solid fa-message fa-flip-horizontal" style="color: #76bed0;"></i>
+                                    <i class="fa-solid fa-message fa-flip-horizontal" style="color: #76bed0;"></i>
+                                     -->
+                                    <br>
+                                    <span class="flag_ro_col1">고3</span>
+                                    <span class="flag_ro_col2">입문</span>
+                                    <!-- <span class="flag_ro_col3 cStep02">기본</span>
+                                    <span class="flag_ro_col4">최종평가</span> -->
+                                </div>
+
+                                <c:forEach items="${takingList }" var="takingList" varStatus="status">
+                                    <div class="tit_wrap">
+                                        <h2 class="tit">${takingList.lecTitle }</h2>
+                                    </div>
+
+
+                                    <p class="name">
+                                        <strong2 style="font-size: 30px;">${takingList.insName }</strong2>
+                                            <%--<i class="fas fa-solid fa-house fa-2x" ></i>--%>
+                                        <img src="${path}/resources/img/icon_house.png" style="width: 30px;">
+                                    </p>
+                                </c:forEach>
+
+                                <div class="like_wrap">
+                                    <!-- <button type="button" id="btnCouseGoodYn" class="btn_XL_like "
+                                            onclick="javascript:courseGoodYn('S20220000579');">
+                                        <span>좋아요</span>
+                                    </button>
+                                    <button type="button" class="btn_XL_col3"
+                                            onclick="javascript:openIt('https://WSTR.ebsi.co.kr/M41M2201/S20220000579/S20220000579_1M4_100030029084.mp4',2) ">
+                                        <span>OT</span></button>
+                                    <button type="button" class="btn_XL_col2"
+                                            onclick="registerCourse('S20220000579','');"><span>수강신청</span></button> -->
+                                </div>
+                            </div>
+                            <div class="teacher_wrap">
+                                <p class="slide_item">
+                                    <a href="/ebs/pot/potg/retrieveCourseH3TeacherInfo.ebs?dstgCd=T0283">
+                                        <!-- <p class="name"><strong>정승익</strong></p> -->
+                                        <%--  <p class="img"><img src="${path}/resources/img/수학_홍길동.png"
+                                                              alt=""
+                                                              onError="this.src='/ebs/public_hsp/images/common/img_teacher_noimg212.png'"/>
+                                          </p>--%>
+
+                                        <%--<p class="img"><img src="${path }/resources/upload/${takingList.simg }"/></p>--%>
+
+                                        <p class="img"><img src="${path }/resources/upload/${lecList.simg }"/></p>
+                                    </a>
+                            </div>
+                        </div>
+
+                    </div>
 
 
                     <%--강의 소개--%>
@@ -168,7 +380,8 @@
                                 <option value="2">작성자</option>
                                 <option value="3">내용</option>
                             </select>
-                            <input type="text" name="search_filter2" id="search_filter2" class="search_filter">
+                            <input type="text" name="search_filter2" id="search_filter2"
+                                   class="search_filter">
                         </div>
                         <table id="myTable2" class="table">
                             <thead>
@@ -219,16 +432,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${instructorNotices}" var="notice" varStatus="status">
+                                        <c:forEach items="${instructorNotices}" var="notice"
+                                                   varStatus="status">
                                             <tr>
                                                 <td>${status.count }</td>
                                                 <td>
                                                     <a href="${path14}/instructor/instructorNoticeDetail.do?noticeNo=${notice.no }&no=${instructor.no}">${notice.title }</a>
                                                 </td>
                                                 <td>
-                                                    <fmt:parseDate value="${notice.resdate }" var="resdate"
+                                                    <fmt:parseDate value="${notice.resdate }"
+                                                                   var="resdate"
                                                                    pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                    <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
+                                                    <fmt:formatDate value="${resdate }"
+                                                                    pattern="yyyy-MM-dd"/>
                                                 </td>
                                                 <td>${notice.cnt }</td>
                                             </tr>
@@ -268,7 +484,8 @@
                                         <td>${status.count }</td>
                                         <c:choose>
                                             <c:when test="${empty board.pw || board.pw eq ''}">
-                                                <td><a href="${path}/qna/detail.do?bno=${board.bno}">${board.title}</a>
+                                                <td>
+                                                    <a href="${path}/qna/detail.do?bno=${board.bno}">${board.title}</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
@@ -280,7 +497,8 @@
                                         <td>
                                             <fmt:parseDate value="${board.resdate }" var="resdate"
                                                            pattern="yyyy-MM-dd HH:mm:ss"/>
-                                            <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
+                                            <fmt:formatDate value="${resdate }"
+                                                            pattern="yyyy-MM-dd"/>
                                         </td>
                                         <td>${board.cnt }</td>
                                     </tr>
@@ -289,7 +507,8 @@
                             </table>
                             <c:if test='${not empty sid}'>
                                 <div class="button-group">
-                                    <a class="button is-link is-outlined" href="${path}/qna/insert.do">글쓰기</a>
+                                    <a class="button is-link is-outlined"
+                                       href="${path}/qna/insert.do">글쓰기</a>
                                 </div>
                             </c:if>
 
@@ -313,7 +532,9 @@
                             <tbody>
                             <c:forEach var="lev" items="${reviewList }">
                                 <tr>
-                                    <td><a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a></td>
+                                    <td>
+                                        <a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a>
+                                    </td>
                                     <td>${lev.score}</td>
                                     <td>${lev.content}</td>
                                     <td>${lev.resdate}</td>
@@ -331,9 +552,9 @@
 
 
                     <%--자료실--%>
-                    <div id="ud_tab-content6" class="ud_content">
+                    <%--<div id="ud_tab-content6" class="ud_content">
 
-                        <%--<h5> 자료실 </h5>--%>
+                        &lt;%&ndash;<h5> 자료실 </h5>&ndash;%&gt;
                         <table>
                             자료실 페이지 입니다
                             <thead>
@@ -347,7 +568,7 @@
 
                             </thead>
 
-                            <%-- <tbody>
+                            &lt;%&ndash; <tbody>
                              <c:forEach items="${board_comlist }" var="board_comlist">
                                  <tr class = "commentlist">
                                      <td>${board_comlist.content}</td>
@@ -356,9 +577,9 @@
                                  </tr>
 
                              </c:forEach>
-                             </tbody>--%>
+                             </tbody>&ndash;%&gt;
                         </table>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
@@ -366,7 +587,7 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         const filledStarPath = '${path}/resources/img/star.png';
         const emptyStarPath = '${path}/resources/img/empty_star.png';
 
@@ -382,7 +603,7 @@
             }
         }
 
-        $('.starRating').each(function() {
+        $('.starRating').each(function () {
             const $this = $(this);
             const score = $this.data('score');
             renderStars($this, score);
