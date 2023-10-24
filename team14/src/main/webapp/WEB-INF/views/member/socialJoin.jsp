@@ -141,7 +141,7 @@
             <input type="hidden" name="socialName" value="${socialName}">
             <input type="hidden" name="socialTel" value="${socialTel}">
 
-            <div class="check-menu-box">
+            <div class="check-menu-box" style="text-align: left; padding-left: 350px;">
                 <div class="checkbox-container">
                     <input type="checkbox" id="checkbox1" name="checkAll" />
                     <label for="checkbox1">약관에 모두 동의</label>

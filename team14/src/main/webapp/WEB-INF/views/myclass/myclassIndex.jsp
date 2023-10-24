@@ -28,7 +28,7 @@
 
         <div class="titArea">
             <h3 class="subMtit">최근 수강 강좌</h3>
-            <span>수강 중인 강좌 <em> 0</em>개</span>
+            <span>수강 중인 강좌 <em> ${count } </em> 개</span>
 
             <div class="board_wrap">
                 <!-- <div class="board_title">

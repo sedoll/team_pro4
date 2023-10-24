@@ -23,9 +23,8 @@
     <link rel="stylesheet" href="${path}/resources/css/myPage/baseLayout.css"/>
     <link rel="stylesheet" href="${path}/resources/css/myPage/validateUser.css"/>
     <link href="${path}/resources/css/myStudy/com_write.css" rel="stylesheet">
+    <link href="${path}/resources/css/starrr.css"/>
     <%--    <script type="text/javascript" src="${path}/resources/js/com_write.js" charset="UTF-8"></script>--%>
-
-
 
 
     <title>강의 상세보기</title>
@@ -68,11 +67,9 @@
             padding-right: 100px;
         }
 
-        #myTable2{
+        #myTable2 {
             font-size: 20px;
         }
-
-
 
 
     </style>
@@ -129,7 +126,7 @@
 
                                 <tr>
                                     <th>제작 강의수</th>
-                                    <td>${cnt}</td>
+                                    <td>${cnt}개</td>
                                 </tr>
 
                                 <tr>
@@ -143,8 +140,9 @@
                                         <c:when test="${empty avg || avg eq ''}">
                                             <td>0/5</td>
                                         </c:when>
+
                                         <c:otherwise>
-                                            <td>${avg}/5</td>
+                                            <td class="starRating" data-score="${avg}"></td>
                                         </c:otherwise>
                                     </c:choose>
                                 </tr>
@@ -205,8 +203,6 @@
                     </div>
 
 
-
-
                     <%--공지사항--%>
                     <div id="ud_tab-content3" class="ud_content">
 
@@ -226,10 +222,13 @@
                                         <c:forEach items="${instructorNotices}" var="notice" varStatus="status">
                                             <tr>
                                                 <td>${status.count }</td>
-                                                <td><a href="${path14}/instructor/instructorNoticeDetail.do?noticeNo=${notice.no }&no=${instructor.no}">${notice.title }</a></td>
                                                 <td>
-                                                    <fmt:parseDate value="${notice.resdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                                                    <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
+                                                    <a href="${path14}/instructor/instructorNoticeDetail.do?noticeNo=${notice.no }&no=${instructor.no}">${notice.title }</a>
+                                                </td>
+                                                <td>
+                                                    <fmt:parseDate value="${notice.resdate }" var="resdate"
+                                                                   pattern="yyyy-MM-dd HH:mm:ss"/>
+                                                    <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
                                                 </td>
                                                 <td>${notice.cnt }</td>
                                             </tr>
@@ -238,7 +237,8 @@
                                     </table>
                                     <c:if test='${sid eq "admin"}'>
                                         <div class="button-group">
-                                            <a class="button is-link is-outlined" href="${path}/notice/insert.do">글쓰기</a>
+                                            <a class="button is-link is-outlined"
+                                               href="${path}/notice/insert.do">글쓰기</a>
                                         </div>
                                     </c:if>
 
@@ -247,11 +247,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
 
 
                     <%--QnA--%>
@@ -302,7 +297,6 @@
                     </div>
 
 
-
                     <%--수강 후기--%>
                     <div id="ud_tab-content5" class="ud_content">
 
@@ -334,9 +328,6 @@
                             </tbody>
                         </table>
                     </div>
-
-
-
 
 
                     <%--자료실--%>
@@ -375,9 +366,34 @@
 </div>
 
 <script>
-    $(document).ready( function () {
+    $(document).ready(function() {
+        const filledStarPath = '${path}/resources/img/star.png';
+        const emptyStarPath = '${path}/resources/img/empty_star.png';
+
+        function renderStars($starContainer, score) {
+            $starContainer.empty(); // 기존 내용을 지웁니다.
+            for (let i = 1; i <= 5; i++) {
+                const starPath = i <= score ? filledStarPath : emptyStarPath;
+                const $star = $('<img>').attr('src', starPath)
+                    .attr('alt', 'star')
+                    .width(20)
+                    .height(20);
+                $starContainer.append($star);
+            }
+        }
+
+        $('.starRating').each(function() {
+            const $this = $(this);
+            const score = $this.data('score');
+            renderStars($this, score);
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
         $('#myTable').DataTable({
-            pageLength : 10,
+            pageLength: 10,
             order: [[0, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
             info: false,
             dom: 't<f>p',
@@ -385,20 +401,20 @@
                 emptyTable: '등록된 글이 없습니다.'
             }
         });
-    } );
-    $(document).ready(function() {
+    });
+    $(document).ready(function () {
         $('.dataTables_paginate').css({
-            'textAlign':'left',
+            'textAlign': 'left',
             'float': 'none',
-            'margin-top':'10px',
+            'margin-top': '10px',
         });
         $('.dataTables_filter').css({
             'float': 'left',
-            'margin-top':'14px',
-            'margin-right':'280px'
+            'margin-top': '14px',
+            'margin-right': '280px'
         });
         $('#myTable_paginate').css({
-            'margin-right':'120px'
+            'margin-right': '120px'
         });
     });
 </script>

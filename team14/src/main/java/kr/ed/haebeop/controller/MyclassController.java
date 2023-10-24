@@ -54,18 +54,6 @@ public class MyclassController {
 
 
 
-    // 내 정보 가져오기
-    @GetMapping("mypage.do")
-    public String mypage(HttpServletRequest request, Model model) throws Exception {
-        String id = (String) session.getAttribute("sid");
-        Member member = memberService.getMember(id);
-        System.out.println("내 정보: " + member);
-        model.addAttribute("member", member);
-
-        return "/myclass/myclassTopbar";
-    }
-
-
 
     @GetMapping("myclassList.do")		// board/list.do
     public String myclassList(Model model) throws Exception {
@@ -82,10 +70,16 @@ public class MyclassController {
         String id = (String) session.getAttribute("sid");
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
 
+        
+
         //topbar정보
         Member member = memberService.getMember(id);
         System.out.println("내 정보: " + member);
         model.addAttribute("member", member);
+
+        //최근 수강 중인 강의 수
+        int count = myclassService.takingCount();
+        model.addAttribute("count",count);
 
         //출력해보기
         System.out.println(myclassList.toString());
@@ -273,7 +267,11 @@ public class MyclassController {
 
 
         // region 4. QnA
+        Lecture lecture4 = lectureService.getLecture(no);
+        int lns_No4 = lecture4.getIno();
 
+        List<InstructorQna> qnaList = instructorService.instructorQnaList(lns_No4);
+        model.addAttribute("qnaList", qnaList);
 
 
         // region 5. 수강후기
