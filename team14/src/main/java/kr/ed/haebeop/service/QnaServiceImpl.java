@@ -66,4 +66,9 @@ public class QnaServiceImpl implements QnaService{
         }
         return comp;
     }
+
+    @Override
+    public void countUp(int bno) throws Exception {
+        qnaRepository.countUp(bno);
+    }
 }

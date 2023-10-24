@@ -37,4 +37,9 @@ public class InfoStuServiceImpl implements InfoService{
     public void infoEdit(Infomation dto) throws Exception {
         infoStuRepository.infoEdit(dto);
     }
+
+    @Override
+    public void countUp(int bno) throws Exception {
+        infoStuRepository.countUp(bno);
+    }
 }

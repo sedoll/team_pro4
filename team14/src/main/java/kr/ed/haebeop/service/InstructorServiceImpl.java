@@ -28,7 +28,7 @@ public class InstructorServiceImpl implements InstructorService{
 
     @Override
     public InstructorNotice getInstructorNoticeDetail(int noticeNo) {
-        instructorMapper.instructorNoticeCountUp(noticeNo);
+//        instructorMapper.instructorNoticeCountUp(noticeNo);
         return instructorMapper.getInstructorNoticeDetail(noticeNo);
     }
 
@@ -45,6 +45,11 @@ public class InstructorServiceImpl implements InstructorService{
     @Override
     public void noticeEdit(InstructorNotice dto) throws Exception {
         instructorMapper.noticeEdit(dto);
+    }
+
+    @Override
+    public void instructorNoticeCountUp(int noticeNo) {
+        instructorMapper.instructorNoticeCountUp(noticeNo);
     }
 
     //선생님 리스트
@@ -66,6 +71,7 @@ public class InstructorServiceImpl implements InstructorService{
     }
     @Override
     public InstructorQna qnaDetail(int bno) throws Exception {
+//        instructorMapper.qnaCountUp(bno);
         return instructorMapper.qnaDetail(bno);
     }
 
@@ -111,6 +117,11 @@ public class InstructorServiceImpl implements InstructorService{
     }
 
     @Override
+    public void qnaCountUp(int bno) {
+        instructorMapper.qnaCountUp(bno);
+    }
+
+    @Override
     public List<InstructorFile> getInstructorFileList(int no) {
         return instructorMapper.getInstructorFileList(no);
     }
@@ -127,12 +138,23 @@ public class InstructorServiceImpl implements InstructorService{
 
     @Override
     public InstructorFile getInstructorFile(int fileNo) {
+//        instructorMapper.fileCountUp(fileNo);
         return instructorMapper.getInstructorFile(fileNo);
+    }
+
+    @Override
+    public void fileCountUp(int fileNo) {
+        instructorMapper.fileCountUp(fileNo);
     }
 
     @Override
     public String getInstFileName(String sfile) {
         return instructorMapper.getInstFileName(sfile);
+    }
+
+    @Override
+    public void instructorFileDelete(int no) {
+        instructorMapper.instructorFileDelete(no);
     }
 
     @Override

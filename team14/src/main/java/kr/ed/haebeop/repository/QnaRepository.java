@@ -13,4 +13,5 @@ public interface QnaRepository {
     public void commentInsert(Qna dto) throws Exception;
     public List<Qna> commentList(int bno) throws Exception;
     public void commentDeleteAll(int bno) throws Exception;
+    void countUp(int bno) throws Exception;
 }

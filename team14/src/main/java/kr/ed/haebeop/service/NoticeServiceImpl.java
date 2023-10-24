@@ -44,7 +44,7 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public void countUp(int no) throws Exception {
-
+        noticeRepository.countUp(no);
     }
 
 

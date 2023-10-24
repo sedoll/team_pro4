@@ -21,8 +21,13 @@ public class BoardRepositoryImpl implements BoardRepository {
 
     @Override
     public Board boardDetail(int bno) throws Exception {
-        sqlSession.update("board.countUp", bno); // 이건 나중에 서비스 쪽에 넣어라
+//        sqlSession.update("board.countUp", bno); // 이건 나중에 서비스 쪽에 넣어라
         return sqlSession.selectOne("board.boardDetail", bno);
+    }
+
+    @Override
+    public void countUp(int bno) throws Exception {
+        sqlSession.update("board.countUp",bno);
     }
 
     @Override
