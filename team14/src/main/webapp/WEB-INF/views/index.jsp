@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path" value="<%=request.getContextPath() %>" />
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <!--
 // WEBSITE: https://themefisher.com
@@ -17,7 +17,7 @@
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- theme meta -->
-    <meta name="theme-name" content="kross-bulma" />
+    <meta name="theme-name" content="kross-bulma"/>
     <!-- ** Plugins Needed for the Project ** -->
     <!-- bulma -->
     <link rel="stylesheet" href="${path}/resources/theme/plugins/bulma/bulma.min.css">
@@ -44,9 +44,10 @@
             font-family: 'NanumSquare' !important;
         }
 
-         .buttons {
-             margin-bottom: 0;
-         }
+        .buttons {
+            margin-bottom: 0;
+        }
+
         .buttons .button {
             margin-bottom: 0;
         }
@@ -59,7 +60,8 @@
             <a class="navbar-item" href="${path}/">
                 <img src="${path}/resources/img/smart_haebeop_logo.png" width="112" height="28">
             </a>
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -69,26 +71,30 @@
         <!-- header menu -->
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless" id="menu1" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
+                <a class="navbar-link is-arrowless" id="menu1"
+                   onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
                    onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>강의</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu1').css({'background-color': '#CDEBFF', 'color': 'white'});"
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined"
+                     onmouseover="$('#menu1').css({'background-color': '#CDEBFF', 'color': 'white'});"
                      onmouseout="$('#menu1').css({'background-color': '', 'color': ''});">
-                    <a href="${path}/lecture/lecList" class="button is-link2 is-rounded b2" >
+                    <a href="${path}/lecture/lecList" class="button is-link2 is-rounded b2">
                         강의 목록
                     </a>
                 </div>
             </div>
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless" id="menu2" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
+                <a class="navbar-link is-arrowless" id="menu2"
+                   onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
                    onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>선생님</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu2').css({'background-color': '#CDEBFF', 'color': 'white'});"
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined"
+                     onmouseover="$('#menu2').css({'background-color': '#CDEBFF', 'color': 'white'});"
                      onmouseout="$('#menu2').css({'background-color': '', 'color': ''});">
-                    <a href="${path}/instructor/instructorList" class="button is-link2 is-rounded b2" >
+                    <a href="${path}/instructor/instructorList" class="button is-link2 is-rounded b2">
                         선생님 목록
                     </a>
                 </div>
@@ -118,11 +124,13 @@
             <%--            </div>--%>
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link is-arrowless" id="menu3" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
+                <a class="navbar-link is-arrowless" id="menu3"
+                   onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
                    onmouseout="$(this).css({'background-color': '', 'color': ''});">
                     <strong>입시 커뮤니티</strong>
                 </a>
-                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu3').css({'background-color': '#CDEBFF', 'color': 'white'});"
+                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined"
+                     onmouseover="$('#menu3').css({'background-color': '#CDEBFF', 'color': 'white'});"
                      onmouseout="$('#menu3').css({'background-color': '', 'color': ''});">
                     <a href="${path}/board/list.do" class="navbar-item">
                         자유 게시판
@@ -151,9 +159,10 @@
                 </div>
             </div>
 
-            <div class="navbar-item is-hoverable has-dropdown" >
-                <a class="navbar-link is-arrowless" href="${path}/myclass/myclassIndex.do" style="color:black;"  id="menu5" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
-                   onmouseout="$(this).css({'background-color': '', 'color': ''});" > <%--class="button is-link2 is-rounded b2" --%>
+            <div class="navbar-item is-hoverable has-dropdown">
+                <a class="navbar-link is-arrowless" href="${path}/myclass/myclassIndex.do" style="color:black;"
+                   id="menu5" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
+                   onmouseout="$(this).css({'background-color': '', 'color': ''});"> <%--class="button is-link2 is-rounded b2" --%>
                     <strong>나의 학습방</strong>
                 </a>
             </div>
@@ -182,46 +191,58 @@
                     <%--                    </c:if>--%>
                 </div>
                 <div class="buttons" style="margin-bottom: 0">
+                    <c:if test="${isInst==true}"> <%-- 선생님으로 로그인 한 경우 --%>
+                        <a href="${path}/instructor/instructorDetail.do?no=${instNo}" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                            나의 선생님 페이지
+                        </a>
+                    </c:if>
                     <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
-                        <a href="${path}/member/mypage.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path}/member/mypage.do" class="button is-link is-rounded b2"
+                           style="margin-bottom: 0">
                             <img src="${path}/resources/img/account_thin.svg" alt="${sid}" width="26px">
                             &nbsp;${sid}님
                         </a>
-                        <a href="${path}/cart/cartList.do" class="button is-link2 is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path}/cart/cartList.do" class="button is-link2 is-rounded b2"
+                           style="margin-bottom: 0">
                             <img src="${path}/resources/img/cart_thin.svg" alt="" width="26px">
                                 <%--                            장바구니--%>
                         </a>
-                        <a href="${path}/member/logout.do" class="button is-link2 is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path}/member/logout.do" class="button is-link2 is-rounded b2"
+                           style="margin-bottom: 0">
                             <img src="${path}/resources/img/logout_thin.svg" alt="" width="26px">
                                 <%--                            로그아웃--%>
                         </a>
                     </c:if>
                     <c:if test="${empty sid}"> <%-- 로그인을 안 한 경우 --%>
-                        <a href="${path}/member/login.do" class="button is-link2 is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path}/member/login.do" class="button is-link2 is-rounded b2"
+                           style="margin-bottom: 0">
                             로그인
                             <img src="${path}/resources/img/login_thin.svg" alt="" width="26px">
 
                         </a>
-                        <a href="${path}/member/join.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path}/member/join.do" class="button is-link is-rounded b2" style="margin-bottom: 0">
                             회원가입
                             <img src="${path}/resources/img/person_add_thin.svg" alt="" width="26px">
                         </a>
 
                     </c:if>
                     <c:if test="${sid eq 'admin'}"> <%-- 관리자로 로그인 한 경우 --%>
-                        <a href="${path}/admin/adminMain.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path}/admin/adminMain.do" class="button is-link is-rounded b2"
+                           style="margin-bottom: 0">
                             <img src="${path}/resources/img/settings_thin.svg" alt="" width="26px">
                                 <%--                            관리자페이지--%>
                         </a>
                     </c:if>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link is-arrowless" id="menu4" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
+                    <a class="navbar-link is-arrowless" id="menu4"
+                       onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
                        onmouseout="$(this).css({'background-color': '', 'color': ''});">
                         <img src="${path}/resources/img/help_thin.svg" alt="" width="26px">
                         <%--                        <strong>고객센터</strong>--%>
                     </a>
-                    <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined" onmouseover="$('#menu4').css({'background-color': '#CDEBFF', 'color': 'white'});"
+                    <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined"
+                         onmouseover="$('#menu4').css({'background-color': '#CDEBFF', 'color': 'white'});"
                          onmouseout="$('#menu4').css({'background-color': '', 'color': ''});">
                         <a href="${path}/notice/list.do" class="navbar-item">
                             공지 사항
@@ -239,7 +260,7 @@
     </nav>
 </header>
 <!-- hero area -->
-<section class="hero-area has-background-primary" id="parallax" style="padding-top: 0;" >
+<section class="hero-area has-background-primary" id="parallax" style="padding-top: 0;">
     <div class="columns">
         <img src="${path }/resources/img/main_banner.png">
     </div>
@@ -296,22 +317,22 @@
 </section>
 <!-- /hero area -->
 <!-- 사이드 메뉴 -->
-<%@include file="main/sidemenu.jsp"%>
+<%@include file="main/sidemenu.jsp" %>
 <!-- 사이드 메뉴 -->
 <!-- 소개글 -->
-<%@include file="main/introduction.jsp"%>
+<%@include file="main/introduction.jsp" %>
 <!-- 소개글 -->
 <!-- slidebanner -->
-<%@include file="main/slidebanner.jsp"%>
+<%@include file="main/slidebanner.jsp" %>
 <!-- slidebanner -->
 <!-- parentsinfo -->
-<%@include file="main/parentsinfo.jsp"%>
+<%@include file="main/parentsinfo.jsp" %>
 <!-- parentsinfo -->
 <!-- awards -->
-<%@include file="main/awards.jsp"%>
+<%@include file="main/awards.jsp" %>
 <!-- awards -->
 <!-- 회원가입 -->
-<%@include file="main/mainjoin.jsp"%>
+<%@include file="main/mainjoin.jsp" %>
 <!-- 회원가입 -->
 <!-- footer -->
 
@@ -330,14 +351,14 @@
 <!-- 상담 api -->
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/652532e4eb150b3fb99ff97a/1hccktjhr';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/652532e4eb150b3fb99ff97a/1hccktjhr';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
 </script>
 <!--End of Tawk.to Script-->

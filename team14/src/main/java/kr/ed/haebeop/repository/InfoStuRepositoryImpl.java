@@ -19,8 +19,13 @@ public class InfoStuRepositoryImpl implements InfoRepository {
 
     @Override
     public Infomation infoDetail(int bno) throws Exception {
-        sqlSession.update("infoStu.countUp", bno); // 이건 나중에 서비스 쪽에 넣어라
+//        sqlSession.update("infoStu.countUp", bno); // 이건 나중에 서비스 쪽에 넣어라
         return sqlSession.selectOne("infoStu.infoDetail", bno);
+    }
+
+    @Override
+    public void countUp(int bno) throws Exception {
+        sqlSession.update("infoStu.countUp", bno);
     }
 
     @Override

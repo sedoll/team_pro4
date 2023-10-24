@@ -27,6 +27,7 @@ public class GradeController {
 
     @GetMapping("list.do") // 수정, 입력, 삭제 가능한 성적표 게시판
     public String gradeList(HttpServletResponse response, HttpServletRequest request ,Model model) throws Exception {
+        Grade grade = new Grade();
         System.out.println("버튼 클릭");
         if(session.getAttribute("sid") != null && !"".equals(session.getAttribute("sid"))) {
             List<Grade> gradeList = gradeService.gradeList();
@@ -87,7 +88,7 @@ public class GradeController {
         grade.setTname(request.getParameter("tname"));
         grade.setTid(request.getParameter("tid"));
         gradeService.gradeInsert(grade);
-        return "redirect:list.do";
+        return "/grade/gblankpage";
     }
 
     @GetMapping("gradedelete.do")
@@ -117,7 +118,7 @@ public class GradeController {
         grade.setScience(Integer.parseInt(request.getParameter("science")));
         grade.setNo(no);
         gradeService.gradeEdit(grade);
-        return "redirect:list.do";
+        return "/grade/gblankpage";
     }
 
 }

@@ -48,7 +48,7 @@
 
                         </div>
                         <div class="info">
-                            <span class="name">${member.name}<em>님</em></span>
+                            <span class="name">${member.name}<em> 님</em></span>
                             <ul class="infolist">
                                 <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급 :
                                     <span id="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1"><span
@@ -92,8 +92,8 @@
                                     <div class="jb-text-table">
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
-                                                <p>수강강의</p>
-                                                <span>2<em>일</em></span>
+                                                <p>수강강의수</p>
+                                                <span> ${count } <em>일</em></span>
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>수강시간</p>
-                                                <span>2<em>일</em></span>
+                                                <span style="margin: -8px;">20<em>시간</em></span>
                                             </div>
                                         </div>
                                     </div>
@@ -195,12 +195,13 @@
                 <li class="menu04" id="menu010701" onfocus="menu_open('4');" onmouseover="menu_open('4');"><a href=""
                                                                                                               id="lnk0107">내가
                     쓴 글</a>
-                    <%--<ul class="dep02" id="dep04">
-                        <li><a id="sub010714" href="">내가 쓴 글</a></li>
-                        <li><a id="sub010712" href="">내가 남긴 댓글</a></li>
-                    </ul>--%>
+                    <ul class="dep02" id="dep04">
+                        <li><a id="sub010714" href="${path21}/member/memberWrittenBoard.do">내가 쓴 글</a></li>
+                        <li><a id="sub010712" href="${path21}/member/memberWrittenComent.do">내가 남긴 댓글</a></li>
+                    </ul>
                 </li>
                 <li class="menu05" onfocus="menu_open('5');" onmouseover="menu_open('5');"><a href="${path21}/grade/slist.do"id="lnk0130">성적표</a></li>
+
                 <li class="menu06" onfocus="menu_open('6');" onmouseover="menu_open('6');"><a href="${path21}/calendar/list.do"id="lnk1007">학습계획표</a></li>
             </ul>
         </div>

@@ -108,4 +108,9 @@ public class BoardTeaRepositoryImpl implements BoardRepository {
     public void readableEdit(Board bno) throws Exception {
         sqlSession.update("boardTea.readableEdit", bno);
     }
+
+    @Override
+    public void countUp(int bno) throws Exception {
+
+    }
 }

@@ -21,6 +21,7 @@ public class MyClassVO {
     String lecStudystart; //강의시작일
     String lecStudyend; //강의종료
     int ck; // 1.수강중 , 2.수강정지, 3.수강취소
+    String simg;
 
     private Map<String, Object> myclassMap; // 남은일수, 수강상태(string)
 

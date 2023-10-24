@@ -58,12 +58,17 @@ public class FileRepositoryImpl implements FileRepository {
     @Override
     public FileVO getFilebord(int postNo) throws Exception {
         FileVO fileboard = new FileVO();
-        sqlSession.update("fileboard.countUp", postNo);
+//        sqlSession.update("fileboard.countUp", postNo);
         FileBoard board = sqlSession.selectOne("fileboard.fileboardDetail", postNo);
         List<FileDTO> fileList = sqlSession.selectList("fileboard.fileGroupList", postNo);
         fileboard.setFileBoard(board);
         fileboard.setFileList(fileList);
         return fileboard;
+    }
+
+    @Override
+    public void countUp(int postNo) throws Exception {
+        sqlSession.update("fileboard.countUp", postNo);
     }
 
     @Override

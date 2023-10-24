@@ -30,4 +30,10 @@ public class MyclassService {
         return myclassMapper.gettakingClassList(lec_no);
     }
 
+
+    //수강 중인 강의 수 카운트
+    public int takingCount()throws Exception{
+        return myclassMapper.takingCount();
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,6 +41,29 @@ public class NoticeController {
         Notice dto = noticeService.noticeDetail(no);
         System.out.println(dto.toString());
         model.addAttribute("dto", dto);
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(no+":cookieNotice") == null) {
+            session.setAttribute(no+":cookieNotice", no + ":" + cookieValue);
+        } else {
+            session.setAttribute(no+":cookieNotice ex", session.getAttribute(no+":cookieNotice"));
+            if (!session.getAttribute(no+":cookieNotice").equals(no + ":" + cookieValue)) {
+                session.setAttribute(no+":cookieNotice", no + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(no+":cookieNotice").equals(session.getAttribute(no+":cookieNotice ex"))) {
+            noticeService.countUp(no);
+            dto.setCnt(dto.getCnt()+1);
+        }
+
         return "/notice/noticeDetail";
     }
 

@@ -19,7 +19,7 @@ public class QnaRepositoryImpl implements QnaRepository {
 
     @Override
     public Qna qnaDetail(int bno) throws Exception {
-        sqlSession.update("qna.countUp", bno);
+//        sqlSession.update("qna.countUp", bno);
         return sqlSession.selectOne("qna.qnaDetail", bno);
     }
 
@@ -51,5 +51,10 @@ public class QnaRepositoryImpl implements QnaRepository {
     @Override
     public void commentDeleteAll(int bno) throws Exception {
         sqlSession.delete("qna.commentDeleteAll", bno);
+    }
+
+    @Override
+    public void countUp(int bno) throws Exception {
+        sqlSession.update("qna.countUp", bno);
     }
 }

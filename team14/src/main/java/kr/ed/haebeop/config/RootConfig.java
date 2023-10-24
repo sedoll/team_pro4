@@ -49,6 +49,9 @@ public class RootConfig {
     public BasicDataSource dataSource() { // 데이터 베이스 설정
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName("org.mariadb.jdbc.Driver");
+//        basicDataSource.setUrl("jdbc:mariadb://10.41.1.198:3306/team14");
+//        basicDataSource.setUsername("team14");
+//        basicDataSource.setPassword("team14");
         basicDataSource.setUrl("jdbc:mariadb://localhost:3306/haebeop");
         basicDataSource.setUsername("root");
         basicDataSource.setPassword("1234");
@@ -68,6 +71,7 @@ public class RootConfig {
     public String uploadPath() { // 멀티파트 업로드 디렉토리 지정
         //환경에 따라 수정 필요
 //        return "D:\\spring_study\\pro04\\src\\main\\webapp\\resources\\upload";
+        //       return "D:\\kuyejin\\team14\\src\\main\\webapp\\resources\\upload"; //예진
         return "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload";
 
     }
