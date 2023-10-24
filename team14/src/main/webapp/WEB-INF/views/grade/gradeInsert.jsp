@@ -249,10 +249,6 @@
             width: 400px
         }
 
-        .hero {
-            height: 250px;
-            margin-top: 40px;
-        }
 
         .select select:active{
             border: #0c0c0c solid 2px;
@@ -263,20 +259,10 @@
 </head>
 <body>
 <div class="wrap">
-    <jsp:include page="../include/header.jsp"></jsp:include>
-    <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
-    <section class="hero is-white is-medium">
+    <section class="hero is-black is-small">
         <div class="hero-body has-text-centered">
             <p class="title is-size-3">성적표 입력</p>
         </div>
-        <nav class="breadcrumb is-small has-bullet-separator is-right" aria-label="breadcrumbs">
-            <ul>
-                <li><a href="#">Bulma</a></li>
-                <li><a href="#">Documentation</a></li>
-                <li><a href="#">Components</a></li>
-                <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-            </ul>
-        </nav>
     </section>
     <div class="contents" id="contents">
         <div class="container">
@@ -290,7 +276,6 @@
                             <label>학생 아이디</label>
                             <input type="text" name="stuid" id="stuid" class="indata" placeholder="학생 아이디를 입력하세요" required/>
                         </div>
-
                         <!--<div class="register_info">
                             <label>시험 종류</label>
                             <input type="text" name="exam" id="exam" class="indata" placeholder="ex)1학기 중간고사" required/>
@@ -307,51 +292,39 @@
                                 <input type="hidden" name="exam" id="exam" required>
                             </div>
                         </div>
-
                         <div class="register_info">
                             <label>국어</label>
                             <input type="text" name="kor" id="kor" class="indata" placeholder="국어 점수 입력"  required/>
                         </div>
-
                         <div class="register_info">
                             <label>영어</label>
                             <td><input type="text" name="eng" id="eng" placeholder="영어 점수 입력" class="indata" required></td>
                         </div>
-
                         <div class="register_info">
                             <label>수학</label>
                             <input type="text" name="math" id="math" class="indata" placeholder="수학 점수 입력"  required/>
                         </div>
-
                         <div class="register_info">
                             <label>사회</label>
                             <input type="text" name="social" id="social" class="indata" placeholder="사회 점수 입력"  required/>
                         </div>
-
                         <div class="register_info">
                             <label>과학</label>
                             <input type="text" name="science" id="science" placeholder="과학 점수 입력" class="indata"  required/>
                         </div>
-
                         <div class="register_info">
                             <label>담당 선생님 성함</label>
                             <input type="text" name="tname" id="tname" placeholder="선생님 성함 입력" class="indata" required/>
                             <input type="hidden" name="tid" id="tid" value="${sid}"/>
                         </div>
-
-
                         <div class="btn1">
-                            <button class="submit button is-link is-outlined" type="submit"> 성적표 등록</button>
-                            <button class="reset button is-danger is-outlined" type="reset">작성 취소</button>
+                            <button class="submit button is-link is-outlined" type="submit" style="margin-left: 90px;"> 성적표 등록</button>
                         </div>
-
-
                     </form>
                 </div>
         </div>
     </div>
 </div>
-<jsp:include page="../include/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

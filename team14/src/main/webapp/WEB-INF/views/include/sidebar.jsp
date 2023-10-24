@@ -38,6 +38,13 @@
                     찜 강의
                 </a>
             </li>
+            <c:if test="${member.job == 2}">
+            <li>
+                <a href="${path4}/grade/list.do">
+                    성적 게시판 관리
+                </a>
+            </li>
+            </c:if>
 <%--            <li>--%>
 <%--                <a href="${path4}/lecture/lecMemList.do">--%>
 <%--                    수강내역--%>
