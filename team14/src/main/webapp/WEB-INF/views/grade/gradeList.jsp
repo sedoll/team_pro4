@@ -14,10 +14,6 @@
     <!-- 헤드 부분 인클루드 -->
     <jsp:include page="../include/head.jsp"></jsp:include>
     <style>
-        .hero {
-            height: 250px;
-            margin-top: 40px;
-        }
 
         tbody .button{
             width: 40px;
@@ -31,17 +27,17 @@
 <div class="page_wrap">
     <jsp:include page="../include/header.jsp"></jsp:include>
     <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
-<section class="hero is-white is-small">
-    <div class="hero-body has-text-centered">
-        <p class="title is-size-3">
-            성적 게시판
-        </p>
-    </div>
-</section>
-<div class="content" id="content">
-    <div class="row column text-center">
-        <div class="container">
-            <table id="myTable">
+    <section class="hero is-white is-small">
+        <div class="hero-body">
+            <h5 class="is-size-4" style="margin-left: 440px">
+                성적 게시판
+            </h5>
+        </div>
+    </section>
+<div class="content" id="content" style="min-height: 10px; width: 1200px; margin-left: 40px; margin-bottom: 100px; margin-top: 0px">
+    <div class="row column text-center" style="width: 1200px">
+        <div class="container" style="width: 1000px; left: 320px; height: 470px;">
+            <table id="myTable" style="font-size: 16px">
                 <thead>
                 <tr>
                     <th width="80">No</th>
@@ -69,7 +65,7 @@
                         </td>
                         <td colspan="2">
                             <c:if test="${sid == grade.stuid || sid == grade.tid}">
-                                <a class="button is-black is-outlined">상세보기</a>
+                                <a class="button is-black is-outlined" onclick="window.open('${path}/grade/gradedetail.do?no=${grade.no}', '_blank', 'popup=yes', 'width=700px', 'height=700px', 'top=50px', 'left=50px')" >상세보기</a>
                             </c:if>
                             <c:if test="${sid == grade.tid}">
                                 <a href="${path}/grade/gradedelete.do?no=${grade.no}" class="button is-danger is-outlined">성적삭제</a>
@@ -79,11 +75,9 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <c:if test="${sid != grade.stuid && sid != 'admin'}">                                                                                                                                                                                              }">
             <div class="button-group">
-                <a class="button is-link is-outlined" href="${path}/grade/gradeinsert.do">성적입력</a>
+                <a class="button is-link is-outlined" onclick="window.open('${path}/grade/gradeinsert.do', '_blanck', 'popup=yes', 'width=700px', 'height=700px', 'top=50px', 'left=50px')">성적입력</a>
             </div>
-            </c:if>
             <script>
                 $(document).ready( function () {
                     $('#myTable').DataTable({
@@ -105,7 +99,6 @@
                     });
                     $('.dataTables_filter').css({
                         'float': 'left',
-                        'margin-top':'14px',
                         'margin-right':'280px'
                     });
                     $('#myTable_paginate').css({
@@ -114,7 +107,6 @@
                 });
             </script>
         </div>
-
     </div>
 </div>
 </div>
