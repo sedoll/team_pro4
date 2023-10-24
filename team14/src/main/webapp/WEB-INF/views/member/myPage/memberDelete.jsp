@@ -36,7 +36,7 @@
                     <div class="input-line">
                         <div class="input-label"><label>아이디</label></div>
                         <div class="input">
-                            <input name="id" type="text" readonly="true" value="${sessionScope.sid}" />
+                            <input name="id" type="text" readonly="true" class="input" value="${sessionScope.sid}" />
                         </div>
                     </div>
                     <div class="input-line">
@@ -44,14 +44,14 @@
                             <label>비밀번호<span class="required">*</span></label>
                         </div>
                         <div class="input">
-                            <input name="pw" type="password" class="test" />
+                            <input name="pw" type="password" class="input" />
                             <input type="hidden" name ="pwck" id="pwck" value="pw">
                         </div>
                     </div>
                 </div>
                 <div class="button-box">
-                    <button id="return" class="button is-black is-outlined" onclick="location.href='${path10 }/member/mypage.do'" >취소하기</button>
-                    <button id="withdraw" class="button is-danger is-outlined">탈퇴하기</button>
+                    <a href="${path10}/member/mypage.do" class="button is-black is-outlined">취소하기</a>
+                    <a href="javascript:void(0)" id="withdraw" class="button is-danger is-outlined">탈퇴하기</a>
                 </div>
             </form>
         </div>
