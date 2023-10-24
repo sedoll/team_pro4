@@ -167,10 +167,10 @@
                                     <a href="${path}/cart/cartInsert.do?lec_no=${pro.no}" class="button is-info inbtn">장바구니</a>
                                     <c:choose>
                                     <c:when test="${isLiked}">
-                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
+                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #ff5050">♥</a>
                                     </c:when>
                                     <c:otherwise>
-                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sessionScope.sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #b4b4b4">♥</a>
+                                    <a href="javascript:void(0);" onclick="toggleLike(${pro.no}, '${sid}');" class="inbtn" data-product-id="${pro.no}" style="color: #b4b4b4">♥</a>
                                     </c:otherwise>
                                     </c:choose>
                                     </c:if>
@@ -188,13 +188,13 @@
                     </div>
                 </div>
                 <script>
-                    function toggleLike(productNo, ${sid }) {
+                    function toggleLike(productNo, id) {
                         $.ajax({
                             url: "ProductLike.do",
                             method: "POST",
                             data: {
                                 pno: productNo,
-                                sid: ${sid }
+                                sid: id
                             },
                             success: function(response) {
                                 var likeButton = $("[data-product-id='" + productNo + "']");

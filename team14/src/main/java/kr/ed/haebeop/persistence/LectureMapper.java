@@ -2,6 +2,7 @@ package kr.ed.haebeop.persistence;
 
 import kr.ed.haebeop.domain.LecFile;
 import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.LectureLikes;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -53,4 +54,24 @@ public interface LectureMapper {
     // 기존 파일 이름 추출
     @Select("select realname from lecfile where sfile=#{sfile}")
     public String getLecFileName(String sfile);
+
+    // 좋아요 유뮤 확인
+    @Select("SELECT count(*) FROM lecturelikes WHERE userid = #{userid} AND lno = #{lno}")
+    public int checkLiked(LectureLikes lectureLikes);
+    
+    // 좋아요 추가
+    @Insert("INSERT INTO lecturelikes(userid, lno) VALUES(#{userid}, #{lno})")
+    public void addLike(LectureLikes lectureLikes);
+
+    // 좋아요 취소
+    @Delete("DELETE FROM lecturelikes WHERE userid = #{userid} AND lno = #{lno}")
+    public void removeLike(LectureLikes lectureLikes);
+    
+    // 좋아요 누른 상품의 id 목록 반환
+    @Select("SELECT lno FROM lecturelikes WHERE userid = #{userid}")
+    public List<Integer> getLikedProductsByUser(String userid);
+
+    // 유저의 좋아요 목록 출력
+    @Select("select * from lecturelikes where userid=#{userid}")
+    public List<LectureLikes> getByIdLikeList(String userid);
 }

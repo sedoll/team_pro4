@@ -23,12 +23,12 @@
     <%@ include file="/WEB-INF/views/myclass/myclassTopbar.jsp" %>
 
 
+
     <div class="mainCont">
 
         <div class="titArea">
             <h3 class="subMtit">최근 수강 강좌</h3>
             <span>수강 중인 강좌 <em> 0</em>개</span>
-
 
             <div class="board_wrap">
                 <!-- <div class="board_title">
@@ -39,9 +39,9 @@
                     <div class="board_list">
                         <div class="top">
                             <div class="leccate" style="width: 10%">분류</div>
-                            <div class="lectitle" style="width: 40%">강좌명</div>
+                            <div class="lectitle" style="width: 35%">강좌명</div>
                             <div class="insName" style="width: 10%">강사님</div>
-                            <div class="lecday" style="width: 10%; line-height: 3;">수강기간</div>
+                            <div class="lecday" style="width: 15%; line-height: 3;">수강기간</div>
                             <div class="deaddate" style="width: 10%">남은기간</div>
                             <div class="check" style="width: 10%">상태</div>
                             <div class="study" style="width: 10%">학습</div>
@@ -51,9 +51,9 @@
                         <c:forEach items="${myclassList }" var="myclass" varStatus="status">
                             <div>
                                 <div class="leccate" style="width: 10%">${myclass.lecCate }</div>
-                                <div class="lectitle" style="width: 40%">${myclass.lecTitle }</div>
+                                <div class="lectitle" style="width: 35%">${myclass.lecTitle }</div>
                                 <div class="insName" style="width: 10%">${myclass.insName }</div>
-                                <div class="lecday" style="width: 10%;">
+                                <div class="lecday" style="width: 15%; font-size:15px;">
                                     <script>
                                         var lecStartDate = new Date("${myclass.lecStudystart}");
                                         var lecEndDate = new Date("${myclass.lecStudyend}");
