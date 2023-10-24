@@ -99,6 +99,12 @@ public class BoardParServiceImpl implements BoardService{
     public void addLike(Like like) throws Exception {
         boardParRepository.addLike(like);
     }
+
+    @Override
+    public List<Board> boardLikeList(String id) throws Exception {
+        return boardParRepository.boardLikeList(id);
+    }
+
     @Override
     public boolean getReadable(int bno) throws Exception {
         return boardParRepository.getReadable(bno);

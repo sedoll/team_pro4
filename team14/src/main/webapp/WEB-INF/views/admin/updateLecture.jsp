@@ -67,48 +67,7 @@
                             <th>과목</th>
                             <td colspan="2">
                                 <input type="hidden" name="no" id="no" value="${lecture.no}" readonly>
-                                <select name="cate" id="cate" class="select is-fullwidth" autofocus required>
-                                    <c:choose>
-                                        <c:when test="${lecture.cate eq '국어'}">
-                                            <option value="국어" selected>국어</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="국어">국어</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${lecture.cate eq '수학'}">
-                                            <option value="수학" selected>수학</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="수학">수학</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${lecture.cate eq '영어'}">
-                                            <option value="영어" selected>영어</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="영어">영어</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${lecture.cate eq '과학'}">
-                                            <option value="과학" selected>과학</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="과학">과학</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${lecture.cate eq '사회'}">
-                                            <option value="사회" selected>사회</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="사회">사회</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </select>
+                                <input type="text" name="cate" id="cate" value="${instructor.cate}" class="input" readonly>
                             </td>
                         </tr>
 
@@ -229,51 +188,57 @@
                         <tr>
                             <th>강사 이름</th>
                             <td colspan="2">
-                                <select name="ino" id="ino" class="input" autofocus required>
-                                    <c:forEach items="${instList}" var="inst">
-                                        <c:choose>
-                                            <c:when test="${inst.name eq instructor.name}">
-                                                <option value="${inst.no}" selected>${inst.name}</option>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <option value="${inst.no}">${inst.name}</option>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                                </select>
+                                <input type="text" class="input" value="${instructor.name}" readonly>
+                                <input type="text" class="input" name="ino" value="${instructor.no}" readonly>
                             </td>
                         </tr>
                         <tr>
                             <th>강의 설명</th>
                             <td colspan="2">
-                                <textarea name="content" id="content" class="textarea" cols="50" rows="15" placeholder="상품 설명 입력" required>
-                                    ${lecture.content}
-                                </textarea>
+                                <textarea name="content" id="content" class="textarea" cols="50" rows="15" placeholder="상품 설명 입력" required>${lecture.content}</textarea>
                             </td>
                         </tr>
                         <tr>
                             <th>표지 이미지</th>
-                            <td colspan="2"><input type="file" name="simg" id="simg" class="input" placeholder="표지 이미지" accept=".jpg, .png"></td>
+                            <td colspan="2">
+                                <input type="text" value="기존파일: ${lecFileList.get(0)}" class="input" readonly>
+                                <input type="file" name="simg" id="simg" class="input" placeholder="표지 이미지" accept=".jpg, .png">
+                            </td>
                         </tr>
                         <tr>
                             <th>샘플(OT) 영상</th>
-                            <td colspan="2"><input type="file" name="sfile1" id="sfile1" class="input" placeholder="샘플 영상1" accept=".mp4"></td>
+                            <td colspan="2">
+                                <input type="text" value="기존파일: ${lecFileList.get(1)}" class="input" readonly>
+                                <input type="file" name="sfile1" id="sfile1" class="input" placeholder="샘플 영상1" accept=".mp4">
+                            </td>
                         </tr>
                         <tr>
                             <th>강의 영상 1</th>
-                            <td colspan="2"><input type="file" name="sfile2" id="sfile2" class="input" placeholder="강의 영상1" accept=".mp4"></td>
+                            <td colspan="2">
+                                <input type="text" value="기존파일: ${lecFileList.get(2)}" class="input" readonly>
+                                <input type="file" name="sfile2" id="sfile2" class="input" placeholder="강의 영상1" accept=".mp4">
+                            </td>
                         </tr>
                         <tr>
                             <th>강의 영상 2</th>
-                            <td colspan="2"><input type="file" name="sfile3" id="sfile3" class="input" placeholder="강의 영상2" accept=".mp4"></td>
+                            <td colspan="2">
+                                <input type="text" value="기존파일: ${lecFileList.get(3)}" class="input" readonly>
+                                <input type="file" name="sfile3" id="sfile3" class="input" placeholder="강의 영상2" accept=".mp4">
+                            </td>
                         </tr>
                         <tr>
                             <th>강의 영상 3</th>
-                            <td colspan="2"><input type="file" name="sfile4" id="sfile4" class="input" placeholder="강의 영상3" accept=".mp4"></td>
+                            <td colspan="2">
+                                <input type="text" value="기존파일: ${lecFileList.get(4)}" class="input" readonly>
+                                <input type="file" name="sfile4" id="sfile4" class="input" placeholder="강의 영상3" accept=".mp4">
+                            </td>
                         </tr>
                         <tr>
                             <th>강의 영상 4</th>
-                            <td colspan="2"><input type="file" name="sfile5" id="sfile5" class="input" placeholder="강의 영상4" accept=".mp4"></td>
+                            <td colspan="2">
+                                <input type="text" value="기존파일: ${lecFileList.get(5)}" class="input" readonly>
+                                <input type="file" name="sfile5" id="sfile5" class="input" placeholder="강의 영상4" accept=".mp4">
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">

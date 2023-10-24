@@ -20,7 +20,7 @@
 
     <!-- 회원 수정 -->
     <update id="memberUpdate">
-        update member set pw=#{pw }, name=#{name }, email=#{email }, tel=#{tel }, addr1=#{addr1 }, addr2=#{addr2 }, postcode=#{postcode }, job=#{job} where id = #{id }
+        update member set pw=#{pw }, name=#{name }, email=#{email }, tel=#{tel }, addr1=#{addr1 }, addr2=#{addr2 }, postcode=#{postcode }, birth=#{birth} where id = #{id }
     </update>
 
     <!-- 회원 가입 -->
@@ -179,7 +179,7 @@
     </delete>
 
     <select id="myLikeList" resultType="kr.ed.haebeop.domain.BoardLikes">
-        select * from boardlikes where userid=#{userid} order by liketime desc
+        select * from boardlikes where userid=#{id} order by liketime desc
     </select>
 
     <!--  boardLikeRemove  -->

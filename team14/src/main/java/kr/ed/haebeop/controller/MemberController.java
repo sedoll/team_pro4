@@ -6,6 +6,7 @@ import kr.ed.haebeop.repository.AuthRepositoryImpl;
 import kr.ed.haebeop.repository.MemberRepository;
 import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.board.BoardService;
 import kr.ed.haebeop.util.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -44,6 +45,9 @@ public class MemberController {
 
     @Autowired
     private InstService instService; // 강사 로그인을 위해 사용
+
+    @Autowired
+    private BoardService boardService;
 
     @Autowired
     HttpSession session; // 세션 생성
@@ -330,10 +334,9 @@ public class MemberController {
     }
 
     //회원 가입 - 회원가입폼 페이지 로딩
-    @PostMapping("join.do")
+    @GetMapping("join.do")
     public String getJoin(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-        String job = request.getParameter("job");
-        model.addAttribute("job", job);
+        model.addAttribute("job", "1");
         return "/member/join";
     }
 
@@ -401,21 +404,6 @@ public class MemberController {
         String addr2 = request.getParameter("addr2");
         String postcode = request.getParameter("postcode");
         String birth = request.getParameter("birth");
-        int job = Integer.parseInt(request.getParameter("job"));
-
-        //해당 id의 기존 job값 가져오기
-        //기존 job값이 2이면 teacher테이블 update처리, 아니면 insert
-        Member chkmember = memberService.getMember(id);
-        int chkJob = chkmember.getJob();
-        System.out.println("chkJob : "+chkJob);
-
-        if (chkJob==2 && job==2) {
-            //update
-        } else if (chkJob==2 && job==1){
-            //delete
-        } else {
-            //insert
-        }
 
         Member member = new Member();
         member.setId(id);
@@ -427,7 +415,6 @@ public class MemberController {
         member.setAddr2(addr2);
         member.setPostcode(postcode);
         member.setBirth(birth);
-        member.setJob(job);
 
         memberService.memberUpdate(member);
         model.addAttribute("member", member);
@@ -765,7 +752,7 @@ public class MemberController {
     @GetMapping("myLikeList.do")
     public String myLikeList(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
-        List<BoardLikes> boardList = memberService.myLikeList(id);
+        List<Board> boardList = boardService.boardLikeList(id);
         model.addAttribute("likeList", boardList);
         System.out.println(boardList.toString());
         return "/member/myPage/myLikeList";
@@ -773,23 +760,29 @@ public class MemberController {
 
     @GetMapping("myLikeRemove.do")
     public String myLikeRemove(HttpServletRequest request, Model model) throws Exception {
-        String id = request.getParameter("id");
+        String id = (String) session.getAttribute("sid");
         int bno = Integer.parseInt(request.getParameter("bno"));
-        String category = request.getParameter("category");
+//        String category = request.getParameter("category");
 
-        if (category.equals("board")) {
-            memberService.boardLikeRemove(bno);
-            return "redirect:myLikeList.do";
-        } else if (category.equals("boardTea")) {
-            memberService.teaLikeRemove(bno);
-            return "redirect:myLikeList.do";
-        } else if (category.equals("boardPar")) {
-            memberService.parLikeRemove(bno);
-            return "redirect:myLikeList.do";
-        } else {
-            return "redirect:myLikeList.do";
-        }
+        Like like=new Like();
+        like.setUserId(id);
+        like.setBoardNo(bno);
 
+        boardService.removeLike(like);
+
+//        if (category.equals("board")) {
+//            memberService.boardLikeRemove(bno);
+//            return "redirect:myLikeList.do";
+//        } else if (category.equals("boardTea")) {
+//            memberService.teaLikeRemove(bno);
+//            return "redirect:myLikeList.do";
+//        } else if (category.equals("boardPar")) {
+//            memberService.parLikeRemove(bno);
+//            return "redirect:myLikeList.do";
+//        } else {
+//            return "redirect:myLikeList.do";
+//        }
+        return "redirect:myLikeList.do";
     }
 
 }

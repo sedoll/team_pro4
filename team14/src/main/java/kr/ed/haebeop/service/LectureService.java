@@ -2,7 +2,11 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.LecFile;
 import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.LectureLikes;
 import kr.ed.haebeop.persistence.LectureMapper;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +55,20 @@ public class LectureService {
     // 파일의 실제 이름 출력
     public String getLecFileName(String sfile) {return lectureMapper.getLecFileName(sfile);}
 
+    // 좋아요 유뮤 확인
+    public int checkLiked(LectureLikes lectureLikes) {return lectureMapper.checkLiked(lectureLikes);}
+
+    // 좋아요 추가
+    public void addLike(LectureLikes lectureLikes) {lectureMapper.addLike(lectureLikes);}
+
+    // 좋아요 취소
+    public void removeLike(LectureLikes lectureLikes) {lectureMapper.removeLike(lectureLikes);}
+
+    // 좋아요 누른 상품의 id 목록 반환
+    public List<Integer> getLikedProductsByUser(String userid) {return lectureMapper.getLikedProductsByUser(userid);}
+
+    // 유저의 좋아요 목록 출력
+    public List<LectureLikes> getByIdLikeList(String userid) {return lectureMapper.getByIdLikeList(userid);}
 
 //    public List<RedirectView> getReviewList(int no) {
 //        ReviewDAO dao = new ReviewDAO();

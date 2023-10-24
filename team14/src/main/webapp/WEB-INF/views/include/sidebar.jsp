@@ -34,10 +34,15 @@
                 </a>
             </li>
             <li>
-                <a href="${path4}/lecture/lecMemList.do">
-                    수강내역
+                <a href="${path4}/lecture/likeList.do">
+                    찜 강의
                 </a>
             </li>
+<%--            <li>--%>
+<%--                <a href="${path4}/lecture/lecMemList.do">--%>
+<%--                    수강내역--%>
+<%--                </a>--%>
+<%--            </li>--%>
         </ul>
         <a href="${path4}/qna/list.do" class="mypage-inquiry">
             <div>

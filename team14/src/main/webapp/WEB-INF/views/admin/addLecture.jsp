@@ -66,13 +66,14 @@
                         <tr>
                             <th>과목</th>
                             <td colspan="2">
-                                <select name="cate" id="cate" class="select is-fullwidth" autofocus required>
-                                    <option value="국어" selected>국어</option>
-                                    <option value="수학">수학</option>
-                                    <option value="영어">영어</option>
-                                    <option value="과학">과학</option>
-                                    <option value="과학">사회</option>
-                                </select>
+                                <input type="text" name="cate" id="cate" value="" class="input" required readonly>
+<%--                                <select name="cate" id="cate" class="select is-fullwidth" autofocus required>--%>
+<%--                                    <option value="국어" selected>국어</option>--%>
+<%--                                    <option value="수학">수학</option>--%>
+<%--                                    <option value="영어">영어</option>--%>
+<%--                                    <option value="과학">과학</option>--%>
+<%--                                    <option value="과학">사회</option>--%>
+<%--                                </select>--%>
                             </td>
                         </tr>
 
@@ -132,6 +133,54 @@
                                 </select>
                             </td>
                         </tr>
+                        <script>
+                            $(document).ready(function () {
+                                // 처음 시작할 때
+                                let ino = $('#ino').val();
+
+                                // AJAX로 서버에 신고 정보 전송
+                                $.ajax({
+                                    type: "POST",
+                                    url: "${path}/instructor/getInstCate.do",
+                                    data: {
+                                        ino: ino
+                                    },
+                                    dataType: "json",
+                                    success: function(result) {
+                                        $("#cate").val(result.result);
+                                        console.log('result.result :'+result.result);
+                                        console.log("전달 완료");
+                                    },
+                                    error: function(result) {
+                                        console.log(result.cate);
+                                        console.log("전달 오류")
+                                    }
+                                });
+
+                                $('#ino').on('change', function () {
+                                let ino = $('#ino').val();
+
+                                // AJAX로 서버에 신고 정보 전송
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "${path}/instructor/getInstCate.do",
+                                        data: {
+                                            ino: ino
+                                        },
+                                        dataType: "json",
+                                        success: function(result) {
+                                            $("#cate").val(result.result);
+                                            console.log('result.result :'+result.result);
+                                            console.log("전달 완료");
+                                        },
+                                        error: function(result) {
+                                            console.log(result.result);
+                                            console.log("전달 오류")
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
                         <tr>
                             <th>강의 설명</th>
                             <td colspan="2"> <textarea name="content" id="content" cols="50" class="textarea" rows="15" placeholder="상품 설명 입력" required></textarea></td>
