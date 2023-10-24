@@ -60,7 +60,7 @@
                             <th style="background-color:#dcdcdc">아이디</th>
                             <td>
                                 <input type="text" name="id" id="id" class="input" placeholder="아이디" maxlength="20" autofocus required>
-                                <button type="button" id="ck_btn" class="button is-link" onclick="idCheck()">중복확인</button>
+                                <button type="button" id="ck_btn" class="button is-black is-outlined" onclick="idCheck()">중복확인</button>
                                 <input type="hidden" name="idck" id="idck" value="no">
                             </td>
                             <div>
@@ -111,30 +111,31 @@
                         <tr>
                             <th style="background-color:#dcdcdc">주소</th>
                             <td>
-                                <input type="text" name="postcode" id="postcode" style="width:160px;float:left;margin-right:20px;" placeholder="우편번호" class="form-control" readonly>
-                                <button type="button" id="post_btn" onclick="findAddr()" class="button is-link is-size-6">우편번호 검색</button>
-                                <input type="text" name="addr1" id="addr1" placeholder="기본 주소 입력" class="form-control" required readonly/><br>
-                                <input type="text" name="addr2" id="addr2" placeholder="상세 주소 입력" class="form-control" required /><br>
+                                <input type="text" name="addr1" id="addr1" placeholder="기본 주소 입력" class="input" required readonly/><br>
+                                <input type="text" name="postcode" id="postcode" style="width:160px;float:left;margin-right:20px;" placeholder="우편번호" class="input" readonly><br>
+                                <button type="button" id="post_btn" onclick="findAddr()" class="button is-black is-outlined">우편번호 검색</button><br>
+                                <input type="text" name="addr2" id="addr2" placeholder="상세 주소 입력" class="input" required /><br>
                             </td>
                         </tr>
                         <tr>
-                            <th>담당 과목</th>
+                            <th style="background-color:#dcdcdc">담당 과목</th>
                             <td colspan="2">
-                                <select name="cate" id="cate" class="indata" autofocus required>
+                                <select name="cate" id="cate" class="select is-fullwidth" autofocus required>
                                     <option value="국어" selected>국어</option>
                                     <option value="수학">수학</option>
                                     <option value="영어">영어</option>
                                     <option value="과학">과학</option>
-                                    <option value="과학">사회</option>
+                                    <option value="사회">사회</option>
+                                    <option value="한국사">한국사</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>선생님 설명</th>
-                            <td colspan="2"> <textarea name="intro" id="intro" cols="50" rows="15" placeholder="설명 입력" required></textarea></td>
+                            <th style="background-color:#dcdcdc">선생님 설명</th>
+                            <td colspan="2"> <textarea name="intro" id="intro" class="textarea" cols="50" rows="15" placeholder="설명 입력" required></textarea></td>
                         </tr>
                         <tr>
-                            <th>선생님 이미지</th>
+                            <th style="background-color:#dcdcdc">선생님 이미지</th>
                             <td colspan="2"><input type="file" name="img" id="img" class="input" placeholder="이미지" accept=".jpg, .png" required></td>
                         </tr>
                         <tr>
