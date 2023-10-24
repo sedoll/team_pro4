@@ -242,9 +242,9 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" value="상품등록" class="button is-info">
+                                <input type="submit" value="강의수정" class="button is-info">
                                 <input type="reset" value="취소" class="button is-danger" onclick="window.history.back();">
-                                <a href="${path}/lecture/lecList" class="button is-info">상품목록</a>
+                                <a href="${path}/lecture/lecList" class="button is-info">강의목록</a>
                             </td>
                         </tr>
                         </tbody>

@@ -317,14 +317,14 @@ public class LectureController {
         Instructor inst = instService.getInstructorName(lecture.getIno());
         List<String> lecFileList = new ArrayList<>();
 
-        if(lecture.getSimg() != null || !lecture.getSimg().equals("")) {
+        if(lecture.getSimg() != null && !lecture.getSimg().equals("")) {
             String lecFile = lectureService.getLecFileName(lecture.getSimg());
             lecFileList.add(lecFile);
         } else {
             lecFileList.add("");
         }
 
-        if(lecture.getSfile1() != null || !lecture.getSfile1().equals("")) {
+        if(lecture.getSfile1() != null && !lecture.getSfile1().equals("")) {
             String lecFile = lectureService.getLecFileName(lecture.getSfile1());
             lecFileList.add(lecFile);
         } else {
@@ -332,7 +332,7 @@ public class LectureController {
         }
 
 
-        if(lecture.getSfile2() != null || !lecture.getSfile2().equals("")) {
+        if(lecture.getSfile2() != null && !lecture.getSfile2().equals("")) {
             String lecFile = lectureService.getLecFileName(lecture.getSfile2());
             lecFileList.add(lecFile);
         } else {
@@ -340,7 +340,7 @@ public class LectureController {
         }
 
 
-        if(lecture.getSfile3() != null || !lecture.getSfile3().equals("")) {
+        if(lecture.getSfile3() != null && !lecture.getSfile3().equals("")) {
             String lecFile = lectureService.getLecFileName(lecture.getSfile3());
             lecFileList.add(lecFile);
         } else {
@@ -348,7 +348,7 @@ public class LectureController {
         }
 
 
-        if(lecture.getSfile4() != null || !lecture.getSfile4().equals("")) {
+        if(lecture.getSfile4() != null && !lecture.getSfile4().equals("")) {
             String lecFile = lectureService.getLecFileName(lecture.getSfile4());
             lecFileList.add(lecFile);
         } else {
@@ -356,7 +356,7 @@ public class LectureController {
         }
 
 
-        if(lecture.getSfile5() != null || !lecture.getSfile5().equals("")) {
+        if(lecture.getSfile5() != null && !lecture.getSfile5().equals("")) {
             String lecFile = lectureService.getLecFileName(lecture.getSfile5());
             lecFileList.add(lecFile);
         } else {
