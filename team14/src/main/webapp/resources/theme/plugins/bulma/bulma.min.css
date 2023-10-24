@@ -2214,7 +2214,7 @@ a.box:active {
 }
 
 .button.is-link.is-outlined {
-    background-color: transparent;
+    /*background-color: transparent;*/
     border-color: #3273dc;
     color: #3273dc
 }
@@ -2691,9 +2691,9 @@ a.box:active {
 }
 
 .button.is-danger.is-outlined {
-    background-color: transparent;
+    background-color: #f14668;
     border-color: #f14668;
-    color: #f14668
+    color: white
 }
 
 .button.is-danger.is-outlined.is-focused, .button.is-danger.is-outlined.is-hovered, .button.is-danger.is-outlined:focus, .button.is-danger.is-outlined:hover {

@@ -48,7 +48,7 @@
 
                         </div>
                         <div class="info">
-                            <span class="name">${member.name}<em>님</em></span>
+                            <span class="name">${member.name}<em> 님</em></span>
                             <ul class="infolist">
                                 <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급 :
                                     <span id="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1"><span
@@ -92,8 +92,8 @@
                                     <div class="jb-text-table">
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
-                                                <p>수강강의</p>
-                                                <span>2<em>일</em></span>
+                                                <p>수강강의수</p>
+                                                <span> ${count } <em>일</em></span>
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>수강시간</p>
-                                                <span>2<em>일</em></span>
+                                                <span style="margin: -8px;">20<em>시간</em></span>
                                             </div>
                                         </div>
                                     </div>

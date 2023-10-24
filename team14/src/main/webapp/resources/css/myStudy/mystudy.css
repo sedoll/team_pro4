@@ -491,11 +491,11 @@ Attention : utf-8 인코딩 꼭 지키기, 한글 안깨지게 하기!
 }
 
 .jb-text span {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     color: white;
-    margin:0px 0px 0px 29px;
-    padding: 10px;
+    margin: 0px 0px 0px 10px;
+    padding: 32px;
     text-align: center;
 }
 
