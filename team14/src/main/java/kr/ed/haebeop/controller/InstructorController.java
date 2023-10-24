@@ -3,6 +3,7 @@ package kr.ed.haebeop.controller;
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.InstructorService;
 import kr.ed.haebeop.service.LectureService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -611,7 +612,22 @@ public class InstructorController {
         return "/instructor/instructorReview";
     }
 
+    // 선생님 담당 과목
+    @PostMapping("getInstCate.do")
+    public void getInstCate(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
+        int ino = Integer.parseInt(req.getParameter("ino"));
 
+        System.out.println("ino "+ino);
+        Report report = new Report();
+
+        String cate = instructorService.getInstCate(ino);
+
+        JSONObject json = new JSONObject();
+        json.put("result", cate);
+        PrintWriter out = res.getWriter();
+        out.println(json.toString());
+        System.out.println(json.toString());
+    }
 
 
 }

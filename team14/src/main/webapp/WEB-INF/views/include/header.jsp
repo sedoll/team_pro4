@@ -156,7 +156,7 @@
                             <img src="${path2}/resources/img/login_thin.svg" alt="" width="26px">
 
                         </a>
-                        <a href="${path2}/member/term.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
+                        <a href="${path2}/member/join.do" class="button is-link is-rounded b2"  style="margin-bottom: 0">
                             회원가입
                             <img src="${path2}/resources/img/person_add_thin.svg" alt="" width="26px">
                         </a>
