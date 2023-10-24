@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,6 +45,30 @@ public class QnaController {
         model.addAttribute("dto", dto);
         model.addAttribute("comment", comment);
         System.out.println(comment.toString());
+
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(bno+":cookieQNA") == null) {
+            session.setAttribute(bno+":cookieQNA", bno + ":" + cookieValue);
+        } else {
+            session.setAttribute(bno+":cookieQNA ex", session.getAttribute(bno+":cookieQNA"));
+            if (!session.getAttribute(bno+":cookieQNA").equals(bno + ":" + cookieValue)) {
+                session.setAttribute(bno+":cookieQNA", bno + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(bno+":cookieQNA").equals(session.getAttribute(bno+":cookieQNA ex"))) {
+            qnaService.countUp(bno);
+            dto.setCnt(dto.getCnt()+1);
+        }
+
         return "/qna/qnaDetail";
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -48,6 +49,29 @@ public class InfoActController {
         int bno = Integer.parseInt(request.getParameter("bno"));
         Infomation dto = infoActService.infoDetail(bno);
         model.addAttribute("dto", dto);
+
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            // 요청정보로부터 쿠키를 가져온다.
+            cookieValue = cookieFromRequest[0].getValue();  // 테스트라서 추가 데이터나 보안사항은 고려하지 않으므로 1번째 쿠키만 가져옴
+        }
+        // 쿠키 세션 입력
+        if (session.getAttribute(bno+":cookieAct") == null) {
+            session.setAttribute(bno+":cookieAct", bno + ":" + cookieValue);
+        } else {
+            session.setAttribute(bno+":cookieAct ex", session.getAttribute(bno+":cookieAct"));
+            if (!session.getAttribute(bno+":cookieAct").equals(bno + ":" + cookieValue)) {
+                session.setAttribute(bno+":cookieAct", bno + ":" + cookieValue);
+            }
+        }
+// 쿠키와 세션이 없는 경우 조회수 카운트
+        if (!session.getAttribute(bno+":cookieAct").equals(session.getAttribute(bno+":cookieAct ex"))) {
+            infoActService.countUp(bno);
+            dto.setCnt(dto.getCnt()+1);
+        }
+
         return "/infoAct/infoDetail";
     }
 

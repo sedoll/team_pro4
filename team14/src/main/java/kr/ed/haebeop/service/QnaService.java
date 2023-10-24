@@ -14,4 +14,6 @@ public interface QnaService {
     public List<Qna> commentList(int bno) throws Exception;
     public void commentDeleteAll(int bno) throws Exception;
     public boolean check(int bno, String pw) throws Exception;
+    void countUp(int bno) throws Exception;
+
 }

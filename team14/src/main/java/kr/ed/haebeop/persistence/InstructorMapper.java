@@ -77,7 +77,7 @@ public interface InstructorMapper {
     int qnaEdit(InstructorQna dto);
 
     @Update("UPDATE instructorqna SET cnt = cnt + 1 WHERE bno = #{bno}")
-    int countUp(@Param("bno") int bno);
+    int qnaCountUp(@Param("bno") int bno);
 
     @Insert("INSERT INTO instructorqna(title, content, author, lev, par,instructorno) VALUES ('댓글', #{content}, #{author}, 1, #{bno},#{instructorno})")
     int commentInsert(InstructorQna dto);
@@ -99,10 +99,14 @@ public interface InstructorMapper {
 
     @Select("select * from instructorfile where no=#{fileNo}")
     InstructorFile getInstructorFile(int fileNo);
-
+    @Delete("DELETE FROM instructorfile WHERE no = #{no}")
+    public void instructorFileDelete(int no);
     // 기존 파일 이름 추출
     @Select("select realname from instfile where sfile=#{sfile}")
     public String getInstFileName(String sfile);
+    //조회수
+    @Update("UPDATE instructorfile SET cnt = cnt + 1 WHERE no = #{fileNo}")
+    int fileCountUp(@Param("fileNo") int fileNo);
 
 
     //선생님 후기 목록
@@ -113,4 +117,6 @@ public interface InstructorMapper {
     // 선생님 과목 추출
     @Select("select cate from instructor where no=#{no}")
     public String getInstCate(int no);
+
+
 }
