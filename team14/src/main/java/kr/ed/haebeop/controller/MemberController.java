@@ -404,7 +404,7 @@ public class MemberController {
         String addr2 = request.getParameter("addr2");
         String postcode = request.getParameter("postcode");
         String birth = request.getParameter("birth");
-        /*int job = Integer.parseInt(request.getParameter("job"));*/
+        int job = Integer.parseInt(request.getParameter("job"));
 
         //해당 id의 기존 job값 가져오기
         //기존 job값이 2이면 teacher테이블 update처리, 아니면 insert
@@ -412,13 +412,13 @@ public class MemberController {
         int chkJob = chkmember.getJob();
         System.out.println("chkJob : "+chkJob);
 
-       /* if (chkJob==2 && job==2) {
+        if (chkJob==2 && job==2) {
             //update
         } else if (chkJob==2 && job==1){
             //delete
         } else {
             //insert
-        }*/
+        }
 
         Member member = new Member();
         member.setId(id);
