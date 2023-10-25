@@ -298,6 +298,8 @@
         .box {
             background-color: #BED4E9;
         }
+
+      
     </style>
 
     <link rel="stylesheet" href="${path}/css/ft.css">
@@ -306,7 +308,7 @@
 <jsp:include page="../include/header.jsp"></jsp:include>
 <div class="wrap">
     <section class="hero is-white is-medium">
-        <div class="hero-body has-text-centered">
+        <div class="hero-body has-text-centered" style="padding-bottom: 0">
             <p class="title is-size-3">회원 가입</p>
         </div>
     </section>
