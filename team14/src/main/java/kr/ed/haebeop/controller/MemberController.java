@@ -120,6 +120,7 @@ public class MemberController {
                 session.setAttribute("instNo", instNo);
             } else {
                 // 찾지 못했을 때
+                session.setAttribute("isInst", isInst);
             }
 
 
