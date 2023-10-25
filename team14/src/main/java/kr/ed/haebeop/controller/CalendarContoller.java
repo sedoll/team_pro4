@@ -1,7 +1,10 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.Calendar;
+import kr.ed.haebeop.domain.Member;
 import kr.ed.haebeop.service.CalendarServiceImpl;
+import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.MyclassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +22,30 @@ public class CalendarContoller {
     @Autowired
     private CalendarServiceImpl calendarService;
 
+    @Autowired
+    MemberService memberService;
+
+    @Autowired
+    MyclassService myclassService;
+
+
     @GetMapping("list.do")
     public String calendarList(HttpSession session, Model model) throws Exception{
         String id = (String) session.getAttribute("sid");
+
+
+
+        //topbar정보
+        Member member = memberService.getMember(id);
+        System.out.println("내 정보: " + member);
+        model.addAttribute("member", member);
+
+        //최근 수강 중인 강의 수
+        int count = myclassService.takingCount();
+        model.addAttribute("count",count);
+
+
+
         List<Calendar> calendarList = calendarService.calendarList(id);
 
         model.addAttribute("calendarList", calendarList);

@@ -23,7 +23,6 @@
     <%@ include file="/WEB-INF/views/myclass/myclassTopbar.jsp" %>
 
 
-
     <div class="mainCont">
 
         <div class="titArea">
@@ -63,7 +62,7 @@
                                     </script>
                                 </div>
 
-                                <c:set var="Ddays" value="${myclass.myclassMap.Ddays}" />
+                                <c:set var="Ddays" value="${myclass.myclassMap.Ddays}"/>
                                 <div class="deaddate" style="width: 10%">
                                     <c:choose>
                                         <c:when test="${Ddays >= 0}">${Ddays}일</c:when>
@@ -72,7 +71,7 @@
                                 </div>
 
 
-                                <c:set var="check" value="${myclass.myclassMap.ck}" />
+                                <c:set var="check" value="${myclass.myclassMap.ck}"/>
                                 <div class="check" style="width: 10%">${check}</div>
 
                                 <div class="study" style="width: 10%">
@@ -107,10 +106,10 @@
         </div>
 
     </div>
-    <footer id="footer" class="footer-nav row expanded collapse">
-        <!-- 푸터 부분 인클루드 -->
-        <jsp:include page="../include/footer.jsp"></jsp:include>
-    </footer>
+</div>
+<footer id="footer" class="footer-nav row expanded collapse">
+    <jsp:include page="../include/footer.jsp"></jsp:include>
+</footer>
 
 
 </body>
