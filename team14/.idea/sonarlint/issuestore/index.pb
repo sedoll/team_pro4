@@ -225,10 +225,6 @@ c
 3src/main/webapp/WEB-INF/views/member/memberList.jsp,7\2\722edbac4e39cd33f2b774fcf6edb9c87763180e
 ^
 .src/main/webapp/WEB-INF/views/include/head.jsp,b\8\b86300e4ca06367036f05606f77b31a9976b507c
-Z
-*src/main/webapp/resources/js/datatables.js,9\9\9955c0daf5dd370618bf1dcb438781afc56bb488
-\
-,src/main/webapp/resources/css/datatables.css,f\d\fd90d86ed9492e5695688cd16e77547cee94b7fa
 b
 2src/main/webapp/WEB-INF/views/infoAct/infoList.jsp,0\5\05c0440a65b20afece4177c13b5b73f0bcb5ae15
 d
@@ -245,3 +241,9 @@ c
 -src/main/webapp/WEB-INF/views/qna/qnaList.jsp,4\2\425b52b81c3c6fb5386231cb885b48821d47c8a8
 [
 +src/main/webapp/WEB-INF/views/qna/qnaPw.jsp,e\c\eccbb20fedbdd8d486a2b2b4e74547f11034203f
+j
+:src/main/webapp/WEB-INF/views/instructor/instructorQNA.jsp,4\c\4cb0530e2b6214f2a3801d235b3cc0c65ac348d3
+m
+=src/main/webapp/WEB-INF/views/instructor/instructorDetail.jsp,6\2\6291bac881af44cdb9e8f2115e6eee9254122e45
+n
+>src/main/webapp/WEB-INF/views/instructor/instructorLecture.jsp,0\1\01ab2cc0f9afbc79f86fa99e9f4ade4475bc3232

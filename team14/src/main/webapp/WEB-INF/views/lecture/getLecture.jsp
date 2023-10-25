@@ -163,7 +163,7 @@
                                 <td>${cnt}</td>
                             </tr>
                             <tr class="pbtn">
-                                <c:if test="${not empty sid}">
+                                <c:if test="${not empty sid and isInst == false}">
                                 <c:set var="isLiked" value="${likedProductIds.contains(pro.no)}" />
                                 <td colspan="2">
                                     <a href="${path}/payment/addPayment.do?lec_no=${pro.no}" class="button is-success inbtn">수강신청</a>
