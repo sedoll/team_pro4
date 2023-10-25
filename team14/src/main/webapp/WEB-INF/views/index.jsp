@@ -51,13 +51,36 @@
         .buttons .button {
             margin-bottom: 0;
         }
+
+
+
+
+
+        /*비디오*/
+        body { padding: 0px; margin: 0px; }
+        .jb-box { width: 100%;overflow: hidden;margin: 0px auto; position: relative; padding-top: 0px;}
+        video { width: 100%; }
+        .jb-text { position: absolute; top: 50%; width: 100%; }
+        .jb-text p { margin-top: -24px; text-align: center; font-size: 48px; color: #ffffff; }
+
+        .navbar{
+            position: fixed;
+            /*background-color: grey;*/
+            /*opacity: 0.5;*/
+            background-color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+
     </style>
 </head>
 <body>
+<!-- 헤더 부분 인클루드 -->
+<%--<jsp:include page="include/header.jsp"></jsp:include>--%>
+
 <header id="header">
     <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="${path}/">
+            <a class="navbar-item" href="${path}/" >
                 <img src="${path}/resources/img/smart_haebeop_logo.png" width="112" height="28">
             </a>
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -99,29 +122,7 @@
                     </a>
                 </div>
             </div>
-            <%--            --%>
-            <%--            <div class="navbar-item has-dropdown is-hoverable">--%>
-            <%--                <a href="${path}" class="navbar-link is-arrowless">--%>
-            <%--                    <strong>정보</strong>--%>
-            <%--                </a>--%>
-            <%--                <div class="navbar-dropdown is-size-6 is-dark is-outlined .shadow">--%>
-            <%--                    <a href="${path}/infoStu/list.do" class="navbar-item">--%>
-            <%--                        교육 정보--%>
-            <%--                    </a>--%>
-            <%--                    <a href="${path}/infoUni/list.do" class="navbar-item">--%>
-            <%--                        대입 정보--%>
-            <%--                    </a>--%>
-            <%--                    <a href="${path}/infoAct/list.do" class="navbar-item">--%>
-            <%--                        대외 활동--%>
-            <%--                    </a>--%>
-            <%--                    <a href="${path}/file/filelist1.do" class="navbar-item">--%>
-            <%--                        자료실--%>
-            <%--                    </a>--%>
-            <%--                    <a href="${path}/news/list.do" class="navbar-item">--%>
-            <%--                        뉴스--%>
-            <%--                    </a>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
+
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless" id="menu3"
@@ -150,12 +151,7 @@
                     <a href="${path}/news/list.do" class="navbar-item">
                         뉴스
                     </a>
-                    <%--                    <a href="${path}/boardTea/list.do" class="navbar-item">--%>
-                    <%--                        선생님 게시판--%>
-                    <%--                    </a>--%>
-                    <%--                    <a href="${path}/boardPar/list.do" class="navbar-item">--%>
-                    <%--                        학부모 게시판--%>
-                    <%--                    </a>--%>
+
                 </div>
             </div>
 
@@ -166,29 +162,13 @@
                     <strong>나의 학습방</strong>
                 </a>
             </div>
-            <%--            <div class="navbar-item has-dropdown is-hoverable">--%>
-            <%--                <a class="navbar-link is-arrowless">--%>
-            <%--                    <strong>학교 생활</strong>--%>
-            <%--                </a>--%>
-            <%--                <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined">--%>
-            <%--                    <a href="${path}/menu/list.do" class="navbar-item">--%>
-            <%--                        급식표--%>
-            <%--                    </a>--%>
-            <%--                    <a href="${path}/grade/list.do" class="navbar-item">--%>
-            <%--                        성적표--%>
-            <%--                    </a>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
-
 
         </div>
         <!-- header menu end -->
         <div class="navbar-end">
             <div class="navbar-item">
                 <div style="padding-right: 10px">
-                    <%--                    <c:if test="${not empty sid}">--%>
-                    <%--                        ${sid} 회원님 환영합니다.--%>
-                    <%--                    </c:if>--%>
+
                 </div>
                 <div class="buttons" style="margin-bottom: 0">
                     <c:if test="${isInst==true}"> <%-- 선생님으로 로그인 한 경우 --%>
@@ -259,18 +239,34 @@
         </div>
     </nav>
 </header>
+
+
 <!-- hero area -->
 <section class="hero-area has-background-primary" id="parallax" style="padding-top: 0;">
-    <div class="columns">
+    <%--<div class="columns">
         <img src="${path }/resources/img/main_banner.png">
-    </div>
+    </div>--%>
 
     <%--<div class="columns">
         <img src="${path }/resources/img/index_1.png">
     </div>--%>
 
+        <div class="jb-box">
+            <video muted autoplay loop>
+                <source src="${path }/resources/video/main_video.mp4" type="video/mp4">
+                <strong></strong>
+            </video>
+            <div class="jb-text">
+
+            </div>
+        </div>
+
+
+
+
+
     <!-- slidebar banner -->
-    <div class="swiper mySwiper">
+    <div class="swiper mySwiper" style="margin-top: -10px">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <img src="${path }/resources/img/index_1.png" alt="메인페이지 배너1" style="width: 100vw">

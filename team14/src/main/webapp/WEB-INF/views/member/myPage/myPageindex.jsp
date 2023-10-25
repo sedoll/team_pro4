@@ -39,20 +39,55 @@
                                     alt="프로필 사진"
                                     class="my-page-profile__image"
                             />
-                            <span class="my-page-profile__nickname">${member.name}</span>
+                            <span class="my-page-profile__nickname" style="text-align: center">${member.name}</span>
                         </div>
 
                         <div class="my-transaction-info">
                             <ul class="my-transaction-info__list">
                                 <li class="my-transaction-info__item">
                                     <span class="my-transaction-info__title">작성글 수</span>
-                                    <span class="my-transaction-info__content">66</span>
+                                    <span class="my-transaction-info__content">${cntBoard}</span>
                                 </li>
 
-                                <li class="my-transaction-info-item">
-                                    <span class="my-transaction-info__title">회원등급</span>
-                                    <span class="my-transaction-info__content">F</span>
-                                </li>
+                                <c:choose>
+                                    <c:when test="${member.pt >= 100000}">
+                                        <li class="my-transaction-info-item">
+                                            <span class="my-transaction-info__title">회원등급</span>
+                                            <span class="my-transaction-info__content">VIP</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 50000}">
+                                        <li class="my-transaction-info-item">
+                                            <span class="my-transaction-info__title">회원등급</span>
+                                            <span class="my-transaction-info__content">A</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 40000}">
+                                        <li class="my-transaction-info-item">
+                                            <span class="my-transaction-info__title">회원등급</span>
+                                            <span class="my-transaction-info__content">B</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 30000}">
+                                        <li class="my-transaction-info-item">
+                                            <span class="my-transaction-info__title">회원등급</span>
+                                            <span class="my-transaction-info__content">C</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 10000}">
+                                        <li class="my-transaction-info-item">
+                                            <span class="my-transaction-info__title">회원등급</span>
+                                            <span class="my-transaction-info__content">D</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 0 }">
+                                        <li class="my-transaction-info-item">
+                                            <span class="my-transaction-info__title">회원등급</span>
+                                            <span class="my-transaction-info__content">F</span>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
+
 
                                 <li class="my-transaction-info-item">
                                     <span class="my-transaction-info__title">POINT</span>
@@ -65,10 +100,9 @@
                     <p class="my-page__introduction"></p>
 
                     <div class="my-page__edit-buttons">
-                        <button type="button" class="button is-link is-rounded is-outlined" onclick="location.href='${path14}/member/update.do'">회원 정보 변경
+                        <button type="button" class="button is-link is-rounded is-outlined" onclick="location.href='${path14}/member/update.do?id=${sid }'">회원 정보 변경
                         </button>
-                        <button type="button" class="my-info-edit" onclick="location.href='${path14 }/LikeList.do'">
-                            <i class="fas fa-cog my-info-edit__icon"></i>
+                        <button type="button" class="my-info-edit" onclick="location.href='${path14 }/member/writtenList.do'">
                             <span class="my-info-edit__text">내가 쓴 글</span>
                         </button>
                     </div>

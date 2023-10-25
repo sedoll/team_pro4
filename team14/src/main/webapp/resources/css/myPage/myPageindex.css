@@ -175,7 +175,7 @@ button {
     min-width: 600px;
     margin: 100px auto;
     margin-bottom: 200px;
-    padding-top: 50px;
+    /*padding-top: 50px;*/
 }
 
 .my-page__title {

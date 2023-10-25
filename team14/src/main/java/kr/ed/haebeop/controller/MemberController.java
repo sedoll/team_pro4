@@ -4,10 +4,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.repository.AuthRepositoryImpl;
 import kr.ed.haebeop.repository.MemberRepository;
-import kr.ed.haebeop.service.InstService;
-import kr.ed.haebeop.service.InstructorService;
-import kr.ed.haebeop.service.MemberService;
-import kr.ed.haebeop.service.ReviewService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.service.board.BoardService;
 import kr.ed.haebeop.util.Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +68,9 @@ public class MemberController {
 
     @Autowired
     private AuthRepositoryImpl authRepository;
+
+    @Autowired
+    private MyclassService myclassService;
 
     OAuth2AccessToken oauthToken;
 
@@ -409,6 +409,11 @@ public class MemberController {
         String id = (String) session.getAttribute("sid");
         Member member = memberService.getMember(id);
         model.addAttribute("member", member);
+
+        List<BoardlistVO> boardlist = memberService.getWriteList1(id);
+        int cntBoard = boardlist.size();
+        model.addAttribute("cntBoard",cntBoard);
+
         return "/member/myPage/myPageindex";
     }
 
@@ -564,6 +569,10 @@ public class MemberController {
 
         Member member = memberService.getMember(id);
         model.addAttribute("member", member);
+
+        //최근 수강 중인 강의 수
+        int count = myclassService.takingCount();
+        model.addAttribute("count",count);
 
         /*자유게시판*/
         List<BoardlistVO> boardlist = memberService.getWriteList1(id);

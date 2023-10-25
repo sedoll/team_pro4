@@ -1,7 +1,10 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.Grade;
+import kr.ed.haebeop.domain.Member;
 import kr.ed.haebeop.service.GradeServiceImpl;
+import kr.ed.haebeop.service.MemberService;
+import kr.ed.haebeop.service.MyclassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,12 @@ import java.util.List;
 public class GradeController {
     @Autowired
     private GradeServiceImpl gradeService;
+
+    @Autowired
+    private MyclassService myclassService;
+
+    @Autowired
+    private MemberService memberService;
 
     @Autowired
     HttpSession session; // 세션 생성
@@ -47,6 +56,21 @@ public class GradeController {
         System.out.println("버튼 클릭");
         if(session.getAttribute("sid") != null && !"".equals(session.getAttribute("sid"))) {
             String stuid = (String)session.getAttribute("sid");
+
+            //topbar정보
+            Member member = memberService.getMember(stuid);
+            System.out.println("내 정보: " + member);
+            model.addAttribute("member", member);
+
+            //최근 수강 중인 강의 수
+            int count = myclassService.takingCount();
+            model.addAttribute("count",count);
+
+
+
+
+
+
             List<Grade> sgradeList = gradeService.sgradeList(stuid);
             model.addAttribute("sgradeList", sgradeList);
             return "/grade/sgradeList";

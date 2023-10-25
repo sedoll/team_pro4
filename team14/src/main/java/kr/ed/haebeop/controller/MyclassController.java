@@ -52,12 +52,9 @@ public class MyclassController {
     HttpSession session;
 
 
-
-
-
-    @GetMapping("myclassList.do")		// board/list.do
+    @GetMapping("myclassList.do")        // board/list.do
     public String myclassList(Model model) throws Exception {
-        List<MyClassVO> myclassList= myclassService.myclassList();
+        List<MyClassVO> myclassList = myclassService.myclassList();
         model.addAttribute("myclassList", myclassList);
         return "/myclass/";
     }
@@ -78,14 +75,14 @@ public class MyclassController {
 
         //최근 수강 중인 강의 수
         int count = myclassService.takingCount();
-        model.addAttribute("count",count);
+        model.addAttribute("count", count);
 
         //출력해보기
         System.out.println(myclassList.toString());
 
-        String ck ="";
+        String ck = "";
         int Ddays = 0;
-        for(MyClassVO myClass : myclassList) {
+        for (MyClassVO myClass : myclassList) {
             //테스트
             //String strDate = "2023-10-17";
 
@@ -99,14 +96,14 @@ public class MyclassController {
 
             long calculate = date.getTime() - today.getTime();
 
-            Ddays = (int) (calculate / ( 24*60*60*1000));
+            Ddays = (int) (calculate / (24 * 60 * 60 * 1000));
 
-            System.out.println(myClass.getLecTitle()+ " : 남은 기간: " + Ddays);
+            System.out.println(myClass.getLecTitle() + " : 남은 기간: " + Ddays);
 
 
             Course course = new Course();
 
-            if(Ddays < 0){
+            if (Ddays < 0) {
                 course.setSid(id);
                 course.setLec_no(myClass.getLec_no());
                 course.setCheck(3);
@@ -120,11 +117,11 @@ public class MyclassController {
 
             System.out.println(check);
 
-            if(check == 1){
+            if (check == 1) {
                 ck = "수강 중";
-            }else if (check == 2){
+            } else if (check == 2) {
                 ck = "수강 정지";
-            }else if(check == 3){
+            } else if (check == 3) {
                 ck = "수강 완료";
             }
 
@@ -141,12 +138,41 @@ public class MyclassController {
     }
 
 
+    // 좋아요 목록
+    @GetMapping("/likeList.do")
+    public String LikeList(HttpServletRequest req, Model model) throws Exception {
+
+
+        String id = (String) session.getAttribute("sid");
+
+        //topbar정보
+        Member member = memberService.getMember(id);
+        System.out.println("내 정보: " + member);
+        model.addAttribute("member", member);
+
+        //최근 수강 중인 강의 수
+        int count = myclassService.takingCount();
+        model.addAttribute("count", count);
+
+
+        List<LectureLikes> lectureLikes = lectureService.getByIdLikeList(id);
+        List<Lecture> lectureList = new ArrayList<>();
+
+        for (LectureLikes lec : lectureLikes) {
+            lectureList.add(lectureService.getLecture(lec.getLno()));
+        }
+
+        model.addAttribute("lectureList", lectureList);
+        model.addAttribute("likeList", lectureLikes);
+        return "/myclass/likeList";
+    }
+
+
     // 수강신청한 강좌 디테일
     @RequestMapping(value = "/myclassDetail.do", method = RequestMethod.GET)
     public String myclassDetail(Model model, HttpServletRequest req) throws Exception {
         int no = Integer.parseInt(req.getParameter("no"));
         String id = (String) session.getAttribute("sid");
-
 
 
         //topbar정보
@@ -156,12 +182,11 @@ public class MyclassController {
 
         //최근 수강 중인 강의 수
         int count = myclassService.takingCount();
-        model.addAttribute("count",count);
-
+        model.addAttribute("count", count);
 
 
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
-        List<MyClassVO> takingClassList =  myclassService.gettakingClassList(no);
+        List<MyClassVO> takingClassList = myclassService.gettakingClassList(no);
         Lecture getLectureList = lectureService.getLecture(no);// 서비스 클래스에 비즈니스 로직을 정의하고 호출
 
         model.addAttribute("lecList", getLectureList);
@@ -175,28 +200,28 @@ public class MyclassController {
 
         List<String> vList = new ArrayList<>(); // 비디오 이름 받기
         String scoreAvg = reviewService.avgScore(no);
-        if(scoreAvg != null) {
+        if (scoreAvg != null) {
             scoreAvg = String.format("%.1f", Double.parseDouble(scoreAvg));
         }
 
         // 강의 영상 개수 카운트
         int cnt = 0;
-        if(Lecture1.getSfile2()!=null) {
+        if (Lecture1.getSfile2() != null) {
             cnt += 1;
             String realName = lectureService.getLecFileName(Lecture1.getSfile2());
             vList.add(realName);
         }
-        if(Lecture1.getSfile3()!=null) {
+        if (Lecture1.getSfile3() != null) {
             cnt += 1;
             String realName = lectureService.getLecFileName(Lecture1.getSfile3());
             vList.add(realName);
         }
-        if(Lecture1.getSfile4()!=null) {
+        if (Lecture1.getSfile4() != null) {
             cnt += 1;
             String realName = lectureService.getLecFileName(Lecture1.getSfile4());
             vList.add(realName);
         }
-        if(Lecture1.getSfile5()!=null) {
+        if (Lecture1.getSfile5() != null) {
             cnt += 1;
             String realName = lectureService.getLecFileName(Lecture1.getSfile5());
             vList.add(realName);
@@ -221,7 +246,7 @@ public class MyclassController {
 //        path = path.replace("\\", "/");
 //        path2 = path2.replace("\\", "/");
 
-        if(lecture.getSfile2()!=null) {
+        if (lecture.getSfile2() != null) {
             String sfileName = lecture.getSfile2();
             String realName = lectureService.getLecFileName(sfileName);
             videoList.add(realName);
@@ -229,7 +254,7 @@ public class MyclassController {
 //            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
 //            vtl.add(t);
         }
-        if(lecture.getSfile3()!=null) {
+        if (lecture.getSfile3() != null) {
             String sfileName = lecture.getSfile3();
             String realName = lectureService.getLecFileName(sfileName);
             videoList.add(realName);
@@ -237,7 +262,7 @@ public class MyclassController {
 //            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
 //            vtl.add(t);
         }
-        if(lecture.getSfile4()!=null) {
+        if (lecture.getSfile4() != null) {
             String sfileName = lecture.getSfile4();
             String realName = lectureService.getLecFileName(sfileName);
             videoList.add(realName);
@@ -245,7 +270,7 @@ public class MyclassController {
 //            String t = VideoTimeCut.media_player_time(path2, path, sfileName);
 //            vtl.add(t);
         }
-        if(lecture.getSfile5()!=null) {
+        if (lecture.getSfile5() != null) {
             String sfileName = lecture.getSfile5();
             String realName = lectureService.getLecFileName(sfileName);
             videoList.add(realName);
@@ -273,7 +298,7 @@ public class MyclassController {
         int lns_No3 = lecture3.getIno();
 
         List<InstructorNotice> instructorNotices = instructorService.getInstructorNoticeList(lns_No3);
-        model.addAttribute("instructorNotices",instructorNotices);
+        model.addAttribute("instructorNotices", instructorNotices);
         System.out.println(instructorNotices.toString());
 
 
@@ -290,10 +315,17 @@ public class MyclassController {
         int lns_No5 = lecture5.getIno();
 
         List<Review> reviewList = instructorService.getReviewList(lns_No5);
-        model.addAttribute("reviewList",reviewList);
+        model.addAttribute("reviewList", reviewList);
 
 
         // region 6. 자료실
+        //선생님 정보
+        Instructor instructor = instructorService.getInstructor(no);
+        model.addAttribute("instructor", instructor);
+
+        //자료실 목록
+        List<InstructorFile> instructorFiles = instructorService.getInstructorFileList(no);
+        model.addAttribute("instructorFiles", instructorFiles);
 
 
         System.out.println(takingClassList);
@@ -301,9 +333,6 @@ public class MyclassController {
 
         return "myclass/myclassDetail";
     }
-
-
-
 
 
     // 강의 영상 보기
