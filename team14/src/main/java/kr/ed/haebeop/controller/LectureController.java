@@ -732,6 +732,6 @@ public class LectureController {
         lectureLikes.setLno(no);
         lectureLikes.setUserid(id);
         lectureService.removeLike(lectureLikes);
-        return "redirect:/lecture/likeList.do";
+        return "redirect:/myclass/likeList.do";
     }
 }
