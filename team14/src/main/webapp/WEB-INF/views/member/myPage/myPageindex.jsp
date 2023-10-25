@@ -80,7 +80,7 @@
                                             <span class="my-transaction-info__content">D</span>
                                         </li>
                                     </c:when>
-                                    <c:when test="${member.pt >= 5000}">
+                                    <c:when test="${member.pt >= 0 }">
                                         <li class="my-transaction-info-item">
                                             <span class="my-transaction-info__title">회원등급</span>
                                             <span class="my-transaction-info__content">F</span>
