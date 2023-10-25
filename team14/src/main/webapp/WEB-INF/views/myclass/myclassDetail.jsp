@@ -453,8 +453,8 @@
                                     </table>
                                     <c:if test='${sid eq "admin"}'>
                                         <div class="button-group">
-                                            <a class="button is-link is-outlined"
-                                               href="${path}/notice/insert.do">글쓰기</a>
+                                                <%--<a class="button is-link is-outlined"
+                                                   href="${path}/notice/insert.do">글쓰기</a>--%>
                                         </div>
                                     </c:if>
 
@@ -507,8 +507,8 @@
                             </table>
                             <c:if test='${not empty sid}'>
                                 <div class="button-group">
-                                    <a class="button is-link is-outlined"
-                                       href="${path}/qna/insert.do">글쓰기</a>
+                                        <%-- <a class="button is-link is-outlined"
+                                            href="${path}/qna/insert.do">글쓰기</a>--%>
                                 </div>
                             </c:if>
 
@@ -538,12 +538,7 @@
                                     <td>${lev.score}</td>
                                     <td>${lev.content}</td>
                                     <td>${lev.resdate}</td>
-                                        <%--                                <td>--%>
-                                        <%--                                    <c:if test="${sid eq lev.id || sid eq 'admin'}">--%>
-                                        <%--                                        <a href="${path14}/review/updateReviewForm.do?par=${pro.no}" class="button is-info">수정</a>--%>
-                                        <%--                                        <a href="${path14}/review/deleteReview.do?par=${pro.no}" class="button is-danger"> 삭제 </a>--%>
-                                        <%--                                    </c:if>--%>
-                                        <%--                                </td>--%>
+
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -552,34 +547,39 @@
 
 
                     <%--자료실--%>
-                    <%--<div id="ud_tab-content6" class="ud_content">
+                    <div id="ud_tab-content6" class="ud_content">
 
-                        &lt;%&ndash;<h5> 자료실 </h5>&ndash;%&gt;
-                        <table>
-                            자료실 페이지 입니다
+                        <table class="table is-fullwidth" id="myTable2">
                             <thead>
-
                             <tr>
-                                <th style="width: 10%"></th>
-                                <th style="width: 65%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
-                                <th style="width: 25%; text-align: center"></th>
+                                <th width="80">No</th>
+                                <th>Title</th>
+                                <th width="120">RegDate</th>
+                                <th width="100">Visited</th>
                             </tr>
-
                             </thead>
-
-                            &lt;%&ndash; <tbody>
-                             <c:forEach items="${board_comlist }" var="board_comlist">
-                                 <tr class = "commentlist">
-                                     <td>${board_comlist.content}</td>
-                                     <td>${board_comlist.write_date}</td>
-                                     <td><button type="button" class ="origin" onclick="location.href='${path}/board/detail.do?bno=${board_comlist.num}'">원문보기</button></td>
-                                 </tr>
-
-                             </c:forEach>
-                             </tbody>&ndash;%&gt;
+                            <tbody>
+                            <c:forEach items="${instructorFiles}" var="file" varStatus="status">
+                                <tr>
+                                    <td>${status.count }</td>
+                                    <td>
+                                        <a href="${path14}/instructor/instructorFileDetail.do?fileNo=${file.no }&no=${instructor.no}">${file.title }</a>
+                                    </td>
+                                    <td>
+                                        <fmt:parseDate value="${file.resdate }" var="resdate"
+                                                       pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
+                                    </td>
+                                    <td>${file.cnt }</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
                         </table>
-                    </div>--%>
+
+
+                    </div>
+
+
                 </div>
             </div>
         </div>

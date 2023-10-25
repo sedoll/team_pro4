@@ -36,8 +36,8 @@
 
         .instructorCard {
             width:250px;
-            height: 370px;
-            margin-right: 60px;
+            height: 400px;
+            margin-right: 40px;
             background-color: #fff;
             border: 1px solid #e0e0e0;
             border-bottom-left-radius: 10px;
@@ -45,6 +45,9 @@
             overflow: hidden;
             transition: transform 0.3s;
             float: left;
+        }
+        .columns .instructorCard:first-child{
+            margin-left: 50px;
         }
         .instructorCard:last-child{
             margin-right: 0;
@@ -74,12 +77,16 @@
         }
 
         .instructorInfo {
+            height: 100px;
             padding: 0px 15px 15px 15px;
         }
         .instructorCate {
             font-size: 16px;
             margin-bottom: 2px;
             color: #6b6b6b;
+            height: 50px;
+            vertical-align: bottom;
+            display: table-cell;
         }
         .instructorTitle {
             font-size: 20px;
