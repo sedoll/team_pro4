@@ -41,7 +41,7 @@ public class GradeController {
         if(session.getAttribute("sid") != null && !"".equals(session.getAttribute("sid"))) {
             List<Grade> gradeList = gradeService.gradeList();
             model.addAttribute("gradeList", gradeList);
-            return "/grade/gradeList";
+            return "/member/myPage/gradeList";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -63,7 +63,7 @@ public class GradeController {
             model.addAttribute("member", member);
 
             //최근 수강 중인 강의 수
-            int count = myclassService.takingCount();
+            int count = myclassService.takingCount(stuid);
             model.addAttribute("count",count);
 
 

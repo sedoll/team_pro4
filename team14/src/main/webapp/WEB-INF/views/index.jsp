@@ -321,15 +321,9 @@
 <!-- slidebanner -->
 <%@include file="main/slidebanner.jsp" %>
 <!-- slidebanner -->
-<!-- parentsinfo -->
-<%@include file="main/parentsinfo.jsp" %>
-<!-- parentsinfo -->
 <!-- awards -->
 <%@include file="main/awards.jsp" %>
 <!-- awards -->
-<!-- 회원가입 -->
-<%@include file="main/mainjoin.jsp" %>
-<!-- 회원가입 -->
 <!-- footer -->
 
 <jsp:include page="include/footer.jsp"></jsp:include>

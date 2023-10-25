@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="${path}/resources/css/ft.css">
     <style>
         /* 본문 영역 스타일 */
-        .contents { clear:both; min-height: 180vh; background-image: url("../img/login.jpg");
+        .contents { clear:both; min-height: 110vh; background-image: url("../img/login.jpg");
             background-repeat: no-repeat; background-position: center -250px; }
         .contents::after { content:""; clear:both; display:block; width:100%; }
 
@@ -245,7 +245,7 @@
     <div class="contents" id="contents">
         <section class="page" id="page1">
             <div class="page_wrap">
-                <h2 class="page_tit">게시글</h2>
+<%--                <h2 class="page_tit">게시글</h2>--%>
                 <table class="tb1">
 
                     <thead>
@@ -343,11 +343,11 @@
                                 <c:choose>
                                     <c:when test="${isLiked }">
                                         <!-- 좋아요를 눌렀을 경우 -->
-                                        <button type="button is-info is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}"><img src="${path}/resources/img/like_blue.png" alt="!" style="height: 26px; margin-top: 6px "></button>
+                                        <button type="button is-info is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}" style="width: 80px; height: 34px;"><img src="${path}/resources/img/like_blue.png" alt="!" style="height: 26px; margin-top: 5px "></button>
                                     </c:when>
                                     <c:otherwise>
                                         <!-- 좋아요를 누르지 않았을 경우 -->
-                                        <button type="button is-danger is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}"><img src="${path}/resources/img/like_white.png" alt="!" style="height: 26px; margin-top: 6px"></button>
+                                        <button type="button is-danger is-hovered" onclick="toggleLike(${dto.bno}, '${sid}');" class="inbtn" data-board-id="${dto.bno}" style="width: 80px; height: 34px;"><img src="${path}/resources/img/like_white.png" alt="!" style="height: 26px; margin-top: 5px"></button>
                                     </c:otherwise>
                                 </c:choose>
                                 <button class="button is-danger is-hovered" onclick="openReportPopup()">

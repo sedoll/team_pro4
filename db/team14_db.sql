@@ -40,7 +40,7 @@ CREATE TABLE member(
 -- 관리자
 INSERT INTO member VALUES(
 'admin', '1234', '관리자', 'admin@edu.com', '010-1234-5678', 
-	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1998-04-22',
+	'경기 성남시 분당구 대왕판교로 477', '102호', '13480', DEFAULT, '1980-04-22',
 	DEFAULT, DEFAULT, DEFAULT, DEFAULT, 0);
 
 -- 일반 회원
