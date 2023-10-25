@@ -84,57 +84,57 @@
                         <div class="error11"></div>--%>
 
 
-                        <c:if test="${member.job == 2}">
-                            <h5> 선생님 게시판</h5>
-                            <table style="width: 700px; margin-left: -20px">
-                                <thead>
-                                <tr>
-                                    <th style="width: 10%">글번호</th>
-                                    <th style="width: 65%; text-align: center">제목</th>
-                                    <th style="width: 25%; text-align: center">작성일</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${boardtealist }" var="boardtealist">
-                                    <tr class="boardlist2">
-                                        <td>${boardtealist.num}</td>
-                                        <td><a class="path"
-                                               href="${path13}/boardTea/detail.do?bno=${boardlist.num}">${boardtealist.subject}</a>
-                                        </td>
-                                        <td>${boardtealist.write_date}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                            <%--<input type="button" id="check12" value="더보기">
-                            <div class="error12"></div>--%>
-                        </c:if>
+<%--                        <c:if test="${member.job == 2}">--%>
+<%--                            <h5> 선생님 게시판</h5>--%>
+<%--                            <table style="width: 700px; margin-left: -20px">--%>
+<%--                                <thead>--%>
+<%--                                <tr>--%>
+<%--                                    <th style="width: 10%">글번호</th>--%>
+<%--                                    <th style="width: 65%; text-align: center">제목</th>--%>
+<%--                                    <th style="width: 25%; text-align: center">작성일</th>--%>
+<%--                                </tr>--%>
+<%--                                </thead>--%>
+<%--                                <tbody>--%>
+<%--                                <c:forEach items="${boardtealist }" var="boardtealist">--%>
+<%--                                    <tr class="boardlist2">--%>
+<%--                                        <td>${boardtealist.num}</td>--%>
+<%--                                        <td><a class="path"--%>
+<%--                                               href="${path13}/boardTea/detail.do?bno=${boardlist.num}">${boardtealist.subject}</a>--%>
+<%--                                        </td>--%>
+<%--                                        <td>${boardtealist.write_date}</td>--%>
+<%--                                    </tr>--%>
+<%--                                </c:forEach>--%>
+<%--                                </tbody>--%>
+<%--                            </table>--%>
+<%--                            &lt;%&ndash;<input type="button" id="check12" value="더보기">--%>
+<%--                            <div class="error12"></div>&ndash;%&gt;--%>
+<%--                        </c:if>--%>
 
-                        <c:if test="${member.job == 1}">
-                            <h5> 학부모 게시판</h5>
-                            <table style="width: 700px; margin-left: -20px">
-                                <thead>
-                                <tr>
-                                    <th style="width: 10%">글번호</th>
-                                    <th style="width: 65%; text-align: center">제목</th>
-                                    <th style="width: 25%; text-align: center">작성일</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${boardparlist }" var="boardparlist">
-                                    <tr class="boardlist3">
-                                        <td>${boardparlist.num}</td>
-                                        <td><a class="path"
-                                               href="${path13}/boardPar/detail.do?bno=${boardparlist.num}">${boardparlist.subject}</a>
-                                        </td>
-                                        <td>${boardparlist.write_date}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                            <%--<input type="button" id="check13" value="더보기">
-                            <div class="error13"></div>--%>
-                        </c:if>
+<%--                        <c:if test="${member.job == 1}">--%>
+<%--                            <h5> 학부모 게시판</h5>--%>
+<%--                            <table style="width: 700px; margin-left: -20px">--%>
+<%--                                <thead>--%>
+<%--                                <tr>--%>
+<%--                                    <th style="width: 10%">글번호</th>--%>
+<%--                                    <th style="width: 65%; text-align: center">제목</th>--%>
+<%--                                    <th style="width: 25%; text-align: center">작성일</th>--%>
+<%--                                </tr>--%>
+<%--                                </thead>--%>
+<%--                                <tbody>--%>
+<%--                                <c:forEach items="${boardparlist }" var="boardparlist">--%>
+<%--                                    <tr class="boardlist3">--%>
+<%--                                        <td>${boardparlist.num}</td>--%>
+<%--                                        <td><a class="path"--%>
+<%--                                               href="${path13}/boardPar/detail.do?bno=${boardparlist.num}">${boardparlist.subject}</a>--%>
+<%--                                        </td>--%>
+<%--                                        <td>${boardparlist.write_date}</td>--%>
+<%--                                    </tr>--%>
+<%--                                </c:forEach>--%>
+<%--                                </tbody>--%>
+<%--                            </table>--%>
+<%--                            &lt;%&ndash;<input type="button" id="check13" value="더보기">--%>
+<%--                            <div class="error13"></div>&ndash;%&gt;--%>
+<%--                        </c:if>--%>
 
 
                        <%-- <h5> 자료실 </h5>

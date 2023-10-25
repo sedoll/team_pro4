@@ -409,6 +409,11 @@ public class MemberController {
         String id = (String) session.getAttribute("sid");
         Member member = memberService.getMember(id);
         model.addAttribute("member", member);
+
+        List<BoardlistVO> boardlist = memberService.getWriteList1(id);
+        int cntBoard = boardlist.size();
+        model.addAttribute("cntBoard",cntBoard);
+
         return "/member/myPage/myPageindex";
     }
 
