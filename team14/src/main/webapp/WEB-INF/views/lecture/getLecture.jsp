@@ -69,6 +69,9 @@
         .rev-con {
             width: 40%;
         }
+        #myTable th {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -274,13 +277,15 @@
                                 <td>${lev.id}</td>
                                 <td class="starRating" data-score="${lev.score}"></td>
                                 <td>${lev.content}</td>
-                                <td>${lev.resdate}</td>
+                                <td>
+                                    <fmt:parseDate value="${lev.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                    <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" />
+                                </td>
                                 <td>
                                     <c:if test="${sid eq lev.id || sid eq 'admin'}">
-                                        <a href="${path}/review/updateReviewForm.do?par=${pro.no}" class="button is-info">수정</a>
-                                        <a href="${path}/review/deleteReview.do?par=${pro.no}" class="button is-danger"> 삭제 </a>
+                                        <a href="${path}/review/updateReviewForm.do?par=${pro.no}" class="button is-info" style="height: 31px">수정</a>
+                                        <a href="${path}/review/deleteReview.do?par=${pro.no}" class="button is-danger"style="height: 31px"> 삭제 </a>
                                     </c:if>
-                                    <br><br>
                                     <c:if test="${not empty sid }">
                                         <button class="button is-danger is-hovered" onclick="openReportPopup()">
                                             <img src="${path1}/resources/img/report.png" alt="!" style="height: 20px; margin-right: 6px">신고</button>

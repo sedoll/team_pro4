@@ -53,7 +53,10 @@
                                 <td><a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a></td>
                                 <td class="starRating" data-score="${lev.score}"></td>
                                 <td>${lev.content}</td>
-                                <td>${lev.resdate}</td>
+                                <td>
+                                    <fmt:parseDate value="${lev.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                    <fmt:formatDate value="${resdate}" pattern="yyyy-MM-dd" />
+                                </td>
 
                             </tr>
                         </c:forEach>
