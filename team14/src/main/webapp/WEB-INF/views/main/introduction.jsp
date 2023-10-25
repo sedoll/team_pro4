@@ -17,8 +17,13 @@ margin-bottom: 300px;
         <div class="columns is-centered">
             <div class="column is-four-fifths-desktop has-text-centered">
                 <p class=intro>
-                    자녀의 교육과 관련된 모든 정보를 한 눈에 확인하세요.<br><br>
-                    티스푼과 함께라면 학부모의 일상이 편안하고 효율적으로 관리됩니다.
+                    스마트해법은 초중고 학생들을 위한 최고의 학습 도구로,<br>
+                    국어, 영어, 수학 등 다양한 주제의 풍부한 교육 자료와 강의를 제공합니다.<br><br>
+
+                    개별 맞춤 학습 경로와 흥미로운 학습 경험을 제공하여<br>
+                    학생들의 학업 성과 향상을 지원합니다.<br><br>
+
+                    함께 더 나은 학습을 경험하세요!<br><br>
                 </p>
             </div>
         </div>

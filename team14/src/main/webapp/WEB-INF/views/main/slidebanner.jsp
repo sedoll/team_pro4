@@ -23,32 +23,32 @@
             <div class="column is-10 testimonial-slider">
                 <!-- slider-item01 -->
                 <div class="has-text-centered">
-                    <h3 class="has-text-grey text02">정보</h3>
-                    <img class="imgsize" src="${path}/resources/img/slidebanner01.jpg" alt="slide-image">
+                    <h3 class="has-text-grey text02">새로운 공부</h3>
+                    <img class="imgsize" src="${path}/resources/img/learning.jpg" alt="slide-image">
                     <br>
                     <h4 class="has-text-grey text03">
-                        자녀의 교육과 관련된 핵심 정보를 한 곳에서 확인하세요.<br>
-                        교육, 대입, 대외활동, 자료실 등 다양한 정보와 자료를 제공합니다.
+                        기존의 따분한 공부에서 벗어나세요.<br>
+                        스마트 해법은 언제나 수강생을 생각해서 딱 맞는 솔루션을 제공합니다.
                     </h4>
                 </div>
                 <!-- slider-item02 -->
                 <div class="has-text-centered">
-                    <h3 class="has-text-grey text02">커뮤니티</h3>
+                    <h3 class="has-text-grey text02">진짜 커뮤니티</h3>
                     <img class="imgsize" src="${path}/resources/img/slidebanner02.png" alt="slide-image">
                     <br>
                     <h4 class="has-text-grey text03">
-                        학부모, 학생, 그리고 교사들이 모여 정보를 공유하고 소통할 수 있는 공간입니다.<br>
+                        학생, 그리고 교사들이 모여 정보를 공유하고 소통할 수 있는 공간입니다.<br>
                         다양한 게시판을 통해 자유롭게 의견을 나누고, 정보를 교환하세요.
                     </h4>
                 </div>
                 <!-- slider-item03 -->
                 <div class="has-text-centered">
-                    <h3 class="has-text-grey text02">내 자녀</h3>
-                    <img class="imgsize" src="${path}/resources/img/slidebanner03.jpg" alt="slide-image">
+                    <h3 class="has-text-grey text02">압도적 실력 향상</h3>
+                    <img class="imgsize" src="${path}/resources/img/score.jpg" alt="slide-image">
                     <br>
                     <h4 class="has-text-grey text03">
-                        자녀의 학교 생활을 더 가깝게 지켜보고, 관리할 수 있는 편리한 기능을 제공합니다.<br>
-                        자녀의 성장과 학습 과정을 더욱 쉽게 확인하세요.
+                        스마트 해법만의 특화된 교육으로 자녀, 자신의 실력을 높이세요.<br>
+                        수 많은 강사진이 여러분들을 기다리고 있습니다.
                     </h4>
                 </div>
             </div>
