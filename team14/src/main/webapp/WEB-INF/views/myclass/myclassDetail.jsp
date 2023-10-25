@@ -222,6 +222,13 @@
             background: #334075;
         }
 
+        .video-style {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 500px;
+        }
+
 
     </style>
 </head>
@@ -377,8 +384,6 @@
                             <select name="select_filter2" id="select_filter2" class="select_filter">
                                 <option value="0">강의번호</option>
                                 <option value="1">강의명</option>
-                                <option value="2">작성자</option>
-                                <option value="3">내용</option>
                             </select>
                             <input type="text" name="search_filter2" id="search_filter2"
                                    class="search_filter">
@@ -386,23 +391,19 @@
                         <table id="myTable2" class="table">
                             <thead>
                             <tr>
-                                <th style="width: 10%">순번</th>
-                                <th style="width: 50%; text-align: center">강의명</th>
-                                <th style="width: 10%; text-align: center">강의 과목</th>
-                                <th style="width: 10%; text-align: center">강사</th>
+                                <th style="width: 100px;">순번</th>
+                                <th style="width: 550px; text-align: center">강의명</th>
                                 <%--                                <th style="width: 10%; text-align: center">시간</th>--%>
                                 <%--                                <th style="width: 10%; text-align: center">최근 학습일</th>--%>
                                 <%--                                <th style="width: 10%; text-align: center">학습 완료</th>--%>
-                                <th style="width: 10%; text-align: center">학습 하기</th>
+                                <th style="width: 120px; text-align: center">학습 하기</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="video" items="${videoList }" varStatus="status">
                                 <tr>
                                     <td>${status.count}</td>
-                                    <td>${video}</td>
-                                    <td>${lecture.cate }</td>
-                                    <td>${inst.name }</td>
+                                    <td class="video-style">${video}</td>
                                         <%--                                    <td>${vtl.get(status.index)} 초</td>--%>
                                     <td>
                                         <a href="javascript:void(0);"
