@@ -87,7 +87,7 @@
                                     pageLength : 10,
                                     order: [[0, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
                                     info: false,
-                                    dom: 't<f>p',
+                                    dom: 'ftp',
                                     language: {
                                         emptyTable: '등록된 글이 없습니다.'
                                     }

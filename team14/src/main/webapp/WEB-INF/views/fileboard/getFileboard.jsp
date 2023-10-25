@@ -19,7 +19,13 @@
 		.hero {
 		height: 250px;
 		margin-top: 40px;
-	}</style>
+	}
+		table th {
+			width: 20%;
+			background-color: #e7e7e7;
+		}
+
+	</style>
 </head>
 <body>
 <div class="container is-fullhd">
@@ -52,7 +58,7 @@
 					  <th>글 제목</th>
 					  <td>${fileboard.fileBoard.title}</td>
 				  </tr>
-				  <tr>
+				  <tr style="height: 200px">
 					  <th>글 내용</th>
 					  <td>${fileboard.fileBoard.content}</td>
 				  </tr>

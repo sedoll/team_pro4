@@ -102,7 +102,7 @@
                                         <input type="submit" class="button is-link is-outlined" value="수정">
                                         <input type="reset" class="button is-black is-outlined" value="취소">
                                         <c:if test="${sid!='admin' }">
-                                            <a href="${path11 }/member/delete.do?id=${sid }" class="button is-danger is-outlined">회원 탈퇴</a>
+                                            <a href="${path11 }/member/delete.do?id=${sid }" class="button is-danger is-outlined" id="memDel" style="float: right">회원 탈퇴</a>
                                         </c:if>
                                         <c:if test="${sid =='admin' }">
                                             <a href="${path11 }/member/delete.do?id=${member.id }" class="button is-danger is-outlined">회원 강퇴</a>
@@ -116,6 +116,22 @@
                             </table>
                         </div>
                     </form>
+                    <script>
+                        // 페이지가 로드되면 실행
+                        document.addEventListener("DOMContentLoaded", function() {
+                            // member.job 값 가져오기
+                            var memberJob = ${member.job};
+
+                            // 만약 member.job 값이 2라면
+                            if (memberJob === 2) {
+                                // 링크 클릭 시 경고창 표시
+                                document.querySelector("#memDel").addEventListener("click", function(event) {
+                                    event.preventDefault(); // 기본 이벤트(링크 이동)를 막음
+                                    alert("선생님의 회원 탈퇴는 허용되지 않습니다. \n관리자에게 문의해주세요");
+                                });
+                            }
+                        });
+                    </script>
                     <script>
                         function updateCheck(f){
                             if(f.userpw.value!=f.userpw2.value){
