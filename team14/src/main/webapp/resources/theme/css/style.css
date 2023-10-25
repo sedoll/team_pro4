@@ -505,12 +505,21 @@ textarea.input {
 }
 
 
-
+/*메인헤더*/
 .navbar {
-  padding: 40px 130px;
+  /*padding: 40px 130px;
   transition: 0.3s ease;
   background: transparent !important;
+*/
+
+  padding: 15px 100px;
+  /* transition: 0.3s ease; */
+  background: #fff !important;
+
 }
+
+
+
 .navbar.nav-bg {
   background-color: #FFFFFF !important;
   padding: 15px 100px;
