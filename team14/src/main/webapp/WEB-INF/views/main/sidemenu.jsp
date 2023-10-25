@@ -67,13 +67,13 @@
             $(".sidemenu").css({"bottom": "30px", "left" : "30px"});
         });
     });
-    $(document).ready(function () {
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > 100) {
-                $(".sidemenu").css("opacity", "1");
-            } else {
-                $(".sidemenu").css("opacity", "0");
-            }
-        });
-    });
+    // $(document).ready(function () {
+    //     $(window).scroll(function () {
+    //         if ($(window).scrollTop() > 100) {
+    //             $(".sidemenu").css("opacity", "1");
+    //         } else {
+    //             $(".sidemenu").css("opacity", "0");
+    //         }
+    //     });
+    // });
 </script>

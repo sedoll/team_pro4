@@ -52,7 +52,7 @@ public class RootConfig {
 //        basicDataSource.setUrl("jdbc:mariadb://10.41.1.198:3306/team14");
 //        basicDataSource.setUsername("team14");
 //        basicDataSource.setPassword("team14");
-        basicDataSource.setUrl("jdbc:mariadb://localhost:3308/haebeop");
+        basicDataSource.setUrl("jdbc:mariadb://localhost:3306/haebeop");
         basicDataSource.setUsername("root");
         basicDataSource.setPassword("1234");
         return basicDataSource;

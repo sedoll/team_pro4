@@ -58,20 +58,29 @@
 
         /*비디오*/
         body { padding: 0px; margin: 0px; }
-        .jb-box { width: 100%;overflow: hidden;margin: 0px auto; position: relative; padding-top: 80px;}
+        .jb-box { width: 100%;overflow: hidden;margin: 0px auto; position: relative; padding-top: 0px;}
         video { width: 100%; }
         .jb-text { position: absolute; top: 50%; width: 100%; }
         .jb-text p { margin-top: -24px; text-align: center; font-size: 48px; color: #ffffff; }
+
+        .navbar{
+            position: fixed;
+            /*background-color: grey;*/
+            /*opacity: 0.5;*/
+            background-color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+
     </style>
 </head>
 <body>
 <!-- 헤더 부분 인클루드 -->
-<jsp:include page="include/header.jsp"></jsp:include>
+<%--<jsp:include page="include/header.jsp"></jsp:include>--%>
 
-<%--<header id="header">
+<header id="header">
     <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="${path}/">
+            <a class="navbar-item" href="${path}/" >
                 <img src="${path}/resources/img/smart_haebeop_logo.png" width="112" height="28">
             </a>
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -149,29 +158,25 @@
             <div class="navbar-item is-hoverable has-dropdown">
                 <a class="navbar-link is-arrowless" href="${path}/myclass/myclassIndex.do" style="color:black;"
                    id="menu5" onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
-                   onmouseout="$(this).css({'background-color': '', 'color': ''});"> &lt;%&ndash;class="button is-link2 is-rounded b2" &ndash;%&gt;
+                   onmouseout="$(this).css({'background-color': '', 'color': ''});"> <%--class="button is-link2 is-rounded b2" --%>
                     <strong>나의 학습방</strong>
                 </a>
             </div>
-
-
 
         </div>
         <!-- header menu end -->
         <div class="navbar-end">
             <div class="navbar-item">
                 <div style="padding-right: 10px">
-                    &lt;%&ndash;                    <c:if test="${not empty sid}">&ndash;%&gt;
-                    &lt;%&ndash;                        ${sid} 회원님 환영합니다.&ndash;%&gt;
-                    &lt;%&ndash;                    </c:if>&ndash;%&gt;
+
                 </div>
                 <div class="buttons" style="margin-bottom: 0">
-                    <c:if test="${isInst==true}"> &lt;%&ndash; 선생님으로 로그인 한 경우 &ndash;%&gt;
+                    <c:if test="${isInst==true}"> <%-- 선생님으로 로그인 한 경우 --%>
                         <a href="${path}/instructor/instructorDetail.do?no=${instNo}" class="button is-link is-rounded b2"  style="margin-bottom: 0">
                             나의 선생님 페이지
                         </a>
                     </c:if>
-                    <c:if test="${not empty sid and sid ne ''}"> &lt;%&ndash; 회원으로 로그인한 경우 &ndash;%&gt;
+                    <c:if test="${not empty sid and sid ne ''}"> <%-- 회원으로 로그인한 경우 --%>
                         <a href="${path}/member/mypage.do" class="button is-link is-rounded b2"
                            style="margin-bottom: 0">
                             <img src="${path}/resources/img/account_thin.svg" alt="${sid}" width="26px">
@@ -180,15 +185,15 @@
                         <a href="${path}/cart/cartList.do" class="button is-link2 is-rounded b2"
                            style="margin-bottom: 0">
                             <img src="${path}/resources/img/cart_thin.svg" alt="" width="26px">
-                                &lt;%&ndash;                            장바구니&ndash;%&gt;
+                                <%--                            장바구니--%>
                         </a>
                         <a href="${path}/member/logout.do" class="button is-link2 is-rounded b2"
                            style="margin-bottom: 0">
                             <img src="${path}/resources/img/logout_thin.svg" alt="" width="26px">
-                                &lt;%&ndash;                            로그아웃&ndash;%&gt;
+                                <%--                            로그아웃--%>
                         </a>
                     </c:if>
-                    <c:if test="${empty sid}"> &lt;%&ndash; 로그인을 안 한 경우 &ndash;%&gt;
+                    <c:if test="${empty sid}"> <%-- 로그인을 안 한 경우 --%>
                         <a href="${path}/member/login.do" class="button is-link2 is-rounded b2"
                            style="margin-bottom: 0">
                             로그인
@@ -201,11 +206,11 @@
                         </a>
 
                     </c:if>
-                    <c:if test="${sid eq 'admin'}"> &lt;%&ndash; 관리자로 로그인 한 경우 &ndash;%&gt;
+                    <c:if test="${sid eq 'admin'}"> <%-- 관리자로 로그인 한 경우 --%>
                         <a href="${path}/admin/adminMain.do" class="button is-link is-rounded b2"
                            style="margin-bottom: 0">
                             <img src="${path}/resources/img/settings_thin.svg" alt="" width="26px">
-                                &lt;%&ndash;                            관리자페이지&ndash;%&gt;
+                                <%--                            관리자페이지--%>
                         </a>
                     </c:if>
                 </div>
@@ -214,7 +219,7 @@
                        onmouseover="$(this).css({'background-color': '#CDEBFF', 'color': 'white'});"
                        onmouseout="$(this).css({'background-color': '', 'color': ''});">
                         <img src="${path}/resources/img/help_thin.svg" alt="" width="26px">
-                        &lt;%&ndash;                        <strong>고객센터</strong>&ndash;%&gt;
+                        <%--                        <strong>고객센터</strong>--%>
                     </a>
                     <div class="navbar-dropdown is-transparent is-size-6 is-dark is-outlined"
                          onmouseover="$('#menu4').css({'background-color': '#CDEBFF', 'color': 'white'});"
@@ -233,7 +238,7 @@
             </div>
         </div>
     </nav>
-</header>--%>
+</header>
 
 
 <!-- hero area -->
@@ -261,7 +266,7 @@
 
 
     <!-- slidebar banner -->
-    <div class="swiper mySwiper">
+    <div class="swiper mySwiper" style="margin-top: -10px">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <img src="${path }/resources/img/index_1.png" alt="메인페이지 배너1" style="width: 100vw">

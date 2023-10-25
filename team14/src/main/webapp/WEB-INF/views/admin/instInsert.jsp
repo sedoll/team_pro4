@@ -132,7 +132,8 @@
                         </tr>
                         <tr>
                             <th style="background-color:#dcdcdc">선생님 설명</th>
-                            <td colspan="2"> <textarea name="intro" id="intro" class="textarea" cols="50" rows="15" placeholder="설명 입력" required></textarea></td>
+                            <td colspan="2"> <textarea name="intro" id="intro" class="textarea" cols="50" rows="4" placeholder="설명 입력" maxlength="39" required></textarea>
+                            </td>
                         </tr>
                         <tr>
                             <th style="background-color:#dcdcdc">선생님 이미지</th>
