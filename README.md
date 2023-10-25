@@ -128,7 +128,7 @@
 ![board](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/board.png) <br/>
 
 🔹boardLikes🔹<br/>
-![boardLikes](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/boardLikes.png) <br/>
+![boardLikes](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/boardlikes.png) <br/>
 
 🔹cart🔹<br/>
 ![cart](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/cart.png) <br/>

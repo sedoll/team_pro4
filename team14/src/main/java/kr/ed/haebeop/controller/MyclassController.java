@@ -74,7 +74,7 @@ public class MyclassController {
         model.addAttribute("member", member);
 
         //최근 수강 중인 강의 수
-        int count = myclassService.takingCount();
+        int count = myclassService.takingCount(id);
         model.addAttribute("count", count);
 
         //출력해보기
@@ -84,7 +84,8 @@ public class MyclassController {
         int Ddays = 0;
         for (MyClassVO myClass : myclassList) {
             //테스트
-            //String strDate = "2023-10-17";
+//            String strDate = "2023-10-30";
+//            String todayFm = "2024-01-25";
 
             String strDate = myClass.getLecStudyend(); // 기준 날짜 데이터 (("yyyy-MM-dd")의 형태)
             String todayFm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())); // 오늘날짜
@@ -103,10 +104,14 @@ public class MyclassController {
 
             Course course = new Course();
 
-            if (Ddays < 0) {
-                course.setSid(id);
-                course.setLec_no(myClass.getLec_no());
+            course.setSid(id);
+            course.setLec_no(myClass.getLec_no());
+
+            if (Ddays <= 0) {
                 course.setCheck(3);
+                courseService.checkUpdate(course);
+            } else {
+                course.setCheck(1);
                 courseService.checkUpdate(course);
             }
 
@@ -119,8 +124,6 @@ public class MyclassController {
 
             if (check == 1) {
                 ck = "수강 중";
-            } else if (check == 2) {
-                ck = "수강 정지";
             } else if (check == 3) {
                 ck = "수강 완료";
             }
@@ -151,7 +154,7 @@ public class MyclassController {
         model.addAttribute("member", member);
 
         //최근 수강 중인 강의 수
-        int count = myclassService.takingCount();
+        int count = myclassService.takingCount(id);
         model.addAttribute("count", count);
 
 
@@ -181,7 +184,7 @@ public class MyclassController {
         model.addAttribute("member", member);
 
         //최근 수강 중인 강의 수
-        int count = myclassService.takingCount();
+        int count = myclassService.takingCount(id);
         model.addAttribute("count", count);
 
 
