@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -13,11 +13,11 @@
     <%--<script type="text/javascript" src="${path21}/resources/js/myStudy/common.js"></script>--%>
     <link rel="stylesheet" href="${path21}/resources/css/header/header.css">
     <%--    <script type="text/javascript" src="${path21}/resources/js/myStudy/jquery-1.8.3.min.js"></script>--%>
-<style>
-    #dep04{
-        margin-left: 470px;
-    }
-</style>
+    <style>
+        #dep04 {
+            margin-left: 470px;
+        }
+    </style>
 
 </head>
 <body>
@@ -33,7 +33,8 @@
                 <dl class="myProfile">
                     <dt>
                         <span>내 프로필
-                            <a href="javascript:;" onclick="mf_MoveToProfilePopup('ku1992');" class="btns btnOrgline2"></a>
+                            <a href="javascript:;" onclick="mf_MoveToProfilePopup('ku1992');"
+                               class="btns btnOrgline2"></a>
 
                             <!-- <span class="i_org_arr4">프로필 수정</span> -->
                             </span>
@@ -49,10 +50,57 @@
                         </div>
                         <div class="info">
                             <span class="name">${member.name}<em> 님</em></span>
+
                             <ul class="infolist">
-                                <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급 :
-                                    <span id="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1"><span
-                                            class='ico grade06'>일반</span></span></li>
+
+                                <c:choose>
+                                    <c:when test="${member.pt >= 100000}">
+                                        <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
+                                            :
+                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+                                            <span class="ico grade06">VIP</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 50000}">
+                                        <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
+                                            :
+                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+                                            <span class="ico grade06">A</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 40000}">
+                                        <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
+                                            :
+                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+                                            <span class="ico grade06">B</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 30000}">
+                                        <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
+                                            :
+                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+                                            <span class="ico grade06">C</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 10000}">
+                                        <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
+                                            :
+                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+                                            <span class="ico grade06">D</span>
+                                        </li>
+                                    </c:when>
+                                    <c:when test="${member.pt >= 0 }">
+                                        <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
+                                            :
+                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+                                          <%--  <span class="my-transaction-info__title">회원등급</span>--%>
+                                            <span class="ico grade06">F</span>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
+                                </span>
+
+                                </li>
                                 <li class="point" onclick="document.location.href=''" style="cursor:pointer;">포인트 : <em>
                                     ${member.pt} </em>점
                                 </li>
@@ -170,7 +218,8 @@
         <!--// mystudyLry -->
         <div class="studyGnbArea">
             <ul class="studyGnb">
-                <li class="menu01" onfocus="menu_open('1');" onmouseover="menu_open('1');"><a href="${path21}/myclass/myclassIndex.do"  id="lnk0101">나의
+                <li class="menu01" onfocus="menu_open('1');" onmouseover="menu_open('1');"><a
+                        href="${path21}/myclass/myclassIndex.do" id="lnk0101">나의
                     강의실</a>
                     <%--<ul class="dep02" id="dep01">
                         <li><a id="sub010101" href="">수강중인 강좌</a></li>
@@ -181,7 +230,8 @@
                     </ul>--%>
                 </li>
 
-                <li class="menu02" onfocus="menu_open('2');" onmouseover="menu_open('2');"><a href="" id="lnk0111">나의
+                <li class="menu02" onfocus="menu_open('2');" onmouseover="menu_open('2');"><a
+                        href="${path21}/myclass/likeList.do" id="lnk0111">나의
                     좋아요</a>
                     <%--<ul class="dep02" id="dep02">
                         <li><a id="sub011101" href="">서브메뉴</a></li>
@@ -192,17 +242,20 @@
                     </ul>--%>
                 </li>
 
-                <li class="menu04" id="menu010701" onfocus="menu_open('4');" onmouseover="menu_open('4');"><a href=""
-                                                                                                              id="lnk0107">내가
+                <li class="menu04" id="menu010701" onfocus="menu_open('4');" onmouseover="menu_open('4');"><a
+                        href="${path21}/member/memberWrittenBoard.do"
+                        id="lnk0107">내가
                     쓴 글</a>
                     <ul class="dep02" id="dep04">
                         <li><a id="sub010714" href="${path21}/member/memberWrittenBoard.do">내가 쓴 글</a></li>
                         <li><a id="sub010712" href="${path21}/member/memberWrittenComent.do">내가 남긴 댓글</a></li>
                     </ul>
                 </li>
-                <li class="menu05" onfocus="menu_open('5');" onmouseover="menu_open('5');"><a href="${path21}/grade/slist.do"id="lnk0130">성적표</a></li>
+                <li class="menu05" onfocus="menu_open('5');" onmouseover="menu_open('5');"><a
+                        href="${path21}/grade/slist.do" id="lnk0130">성적표</a></li>
 
-                <li class="menu06" onfocus="menu_open('6');" onmouseover="menu_open('6');"><a href="${path21}/calendar/list.do"id="lnk1007">학습계획표</a></li>
+                <li class="menu06" onfocus="menu_open('6');" onmouseover="menu_open('6');"><a
+                        href="${path21}/calendar/list.do" id="lnk1007">학습계획표</a></li>
             </ul>
         </div>
     </div>
