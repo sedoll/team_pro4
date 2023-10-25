@@ -571,7 +571,7 @@ public class MemberController {
         model.addAttribute("member", member);
 
         //최근 수강 중인 강의 수
-        int count = myclassService.takingCount();
+        int count = myclassService.takingCount(id);
         model.addAttribute("count",count);
 
         /*자유게시판*/

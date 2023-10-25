@@ -32,8 +32,8 @@ public class MyclassService {
 
 
     //수강 중인 강의 수 카운트
-    public int takingCount()throws Exception{
-        return myclassMapper.takingCount();
+    public int takingCount(String id)throws Exception{
+        return myclassMapper.takingCount(id);
     }
 
 }

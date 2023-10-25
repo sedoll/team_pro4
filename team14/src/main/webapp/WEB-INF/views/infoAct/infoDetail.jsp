@@ -32,11 +32,11 @@
     <link rel="stylesheet" href="../css/ft.css">
     <style>
         /* 본문 영역 스타일 */
-        .contents { clear:both; min-height: 180vh; background-image: url("../img/login.jpg");
+        .contents { clear:both; min-height: 60vh; background-image: url("../img/login.jpg");
             background-repeat: no-repeat; background-position: center -250px; }
         .contents::after { content:""; clear:both; display:block; width:100%; }
 
-        .page { clear:both; width: 100vw; height: 100vh; position:relative; }
+        .page { clear:both; width: 100vw; min-height: 60vh; position:relative; }
         .page::after { content:""; display:block; width: 100%; clear:both; }
 
         .page_wrap { clear:both; width: 1200px; height: auto; margin:0 auto; }
@@ -288,9 +288,9 @@
             </div>
         </section>
     </div>
-    <footer class="ft" id="ft">
-        <%@ include file="../include/footer.jsp" %>
-    </footer>
 </div>
+<footer class="ft" id="ft">
+    <%@ include file="../include/footer.jsp" %>
+</footer>
 </body>
 </html>

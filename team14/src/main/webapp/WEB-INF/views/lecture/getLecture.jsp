@@ -183,7 +183,7 @@
                                 <td class="adminbtn">
                                     <c:if test="${sid eq 'admin'}">
                                         <a href="${path }/lecture/updateLectureForm.do?no=${pro.no }" class="button is-info is-outlined">수정</a>
-                                        <a href="${path}/DeleteProduct.do?no=${pro.no}" class="button is-danger is-outlined">삭제</a>
+<%--                                        <a href="${path}/DeleteProduct.do?no=${pro.no}" class="button is-danger is-outlined">삭제</a>--%>
                                     </c:if>
                                 </td>
                             </tr>

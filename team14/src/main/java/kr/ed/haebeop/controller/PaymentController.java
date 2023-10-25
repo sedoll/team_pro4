@@ -42,9 +42,11 @@ public class PaymentController {
         payment.setId(id);
         payment.setLec_no(lec_no);
         int check1 = paymentService.checkPayment(payment); // 결제 내역에 있는지 확인
-        if(check1 == 0) {
-            // 강의 정보
-            Lecture lecture = lectureService.getLecture(lec_no);
+
+        // 강의 정보
+        Lecture lecture = lectureService.getLecture(lec_no);
+
+        if(check1 == 0 && lecture.getLec() < lecture.getLec_max()) {
             // 선생님 정보
             Instructor instructor = instService.getInstructorName(lecture.getIno());
             // 회원 정보
@@ -58,19 +60,21 @@ public class PaymentController {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
-            out.println("alert('이미 수강하고 있는 강의 입니다.');");
-            out.println("location.href='"+req.getContextPath()+"/lecture/lecList';"); // 페이지 리디렉션을 JavaScript로 수행
+            out.println("alert('이미 수강하고 있거나 수강생 한도가 초과된 강의 입니다.');");
+            out.println("history.back();"); // 브라우저의 이전 페이지로 돌아가기
             out.println("</script>");
             out.flush();
-            return "redirect:/";
+            return null; // 더 이상의 액션을 실행하지 않도록 null을 반환
         }
     }
     
     // 강의 결제
     @PostMapping("addPayment.do")
-    public String addPaymentPro(@ModelAttribute Payment payment, Model model) throws Exception {
+    public String addPaymentPro(@ModelAttribute Payment payment, HttpServletResponse res, HttpServletRequest req, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
         int lec_no = payment.getLec_no();
+
+        Lecture lecture = lectureService.getLecture(lec_no);
 
         payment.setId(id);
         paymentService.paymentInsert(payment); // 결제 내역 추가

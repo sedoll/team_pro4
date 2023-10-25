@@ -32,7 +32,7 @@ public interface MyclassMapper {
 
 
     //수강 중인 강의 카운트
-    @Select("SELECT COUNT(*) FROM myclass WHERE ck = 1;")
-    public int takingCount();
+    @Select("SELECT COUNT(*) FROM myclass WHERE id=#{id} and ck = 1;")
+    public int takingCount(String id);
 
 }

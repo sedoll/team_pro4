@@ -201,8 +201,8 @@
                                     <div class="field">
                                         <div class="control">
                                             <div class="select">
-                                                <select name="pcom" id="pcom">
-                                                    <option value="선택안함">선택안함</option>
+                                                <select name="pcom" id="pcom" required>
+                                                    <option value="">선택안함</option>
                                                 </select>
                                             </div>
                                             <input type="hidden" name="pcom2" id="pcom2" value="">
@@ -254,11 +254,12 @@
 </div>
 <script>
     $(document).ready(function(){
-        var cardArr1 = ["현대카드","농협카드","BC카드","KB카드"];
-        var cardArr2 = ["하나카드","농협카드","BC카드"];
+        var cardArr1 = ["현대카드","농협카드","BC카드","KB카드","삼성카드"];
+        var cardArr2 = ["하나카드","농협카드","BC카드","KB카드","신한카드"];
         var bankArr = ["카카오뱅크","농협은행","신한은행","기업은행","국민은행"];
         $("#pmethod").change(function(){
             var th = $(this).val();
+            $("#pcom").empty();
             if(th==="신용카드"){
                 for(var i=0;i<cardArr1.length;i++) {
                     $("#pcom").append("<option value='" + cardArr1[i] + "'>" + cardArr1[i] + "</option>");
@@ -312,6 +313,13 @@
             if(parseInt(point) > parseInt(maxPoint)) {
                 alert("사용할 포인트를 수정해주세요");
                 $("#point").focus();
+                return false;
+            }
+
+            var pcom = $('#pcom').val();
+            if(pcom == '') {
+                alert('결제사를 선택 해주세요');
+                $('#pcom').focus();
                 return false;
             }
 

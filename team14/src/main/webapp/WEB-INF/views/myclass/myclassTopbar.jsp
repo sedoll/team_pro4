@@ -57,42 +57,42 @@
                                     <c:when test="${member.pt >= 100000}">
                                         <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
                                             :
-                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+<%--                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">--%>
                                             <span class="ico grade06">VIP</span>
                                         </li>
                                     </c:when>
                                     <c:when test="${member.pt >= 50000}">
                                         <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
                                             :
-                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+<%--                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">--%>
                                             <span class="ico grade06">A</span>
                                         </li>
                                     </c:when>
                                     <c:when test="${member.pt >= 40000}">
                                         <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
                                             :
-                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+<%--                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">--%>
                                             <span class="ico grade06">B</span>
                                         </li>
                                     </c:when>
                                     <c:when test="${member.pt >= 30000}">
                                         <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
                                             :
-                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+<%--                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">--%>
                                             <span class="ico grade06">C</span>
                                         </li>
                                     </c:when>
                                     <c:when test="${member.pt >= 10000}">
                                         <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
                                             :
-                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+<%--                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">--%>
                                             <span class="ico grade06">D</span>
                                         </li>
                                     </c:when>
                                     <c:when test="${member.pt >= 0 }">
                                         <li class="class" onclick="document.location.href=''" style="cursor:pointer;">등급
                                             :
-                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">
+<%--                                            <span class="cph_Contents_ucl_MyStudy_MyInfo_ltl_MemberClass1">--%>
                                           <%--  <span class="my-transaction-info__title">회원등급</span>--%>
                                             <span class="ico grade06">F</span>
                                         </li>
@@ -126,7 +126,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>출석일수</p>
-                                                <span>2<em>일</em></span>
+                                                <span>2 <em>일</em></span>
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>수강강의수</p>
-                                                <span> ${count } <em>일</em></span>
+                                                <span> ${count } <em>개</em></span>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>수강시간</p>
-                                                <span style="margin: -8px;">20<em>시간</em></span>
+                                                <span style="margin: -8px;">${count * 5} <em>시간</em></span>
                                             </div>
                                         </div>
                                     </div>
