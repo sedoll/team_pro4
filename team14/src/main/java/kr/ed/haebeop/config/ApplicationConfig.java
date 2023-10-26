@@ -40,7 +40,6 @@ public class ApplicationConfig {
     }
 
     // board
-
     @Bean
     public BoardRepositoryImpl boardRepository() {return new BoardRepositoryImpl();}
     @Bean

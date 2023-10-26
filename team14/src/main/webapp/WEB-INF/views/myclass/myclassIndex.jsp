@@ -65,8 +65,8 @@
                                 <c:set var="Ddays" value="${myclass.myclassMap.Ddays}"/>
                                 <div class="deaddate" style="width: 10%">
                                     <c:choose>
-                                        <c:when test="${Ddays >= 0}">${Ddays}일</c:when>
-                                        <c:when test="${Ddays < 0}">기간만료</c:when>
+                                        <c:when test="${Ddays > 0}">${Ddays}일</c:when>
+                                        <c:when test="${Ddays <= 0}">기간만료</c:when>
                                     </c:choose>
                                 </div>
 
@@ -75,7 +75,7 @@
                                 <div class="check" style="width: 10%">${check}</div>
 
                                 <div class="study" style="width: 10%">
-                                    <c:if test="${Ddays >= 0}">
+                                    <c:if test="${Ddays > 0}">
                                         <button type="button" class="button is-info"
                                                 onclick="location.href='${path14}/myclass/myclassDetail.do?no=${myclass.lec_no}' ">
                                             학습

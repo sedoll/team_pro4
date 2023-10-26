@@ -43,8 +43,6 @@ public class AdminController {
     private MemberService memberService; // 서비스 생성
     @Autowired
     private BoardServiceImpl boardService; //자유게시판
-
-
     @Autowired
     private NoticeService noticeService; //공지사항
     @Autowired
@@ -113,7 +111,6 @@ public class AdminController {
             model.addAttribute("boardList", boardList);
             model.addAttribute("boardCate", "board");
             return "/admin/boardList";
-
         } else {
             return "/admin/adminMain";
         }
@@ -127,7 +124,6 @@ public class AdminController {
             boardService.boardDelete(bno);
             boardService.commentDeleteAll(bno);
             return "redirect:boardList.do?category=free";
-
         } else {
             return "/admin/adminMain";
         }
@@ -144,7 +140,6 @@ public class AdminController {
             model.addAttribute("boardList", boardList);
             model.addAttribute("boardCate", "board");
             return "/admin/commentList";
-
         } else {
             return "/admin/adminMain";
         }
@@ -159,7 +154,6 @@ public class AdminController {
             boardService.boardDelete(bno);
             boardService.commentDeleteAll(bno);
             return "redirect:commentList.do?category=free";
-
         } else {
             return "/admin/adminMain";
         }
@@ -175,7 +169,6 @@ public class AdminController {
             model.addAttribute("boardCate", "board");
             model.addAttribute("boardList", boardList);
             return "/admin/boardReportList";
-
         } else {
             return "/admin/adminMain";
         }
@@ -189,7 +182,6 @@ public class AdminController {
             boardService.boardDelete(bno);
             boardService.commentDeleteAll(bno);
             return "redirect:boardReportList.do?category=free";
-
         } else {
             return "/admin/adminMain";
         }
