@@ -3,10 +3,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.controller.file.FileController;
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.InstService;
-import kr.ed.haebeop.service.MemberService;
-import kr.ed.haebeop.service.NoticeService;
-import kr.ed.haebeop.service.ReviewService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -50,6 +47,8 @@ public class AdminController {
     @Autowired
     private ReviewService reviewService; // 리뷰 관련 기능
     @Autowired
+    private InstructorService instructorService;
+    @Autowired
     HttpSession session; // 세션 생성
 
     // spring security 이용
@@ -88,6 +87,10 @@ public class AdminController {
         String id = request.getParameter("id");
         Member member = memberService.getMember(id);
         model.addAttribute("member", member);
+
+        Instructor instructor = instructorService.getInstructorById(id);
+        model.addAttribute("instructor",instructor);
+
         return "/admin/memberDetail";
     }
 
@@ -186,13 +189,13 @@ public class AdminController {
             return "/admin/adminMain";
         }
     }
-    
+
     // 강사 등록폼 이동
     @GetMapping("instInsert.do")
     public String instInsertForm(HttpServletRequest req, Model model) throws Exception {
         return "/admin/instInsert";
     }
-    
+
     // 강사 아이디 중복 확인
     @RequestMapping(value = "idCheck.do", method = RequestMethod.POST)
     public void idCheck(HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
@@ -210,7 +213,7 @@ public class AdminController {
         PrintWriter out = response.getWriter();
         out.println(json.toString());
     }
-    
+
     // 강사 등록, member 포함
     @PostMapping("instInsert.do")
     public String instInsert(HttpServletRequest req, MultipartHttpServletRequest files, Model model) throws Exception {
@@ -233,7 +236,7 @@ public class AdminController {
             String value = files.getParameter(name);
             map.put(name, value);
         }
-        
+
         // member 테이블에 강사 정보 등록
         Member member = new Member();
         Instructor inst = new Instructor();
@@ -252,7 +255,7 @@ public class AdminController {
         member.setBirth(files.getParameter("birth"));
         member.setJob(2);
         memberService.memberInsert(member);
-        
+
         // 강사 테이블에 정보 등록
         Instructor inst2 = new Instructor();
         inst2.setCate(files.getParameter("cate"));

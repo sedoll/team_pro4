@@ -21,19 +21,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -71,7 +73,8 @@ public class MemberController {
 
     @Autowired
     private MyclassService myclassService;
-
+    @Resource(name="uploadPath")
+    String uploadPath;
     OAuth2AccessToken oauthToken;
 
     org.json.simple.JSONObject jsonObj;
@@ -432,6 +435,8 @@ public class MemberController {
     // 회원 정보 수정
     @PostMapping("update.do")
     public String memberEdit(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String name = request.getParameter("name");
@@ -441,6 +446,7 @@ public class MemberController {
         String addr2 = request.getParameter("addr2");
         String postcode = request.getParameter("postcode");
         String birth = request.getParameter("birth");
+        int job = Integer.parseInt(request.getParameter("job"));
 
         Member member = new Member();
         member.setId(id);
@@ -452,6 +458,66 @@ public class MemberController {
         member.setAddr2(addr2);
         member.setPostcode(postcode);
         member.setBirth(birth);
+
+
+        if (job==2) {
+
+            MultipartHttpServletRequest files = (MultipartHttpServletRequest) request;
+            MultipartFile img = files.getFile("img");
+
+            String devFolder = uploadPath;    //개발자용 컴퓨터에 업로드 디렉토리 지정
+            String uploadFolder = request.getRealPath("/resources/upload");
+            File folder = new File(uploadFolder);
+            File devfol = new File(devFolder);
+
+            if (!folder.exists()) folder.mkdirs();
+            if (!devfol.exists()) devfol.mkdirs();
+
+            //파라미터 분리
+            Enumeration<String> enum1 = files.getParameterNames();
+            Map map = new HashMap();
+            while (enum1.hasMoreElements()) {
+                String name2 = enum1.nextElement();
+                String value = files.getParameter(name2);
+                map.put(name2, value);
+            }
+
+
+            Instructor inst2 = instructorService.getInstructorById(id);
+            inst2.setCate(request.getParameter("cate"));
+            inst2.setIntro(request.getParameter("intro"));
+            inst2.setName(request.getParameter("name"));
+            inst2.setEmail(request.getParameter("email"));
+            inst2.setTel(request.getParameter("tel"));
+            inst2.setId(request.getParameter("id"));
+            System.out.println("inst2 : " + inst2.toString());
+// 개발 서버 파일 저장 경로
+//        String uploadDir = "D:/team_pro4/team14/src/main/webapp/resources/upload/"; // 회사
+            String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload/"; // 백준철
+            // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
+            // 실제 서버 파일 저장 경로
+            String uploadSev = request.getRealPath("/resources/upload/");
+
+            if (!img.isEmpty()) {
+                String randomUUID = UUID.randomUUID().toString(); // 파일 이름 중복 방지를 위한 랜덤 설정
+                String OriginalFilename = img.getOriginalFilename();
+                String Extension = OriginalFilename.substring(OriginalFilename.lastIndexOf("."));
+                String RandomFileName = randomUUID + Extension;
+                inst2.setImg(RandomFileName);
+
+                try {
+                    img.transferTo(new File(uploadDir + RandomFileName));
+                    img.transferTo(new File(uploadSev + RandomFileName));
+
+
+                } catch (IOException e) {
+                    e.printStackTrace(); // 오류 처리
+                }
+            }
+
+            instService.updateInstructor(inst2);
+        }
+
 
         memberService.memberUpdate(member);
         model.addAttribute("member", member);

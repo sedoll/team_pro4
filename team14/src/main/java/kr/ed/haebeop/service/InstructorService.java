@@ -20,6 +20,7 @@ public interface InstructorService {
     //
     public List<Instructor> getInstructorList();
     public Instructor getInstructor(int no);
+    public Instructor getInstructorById(String id);
 
     //QNA
     public List<InstructorQna> instructorQnaList(int no);
