@@ -132,7 +132,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${not empty sid}">
+                            <c:if test="${not empty sid and isInst == false}">
                                 <c:set var="isLiked" value="${likedProductIds.contains(pro.no)}" />
                                 <c:if test="${pro.lec < pro.lec_max}">
                                     <a href="${path }/payment/addPayment.do?lec_no=${pro.no }" class="button is-link is-outlined">수강신청</a>
