@@ -13,8 +13,8 @@ public class GradeRepositoryImpl implements GradeRepository {
     private SqlSession sqlSession;
 
     @Override
-    public List<Grade> gradeList() throws Exception {
-        return sqlSession.selectList("grade.gradeList");
+    public List<Grade> gradeList(String id) throws Exception {
+        return sqlSession.selectList("grade.gradeList", id);
     }
     @Override
     public List<Grade> sgradeList(String id) throws Exception {

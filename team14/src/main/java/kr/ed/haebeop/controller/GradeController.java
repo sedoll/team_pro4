@@ -44,10 +44,12 @@ public class GradeController {
         System.out.println("버튼 클릭");
         if(session.getAttribute("sid") != null && !"".equals(session.getAttribute("sid"))) {
             int no = Integer.parseInt(request.getParameter("no"));
+            String id = (String) session.getAttribute("sid");
+
             //선생님 정보
             Instructor instructor = instructorService.getInstructor(no);
             model.addAttribute("instructor", instructor);
-            List<Grade> gradeList = gradeService.gradeList();
+            List<Grade> gradeList = gradeService.gradeList(id);
             model.addAttribute("gradeList", gradeList);
             return "/instructor/instructorGradeList";
         } else {

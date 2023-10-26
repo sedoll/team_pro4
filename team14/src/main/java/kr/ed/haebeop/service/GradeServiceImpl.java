@@ -13,8 +13,8 @@ public class GradeServiceImpl implements GradeService{
     private GradeRepositoryImpl gradeRepository;
 
     @Override
-    public List<Grade> gradeList() throws Exception {
-        return gradeRepository.gradeList();
+    public List<Grade> gradeList(String id) throws Exception {
+        return gradeRepository.gradeList(id);
     }
 
     @Override
