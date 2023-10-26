@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="${path15}/resources/css/myPage/sidebar.css"/>
     <link rel="stylesheet" href="${path15}/resources/css/myPage/validateUser.css"/>
     <link rel="stylesheet" href="${path15}/resources/css/myPage/withdraw.css"/>
+    <script>
+        $(document).ready(function() {
+            $('#side_modify').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 </head>
 <body>
 <!-- 헤더 부분 인클루드 -->

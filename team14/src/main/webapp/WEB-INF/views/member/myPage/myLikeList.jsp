@@ -32,7 +32,14 @@
     <script type="text/javascript" src="${path14}/resources/js/com_write.js" charset="UTF-8"></script>
 
     <title>추천한 게시글</title>
-
+    <script>
+        $(document).ready(function() {
+            $('#side_myLikeList').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 
 </head>
 <body>
