@@ -240,65 +240,84 @@
 ​
 <br/>
 ​
+
 #  💻 화면 설계도
+
 🔹메인페이지🔹
-![main_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/413df33a-5ef3-4258-92f7-c82e43825393)
+![home](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_01_home.png)
 
-🔹FAQ🔹
-![FAQ_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/a54eea46-bc4e-4e7f-bf4d-2cb390efd69d)
-
-
-🔹QnA🔹
-![QnA_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/e4157b41-81bd-4ad3-aba6-d27fe94a68aa)
-
-🔹QnA글쓰기🔹
-![QnA글쓰기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/c0c20712-9935-4cf9-8ba8-cefb8aea418e)
-
-🔹QnA상세보기🔹
-![QnA상세보기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/3dd6217a-ee97-4b16-b44b-cdbd72901e9f)
-
-
-🔹공지사항🔹
-![공지사항_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/3ebba92c-c0b2-4b5a-981d-6b3b25c1cf46)
-🔹공지사항글쓰기 🔹
-![공지사항글쓰기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/e9450127-913b-4f6d-8574-e3114ed6d43d)
-🔹공지사항상세보기🔹
-![공지사항상세보기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/b61484fc-1783-4122-a023-05a569acc75b)
-🔹관리자페이지개인정보변경🔹
-![관리자페이지개인정보변경_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/2642b18c-3434-40f9-94f8-26818ae7c87e)
-🔹관리자페이지게시판관리🔹
-![관리자페이지게시판관리_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/dd636ac3-b219-4072-bef3-798014ff3cab)
-🔹관리자페이지댓글관리🔹
-![관리자페이지댓글관리_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/9b81d2ee-3262-4650-a994-de04a028cb2a)
-🔹관리자페이지회원관리🔹
-![관리자페이지회원관리_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/382d5979-9985-49a4-9f38-31059febb348)
-🔹교육정보🔹
-![교육정보_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/08daf619-c187-41c6-8317-5842e74e77de)
-🔹교육정보글쓰기🔹
-![교육정보글쓰기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/42fce1d4-6e63-4080-9267-578a1ebd7161)
-
-🔹교육정보상세보기🔹
-![교육정보상세보기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/1cbe9435-1766-41ee-b2d9-6ab5cce9feda)
-🔹대입정보🔹
-![대입정보_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/6340e04b-fb40-431a-8010-83f4917cd3d0)
-🔹대입정보글쓰기🔹
-![대입정보글쓰기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/92809491-54ad-4c97-b33f-ff478a320792)
-🔹대입정보상세보기🔹
-![대입정보상세보기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/5475f5aa-c03d-400e-9794-a1d0a45a4d4c)
-🔹마이페이지🔹
-![마이페이지_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/39ac5319-a370-421e-8e81-da0edfb0ef91)
-🔹마이페이지내가쓴글🔹
-![마이페이지내가쓴글_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/5c563d34-2dab-4790-a47e-3e652cf79f88)
-🔹마이페이지내가쓴댓글🔹
-![마이페이지내가쓴댓글_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/ea65dd53-2916-407e-afaa-299053970371)
-🔹자유게시판🔹
-![자유게시판_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/5ace4380-1eff-4687-a148-d63a191d6621)
-🔹자유게시판글쓰기🔹
-![자유게시판글쓰기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/d8ed8eec-b71e-4b8e-b72d-a7f1dc42c094)
-🔹자유게시판상세보기🔹
-![자유게시판상세보기_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/c8a0c81e-c354-40cc-aae1-b83c82090561)
 🔹회원가입🔹
-![회원가입_page](https://github.com/kuyejin/chunjae_spring/assets/65212187/19f6cfe1-63f7-4de4-b23c-2590fb4f0cd1)
+![회원가입](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_02_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.png)
+
+🔹회원정보수정🔹
+![회원정보수정](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_03_%ED%9A%8C%EC%9B%90%EC%A0%95%EB%B3%B4%EB%B3%80%EA%B2%BD.png)
+
+🔹작성글🔹
+![작성글](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_04_%EC%9E%91%EC%84%B1%EA%B8%80.png)
+
+🔹결제내역🔹
+![결제내역](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_07_%EA%B2%B0%EC%A0%9C%EB%82%B4%EC%97%AD.png)
+
+🔹찜 강의🔹
+![찜 강의](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_08_%EC%B0%9C%EA%B0%95%EC%9D%98.png)
+
+🔹회원목록🔹
+![회원목록](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_10_%ED%9A%8C%EC%9B%90%EB%AA%A9%EB%A1%9D.png)
+
+🔹강사등록🔹
+![강사등록](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_11_%EA%B0%95%EC%82%AC%EB%93%B1%EB%A1%9D.png)
+
+🔹신고관리🔹
+![신고관리](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_12_%EC%8B%A0%EA%B3%A0%EA%B4%80%EB%A6%AC.png)
+
+🔹공지사항 - 목록🔹
+![공지사항](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_15_%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD.png)
+
+🔹공지사항 - 상세🔹
+![공지사항상세](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_16_%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0.png)
+
+🔹공지사항 - 작성🔹
+![공지사항작성](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_17_%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD%EA%B8%80%EC%93%B0%EA%B8%B0.png)
+
+🔹faq🔹
+![faq](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_18_FAQ.png)
+
+🔹회원가입🔹
+![회원가입](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_02_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.png)
+
+🔹자료실🔹
+![자료실](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_34_%EC%9E%90%EB%A3%8C%EC%8B%A4.png)
+
+🔹자료실 - 상세보기🔹
+![자료실상세](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_35_%EC%9E%90%EB%A3%8C%EC%8B%A4%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0.png)
+
+🔹강의🔹
+![강의](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_38_%EA%B0%95%EC%9D%98.png)
+
+🔹강의 - 상세보기🔹
+![강의상세보기](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_39_%EA%B0%95%EC%9D%98%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0.png)
+
+🔹수강신청🔹
+![수강신청](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_40_%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD.png)
+
+🔹선생님🔹
+![선생님](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_41_%EC%84%A0%EC%83%9D%EB%8B%98.png)
+
+🔹선생님 - 상세🔹
+![선생님상세](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_42_%EC%84%A0%EC%83%9D%EB%8B%98%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0.png)
+
+🔹나의 강의실🔹
+![나의강의실](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_43_%EB%82%98%EC%9D%98%20%EA%B0%95%EC%9D%98%EC%8B%A4.png)
+
+🔹성적표🔹
+![성적표](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_44_%EC%84%B1%EC%A0%81%ED%91%9C.png)
+
+🔹학습계획표🔹
+![학습계획표](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_45_%ED%95%99%EC%8A%B5%EA%B3%84%ED%9A%8D%ED%91%9C.png)
+
+🔹장바구니🔹
+![장바구니](output/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C/../화면설계서/이미지/team14_46_%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.png)
+
 <br/>
 
 # 결과 이미지
@@ -395,58 +414,45 @@
 🔹정보게시판상세🔹
 ![장바구니](/output/%EA%B2%B0%EA%B3%BC%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%A0%95%EB%B3%B4%EA%B2%8C%EC%8B%9C%ED%8C%90%EC%83%81%EC%84%B8.png)
 
+🔹선생님목록🔹
+![선생님목록](/output/%EA%B2%B0%EA%B3%BC%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%84%A0%EC%83%9D%EB%8B%98%EB%AA%A9%EB%A1%9D.png)
+
+🔹선생님상세🔹
+![선생님상세](/output/%EA%B2%B0%EA%B3%BC%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%84%A0%EC%83%9D%EB%8B%98%EC%83%81%EC%84%B8.png)
+
+🔹나의 학습방 - 메인🔹
+![선생님상세](/output/%EA%B2%B0%EA%B3%BC%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%82%98%EC%9D%98%ED%95%99%EC%8A%B5%EB%B0%A9.png)
+
+🔹나의 학습방 - 학습계획표🔹
+![선생님상세](/output/%EA%B2%B0%EA%B3%BC%EC%9D%B4%EB%AF%B8%EC%A7%80/%ED%95%99%EC%8A%B5%EA%B3%84%ED%9A%8D%ED%91%9C.png)
+
 <!-- 🔹성적표🔹
 ![성적표](https://github.com/sedoll/team_pro3/assets/132269367/4b96f48f-f0e0-4283-8955-6530ff1b47c9)
 🔹성적표 상세🔹
 ![성적표상세](https://github.com/sedoll/team_pro3/assets/132269367/a05f04f4-83a7-43dd-bf62-56ff9b5485db)
 🔹성적표 수정🔹
-![성적표수정](https://github.com/sedoll/team_pro3/assets/132269367/4dcb4bb9-0bd5-483f-a318-a0e0cf9d9995)
+![성적표수정](https://github.com/sedoll/team_pro3/assets/132269367/4dcb4bb9-0bd5-483f-a318-a0e0cf9d9995) -->
 
-🔹관리자 페이지 메인🔹
-![관리자페이지메인](https://github.com/sedoll/team_pro3/assets/132269367/000135b3-cf47-44e9-843f-e62de0ea93f9)
-
-🔹회원목록🔹
-![회원목록](https://github.com/sedoll/team_pro3/assets/132269367/2d361abe-3d66-4c4e-a223-2dd0027e3249)
-🔹회원목록 수정🔹
-![회원정보수정](https://github.com/sedoll/team_pro3/assets/132269367/946b61cd-952a-42ad-9dab-53624ef822fd)
-🔹게시판 글 관리🔹
-![게시판글관리](https://github.com/sedoll/team_pro3/assets/132269367/9ea1760e-0bf1-4e09-a731-9a61e6135f06)
-🔹게시판 댓글 관리🔹
-![게시판댓글관리](https://github.com/sedoll/team_pro3/assets/132269367/2af60352-9966-4a79-8587-68a8a0d4fc68)
-🔹게시판 신고 내역🔹
-![게시판신고내역](https://github.com/sedoll/team_pro3/assets/132269367/541d9647-8c79-41b4-9d97-d322f3cd4753) -->
 <br/>
 
 # 결과 gif
-🔹메인🔹
-![메인](output/결과gif/메인.gif)
-🔹FAQ🔹
-![faq](output/결과gif/faq.gif)
-🔹QNA🔹
-![qna](output/결과gif/qna.gif)
-🔹게시글신고🔹
-![게시글신고](output/결과gif/게시글신고.gif)
-🔹공지사항🔹
-![공지사항](output/결과gif/공지사항.gif)
-🔹관리자페이지🔹
-![관리자페이지](output/결과gif/관리자페이지.gif)
-🔹뉴스게시판🔹
-![뉴스게시판](output/결과gif/뉴스게시판.gif)
-🔹로그인🔹
-![로그인](output/결과gif/로그인.gif)
-🔹마이페이지🔹
-![마이페이지](output/결과gif/마이페이지.gif)
-🔹비밀번호변경🔹
-![비밀번호변경](output/결과gif/비밀번호변경.gif)
-🔹성적표🔹
-![성적표](output/결과gif/성적표.gif)
-🔹식단표🔹
-![식단표](output/결과gif/식단표.gif)
-🔹자료실🔹
-![자료실](output/결과gif/자료실.gif)
-🔹정보게시판🔹
-![정보게시판](output/결과gif/정보게시판.gif)
-🔹커뮤니티게시판🔹
-![커뮤니티게시판](output/결과gif/커뮤니티게시판.gif)
-🔹회원가입🔹
-![회원가입](output/결과gif/회원가입.gif)
+🔹강의 등록🔹
+![강의등록](output/%EA%B2%B0%EA%B3%BCgif/%EA%B0%95%EC%9D%98%EB%93%B1%EB%A1%9D.gif)
+
+🔹관리자 페이지🔹
+![관리자페이지](output/%EA%B2%B0%EA%B3%BCgif/%EA%B4%80%EB%A6%AC%EC%9E%90%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
+
+🔹나의 학습방🔹
+![나의학습방](output/%EA%B2%B0%EA%B3%BCgif/%EB%82%98%EC%9D%98%ED%95%99%EC%8A%B5%EB%B0%A9.gif)
+
+🔹선생님🔹
+![선생님](output/%EA%B2%B0%EA%B3%BCgif/%EC%84%A0%EC%83%9D%EB%8B%98.gif)
+
+🔹수강신청🔹
+![수강신청](output/%EA%B2%B0%EA%B3%BCgif/%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD.gif)
+
+🔹입시커뮤니티🔹
+![입시커뮤니티](output/%EA%B2%B0%EA%B3%BCgif/%EC%9E%85%EC%8B%9C%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0.gif)
+
+🔹좋아요, 찜🔹
+![좋아요](output/%EA%B2%B0%EA%B3%BCgif/%EC%A2%8B%EC%95%84%EC%9A%94_%EC%B0%9C_.gif)
