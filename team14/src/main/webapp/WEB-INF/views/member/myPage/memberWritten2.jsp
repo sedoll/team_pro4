@@ -35,7 +35,14 @@
 
     <title>작성글</title>
 
-
+    <script>
+        $(document).ready(function() {
+            $('#side_writtenList').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 </head>
 <body>
 <jsp:include page="../../include/header.jsp"></jsp:include>

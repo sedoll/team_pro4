@@ -156,7 +156,7 @@
                                         <div class="jb-text-table-row">
                                             <div class="jb-text-table-cell">
                                                 <p>수강시간</p>
-                                                <span style="margin: -8px;">${count * 5} <em>시간</em></span>
+                                                <span style="margin: -10px;">${count * 5} <em>시간</em></span>
                                             </div>
                                         </div>
                                     </div>

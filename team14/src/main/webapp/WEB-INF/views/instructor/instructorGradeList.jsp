@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -24,12 +24,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
 
     <!-- 헤드 부분 인클루드 -->
-    <jsp:include page="../../include/head.jsp"></jsp:include>
-    <link rel="stylesheet" href="${path13}/resources/css/myPage/baseLayout.css"/>
-    <link rel="stylesheet" href="${path13}/resources/css/myPage/sidebar.css"/>
-    <link rel="stylesheet" href="${path13}/resources/css/myPage/validateUser.css"/>
-    <link href="${path13}/resources/css/myPage/com_write.css" rel="stylesheet">
+    <jsp:include page="../include/head.jsp"></jsp:include>
+    <link rel="stylesheet" href="${path13}/resources/css/instructorPage/baseLayout.css"/>
+    <link rel="stylesheet" href="${path13}/resources/css/instructorPage/sidebar.css"/>
+    <link rel="stylesheet" href="${path13}/resources/css/instructorPage/validateUser.css"/>
+    <link href="${path13}/resources/css/instructorPage/com_write.css" rel="stylesheet">
     <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>
+
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+
     <script>
         $(document).ready(function() {
             $('#side_grade').css({
@@ -41,18 +49,15 @@
     <title>성적 내역</title>
 </head>
 <body>
-<jsp:include page="../../include/header.jsp"></jsp:include>
+<jsp:include page="../include/header.jsp"></jsp:include>
 
-<div class="mypage-base">
-    <%@ include file="../../instructor/sidebar.jsp" %>
+<div class="mypage-base" style="margin-top: 80px">
+    <%@ include file="/WEB-INF/views/instructor/sidebar.jsp" %>
 
-    <div class="content-wrap" style="float:left; margin-left: -50px">
-            <h5 class="font"> 목록 > </h5>
-            <br>
-
+    <div class="content-wrap" style="float:left; margin-left: 10px">
             <form class="content">
 
-                <div id="ud_tab" style="float:left; margin-left: -20px">
+                <div id="ud_tab" style="float:left;">
                     <input type="radio" name="ud_tabs" id="tab1" checked>
                     <label for="tab1">성적 내역</label>
 
@@ -144,6 +149,6 @@
 </div>
 
 
-<jsp:include page="../../include/footer.jsp"></jsp:include>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
