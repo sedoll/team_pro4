@@ -10,7 +10,7 @@
 <body>
 <script>
     alert('완료되었습니다.')
-    opener.document.location.href="${path}/grade/list.do"
+    opener.document.location.href="${path}/grade/list.do?no=${instNo}"
     self.close();
 </script>
 </body>

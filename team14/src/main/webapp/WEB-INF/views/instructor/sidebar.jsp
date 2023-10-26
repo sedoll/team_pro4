@@ -33,6 +33,13 @@
                     후기
                 </a>
             </li>
+            <c:if test="${isInst == true}">
+                <li id="side_grade">
+                    <a href="${path4}/grade/list.do?no=${instructor.no }">
+                        성적 게시판 관리
+                    </a>
+                </li>
+            </c:if>
         </ul>
 
     </div>

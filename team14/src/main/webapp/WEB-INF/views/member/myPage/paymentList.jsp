@@ -60,6 +60,14 @@
             font-weight: bold;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            $('#side_paymentList').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
 </head>
 <body>
 <jsp:include page="../../include/header.jsp"></jsp:include>
@@ -79,7 +87,7 @@
 
                     <div id="ud_tab-content1" class="ud_content" style="float:left; margin-left: -20px">
                         <div  id="search_from">
-                            <select name="select_filter" id="select_filter">
+                            <select name="select_filter" id="select_filter" style="float: left">
                                 <option value="0">번호</option>
                                 <option value="1">정보</option>
                                 <option value="2">상품</option>

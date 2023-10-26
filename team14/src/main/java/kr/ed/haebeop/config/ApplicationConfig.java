@@ -7,9 +7,7 @@ import kr.ed.haebeop.persistence.UserMapper;
 import kr.ed.haebeop.persistence.UserMapperImpl;
 import kr.ed.haebeop.repository.*;
 import kr.ed.haebeop.service.*;
-import kr.ed.haebeop.service.board.BoardParServiceImpl;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
-import kr.ed.haebeop.service.board.BoardTeaServiceImpl;
 import kr.ed.haebeop.service.info.InfoActServiceImpl;
 import kr.ed.haebeop.service.info.InfoStuServiceImpl;
 import kr.ed.haebeop.service.info.InfoUniServiceImpl;
@@ -42,14 +40,7 @@ public class ApplicationConfig {
     }
 
     // board
-    @Bean
-    public BoardParServiceImpl boardParService() {return new BoardParServiceImpl();}
-    @Bean
-    public BoardParRepositoryImpl boardParRepository() {return new BoardParRepositoryImpl();}
-    @Bean
-    public BoardTeaServiceImpl boardTeaService() {return new BoardTeaServiceImpl();}
-    @Bean
-    public BoardTeaRepositoryImpl boardTeaRepository() {return new BoardTeaRepositoryImpl();}
+
     @Bean
     public BoardRepositoryImpl boardRepository() {return new BoardRepositoryImpl();}
     @Bean

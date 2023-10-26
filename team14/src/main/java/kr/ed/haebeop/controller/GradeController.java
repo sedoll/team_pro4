@@ -1,8 +1,10 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.Grade;
+import kr.ed.haebeop.domain.Instructor;
 import kr.ed.haebeop.domain.Member;
 import kr.ed.haebeop.service.GradeServiceImpl;
+import kr.ed.haebeop.service.InstructorService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.service.MyclassService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class GradeController {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private InstructorService instructorService;
 
     @Autowired
     HttpSession session; // 세션 생성
@@ -39,9 +43,13 @@ public class GradeController {
         Grade grade = new Grade();
         System.out.println("버튼 클릭");
         if(session.getAttribute("sid") != null && !"".equals(session.getAttribute("sid"))) {
+            int no = Integer.parseInt(request.getParameter("no"));
+            //선생님 정보
+            Instructor instructor = instructorService.getInstructor(no);
+            model.addAttribute("instructor", instructor);
             List<Grade> gradeList = gradeService.gradeList();
             model.addAttribute("gradeList", gradeList);
-            return "/member/myPage/gradeList";
+            return "/instructor/instructorGradeList";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -112,6 +120,9 @@ public class GradeController {
         grade.setTname(request.getParameter("tname"));
         grade.setTid(request.getParameter("tid"));
         gradeService.gradeInsert(grade);
+
+
+
         return "/grade/gblankpage";
     }
 
@@ -119,7 +130,8 @@ public class GradeController {
     public String gradeDelete(HttpServletRequest request, Model model) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
         gradeService.gradeDelete(no);
-        return "redirect:list.do";
+        int instNo = (Integer) session.getAttribute("instNo");
+        return "redirect:list.do?no="+instNo;
     }
 
     @GetMapping("gradeedit.do")

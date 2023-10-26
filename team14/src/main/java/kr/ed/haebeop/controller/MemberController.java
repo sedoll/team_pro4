@@ -601,17 +601,17 @@ public class MemberController {
             System.out.println(boardlist.toString());
         }
 
-        /*선생님 게시판*/
-        List<BoardlistVO> boardtealist = memberService.getWriteList2(id);
-        if (boardtealist != null) {
-            model.addAttribute("boardtealist", boardtealist);
-        }
-
-        /*학부모 게시판*/
-        List<BoardlistVO> boardparlist = memberService.getWriteList3(id);
-        if (boardparlist != null) {
-            model.addAttribute("boardparlist", boardparlist);
-        }
+//        /*선생님 게시판*/
+//        List<BoardlistVO> boardtealist = memberService.getWriteList2(id);
+//        if (boardtealist != null) {
+//            model.addAttribute("boardtealist", boardtealist);
+//        }
+//
+//        /*학부모 게시판*/
+//        List<BoardlistVO> boardparlist = memberService.getWriteList3(id);
+//        if (boardparlist != null) {
+//            model.addAttribute("boardparlist", boardparlist);
+//        }
 
         /* 자료실 */
 //        List<BoardlistVO> boardfreelist = memberService.getWriteList4(id);
