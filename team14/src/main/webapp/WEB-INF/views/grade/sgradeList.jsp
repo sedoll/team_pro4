@@ -18,7 +18,7 @@
             height: 20px;
         }
         .hero-body h5{
-            margin-left: 440px;
+            margin-left: 300px;
             margin-top: 10px;
         }
     </style>
@@ -28,17 +28,15 @@
 <div class="page_wrap">
 <jsp:include page="../include/header.jsp"></jsp:include>
 <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
-<section class="hero is-white is-small">
-    <div class="hero-body">
-        <h5 class="is-size-4">
-            성적 게시판
-        </h5>
+<section class="hero is-white is-small" style="padding-top: 27px">
+    <div class="hero-body" style="margin-left: 390px; padding-bottom: 38px">
+        <p style="font-size: 22px">성적표</p>
     </div>
 </section>
 <div class="content" id="content" style="min-height: 0px; margin-left: 40px; margin-top: 15px; margin-bottom: 30px">
     <div class="row column text-center">
-        <div class="container" style="width: 1000px; left: 400px; height: 470px;">
-            <table id="myTable" style="font-size: 16px">
+        <div class="container" style="width: 1000px; margin-left: 400px; height: 285px; border-top: black solid 2px">
+            <table id="myTable" style="font-size: 1.2rem">
                 <thead>
                 <tr>
                     <th width="80">No</th>
