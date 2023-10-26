@@ -27,7 +27,7 @@
 
         <div class="titArea">
             <h3 class="subMtit">최근 수강 강좌</h3>
-            <span>수강 중인 강좌 <em> ${count } </em> 개</span>
+            <span>수강 중인 강좌 <em> ${count} </em> 개</span>
 
             <div class="board_wrap">
                 <!-- <div class="board_title">
@@ -75,10 +75,12 @@
                                 <div class="check" style="width: 10%">${check}</div>
 
                                 <div class="study" style="width: 10%">
-                                    <button type="button" class="button is-info"
-                                            onclick="location.href='${path14}/myclass/myclassDetail.do?no=${myclass.lec_no}' ">
-                                        학습
-                                    </button>
+                                    <c:if test="${Ddays >= 0}">
+                                        <button type="button" class="button is-info"
+                                                onclick="location.href='${path14}/myclass/myclassDetail.do?no=${myclass.lec_no}' ">
+                                            학습
+                                        </button>
+                                    </c:if>
                                 </div>
                             </div>
 

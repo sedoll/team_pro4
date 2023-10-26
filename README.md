@@ -104,7 +104,7 @@
 ![슬라이드6](/output/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C6.PNG)
 
 🔹관리자🔹<br/>
-![슬라이드10](/output/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%910.PNG)
+![슬라이드10](/output/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C10.PNG)
 ![슬라이드11](/output/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C11.PNG)
 ![슬라이드12](/output/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C12.PNG)
 ![슬라이드13](/output/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C13.PNG)
@@ -128,7 +128,7 @@
 ![board](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/board.png) <br/>
 
 🔹boardLikes🔹<br/>
-![boardLikes](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/boardLikes.png) <br/>
+![boardLikes](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/boardlikes.png) <br/>
 
 🔹cart🔹<br/>
 ![cart](/output/db%ED%85%8C%EC%9D%B4%EB%B8%94/cart.png) <br/>

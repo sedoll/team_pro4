@@ -125,7 +125,7 @@
                         "dom": '<"top"i>rt<"bottom"flp><"clear">',
 
                         pageLength : 5,
-                        order: [[0, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
+                        order: [[6, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
                         info: false,
                         lengthChange: false, // show entries 제거
                         language: {

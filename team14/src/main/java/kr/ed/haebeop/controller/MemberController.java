@@ -120,6 +120,7 @@ public class MemberController {
                 session.setAttribute("instNo", instNo);
             } else {
                 // 찾지 못했을 때
+                session.setAttribute("isInst", isInst);
             }
 
 
@@ -571,7 +572,7 @@ public class MemberController {
         model.addAttribute("member", member);
 
         //최근 수강 중인 강의 수
-        int count = myclassService.takingCount();
+        int count = myclassService.takingCount(id);
         model.addAttribute("count",count);
 
         /*자유게시판*/

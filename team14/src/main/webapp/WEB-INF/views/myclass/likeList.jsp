@@ -85,9 +85,7 @@
 </div>
 
 
-<footer id="footer" class="footer-nav row expanded collapse">
-    <jsp:include page="../include/footer.jsp"></jsp:include>
-</footer>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 
 </body>
 </html>

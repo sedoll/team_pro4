@@ -33,7 +33,33 @@
 
     <title>결제 수강 내역</title>
 
+    <style>
+        #search_from {
+            text-align: right;
+            font-size: 18px;
+            margin-bottom: 20px; /* 아래쪽 여백 추가 */
+        }
+        #select_filter {
+            padding: 5px; /* 셀렉트 박스 내부 패딩 추가 */
+            border: 1px solid #ccc; /* 테두리 추가 */
+            border-radius: 5px; /* 테두리 둥글게 만듭니다. */
+            margin-right: 10px; /* 셀렉트 박스 오른쪽 여백 추가 */
+            font-size: 16px; /* 폰트 크기 조정 */
+        }
 
+        #search_filter {
+            padding: 5px; /* 입력 필드 내부 패딩 추가 */
+            border: 1px solid #ccc; /* 테두리 추가 */
+            border-radius: 5px; /* 테두리 둥글게 만듭니다. */
+            font-size: 16px; /* 폰트 크기 조정 */
+        }
+
+        /* 선택된 셀렉트 박스 옵션 스타일 */
+        #select_filter option:checked {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../../include/header.jsp"></jsp:include>
@@ -52,68 +78,87 @@
                     <label for="tab1">결제 내역</label>
 
                     <div id="ud_tab-content1" class="ud_content" style="float:left; margin-left: -20px">
+                        <div  id="search_from">
+                            <select name="select_filter" id="select_filter">
+                                <option value="0">번호</option>
+                                <option value="1">정보</option>
+                                <option value="2">상품</option>
+                                <option value="3">결제일</option>
+                            </select>
+                            <input type="text" name="search_filter" id="search_filter">
+                        </div>
                         <table class="tb1" id="myTable" style="width: 800px; margin-left: -20px">
                             <thead>
                             <tr>
                                 <th class="item1">결제번호</th>
                                 <th class="item2">결제정보</th>
                                 <th class="item3">결제상품</th>
+                                <th class="item4">결제일</th>
                                 <th class="item4">작업</th>
                             </tr>
                             </thead>
-                            <c:forEach var="pay" items="${payList }" varStatus="status">
-                                <tr>
-                                    <td class="item1">${pay.sno }</td>
-                                    <td class="item2">
-                                        <p>결제 방법 : ${pay.pmethod }</p>
-                                        <p>결제 대행 : ${pay.pcom }</p>
-                                        <p>결제 카드 : ${pay.cnum }</p>
-                                        <p>결제 금액 : ${pay.price }</p>
-                                        <p>결제 일 : ${pay.resdate }</p>
-                                    </td>
-                                    <td class="item3">
-                                        <span title="${pay.lec_no }">${pay.lec_name }</span>
-                                    </td>
-                                    <td class="item4">
-                                        <c:if test="${pay.state==0}">
-                                            <a href="${path13 }/payment/returnPayment.do?sno=${pay.sno }" class="inbtn">환불요청</a>
-                                            <a href="${path13 }/payment/buyPayment.do?sno=${pay.sno }&lno=${pay.lec_no}&pt=${pay.price / 10}" class="inbtn">구매확정</a>
-                                        </c:if>
-                                        <c:if test="${pay.state==1}">
-                                            <span>구매 확정</span>
-                                        </c:if>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <tbody>
+                                <c:forEach var="pay" items="${payList }" varStatus="status">
+                                    <tr>
+                                        <td class="item1">${pay.sno }</td>
+                                        <td class="item2">
+                                            <p>결제 방법 : ${pay.pmethod }</p>
+                                            <p>결제 대행 : ${pay.pcom }</p>
+                                            <p>결제 카드 : ${pay.cnum }</p>
+                                            <p>결제 금액 : ${pay.price }</p>
+                                        </td>
+                                        <td class="item3">
+                                            <span title="${pay.lec_no }">${pay.lec_name }</span>
+                                        </td>
+                                        <td class="item4">
+                                            <p>${pay.resdate }</p>
+                                        </td>
+                                        <td class="item4">
+                                            <c:if test="${pay.state==0}">
+                                                <a href="${path13 }/payment/returnPayment.do?sno=${pay.sno }" class="inbtn">환불요청</a>
+                                                <a href="${path13 }/payment/buyPayment.do?sno=${pay.sno }&lno=${pay.lec_no}&pt=${pay.price / 10}" class="inbtn">구매확정</a>
+                                            </c:if>
+                                            <c:if test="${pay.state==1}">
+                                                <span>구매 확정</span>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                     </div>
                     <script>
                         $(document).ready( function () {
-                            $('#myTable').DataTable({
-                                pageLength : 5,
-                                order: [[0, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
-                                info: false,
-                                dom: 't<f>p',
-                                language: {
-                                    emptyTable: '결제 내역이 없습니다.'
-                                }
+                            let $table = $('#myTable').DataTable({
+                                //search 창 오른쪽 상단으로 이동
+                                "dom": '<"top"i>rt<"bottom"flp><"clear">',
 
+                                pageLength : 5,
+                                order: [[3, 'desc']], // 0번째 컬럼을 기준으로 내림차순 정렬
+                                info: false,
+                                lengthChange: false, // show entries 제거
+                                language: {
+                                    emptyTable: '결제 내역(이)가 없습니다.'
+                                }
                             });
-                        } );
-                        $(document).ready(function() {
+
                             $('.dataTables_paginate').css({
-                                'textAlign':'left',
+                                'textAlign':'center',
                                 'float': 'none',
                                 'margin-top':'10px',
                             });
-                            $('.dataTables_filter').css({
-                                'float': 'left',
-                                'margin-top':'14px',
-                                'margin-right':'280px'
+
+                            $('.dataTables_filter').remove();  // dataTable 자체 search input 없애기
+
+                            $('#select_filter').change(function () { // select 선택값에 따라  해당 선택 열 input이 검색하는곳 변경
+                                $table.columns('').search('').draw();
+                                $table.columns(Number($('#select_filter').val())).search($('#search_filter').val()).draw();
                             });
-                            $('#myTable_paginate').css({
-                                'margin-right':'100px'
-                            });
+
+                            $('#search_filter').keyup(function () { //input의 값대로 search
+                                let $value = $(this).val();
+                                $table.columns(Number($('#select_filter').val())).search($value).draw();
+                            })
                         });
                     </script>
                     <%--<input type="button" id="check11" value="더보기">
