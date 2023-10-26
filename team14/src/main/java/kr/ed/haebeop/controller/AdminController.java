@@ -7,9 +7,7 @@ import kr.ed.haebeop.service.InstService;
 import kr.ed.haebeop.service.MemberService;
 import kr.ed.haebeop.service.NoticeService;
 import kr.ed.haebeop.service.ReviewService;
-import kr.ed.haebeop.service.board.BoardParServiceImpl;
 import kr.ed.haebeop.service.board.BoardServiceImpl;
-import kr.ed.haebeop.service.board.BoardTeaServiceImpl;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,10 +43,6 @@ public class AdminController {
     private MemberService memberService; // 서비스 생성
     @Autowired
     private BoardServiceImpl boardService; //자유게시판
-    @Autowired
-    private BoardTeaServiceImpl boardTeaService; //선생님게시판
-    @Autowired
-    private BoardParServiceImpl boardParService; //학부모게시판
     @Autowired
     private NoticeService noticeService; //공지사항
     @Autowired
@@ -117,20 +111,6 @@ public class AdminController {
             model.addAttribute("boardList", boardList);
             model.addAttribute("boardCate", "board");
             return "/admin/boardList";
-        } else if (category.equals("teacher")) {
-            List<Board> boardList = boardTeaService.boardList();
-            model.addAttribute("categoryKor", "선생님");
-            model.addAttribute("category", category);
-            model.addAttribute("boardList", boardList);
-            model.addAttribute("boardCate", "boardTea");
-            return "/admin/boardList";
-        } else if (category.equals("parent")) {
-            List<Board> boardList = boardParService.boardList();
-            model.addAttribute("categoryKor", "학부모");
-            model.addAttribute("category", category);
-            model.addAttribute("boardList", boardList);
-            model.addAttribute("boardCate", "boardPar");
-            return "/admin/boardList";
         } else {
             return "/admin/adminMain";
         }
@@ -144,14 +124,6 @@ public class AdminController {
             boardService.boardDelete(bno);
             boardService.commentDeleteAll(bno);
             return "redirect:boardList.do?category=free";
-        } else if (category.equals("teacher")) {
-            boardTeaService.boardDelete(bno);
-            boardTeaService.commentDeleteAll(bno);
-            return "redirect:boardList.do?category=teacher";
-        } else if (category.equals("parent")) {
-            boardParService.boardDelete(bno);
-            boardParService.commentDeleteAll(bno);
-            return "redirect:boardList.do?category=parent";
         } else {
             return "/admin/adminMain";
         }
@@ -168,20 +140,6 @@ public class AdminController {
             model.addAttribute("boardList", boardList);
             model.addAttribute("boardCate", "board");
             return "/admin/commentList";
-        } else if (category.equals("teacher")) {
-            List<Board> boardList = boardTeaService.allCommentList();
-            model.addAttribute("categoryKor", "선생님");
-            model.addAttribute("category", category);
-            model.addAttribute("boardList", boardList);
-            model.addAttribute("boardCate", "boardTea");
-            return "/admin/commentList";
-        } else if (category.equals("parent")) {
-            List<Board> boardList = boardParService.allCommentList();
-            model.addAttribute("categoryKor", "학부모");
-            model.addAttribute("category", category);
-            model.addAttribute("boardList", boardList);
-            model.addAttribute("boardCate", "boardPar");
-            return "/admin/commentList";
         } else {
             return "/admin/adminMain";
         }
@@ -196,14 +154,6 @@ public class AdminController {
             boardService.boardDelete(bno);
             boardService.commentDeleteAll(bno);
             return "redirect:commentList.do?category=free";
-        } else if (category.equals("teacher")) {
-            boardTeaService.boardDelete(bno);
-            boardTeaService.commentDeleteAll(bno);
-            return "redirect:commentList.do?category=teacher";
-        } else if (category.equals("parent")) {
-            boardParService.boardDelete(bno);
-            boardParService.commentDeleteAll(bno);
-            return "redirect:commentList.do?category=parent";
         } else {
             return "/admin/adminMain";
         }
@@ -219,20 +169,6 @@ public class AdminController {
             model.addAttribute("boardCate", "board");
             model.addAttribute("boardList", boardList);
             return "/admin/boardReportList";
-        } else if (category.equals("teacher")) {
-            List<Board> boardList = boardTeaService.boardReportList();
-            model.addAttribute("categoryKor", "선생님");
-            model.addAttribute("category", category);
-            model.addAttribute("boardList", boardList);
-            model.addAttribute("boardCate", "boardTea");
-                return "/admin/boardReportList";
-        } else if (category.equals("parent")) {
-            List<Board> boardList = boardParService.boardReportList();
-            model.addAttribute("categoryKor", "학부모");
-            model.addAttribute("category", category);
-            model.addAttribute("boardList", boardList);
-            model.addAttribute("boardCate", "boardPar");
-            return "/admin/boardReportList";
         } else {
             return "/admin/adminMain";
         }
@@ -246,14 +182,6 @@ public class AdminController {
             boardService.boardDelete(bno);
             boardService.commentDeleteAll(bno);
             return "redirect:boardReportList.do?category=free";
-        } else if (category.equals("teacher")) {
-            boardTeaService.boardDelete(bno);
-            boardTeaService.commentDeleteAll(bno);
-            return "redirect:boardReportList.do?category=teacher";
-        } else if (category.equals("parent")) {
-            boardParService.boardDelete(bno);
-            boardParService.commentDeleteAll(bno);
-            return "redirect:boardReportList.do?category=parent";
         } else {
             return "/admin/adminMain";
         }
