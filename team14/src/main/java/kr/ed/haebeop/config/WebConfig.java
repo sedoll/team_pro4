@@ -62,7 +62,8 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
                 .addPathPatterns("/boardPar/**").addPathPatterns("/boardTea/**")
                 .addPathPatterns("/file/**").addPathPatterns("/infoAct/**")
                 .addPathPatterns("/infoStu/**").addPathPatterns("/infoUni/**")
-                .addPathPatterns("/grade/**").addPathPatterns("/cart/**").addPathPatterns("/payment/**");
+                .addPathPatterns("/grade/**").addPathPatterns("/cart/**").addPathPatterns("/payment/**")
+                .addPathPatterns("/myclass/**");
         registry.addInterceptor(adminIntercepter()).addPathPatterns("/admin/**");
     }
 
