@@ -218,7 +218,7 @@ public class AdminController {
         MultipartFile img = files.getFile("img");
 
         String devFolder = uploadPath;    //개발자용 컴퓨터에 업로드 디렉토리 지정
-        String uploadFolder = req.getRealPath("/resources/upload");
+        String uploadFolder = req.getRealPath("/resources/upload/");
         File folder = new File(uploadFolder);
         File devfol = new File(devFolder);
 
@@ -233,7 +233,7 @@ public class AdminController {
             String value = files.getParameter(name);
             map.put(name, value);
         }
-        
+
         // member 테이블에 강사 정보 등록
         Member member = new Member();
         Instructor inst = new Instructor();
@@ -252,7 +252,7 @@ public class AdminController {
         member.setBirth(files.getParameter("birth"));
         member.setJob(2);
         memberService.memberInsert(member);
-        
+
         // 강사 테이블에 정보 등록
         Instructor inst2 = new Instructor();
         inst2.setCate(files.getParameter("cate"));
@@ -264,7 +264,7 @@ public class AdminController {
 
         // 개발 서버 파일 저장 경로
 //        String uploadDir = "D:/team_pro4/team14/src/main/webapp/resources/upload/"; // 회사
-        String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload/"; // 백준철
+//        String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload/"; // 백준철
         // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
         // 실제 서버 파일 저장 경로
         String uploadSev = req.getRealPath("/resources/upload/");
@@ -277,7 +277,7 @@ public class AdminController {
             inst2.setImg(RandomFileName);
 
             try {
-                img.transferTo(new File(uploadDir + RandomFileName));
+//                img.transferTo(new File(uploadDir + RandomFileName));
                 img.transferTo(new File(uploadSev + RandomFileName));
             } catch (IOException e) {
                 e.printStackTrace(); // 오류 처리

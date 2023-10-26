@@ -50,14 +50,14 @@ public class RootConfig {
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName("org.mariadb.jdbc.Driver");
         // 실제 서버 db 연결
-//        basicDataSource.setUrl("jdbc:mariadb://10.41.1.198/team14");
-//        basicDataSource.setUsername("team14");
-//        basicDataSource.setPassword("team14");
+        basicDataSource.setUrl("jdbc:mariadb://10.41.1.198/team14");
+        basicDataSource.setUsername("team14");
+        basicDataSource.setPassword("team14");
 
         // 개발 서버 db 연결
-        basicDataSource.setUrl("jdbc:mariadb://localhost:3306/haebeop");
-        basicDataSource.setUsername("root");
-        basicDataSource.setPassword("1234");
+//        basicDataSource.setUrl("jdbc:mariadb://localhost:3306/haebeop");
+//        basicDataSource.setUsername("root");
+//        basicDataSource.setPassword("1234");
         return basicDataSource;
     }
     
