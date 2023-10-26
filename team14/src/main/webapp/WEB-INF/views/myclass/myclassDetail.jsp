@@ -283,7 +283,11 @@
                                     <p class="name">
                                         <strong2 style="font-size: 30px;">${takingList.insName }</strong2>
                                             <%--<i class="fas fa-solid fa-house fa-2x" ></i>--%>
-                                        <img src="${path}/resources/img/icon_house.png" style="width: 30px;">
+
+                                        <a href="${path}/instructor/instructorDetail.do?no=${ino}">
+                                             <img src="${path}/resources/img/icon_house.png" style="width: 30px;">
+                                        </a>
+
                                     </p>
                                 </c:forEach>
 
@@ -391,24 +395,29 @@
                         <table id="myTable2" class="table">
                             <thead>
                             <tr>
-                                <th style="width: 100px;">순번</th>
-                                <th style="width: 550px; text-align: center">강의명</th>
+                                <th style="width: 15%; text-align: center; vertical-align: middle;">순번</th>
+                                <th style="width: 70%; text-align: center; vertical-align: middle;">강의명</th>
                                 <%--                                <th style="width: 10%; text-align: center">시간</th>--%>
                                 <%--                                <th style="width: 10%; text-align: center">최근 학습일</th>--%>
                                 <%--                                <th style="width: 10%; text-align: center">학습 완료</th>--%>
-                                <th style="width: 120px; text-align: center">학습 하기</th>
+                                <th style="width: 15%; text-align: center; vertical-align: middle;">학습 하기</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="video" items="${videoList }" varStatus="status">
                                 <tr>
-                                    <td>${status.count}</td>
-                                    <td class="video-style">${video}</td>
+                                    <td style="text-align: center; vertical-align: middle;">${status.count}</td>
+                                    <td class="video-style" style="text-align: center; vertical-align: middle;">${video}</td>
                                         <%--                                    <td>${vtl.get(status.index)} 초</td>--%>
-                                    <td>
-                                        <a href="javascript:void(0);"
+                                    <td style="text-align: center;">
+                                        <button type="button" class="button is-info"
+                                                onclick="openVideoWindow('${path}/lecture/getLecVideo?sfile=${videoList2.get(status.index)}')"
+                                                target="_blank">학습</button>
+
+
+                                        <%--<a href="javascript:void(0);"
                                            onclick="openVideoWindow('${path}/lecture/getLecVideo?sfile=${videoList2.get(status.index)}')"
-                                           target="_blank">학습</a>
+                                           target="_blank">학습</a>--%>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -426,28 +435,28 @@
                                     <table id="myTable2">
                                         <thead>
                                         <tr>
-                                            <th width="80">No</th>
-                                            <th>Title</th>
-                                            <th width="120">RegDate</th>
-                                            <th width="100">Visited</th>
+                                            <th width="80" style="text-align: center">번호</th>
+                                            <th style="text-align: center">제목</th>
+                                            <th width="140" style="text-align: center">등록일</th>
+                                            <th width="100" style="text-align: center">조회수</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${instructorNotices}" var="notice"
                                                    varStatus="status">
                                             <tr>
-                                                <td>${status.count }</td>
-                                                <td>
+                                                <td style="text-align: center">${status.count }</td>
+                                                <td style="text-align: center">
                                                     <a href="${path14}/instructor/instructorNoticeDetail.do?noticeNo=${notice.no }&no=${instructor.no}">${notice.title }</a>
                                                 </td>
-                                                <td>
+                                                <td style="text-align: center">
                                                     <fmt:parseDate value="${notice.resdate }"
                                                                    var="resdate"
                                                                    pattern="yyyy-MM-dd HH:mm:ss"/>
                                                     <fmt:formatDate value="${resdate }"
                                                                     pattern="yyyy-MM-dd"/>
                                                 </td>
-                                                <td>${notice.cnt }</td>
+                                                <td style="text-align: center">${notice.cnt }</td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -473,24 +482,24 @@
                             <table id="myTable2">
                                 <thead>
                                 <tr>
-                                    <th width="80">No</th>
-                                    <th>제목</th>
-                                    <th width="120">등록일</th>
-                                    <th width="100">조회수</th>
+                                    <th width="80" style="text-align: center">번호</th>
+                                    <th style="text-align: center">제목</th>
+                                    <th width="140" style="text-align: center">등록일</th>
+                                    <th width="100" style="text-align: center">조회수</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${qnaList }" var="board" varStatus="status">
                                     <tr>
-                                        <td>${status.count }</td>
+                                        <td style="text-align: center">${status.count }</td>
                                         <c:choose>
                                             <c:when test="${empty board.pw || board.pw eq ''}">
-                                                <td>
+                                                <td style="text-align: center">
                                                     <a href="${path}/qna/detail.do?bno=${board.bno}">${board.title}</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td>
+                                                <td style="text-align: center">
                                                     <a href="${path}/qna/qnapw.do?bno=${board.bno}">[비밀글] ${board.title}</a>
                                                 </td>
                                             </c:otherwise>
@@ -501,7 +510,7 @@
                                             <fmt:formatDate value="${resdate }"
                                                             pattern="yyyy-MM-dd"/>
                                         </td>
-                                        <td>${board.cnt }</td>
+                                        <td style="text-align: center">${board.cnt }</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -523,22 +532,22 @@
                         <table class="table is-fullwidth" id="myTable2">
                             <thead>
                             <tr>
-                                <th class="rev">강의</th>
-                                <th class="rev">점수</th>
-                                <th class="rev-con">댓글</th>
-                                <th class="rev2">작성일</th>
+                                <th class="rev"  style="text-align: center">강의</th>
+                                <th class="rev" style="text-align: center">점수</th>
+                                <th class="rev-con" style="text-align: center">댓글</th>
+                                <th class="rev2" style="text-align: center">작성일</th>
                                 <%--                            <th class="rev2">비고</th>--%>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="lev" items="${reviewList }">
                                 <tr>
-                                    <td>
+                                    <td style="text-align: center">
                                         <a href="${path14}/lecture/getLecture?no=${lev.lno}">${lev.title}</a>
                                     </td>
-                                    <td>${lev.score}</td>
-                                    <td>${lev.content}</td>
-                                    <td>${lev.resdate}</td>
+                                    <td style="text-align: center">${lev.score}</td>
+                                    <td style="text-align: center">${lev.content}</td>
+                                    <td style="text-align: center">${lev.resdate}</td>
 
                                 </tr>
                             </c:forEach>
@@ -553,25 +562,25 @@
                         <table class="table is-fullwidth" id="myTable2">
                             <thead>
                             <tr>
-                                <th width="80">No</th>
-                                <th>Title</th>
-                                <th width="120">RegDate</th>
-                                <th width="100">Visited</th>
+                                <th width="80" style="text-align: center">번호</th>
+                                <th style="text-align: center">제목</th>
+                                <th width="140" style="text-align: center">등록일</th>
+                                <th width="100" style="text-align: center">조회수</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${instructorFiles}" var="file" varStatus="status">
                                 <tr>
-                                    <td>${status.count }</td>
-                                    <td>
+                                    <td style="text-align: center">${status.count }</td>
+                                    <td style="text-align: center">
                                         <a href="${path14}/instructor/instructorFileDetail.do?fileNo=${file.no }&no=${instructor.no}">${file.title }</a>
                                     </td>
-                                    <td>
+                                    <td style="text-align: center">
                                         <fmt:parseDate value="${file.resdate }" var="resdate"
                                                        pattern="yyyy-MM-dd HH:mm:ss"/>
                                         <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
                                     </td>
-                                    <td>${file.cnt }</td>
+                                    <td style="text-align: center">${file.cnt }</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
