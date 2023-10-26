@@ -90,10 +90,10 @@ public class CartController {
             PrintWriter out = res.getWriter();
             out.println("<script>");
             out.println("alert('이미 수강중이거나 장바구니에 있는 강의 입니다.');");
-            out.println("location.href='"+req.getContextPath()+"/lecture/lecList';"); // 페이지 리디렉션을 JavaScript로 수행
+            out.println("history.back();"); // 브라우저의 이전 페이지로 돌아가기
             out.println("</script>");
             out.flush();
-            return "redirect:/lecture/lecList";
+            return null; // 더 이상의 액션을 실행하지 않도록 null을 반환
         }
     }
 

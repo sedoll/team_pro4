@@ -189,7 +189,7 @@
                             <th>강사 이름</th>
                             <td colspan="2">
                                 <input type="text" class="input" value="${instructor.name}" readonly>
-                                <input type="text" class="input" name="ino" value="${instructor.no}" readonly>
+                                <input type="hidden" name="ino" value="${instructor.no}" readonly>
                             </td>
                         </tr>
                         <tr>

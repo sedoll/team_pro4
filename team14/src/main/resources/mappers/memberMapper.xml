@@ -150,20 +150,20 @@
 
 
     <select id="myReportList" resultType="kr.ed.haebeop.domain.Board">
-        (
+--         (
             SELECT r.board_bno as bno, r.reporter, r.reason, r.report_date, 'board' AS board_type, b.title
             FROM report r join board b on r.board_bno = b.bno where reporter = #{id}
-        )
-        UNION
-        (
-            SELECT board_bno as bno, reporter, reason, report_date, 'boardTea' AS board_type, b.title
-            FROM report_tea r join board_tea b on r.board_bno = b.bno where reporter = #{id}
-        )
-        UNION
-        (
-            SELECT board_bno as bno, reporter, reason, report_date, 'boardPar' AS board_type, b.title
-            FROM report_par r join board_par b on r.board_bno = b.bno where reporter = #{id}
-        )
+--         )
+--         UNION
+--         (
+--             SELECT board_bno as bno, reporter, reason, report_date, 'boardTea' AS board_type, b.title
+--             FROM report_tea r join board_tea b on r.board_bno = b.bno where reporter = #{id}
+--         )
+--         UNION
+--         (
+--             SELECT board_bno as bno, reporter, reason, report_date, 'boardPar' AS board_type, b.title
+--             FROM report_par r join board_par b on r.board_bno = b.bno where reporter = #{id}
+--         )
         ORDER BY report_date DESC
     </select>
 

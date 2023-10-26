@@ -71,11 +71,11 @@
                     <div class="media-content">
                         <p class="has-text-dark mb-1">2016</p>
                         <h4>
-                            디지털 학부모 혁신상
+                            디지털 교육 혁신상
                             <br>
-                            (Digital Parenting Innovation Award)
+                            (Digital Learning Innovation Award)
                         </h4>
-                        <p class="mb-0 has-text-light">디지털 리터러시와 온라인 안전에 중점을 두며, 학부모들을 디지털 시대에 적응시키고 지원하는 데 기여하였습니다.
+                        <p class="mb-0 has-text-light">디지털 리터러시와 온라인 안전에 중점을 두며, 기존의 교육을 디지털 시대에 적응시키고 지원하는 데 기여하였습니다.
                         </p>
                     </div>
                 </div>
