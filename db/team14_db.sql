@@ -418,7 +418,7 @@ JOIN
     instructor ins ON l.ino = ins.NO
 LEFT JOIN
     payment p ON p.lec_no = l.NO
-WHERE p.id IS NOT NULL AND p.buydate IS NOT NULL AND p.enddate IS NOT NULL;
+WHERE p.id IS NOT NULL AND p.buydate IS NOT NULL AND p.enddate IS NOT NULL GROUP BY p.id, p.lec_no;
 
 create table calendar(
 	no INTEGER AUTO_INCREMENT PRIMARY KEY,
