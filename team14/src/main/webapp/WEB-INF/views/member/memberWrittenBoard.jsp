@@ -30,11 +30,26 @@
     <link rel="stylesheet" href="${path13}/resources/css/myPage/baseLayout.css"/>
     <link rel="stylesheet" href="${path13}/resources/css/myPage/sidebar.css"/>
     <link rel="stylesheet" href="${path13}/resources/css/myPage/validateUser.css"/>
-    <link href="${path13}/resources/css/myPage/com_write.css" rel="stylesheet">
+    <!--<link href="${path13}/resources/css/myPage/com_write.css" rel="stylesheet">-->
     <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>
 
     <title>작성글</title>
     <style>
+        .freebd-table tr{
+            border-bottom:black solid 1px;
+        }
+        .freebd-table{
+            border-top: black solid 2px;
+        }
+
+        .freebd-table thead tr th{
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .freebd-table tbody tr td{
+            padding-top: 24px;
+        }
     </style>
 
 </head>
@@ -44,14 +59,14 @@
 <jsp:include page="../myclass/myclassTopbar.jsp"></jsp:include>
     <div class="mypage-base">
     <div class="content-wrap" style="float:left; margin-left: -50px">
-        <div class="content-section">
-            <h5 class="font" style="margin-left: 120px"> 내가 쓴 글</h5>
-            <form class="content" style="font-size: 18px;">
+        <div class="content" style="margin-left: 45px;">
+            <a class="font" style=" font-size: 20px; font-weight: 0"> 내가 쓴 글</a>
+            <form class="content" style="font-size: 16px; margin-top: 65px">
                     <div id="ud_tab-content1" class="ud_content">
                         <h5 style="margin-left: 60px;"> 자유 게시판</h5>
-                        <table style="width: 1000px; margin-left: 50px; font-size: 18px;">
+                        <table class="freebd-table" style="width: 1000px; height: 225px; font-size: 1.2rem; margin-left: 41px">
                             <thead>
-                            <tr>
+                            <tr style="border-bottom: 1px solid black">
                                 <th style="width: 10%">글번호</th>
                                 <th style="width: 65%; text-align: center">제목</th>
                                 <th style="width: 25%; text-align: center">작성일</th>
@@ -61,10 +76,10 @@
                             <tbody>
                             <c:forEach items="${boardlist }" var="boardlist">
                                 <tr class="boardlist1">
-                                    <td>${boardlist.num}</td>
-                                    <td>${boardlist.subject}</td>
+                                    <td style="text-align: center">${boardlist.num}</td>
+                                    <td style="text-align: center">${boardlist.subject}</td>
                                     <td>${boardlist.write_date}</td>
-                                    <td><button type="button" class ="button is-black is-outlined" onclick="location.href='${path13}/board/detail.do?bno=${boardlist.num}'">원문보기</button></td>
+                                    <td style="padding-top: 12px"><button type="button" class ="button is-black is-outlined" onclick="location.href='${path13}/board/detail.do?bno=${boardlist.num}'">원문보기</button></td>
                                 </tr>
                             </c:forEach>
                             </tbody>

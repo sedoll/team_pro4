@@ -57,6 +57,41 @@
                                 <th>종료일</th>
                                 <td><input type="date" name="end" id="end" class="input" value="${calendar.end}"></td>
                             </tr>
+                            <script>
+                                //값 받아올 때 -1일
+                                $(document).ready(function() {
+                                    var endDate = $('#end').val();
+                                    if (endDate) {
+                                        var date = new Date(endDate);
+                                        date.setDate(date.getDate() - 1);
+                                        var newDate = date.toISOString().split('T')[0];
+                                        $('#end').val(newDate);
+                                    }
+                                });
+
+                                //폼 전송할때 +1일
+                                $(document).ready(function() {
+                                    $('form').on('submit', function(e) {
+                                        // 폼 제출을 일시적으로 중단
+                                        e.preventDefault();
+
+                                        // 날짜를 가져와서 1일을 더함
+                                        var endDate = $('#end').val();
+                                        var date = new Date(endDate);
+                                        date.setDate(date.getDate() + 1);
+
+                                        // 날짜 형식을 "YYYY-MM-DD"로 변환
+                                        var dd = ('0' + date.getDate()).slice(-2);
+                                        var mm = ('0' + (date.getMonth() + 1)).slice(-2);
+                                        var yyyy = date.getFullYear();
+                                        var newDate = yyyy + '-' + mm + '-' + dd;
+
+                                        // 입력 필드의 값을 변경하고 폼을 제출
+                                        $('#end').val(newDate);
+                                        this.submit();
+                                    });
+                                });
+                            </script>
                             <tr>
                                 <th>글자색</th>
                                 <td>

@@ -53,13 +53,14 @@
             </section>
 
 
-            <form action="${path}/member/update.do" method="post" onsubmit="return updateCheck(this)">
+            <form action="${path}/member/update.do" method="post" enctype="multipart/form-data" onsubmit="return updateCheck(this)">
                 <div class="table_form_wrap">
                     <table class="table_form">
                         <tbody>
                         <tr>
                             <th><label for="id">아이디</label></th>
                             <td><input type="text" name="id" id="id" size="100" class="input" value="${member.id }" readonly required>
+                                <input type="hidden" name="job" id="job" size="100" class="input" value="${member.job }" >
                             </td>
                         </tr>
                         <tr>
@@ -103,6 +104,39 @@
                                 <input type="date" name="birth" id="birth" value="${br }" class="input" required>
                             </td>
                         </tr>
+
+                        <c:if test="${member.job ==2}">
+                            <tr>
+                                <th>담당 과목</th>
+                                <td colspan="2">
+                                    <select name="cate" id="cate" class="select is-fullwidth" autofocus required>
+                                        <option value="국어" <c:if test="${instructor.cate == '국어'}">selected</c:if>>국어</option>
+                                        <option value="수학" <c:if test="${instructor.cate == '수학'}">selected</c:if>>수학</option>
+                                        <option value="영어" <c:if test="${instructor.cate == '영어'}">selected</c:if>>영어</option>
+                                        <option value="과학" <c:if test="${instructor.cate == '과학'}">selected</c:if>>과학</option>
+                                        <option value="사회" <c:if test="${instructor.cate == '사회'}">selected</c:if>>사회</option>
+                                        <option value="한국사" <c:if test="${instructor.cate == '한국사'}">selected</c:if>>한국사</option>
+                                    </select>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th>선생님 설명</th>
+                                <td colspan="2"> <textarea name="intro" id="intro" class="textarea" cols="50" rows="4" placeholder="설명 입력" maxlength="39" required>${instructor.intro}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>선생님 이미지</th>
+                                <td colspan="2">
+<%--                                    <input type="text" value="기존파일: ${instructor.img}" class="input" readonly>--%>
+                                    <input type="file" name="img" id="img" class="input" placeholder="이미지" accept=".jpg, .png" > ※ 파일 미선택시, 기존 사진이 사용됩니다.</td>
+                            </tr>
+
+                        </c:if>
+
+
+
+
                         <tr>
                             <td colspan="2">
                                 <br/>

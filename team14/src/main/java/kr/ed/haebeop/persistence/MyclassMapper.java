@@ -35,4 +35,9 @@ public interface MyclassMapper {
     @Select("SELECT COUNT(*) FROM myclass WHERE id=#{id} and ck = 1;")
     public int takingCount(String id);
 
+
+    // 수강신청한 강좌 중 선택한 강의의 정보 select
+    @Select("SELECT * FROM myclass WHERE lec_no = #{lec_no} and id = #{id};")
+    public List<MyClassVO> gettakingClassList2(MyClassVO myClassVO);
+
 }

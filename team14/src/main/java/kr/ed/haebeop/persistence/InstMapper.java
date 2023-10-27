@@ -16,7 +16,7 @@ public interface InstMapper {
     @Insert("INSERT INTO instructor VALUES (default, #{name}, #{tel}, #{email}, #{intro}, #{cate}, #{img}, #{id})")
     @Options(useGeneratedKeys=true, keyProperty="no")
     public void addInstructor(Instructor instructor);
-    @Update("UPDATE instructor SET cate = #{cate}, pname = #{pname}, pcomment = #{pcomment}, plist = #{plist}, price = #{price}, imgsrc1 = #{imgSrc1}, resdate = #{resdate} WHERE no = #{no}")
+    @Update("UPDATE instructor SET cate = #{cate}, name = #{name}, intro = #{intro}, img = #{img}, tel=#{tel}, email=#{email}  WHERE id = #{id}")
     public void updateInstructor(Instructor instructor);
     @Delete("DELETE FROM instructor WHERE no = #{no}")
     public void delInstructor(int no);
