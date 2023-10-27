@@ -180,6 +180,7 @@ public class MyclassController {
         myClassVO.setLec_no(no);
         myClassVO.setId(id);
         List<MyClassVO> takingClassList2 = myclassService.gettakingClassList2(myClassVO);
+        model.addAttribute("takingList2", takingClassList2);
         //topbar정보
         Member member = memberService.getMember(id);
         System.out.println("내 정보: " + member);
