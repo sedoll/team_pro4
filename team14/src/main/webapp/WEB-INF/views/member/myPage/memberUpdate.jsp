@@ -18,6 +18,14 @@
     <link rel="stylesheet" href="${path11}/resources/css/myPage/validateUser.css"/>
     <link rel="stylesheet" href="${path11}/resources/css/font.css"/>
 </head>
+<script>
+    $(document).ready(function() {
+        $('#side_modify').css({
+            'background-color': '#e5e5e5',
+            'font-weight': 'bold'
+        });
+    });
+</script>
 <body>
 <jsp:include page="../../include/header.jsp"></jsp:include>
 

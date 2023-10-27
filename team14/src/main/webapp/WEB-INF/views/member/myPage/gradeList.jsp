@@ -30,14 +30,21 @@
     <link rel="stylesheet" href="${path13}/resources/css/myPage/validateUser.css"/>
     <link href="${path13}/resources/css/myPage/com_write.css" rel="stylesheet">
     <script type="text/javascript" src="${path13}/resources/js/com_write.js" charset="UTF-8"></script>
-
+    <script>
+        $(document).ready(function() {
+            $('#side_grade').css({
+                'background-color': '#e5e5e5',
+                'font-weight': 'bold'
+            });
+        });
+    </script>
     <title>성적 내역</title>
 </head>
 <body>
 <jsp:include page="../../include/header.jsp"></jsp:include>
 
 <div class="mypage-base">
-    <%@ include file="/WEB-INF/views/include/sidebar.jsp" %>
+    <%@ include file="../../instructor/sidebar.jsp" %>
 
     <div class="content-wrap" style="float:left; margin-left: -50px">
             <h5 class="font"> 목록 > </h5>

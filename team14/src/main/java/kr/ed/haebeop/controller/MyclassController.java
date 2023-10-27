@@ -322,15 +322,20 @@ public class MyclassController {
 
 
         // region 6. 자료실
-        //선생님 정보
-        Instructor instructor = instructorService.getInstructor(no);
+        Lecture lecture6 = lectureService.getLecture(no);
+        int ins_No6 = lecture6.getIno();
+
+        Instructor instructor = instructorService.getInstructor(ins_No6);
         model.addAttribute("instructor", instructor);
 
-        //자료실 목록
         List<InstructorFile> instructorFiles = instructorService.getInstructorFileList(no);
         model.addAttribute("instructorFiles", instructorFiles);
 
 
+
+        model.addAttribute("ino", ins_No6);
+
+        System.out.println(instructor);
         System.out.println(takingClassList);
         System.out.println(getLectureList);
 
