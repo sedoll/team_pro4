@@ -295,3 +295,9 @@ d
 4src/main/webapp/WEB-INF/views/common/error/error.jsp,8\9\89370cc0594f4ca189b9db45b10455c569068920
 l
 <src/main/webapp/WEB-INF/views/common/error/securityError.jsp,4\2\4253416485da7ac1ca44f505b659bca53f75fadf
+l
+<src/main/webapp/WEB-INF/views/common/error/databaseError.jsp,6\3\63b237bebb6d66250b64e7d5a6aaa89a1a3daa8f
+l
+<src/main/webapp/WEB-INF/views/common/error/notFoundError.jsp,a\b\ab35833676b37cacf1bb1e020da8182b4a2b8fdc
+a
+1src/main/webapp/WEB-INF/views/admin/boardList.jsp,8\c\8c270eb705a20c2c65cc57b480df5efcac772731

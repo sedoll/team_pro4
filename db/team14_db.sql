@@ -77,21 +77,24 @@ CREATE TABLE board(
 
 INSERT INTO board(title, content, author) VALUES('본문 제목1', '본문 내용1', 'admin');
 UPDATE board SET par=bno WHERE bno=1;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목2', '본문 내용2', 'hong'); 
 UPDATE board SET par=bno WHERE bno=2;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목3', '본문 내용3', 'kang');
 UPDATE board SET par=bno WHERE bno=3;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목4', '본문 내용4', 'lee');
 UPDATE board SET par=bno WHERE bno=4;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목5', '본문 내용5', 'son');
 UPDATE board SET par=bno WHERE bno=5;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목6', '본문 내용6', 'hong');
 UPDATE board SET par=bno WHERE bno=6; 
+INSERT INTO board(title, content, author) VALUES('본문 제목7', '본문 내용7', 'hong');
+UPDATE board SET par=bno WHERE bno=7; 
+INSERT INTO board(title, content, author) VALUES('본문 제목8', '본문 내용8', 'hong');
+UPDATE board SET par=bno WHERE bno=8; 
+INSERT INTO board(title, content, author) VALUES('본문 제목9', '본문 내용9', 'hong');
+UPDATE board SET par=bno WHERE bno=9; 
+INSERT INTO board(title, content, author) VALUES('본문 제목10', '본문 내용10', 'hong');
+UPDATE board SET par=bno WHERE bno=10; 
 
 INSERT INTO board(title, content, author, lev, par) VALUES('댓글', '댓글내용', 'admin', 1, 7);
 INSERT INTO board(title, content, author, lev, par) VALUES('댓글', '댓글내용', 'admin', 1, 7);
