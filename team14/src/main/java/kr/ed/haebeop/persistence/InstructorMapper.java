@@ -15,6 +15,9 @@ public interface InstructorMapper {
     @Select("select * from instructor where no=#{no}")
     public Instructor getInstructor(int no);
 
+    @Select("select * from instructor where id=#{id}")
+    public Instructor getInstructorById(String id);
+
     //강의 리스트
     @Select("select * from lecture where ino = #{no}")
     public List<Lecture> getInstructorLectureList(int no);

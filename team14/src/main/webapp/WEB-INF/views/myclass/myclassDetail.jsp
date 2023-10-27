@@ -274,14 +274,14 @@
                                     <span class="flag_ro_col4">최종평가</span> -->
                                 </div>
 
-                                <c:forEach items="${takingList }" var="takingList" varStatus="status">
+                                <c:forEach items="${takingList2 }" var="takingList2" varStatus="status">
                                     <div class="tit_wrap">
-                                        <h2 class="tit">${takingList.lecTitle }</h2>
+                                        <h2 class="tit">${takingList2.lecTitle }</h2>
                                     </div>
 
 
                                     <p class="name">
-                                        <strong2 style="font-size: 30px;">${takingList.insName }</strong2>
+                                        <strong2 style="font-size: 30px;">${takingList2.insName }</strong2>
                                             <%--<i class="fas fa-solid fa-house fa-2x" ></i>--%>
 
                                         <a href="${path}/instructor/instructorDetail.do?no=${ino}">
@@ -326,25 +326,25 @@
                     <div id="ud_tab-content1" class="ud_content">
                         <h3> 강좌 정보 </h3>
                         <table style="font-size: 25px">
-                            <c:forEach items="${takingList }" var="takingList" varStatus="status">
+                            <c:forEach items="${takingList2 }" var="takingList2" varStatus="status">
                                 <tr>
                                     <th>강좌 제목</th>
-                                    <td> ${takingList.lecTitle }</td>
+                                    <td> ${takingList2.lecTitle }</td>
                                 </tr>
 
                                 <tr>
                                     <th>강좌 설명</th>
-                                    <td>${takingList.lecContent }</td>
+                                    <td>${takingList2.lecContent }</td>
                                 </tr>
 
                                 <tr>
                                     <th>강사</th>
-                                    <td>${takingList.insName }</td>
+                                    <td>${takingList2.insName }</td>
                                 </tr>
 
                                 <tr>
                                     <th>대상 학년</th>
-                                    <td> ${takingList.slevel} </td>
+                                    <td> ${takingList2.slevel} </td>
                                 </tr>
 
                                 <tr>
