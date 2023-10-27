@@ -71,6 +71,14 @@
             font-weight: bolder;
         }
 
+        fc-toolbar-title{
+            margin-left: 10px;
+        }
+
+        .section-middle{
+            margin-top: 20px;
+        }
+
 
 
 
@@ -81,8 +89,8 @@
 <div class="page_wrap">
     <%@include file="../include/header.jsp"%>
     <%@include file="../myclass/myclassTopbar.jsp"%>
-    <div class="container content-container">
-        <h4 class="title is-4">학습계획표</h4>
+    <div class="container content-container" style="margin-top: 40px">
+        <a style="font-size: 20px; margin-left: 120px">학습계획표</a>
     </div>
     <div class="section section-middle" style="padding-top: 0px">
     <div class="registar-btn">

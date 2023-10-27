@@ -176,22 +176,20 @@ public class MyclassController {
     public String myclassDetail(Model model, HttpServletRequest req) throws Exception {
         int no = Integer.parseInt(req.getParameter("no"));
         String id = (String) session.getAttribute("sid");
-
-
+        MyClassVO myClassVO = new MyClassVO();
+        myClassVO.setLec_no(no);
+        myClassVO.setId(id);
+        List<MyClassVO> takingClassList2 = myclassService.gettakingClassList2(myClassVO);
         //topbar정보
         Member member = memberService.getMember(id);
         System.out.println("내 정보: " + member);
         model.addAttribute("member", member);
-
         //최근 수강 중인 강의 수
         int count = myclassService.takingCount(id);
         model.addAttribute("count", count);
-
-
         List<MyClassVO> myclassList = myclassService.getMyclassList(id);
         List<MyClassVO> takingClassList = myclassService.gettakingClassList(no);
         Lecture getLectureList = lectureService.getLecture(no);// 서비스 클래스에 비즈니스 로직을 정의하고 호출
-
         model.addAttribute("lecList", getLectureList);
 
 

@@ -107,7 +107,7 @@
 
                         <c:if test="${member.job ==2}">
                             <tr>
-                                <th style="background-color:#dcdcdc">담당 과목</th>
+                                <th>담당 과목</th>
                                 <td colspan="2">
                                     <select name="cate" id="cate" class="select is-fullwidth" autofocus required>
                                         <option value="국어" <c:if test="${instructor.cate == '국어'}">selected</c:if>>국어</option>
@@ -121,12 +121,12 @@
 
                             </tr>
                             <tr>
-                                <th style="background-color:#dcdcdc">선생님 설명</th>
+                                <th>선생님 설명</th>
                                 <td colspan="2"> <textarea name="intro" id="intro" class="textarea" cols="50" rows="4" placeholder="설명 입력" maxlength="39" required>${instructor.intro}</textarea>
                                 </td>
                             </tr>
                             <tr>
-                                <th style="background-color:#dcdcdc">선생님 이미지</th>
+                                <th>선생님 이미지</th>
                                 <td colspan="2">
 <%--                                    <input type="text" value="기존파일: ${instructor.img}" class="input" readonly>--%>
                                     <input type="file" name="img" id="img" class="input" placeholder="이미지" accept=".jpg, .png" > ※ 파일 미선택시, 기존 사진이 사용됩니다.</td>

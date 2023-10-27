@@ -36,4 +36,8 @@ public class MyclassService {
         return myclassMapper.takingCount(id);
     }
 
+    // 해당 수강 중인 강좌 가져오기
+    public List<MyClassVO> gettakingClassList2(MyClassVO myClassVO) throws Exception {
+        return myclassMapper.gettakingClassList2(myClassVO);
+    }
 }

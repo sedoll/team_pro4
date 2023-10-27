@@ -493,7 +493,7 @@ public class MemberController {
             System.out.println("inst2 : " + inst2.toString());
 // 개발 서버 파일 저장 경로
 //        String uploadDir = "D:/team_pro4/team14/src/main/webapp/resources/upload/"; // 회사
-            String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload/"; // 백준철
+//            String uploadDir = "/Users/juncheol/Desktop/team_pro4/team14/src/main/webapp/resources/upload/"; // 백준철
             // String uploadDir = "E:/git/spring_study/pro04/src/main/webapp/resources/upload/"; // 집
             // 실제 서버 파일 저장 경로
             String uploadSev = request.getRealPath("/resources/upload/");
@@ -506,9 +506,8 @@ public class MemberController {
                 inst2.setImg(RandomFileName);
 
                 try {
-                    img.transferTo(new File(uploadDir + RandomFileName));
                     img.transferTo(new File(uploadSev + RandomFileName));
-
+//                    img.transferTo(new File(uploadDir + RandomFileName));
 
                 } catch (IOException e) {
                     e.printStackTrace(); // 오류 처리
