@@ -76,33 +76,45 @@ public class PaymentController {
 
         Lecture lecture = lectureService.getLecture(lec_no);
 
-        payment.setId(id);
-        paymentService.paymentInsert(payment); // 결제 내역 추가
-        Member member = memberService.getMember(id); // 결제한 회원정보 추출
-        member.setPt(payment.getPt()); // 포인트
-        memberService.memberPointSub(member); // 사용한 포인트 차감
-        lectureService.countUpLec(lec_no); // 수강 인원 현황 +1
+        if(lecture.getLec() < lecture.getLec_max()) {
+            lectureService.countUpLec(lec_no); // 수강 인원 현황 +1
+
+            payment.setId(id);
+            paymentService.paymentInsert(payment); // 결제 내역 추가
+            Member member = memberService.getMember(id); // 결제한 회원정보 추출
+            member.setPt(payment.getPt()); // 포인트
+            memberService.memberPointSub(member); // 사용한 포인트 차감
 
 
-        //수강 신청
-        Course course = new Course();
-        course.setSid(id);
-        course.setLec_no(lec_no);
-        courseService.courseInsert(course);
+            //수강 신청
+            Course course = new Course();
+            course.setSid(id);
+            course.setLec_no(lec_no);
+            courseService.courseInsert(course);
 
 
-        Cart cart = new Cart();
-        cart.setLec_no(lec_no);
-        cart.setId(payment.getId());
+            Cart cart = new Cart();
+            cart.setLec_no(lec_no);
+            cart.setId(payment.getId());
 
-        // 카트에 있으면 제거
-        try {
-            int cartno = cartService.getCart(cart);
-            cartService.cartDelete(cartno);
-        } catch (Exception e) {
+            // 카트에 있으면 제거
+            try {
+                int cartno = cartService.getCart(cart);
+                cartService.cartDelete(cartno);
+            } catch (Exception e) {
 
+            }
+            return "redirect:/";
+        } else {
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>");
+            out.println("alert('에러가 발생했습니다. 메인으로 이동합니다.');");
+            out.println("location.href='"+req.getContextPath()+"/';"); // 메인페이지로 이동
+            out.println("</script>");
+            out.flush();
+            return null; // 더 이상의 액션을 실행하지 않도록 null을 반환
         }
-        return "redirect:/";
     }
 
 

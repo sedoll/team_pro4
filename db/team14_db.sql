@@ -77,21 +77,24 @@ CREATE TABLE board(
 
 INSERT INTO board(title, content, author) VALUES('본문 제목1', '본문 내용1', 'admin');
 UPDATE board SET par=bno WHERE bno=1;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목2', '본문 내용2', 'hong'); 
 UPDATE board SET par=bno WHERE bno=2;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목3', '본문 내용3', 'kang');
 UPDATE board SET par=bno WHERE bno=3;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목4', '본문 내용4', 'lee');
 UPDATE board SET par=bno WHERE bno=4;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목5', '본문 내용5', 'son');
 UPDATE board SET par=bno WHERE bno=5;
-
 INSERT INTO board(title, content, author) VALUES('본문 제목6', '본문 내용6', 'hong');
 UPDATE board SET par=bno WHERE bno=6; 
+INSERT INTO board(title, content, author) VALUES('본문 제목7', '본문 내용7', 'hong');
+UPDATE board SET par=bno WHERE bno=7; 
+INSERT INTO board(title, content, author) VALUES('본문 제목8', '본문 내용8', 'hong');
+UPDATE board SET par=bno WHERE bno=8; 
+INSERT INTO board(title, content, author) VALUES('본문 제목9', '본문 내용9', 'hong');
+UPDATE board SET par=bno WHERE bno=9; 
+INSERT INTO board(title, content, author) VALUES('본문 제목10', '본문 내용10', 'hong');
+UPDATE board SET par=bno WHERE bno=10; 
 
 INSERT INTO board(title, content, author, lev, par) VALUES('댓글', '댓글내용', 'admin', 1, 7);
 INSERT INTO board(title, content, author, lev, par) VALUES('댓글', '댓글내용', 'admin', 1, 7);
@@ -198,14 +201,6 @@ CREATE TABLE qna(
 		CASCADE -- 작성자를 member id를 이용해 외래키로 사용
 );
 
--- 학교 정보
-CREATE TABLE school(
-	eo_code VARCHAR(10), -- 교육청 코드
-	eo_name VARCHAR(100), -- 교육청 이름
-	sc_code VARCHAR(50), -- 학교 코드
-	sc_name VARCHAR(100) -- 학교 이름
-);
-
 -- 자료실 db
 CREATE TABLE fileobj (
 	no int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -263,16 +258,6 @@ CREATE TABLE report (
     report_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 신고일
     FOREIGN KEY(board_bno) REFERENCES board(bno) ON DELETE CASCADE,
     FOREIGN KEY(reporter) REFERENCES member(id) ON DELETE CASCADE
-);
-
--- 공지사항(순번, 제목, 내용, 작성자, 작성일, 읽은 횟수)
-create table notice(
-	no int primary KEY AUTO_INCREMENT, -- notice 글 번호
-	title varchar(200) not NULL,	-- 제목
-	content varchar(1000), -- 내용
-	id VARCHAR(20), -- 작성자
-	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 작성일
-	cnt int DEFAULT 0 -- 조회수
 );
 
 -- 강사, 선생님 테이블
@@ -361,19 +346,6 @@ CREATE TABLE lecfile (
 	sfile VARCHAR(1000), -- 난수화된 파일 이름
 	realname VARCHAR(250) -- 실제 파일 이름
 )
-
--- 교재(교재코드(PK), 교재명, 교재목차, 출판사, 출판일, 저자, 가격, 기타메모)
-CREATE TABLE textbook(
-	NO INT PRIMARY KEY AUTO_INCREMENT,
-	bookname VARCHAR(100),
-	contents VARCHAR(1000),
-	company VARCHAR(50),
-	resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), -- 출판일
-	author VARCHAR(50),
-	cost INT DEFAULT 0,
-	memo VARCHAR(1000)
-	);
-
 
 -- 장바구니 테이블
 CREATE TABLE cart(
