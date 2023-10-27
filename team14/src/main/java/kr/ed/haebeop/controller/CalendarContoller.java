@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -56,6 +58,15 @@ public class CalendarContoller {
     public String getCalendar(HttpServletRequest request, Model model,HttpSession session) throws Exception{
         int no = Integer.parseInt(request.getParameter("no"));
         Calendar calendar = calendarService.getCalendar(no);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 날짜 형식 지정
+        LocalDate endDate = LocalDate.parse(calendar.getEnd(), formatter);
+
+        // LocalDate에서 하루를 빼고 다시 문자열로 변환하여 저장
+        endDate = endDate.minusDays(1);
+        calendar.setEnd(endDate.format(formatter));
+        System.out.println("end : "+calendar.getEnd());
+
         model.addAttribute("calendar", calendar);
         return "/calendar/calendarDetail";
     }

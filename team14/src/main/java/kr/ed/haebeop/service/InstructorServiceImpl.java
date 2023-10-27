@@ -63,6 +63,11 @@ public class InstructorServiceImpl implements InstructorService{
         return instructorMapper.getInstructor(no);
     }
 
+    @Override
+    public Instructor getInstructorById(String id) {
+        return instructorMapper.getInstructorById(id);
+    }
+
     //QNA
 
     @Override
